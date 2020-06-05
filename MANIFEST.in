@@ -1,0 +1,4 @@
+include LICENSE
+include *.md
+prune .DS_Store
+recursive-include tests *.py
