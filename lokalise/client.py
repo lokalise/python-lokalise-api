@@ -9,6 +9,7 @@ This module contains API client definition.
 from .endpoints.projects import ProjectsEndpoint
 from . import request
 
+
 class Client:
     def __init__(self, token):
         """Instantiate a new Lokalise API client.
@@ -22,6 +23,6 @@ class Client:
         self.token = None
 
     def projects(self):
-        #projects_endpoint = ProjectsEndpoint(self)
-        #projects_endpoint.all()
-        request.get(self, 'projects')
+        # projects_endpoint = ProjectsEndpoint(self)
+        # projects_endpoint.all()
+        request.get(self, "projects")

@@ -3,4 +3,4 @@ class ProjectsEndpoint:
         self.client = client
 
     def all(self):
-        print('all')
+        print("all")
