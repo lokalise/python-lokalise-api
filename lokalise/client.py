@@ -6,8 +6,9 @@ lokalise.client
 This module contains API client definition.
 """
 
-from .endpoints.projects import ProjectsEndpoint
-from .collections.projects import ProjectsCollection
+from .endpoints import *
+from .collections import *
+from .models import *
 
 class Client:
     def __init__(self, token, connect_timeout = None, read_timeout = None):
@@ -26,13 +27,17 @@ class Client:
         self.read_timeout = None
         self.__clear_endpoint_attrs()
 
-    def projects(self):
-        raw_projects = self.projects_endpoint().all()
-        return ProjectsCollection(raw_projects)
+    def projects(self, params = {}):
+        raw_projects = self.projects_endpoint().all(params)
+        return projects.ProjectsCollection(raw_projects)
+
+    def project(self, project_id):
+        raw_project = self.projects_endpoint().find(project_id)
+        return project.ProjectModel(raw_project)
 
     def projects_endpoint(self):
         return self.__fetch_attr('__projects_endpoint',
-                                 lambda: ProjectsEndpoint(self))
+                                 lambda: projects_endpoint.ProjectsEndpoint(self))
 
     def __fetch_attr(self, attr_name, populator):
         if not hasattr(self, attr_name):

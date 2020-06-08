@@ -1,1 +1,1 @@
-__all__ = ["projects"]
+__all__ = ["projects_endpoint"]

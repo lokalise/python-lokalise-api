@@ -18,8 +18,10 @@ PAGINATION_HEADERS = [
 ]
 
 
-def get(client, path):
-    return respond_with(requests.get(BASE_URL + path, **params(client)))
+def get(client, path, params={}):
+    return respond_with(requests.get(BASE_URL + path,
+                                     params=params,
+                                     **options(client)))
 
 
 def respond_with(response):
@@ -33,7 +35,7 @@ def extract_headers_from(response):
     }}
 
 
-def params(client):
+def options(client):
     headers = {
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",

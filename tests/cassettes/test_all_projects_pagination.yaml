@@ -1,0 +1,67 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects?limit=2&page=3
+  response:
+    body:
+      string: '{"projects":[{"project_id":"531138705d0ba0c18f5b43.63503311","project_type":"localization_files","name":"Demo
+        Phoenix copy","description":"Description Phoenix","created_at":"2019-06-20
+        15:05:37 (Etc\/UTC)","created_at_timestamp":1561043137,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","team_id":176692,"base_language_id":640,"base_language_iso":"en","settings":{"per_platform_key_names":false,"reviewing":true,"upvoting":false,"auto_toggle_unverified":true,"offline_translation":true,"key_editing":true,"inline_machine_translations":true,"branching":false},"statistics":{"progress_total":17,"keys_total":20,"team":9,"base_words":41,"qa_issues_total":272,"qa_issues":{"not_reviewed":209,"unverified":58,"spelling_grammar":4,"inconsistent_placeholders":1,"inconsistent_html":0,"different_number_of_urls":0,"different_urls":0,"leading_whitespace":0,"trailing_whitespace":0,"different_number_of_email_address":0,"different_email_address":0,"different_brackets":0,"different_numbers":0,"double_space":0,"special_placeholder":0},"languages":[{"language_id":640,"language_iso":"en","progress":100,"words_to_do":0},{"language_id":597,"language_iso":"ru","progress":63,"words_to_do":15},{"language_id":673,"language_iso":"f_over","progress":24,"words_to_do":31},{"language_id":1055,"language_iso":"en-us","progress":0,"words_to_do":41},{"language_id":764,"language_iso":"ca","progress":2,"words_to_do":40},{"language_id":934,"language_iso":"bm","progress":0,"words_to_do":41},{"language_id":803,"language_iso":"sq","progress":0,"words_to_do":41},{"language_id":731,"language_iso":"ar_001","progress":2,"words_to_do":40},{"language_id":601,"language_iso":"zh_TW","progress":0,"words_to_do":41},{"language_id":1056,"language_iso":"es","progress":9,"words_to_do":37},{"language_id":737,"language_iso":"nl","progress":7,"words_to_do":38},{"language_id":10001,"language_iso":"custom_1","progress":0,"words_to_do":41}]}},{"project_id":"672198945b7d72fc048021.15940510","project_type":"localization_files","name":"Demo
+        Rails Proj","description":"","created_at":"2018-08-22 14:28:12 (Etc\/UTC)","created_at_timestamp":1534948092,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","team_id":176692,"base_language_id":640,"base_language_iso":"en","settings":{"per_platform_key_names":false,"reviewing":true,"upvoting":false,"auto_toggle_unverified":true,"offline_translation":false,"key_editing":true,"inline_machine_translations":true,"branching":false},"statistics":{"progress_total":66,"keys_total":2,"team":2,"base_words":5,"qa_issues_total":8,"qa_issues":{"not_reviewed":6,"unverified":2,"spelling_grammar":0,"inconsistent_placeholders":0,"inconsistent_html":0,"different_number_of_urls":0,"different_urls":0,"leading_whitespace":0,"trailing_whitespace":0,"different_number_of_email_address":0,"different_email_address":0,"different_brackets":0,"different_numbers":0,"double_space":0,"special_placeholder":0},"languages":[{"language_id":640,"language_iso":"en","progress":100,"words_to_do":0},{"language_id":597,"language_iso":"ru","progress":100,"words_to_do":0},{"language_id":972,"language_iso":"yo","progress":0,"words_to_do":5}]}}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Jun 2020 12:09:05 GMT
+      Expires:
+      - Mon, 08 Jun 2020 12:09:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '2'
+      X-Pagination-Page:
+      - '3'
+      X-Pagination-Page-Count:
+      - '9'
+      X-Pagination-Total-Count:
+      - '17'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '3155'
+    status:
+      code: 200
+      message: OK
+version: 1
