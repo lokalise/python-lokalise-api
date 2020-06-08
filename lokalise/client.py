@@ -1,17 +1,16 @@
-# -*- coding: utf-8 -*-
-
 """
 lokalise.client
 ~~~~~~~~~~~~~~~
 This module contains API client definition.
 """
 
-from .endpoints import *
-from .collections import *
-from .models import *
+from .endpoints.projects_endpoint import ProjectsEndpoint
+from .collections.projects import ProjectsCollection
+from .models.project import ProjectModel
+
 
 class Client:
-    def __init__(self, token, connect_timeout = None, read_timeout = None):
+    def __init__(self, token, connect_timeout=None, read_timeout=None):
         """Instantiate a new Lokalise API client.
         Args:
           token (str):
@@ -27,17 +26,17 @@ class Client:
         self.read_timeout = None
         self.__clear_endpoint_attrs()
 
-    def projects(self, params = {}):
+    def projects(self, params={}):
         raw_projects = self.projects_endpoint().all(params)
-        return projects.ProjectsCollection(raw_projects)
+        return ProjectsCollection(raw_projects)
 
     def project(self, project_id):
         raw_project = self.projects_endpoint().find(project_id)
-        return project.ProjectModel(raw_project)
+        return ProjectModel(raw_project)
 
     def projects_endpoint(self):
         return self.__fetch_attr('__projects_endpoint',
-                                 lambda: projects_endpoint.ProjectsEndpoint(self))
+                                 lambda: ProjectsEndpoint(self))
 
     def __fetch_attr(self, attr_name, populator):
         if not hasattr(self, attr_name):
@@ -47,4 +46,5 @@ class Client:
 
     def __clear_endpoint_attrs(self):
         endpoint_attrs = [a for a in vars(self) if a.endswith('_endpoint')]
-        for attr in endpoint_attrs: setattr(self, attr, None)
+        for attr in endpoint_attrs:
+            setattr(self, attr, None)

@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
-
 """
 lokalise.request
 ~~~~~~~~~~~~~~~~
 This module sends HTTP requests, parses responses, and returns formatted data.
 """
 
-from ._version import __version__
 import requests
+from ._version import __version__
+
 
 BASE_URL = "https://api.lokalise.com/api2/"
 PAGINATION_HEADERS = [
@@ -30,9 +29,10 @@ def respond_with(response):
 
 
 def extract_headers_from(response):
-    return {"_pagination": {
-        k.lower(): v for k, v in response.headers.items() if k.lower() in PAGINATION_HEADERS
-    }}
+    return {
+        "_pagination": {
+            k.lower(): v for k,
+            v in response.headers.items() if k.lower() in PAGINATION_HEADERS}}
 
 
 def options(client):

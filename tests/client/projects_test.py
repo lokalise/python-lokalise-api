@@ -1,6 +1,7 @@
 import pytest
 
-project_id = "454087345e09f3e7e7eae3.57891254"
+PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
+
 
 @pytest.mark.vcr
 def test_all_projects(client):
@@ -9,6 +10,7 @@ def test_all_projects(client):
     assert projects.is_first_page()
     assert isinstance(projects.items[0].raw_data, dict)
     assert projects.items[0].project_id == "638597985c913f818559f3.17106287"
+
 
 @pytest.mark.vcr
 def test_all_projects_pagination(client):
@@ -24,11 +26,12 @@ def test_all_projects_pagination(client):
     assert projects.has_next_page()
     assert projects.has_prev_page()
 
+
 @pytest.mark.vcr
 def test_project(client):
-    project = client.project(project_id)
+    project = client.project(PROJECT_ID)
 
-    assert project.project_id == project_id
+    assert project.project_id == PROJECT_ID
     assert project.project_type == "localization_files"
     assert project.name == "OnBoarding"
     assert project.description == "Demo project for onboarding course"
@@ -44,7 +47,8 @@ def test_project(client):
     assert isinstance(project.statistics, dict)
     assert project.statistics["progress_total"] == 53
 
+
 @pytest.mark.vcr
 def test_project_to_string(client):
-    project = client.project(project_id)
-    assert project_id in str(project)
+    project = client.project(PROJECT_ID)
+    assert PROJECT_ID in str(project)

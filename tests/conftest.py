@@ -1,9 +1,10 @@
+import os
+import pytest
 from dotenv import load_dotenv, find_dotenv
+import lokalise
+
 load_dotenv(find_dotenv())
 
-import pytest
-import lokalise
-import os
 
 @pytest.fixture(scope='module')
 def vcr_config():
@@ -12,9 +13,11 @@ def vcr_config():
         "decode_compressed_response": True
     }
 
+
 @pytest.fixture(scope='module')
 def vcr_cassette_dir(request):
-    return os.path.join('tests/cassettes')
+    return os.path.join(f"tests/cassettes/{request.module.__name__}")
+
 
 @pytest.fixture(scope='module')
 def client():

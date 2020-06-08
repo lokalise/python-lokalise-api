@@ -8,6 +8,9 @@ pytest = "~=5.4"
 vcrpy = "~=4.0"
 pytest-vcr = "~=1.0.2"
 pytest-cov = "~=2.9.0"
+pylint = "~= 2.5"
+pytest-pylint = "~= 0.17"
+autopep8 = "~= 1.5"
 
 [packages]
 requests = "~=2.23"

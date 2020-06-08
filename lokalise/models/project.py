@@ -23,7 +23,8 @@ class ProjectModel:
     def __str__(self):
         result = ""
         for attr in self.ATTRS:
-            if len(result) != 0: result += "\n"
+            if len(result) != 0:
+                result += "\n"
             result += f"{attr}: {getattr(self, attr)}"
 
         return result
