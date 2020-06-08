@@ -15,7 +15,7 @@ Work in progress.
 
 1. Copypaste `.env.example` file as .env.
 2. Put your API token inside. The .env file is excluded from version control so your token is safe. All in all, we use pre-recorded VCR cassettes, so the actual API requests won't be sent.
-3. Run `pytest`.
+3. Run `pytest`. Observe test results and coverage.
 
 ## License
 

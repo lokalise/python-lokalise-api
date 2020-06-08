@@ -1,11 +1,14 @@
 from setuptools import setup, find_packages
+from lokalise._version import __version__
+from os import path
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
-setuptools.setup(
+setup(
     name="python-lokalise-api",
-    version="0.0.1",
+    version=__version__,
     author="Ilya Bodrov",
     author_email="bodrovis@protonmail.com",
     description="Official Python interface for the Lokalise API v2",
@@ -14,12 +17,14 @@ setuptools.setup(
     url="https://github.com/lokalise/python-lokalise-api",
     keywords='lokalise api client',
     license='MIT',
-    packages=setuptools.find_packages(where='lokalise'),
+    packages=find_packages(where='lokalise'),
     package_dir={'': 'lokalise'},
     platforms=['Any'],
-    install_requires=['requests'],
-    tests_require=['pytest'],
+    install_requires=['requests>2,<3'],
+    tests_require=['pytest', 'vcrpy', 'pytest-vcr', 'pytest-cov'],
     classifiers=[
+        "Intended Audience :: Developers",
+        "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",

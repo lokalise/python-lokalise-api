@@ -14,13 +14,12 @@ PAGINATION_HEADERS = [
     "x-pagination-total-count",
     "x-pagination-page-count",
     "x-pagination-limit",
-    "x-pagination-page",
+    "x-pagination-page"
 ]
 
 
 def get(client, path):
-    r = respond_with(requests.get(BASE_URL + path, **params(client)))
-    print(r)
+    return respond_with(requests.get(BASE_URL + path, **params(client)))
 
 
 def respond_with(response):
@@ -29,9 +28,9 @@ def respond_with(response):
 
 
 def extract_headers_from(response):
-    return {
-        k: v for k, v in response.headers.items() if k.lower() in PAGINATION_HEADERS
-    }
+    return {"_pagination": {
+        k.lower(): v for k, v in response.headers.items() if k.lower() in PAGINATION_HEADERS
+    }}
 
 
 def params(client):
@@ -40,4 +39,7 @@ def params(client):
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
         "X-Api-Token": client.token,
     }
-    return {"headers": headers}
+    return {
+        "timeout": (client.connect_timeout, client.read_timeout),
+        "headers": headers
+    }
