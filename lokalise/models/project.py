@@ -1,4 +1,7 @@
-class ProjectModel:
+from .base_model import BaseModel
+
+
+class ProjectModel(BaseModel):
     ATTRS = [
         "project_id",
         "project_type",
@@ -14,17 +17,3 @@ class ProjectModel:
         "settings",
         "statistics"
     ]
-
-    def __init__(self, raw_data):
-        self.raw_data = raw_data
-        for attr in self.ATTRS:
-            setattr(self, attr, raw_data.get(attr, None))
-
-    def __str__(self):
-        result = ""
-        for attr in self.ATTRS:
-            if len(result) != 0:
-                result += "\n"
-            result += f"{attr}: {getattr(self, attr)}"
-
-        return result

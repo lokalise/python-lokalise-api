@@ -6,6 +6,7 @@ PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 @pytest.mark.vcr
 def test_all_projects(client):
     projects = client.projects()
+    assert projects.project_id is None
     assert projects.is_last_page()
     assert projects.is_first_page()
     assert isinstance(projects.items[0].raw_data, dict)

@@ -7,6 +7,9 @@ This module contains API client definition.
 from .endpoints.projects_endpoint import ProjectsEndpoint
 from .collections.projects import ProjectsCollection
 from .models.project import ProjectModel
+from .endpoints.contributors_endpoint import ContributorsEndpoint
+from .collections.contributors import ContributorsCollection
+from .models.contributor import ContributorModel
 
 
 class Client:
@@ -27,12 +30,26 @@ class Client:
         self.__clear_endpoint_attrs()
 
     def projects(self, params={}):
-        raw_projects = self.projects_endpoint().all(params)
+        raw_projects = self.projects_endpoint().all(params=params)
         return ProjectsCollection(raw_projects)
 
     def project(self, project_id):
         raw_project = self.projects_endpoint().find(project_id)
         return ProjectModel(raw_project)
+
+    def contributors(self, project_id, params={}):
+        raw_contributors = self.contributors_endpoint(). \
+            all(project_id=project_id, params=params)
+        return ContributorsCollection(raw_contributors)
+
+    def contributor(self, project_id, contributor_id):
+        raw_contributor = self.contributors_endpoint(). \
+            find(project_id, resource_id=contributor_id)
+        return ContributorModel(raw_contributor)
+
+    def contributors_endpoint(self):
+        return self.__fetch_attr('__contributors_endpoint',
+                                 lambda: ContributorsEndpoint(self))
 
     def projects_endpoint(self):
         return self.__fetch_attr('__projects_endpoint',
