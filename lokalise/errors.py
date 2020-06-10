@@ -1,5 +1,18 @@
+"""
+lokalise.errors
+~~~~~~~~~~~~~~~
+Defines custom exception classes.
+"""
+
 class ClientError(Exception):
+    """General exception class.
+    """
     def __init__(self, msg, code):
+        """Initializes a new exception.
+
+        :param msg: Exception message
+        :param code: Exception code (derived from HTTP status code)
+        """
         super().__init__(msg, code)
         self.message = msg
         self.code = code
@@ -7,55 +20,72 @@ class ClientError(Exception):
 
 
 class BadRequest(ClientError):
-    pass
+    """The provided request is incorrect,
+    often due to missing a required parameter. HTTP status code 400.
+    """
 
 
 class Unauthorized(ClientError):
-    pass
+    """API token is incorrect. HTTP status code 401.
+    """
 
 
 class Forbidden(ClientError):
-    pass
+    """The authenticated user does not have sufficient rights to perform the
+    desired action. HTTP status code 403.
+    """
 
 
 class NotFound(ClientError):
-    pass
+    """The provided endpoint (resource) cannot be found. HTTP status code 404.
+    """
 
 
 class MethodNowAllowed(ClientError):
-    pass
+    """HTTP request with the provided verb is not supported by the endpoint.
+    HTTP status code 405.
+    """
 
 
 class NotAcceptable(ClientError):
-    pass
+    """Posted resource is malformed. HTTP status code 406.
+    """
 
 
 class Conflict(ClientError):
-    pass
+    """Request conflicts with another request. HTTP status code 409.
+    """
 
 
 class Locked(ClientError):
-    pass
+    """Your token is used simultaneously in multiple requests.
+    HTTP status code 423.
+    """
 
 
 class TooManyRequests(ClientError):
-    pass
+    """Too many requests hit the API too quickly. HTTP status code 429.
+    """
 
 
 class ServerError(ClientError):
-    pass
+    """Server-side error. HTTP status code 500.
+    """
 
 
 class BadGateway(ClientError):
-    pass
+    """Server-side error. HTTP status code 502.
+    """
 
 
 class ServiceUnavailable(ClientError):
-    pass
+    """Server is not available at the moment. HTTP status code 503.
+    """
 
 
 class GatewayTimeout(ClientError):
-    pass
+    """Server has not responded in a timely fashion. HTTP status code 504.
+    """
 
 
 ERROR_CODES = {
