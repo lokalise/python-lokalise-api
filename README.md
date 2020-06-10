@@ -63,6 +63,6 @@ except lokalise.errors.NotFound as err:
 
 ## License
 
-This plugin is licensed under the MIT License.
+This plugin is licensed under the BSD 3 Clause License.
 
 Copyright (c) [Lokalise team](https://lokalise.com), [Ilya Bodrov](http://bodrovis.tech)
