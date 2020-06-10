@@ -4,9 +4,11 @@ lokalise.errors
 Defines custom exception classes.
 """
 
+
 class ClientError(Exception):
     """General exception class.
     """
+
     def __init__(self, msg, code):
         """Initializes a new exception.
 
@@ -16,7 +18,6 @@ class ClientError(Exception):
         super().__init__(msg, code)
         self.message = msg
         self.code = code
-
 
 
 class BadRequest(ClientError):

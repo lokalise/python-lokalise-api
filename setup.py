@@ -24,6 +24,7 @@ setup(
     install_requires=['requests>2,<3'],
     tests_require=['pytest', 'vcrpy', 'pytest-vcr', 'pytest-cov'],
     classifiers=[
+        'Development Status :: 5 - Production/Stable',
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python :: 3",

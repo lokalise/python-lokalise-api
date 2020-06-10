@@ -1,3 +1,5 @@
+.. index:: Exception handling
+
 Exception handling
 ==================
 

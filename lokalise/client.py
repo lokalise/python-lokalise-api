@@ -21,6 +21,7 @@ class Client:
         client = lokalise.Client('api_token')
         client.projects()
     """
+
     def __init__(self, token, connect_timeout=None, read_timeout=None):
         """Instantiate a new Lokalise API client.
 
@@ -46,8 +47,8 @@ class Client:
         """Fetches all projects available to the currently authorized user
         (identified by the API token).
 
-        :param params: (optional) Pagination params
-        :rtype: collections.ProjectsCollection
+        :param dict params: (optional) Pagination params
+        :return: Collection of projects
         """
         raw_projects = self.projects_endpoint().all(params=params)
         return ProjectsCollection(raw_projects)
@@ -55,8 +56,8 @@ class Client:
     def project(self, project_id):
         """Fetches a single project by ID.
 
-        :param project_id: ID of the project to fetch
-        :rtype: models.ProjectModel
+        :param str project_id: ID of the project to fetch
+        :return: Project model
         """
         raw_project = self.projects_endpoint().find(project_id)
         return ProjectModel(raw_project)
@@ -64,9 +65,9 @@ class Client:
     def contributors(self, project_id, params={}):
         """Fetches all contributors for the given project.
 
-        :param project_id: ID of the project to fetch contributors for.
-        :param params: (optional) Pagination params
-        :rtype: collections.ContributorsCollection
+        :param str project_id: ID of the project to fetch contributors for.
+        :param dict params: (optional) Pagination params
+        :return: Collection of contributors
         """
         raw_contributors = self.contributors_endpoint(). \
             all(project_id=project_id, params=params)
@@ -75,9 +76,10 @@ class Client:
     def contributor(self, project_id, contributor_id):
         """Fetches a single contributor.
 
-        :param project_id: ID of the project
+        :param str project_id: ID of the project
         :param contributor_id: ID of the contributor to fetch
-        :rtype: models.ContributorModel
+        :type contributor_id: int or str
+        :return: Contributor model
         """
         raw_contributor = self.contributors_endpoint(). \
             find(project_id, resource_id=contributor_id)

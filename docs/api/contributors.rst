@@ -6,27 +6,18 @@ Contributors endpoint
 Fetch all contributors
 ----------------------
 
-.. code-block:: python
+.. py:function:: contributors(project_id, [params={}])
 
-  client.contributors(project_id)
-
-Arguments:
-
-* ``project_id`` (string, required)
-* Common :ref:`pagination options <collections-pagination>`
-
-Returns a collection of contributors.
+  :param str project_id: ID of the project to fetch contributors for.
+  :param dict params: (optional) :ref:`pagination options <collections-pagination>`
+  :return: Collection of contributors
 
 Fetch a single contributor
 --------------------------
 
-.. code-block:: python
+.. py:function:: contributor(project_id, contributor_id)
 
-  client.contributor(project_id, contributor_id)
-
-Arguments:
-
-* ``project_id`` (string, required)
-* ``contributor_id`` (string or integer, required)
-
-Returns a contributor model.
+  :param str project_id: ID of the project
+  :param contributor_id: ID of the contributor to fetch
+  :type contributor_id: int or str
+  :return: Contributor model

@@ -6,25 +6,15 @@ Projects endpoint
 Fetch all projects
 ------------------
 
-.. code-block:: python
+.. py:function:: projects([params={}])
 
-  client.projects()
-
-Arguments:
-
-* Common :ref:`pagination options <collections-pagination>`
-
-Returns a collection of projects.
+  :param dict params: (optional) :ref:`pagination options <collections-pagination>`
+  :return: Collection of projects
 
 Fetch a single project
 ----------------------
 
-.. code-block:: python
+.. py:function:: project(project_id)
 
-  client.project(project_id)
-
-Arguments:
-
-* ``project_id`` (string, required)
-
-Returns a project model.
+  :param str project_id: ID of the project to fetch
+  :return: Project model

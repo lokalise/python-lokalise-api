@@ -1,4 +1,5 @@
 .. _additional-info:
+.. index:: Client
 
 Manipulating client
 ===================
@@ -13,7 +14,8 @@ You may override connect and/or read timeout in the following way:
 
 .. code-block:: python
 
-  lokalise.Client('token', connect_timeout=5, read_timeout=7)
+  import lokalise
+  client = lokalise.Client('token', connect_timeout=5, read_timeout=7)
 
 Note that the timeout values are in *seconds*.
 

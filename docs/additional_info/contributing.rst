@@ -1,3 +1,5 @@
+.. index:: Contributing (developers)
+
 Contributing
 ============
 
@@ -10,6 +12,8 @@ Contributing
 7. If necessary, add documentation for your feature or bug fix.
 8. Commit and push your changes.
 9. Submit a pull request.
+
+.. index:: Tests (developers)
 
 Running tests
 -------------
