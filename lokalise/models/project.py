@@ -1,7 +1,15 @@
+"""
+lokalise.models.project
+~~~~~~~~~~~~~~~~~~~~~~~
+Module containing project model.
+"""
+
 from .base_model import BaseModel
 
 
 class ProjectModel(BaseModel):
+    """Describes project model.
+    """
     ATTRS = [
         "project_id",
         "project_type",
