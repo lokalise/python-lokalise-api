@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: '{"contributors": [{"email": "demo3@python.org", "fullname": "Python demo
+      3", "languages": [{"lang_iso": "ru_RU", "is_writable": true}]}]}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '137'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/contributors
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","contributors":[{"user_id":68139,"email":"demo3@python.org","fullname":"Python
+        demo 3","created_at":"2020-06-15 12:29:13 (Etc\/UTC)","created_at_timestamp":1592224153,"is_admin":false,"is_reviewer":false,"languages":[{"lang_id":600,"lang_iso":"ru_RU","lang_name":"Russian
+        (Russia)","is_writable":true}],"admin_rights":[]}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - GET
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 15 Jun 2020 12:29:13 GMT
+      Expires:
+      - Mon, 15 Jun 2020 12:29:13 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '389'
+    status:
+      code: 200
+      message: OK
+version: 1

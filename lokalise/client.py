@@ -4,17 +4,20 @@ lokalise.client
 This module contains API client definition.
 """
 
-from .endpoints.projects_endpoint import ProjectsEndpoint
-from .collections.projects import ProjectsCollection
-from .models.project import ProjectModel
-from .endpoints.contributors_endpoint import ContributorsEndpoint
-from .collections.contributors import ContributorsCollection
-from .models.contributor import ContributorModel
-from .endpoints.system_languages_endpoint import SystemLanguagesEndpoint
-from .endpoints.languages_endpoint import LanguagesEndpoint
-from .collections.languages import LanguagesCollection
-from .models.language import LanguageModel
+from lokalise import utils
 
+from .collections.projects import ProjectsCollection
+from .collections.contributors import ContributorsCollection
+from .collections.languages import LanguagesCollection
+from .models.project import ProjectModel
+from .models.contributor import ContributorModel
+from .models.language import LanguageModel
+# These are lazy-loaded:
+# pylint: disable=unused-import
+from .endpoints.system_languages_endpoint import SystemLanguagesEndpoint
+from .endpoints.contributors_endpoint import ContributorsEndpoint
+from .endpoints.projects_endpoint import ProjectsEndpoint
+from .endpoints.languages_endpoint import LanguagesEndpoint
 
 class Client:
     """Client used to send API requests.
@@ -47,7 +50,7 @@ class Client:
         self.read_timeout = None
         self.__clear_endpoint_attrs()
 
-    # === Endpoint methods === #
+    # === Endpoint methods ===
     def contributors(self, project_id, params=None):
         """Fetches all contributors for the given project.
 
@@ -55,7 +58,7 @@ class Client:
         :param dict params: (optional) Pagination params
         :return: Collection of contributors
         """
-        raw_contributors = self.contributors_endpoint(). \
+        raw_contributors = self.get_endpoint("contributors"). \
             all(project_id=project_id, params=params)
         return ContributorsCollection(raw_contributors)
 
@@ -67,7 +70,7 @@ class Client:
         :type contributor_id: int or str
         :return: Contributor model
         """
-        raw_contributor = self.contributors_endpoint(). \
+        raw_contributor = self.get_endpoint("contributors"). \
             find(project_id, resource_id=contributor_id)
         return ContributorModel(raw_contributor)
 
@@ -79,7 +82,7 @@ class Client:
         :type params: list or dict
         :return: Contributors collection
         """
-        raw_contributor = self.contributors_endpoint(). \
+        raw_contributor = self.get_endpoint("contributors"). \
             create(params, project_id=project_id)
 
         return ContributorsCollection(raw_contributor)
@@ -93,7 +96,7 @@ class Client:
         :param dict params: Update parameters
         :return: Contributor model
         """
-        raw_contributor = self.contributors_endpoint(). \
+        raw_contributor = self.get_endpoint("contributors"). \
             update(project_id, params, resource_id=contributor_id)
         return ContributorModel(raw_contributor)
 
@@ -106,7 +109,7 @@ class Client:
         :return: Dictionary with project ID and "contributor_deleted" set to True
         :rtype dict:
         """
-        response = self.contributors_endpoint(). \
+        response = self.get_endpoint("contributors"). \
             delete(project_id, resource_id=contributor_id)
         return response
 
@@ -116,7 +119,8 @@ class Client:
         :param dict params: (optional) Pagination params
         :return: Collection of languages
         """
-        raw_languages = self.system_languages_endpoint().all(params=params)
+        raw_languages = self.get_endpoint(
+            "system_languages").all(params=params)
         return LanguagesCollection(raw_languages)
 
     def project_languages(self, project_id, params=None):
@@ -126,7 +130,7 @@ class Client:
         :param dict params: (optional) Pagination params
         :return: Collection of languages
         """
-        raw_languages = self.languages_endpoint(). \
+        raw_languages = self.get_endpoint("languages"). \
             all(project_id=project_id, params=params)
         return LanguagesCollection(raw_languages)
 
@@ -138,7 +142,7 @@ class Client:
         :type params: dict or list
         :return: Collection of languages
         """
-        raw_languages = self.languages_endpoint(). \
+        raw_languages = self.get_endpoint("languages"). \
             create(params, project_id=project_id)
         return LanguagesCollection(raw_languages)
 
@@ -149,7 +153,7 @@ class Client:
         :param language_id: ID of the language to fetch
         :return: Language model
         """
-        raw_language = self.languages_endpoint(). \
+        raw_language = self.get_endpoint("languages"). \
             find(project_id, resource_id=language_id)
         return LanguageModel(raw_language)
 
@@ -161,7 +165,7 @@ class Client:
         :param dict params: Update parameters
         :return: Language model
         """
-        raw_language = self.languages_endpoint(). \
+        raw_language = self.get_endpoint("languages"). \
             update(project_id, params, resource_id=language_id)
         return LanguageModel(raw_language)
 
@@ -173,7 +177,7 @@ class Client:
         :return: Dictionary with project ID and "language_deleted" set to True
         :rtype dict:
         """
-        response = self.languages_endpoint(). \
+        response = self.get_endpoint("languages"). \
             delete(project_id, resource_id=language_id)
         return response
 
@@ -184,7 +188,7 @@ class Client:
         :param dict params: (optional) Pagination params
         :return: Collection of projects
         """
-        raw_projects = self.projects_endpoint().all(params=params)
+        raw_projects = self.get_endpoint("projects").all(params=params)
         return ProjectsCollection(raw_projects)
 
     def project(self, project_id):
@@ -193,7 +197,7 @@ class Client:
         :param str project_id: ID of the project to fetch
         :return: Project model
         """
-        raw_project = self.projects_endpoint().find(project_id)
+        raw_project = self.get_endpoint("projects").find(project_id)
         return ProjectModel(raw_project)
 
     def create_project(self, params):
@@ -202,7 +206,7 @@ class Client:
         :param dict params: Project parameters
         :return: Project model
         """
-        raw_project = self.projects_endpoint().create(params)
+        raw_project = self.get_endpoint("projects").create(params)
         return ProjectModel(raw_project)
 
     def update_project(self, project_id, params):
@@ -212,7 +216,7 @@ class Client:
         :param dict params: Project parameters
         :return: Project model
         """
-        raw_project = self.projects_endpoint().update(project_id, params)
+        raw_project = self.get_endpoint("projects").update(project_id, params)
         return ProjectModel(raw_project)
 
     def empty_project(self, project_id):
@@ -222,7 +226,7 @@ class Client:
         :return: Dictionary with the project ID and "keys_deleted" set to True
         :rtype dict:
         """
-        return self.projects_endpoint().empty(project_id)
+        return self.get_endpoint("projects").empty(project_id)
 
     def delete_project(self, project_id):
         """Deletes a given project.
@@ -231,46 +235,28 @@ class Client:
         :return: Dictionary with project ID and "project_deleted" set to True
         :rtype dict:
         """
-        return self.projects_endpoint().delete(project_id)
+        return self.get_endpoint("projects").delete(project_id)
     # === End of endpoint methods ===
 
     # === Endpoint helpers
+    def get_endpoint(self, name):
+        """Lazily loads an endpoint with a given name and stores it
+        under a specific instance attribute. For example, if the `name`
+        is "projects", then:
+        __projects_endpoint = ProjectsEndpoint(self)
 
-    def contributors_endpoint(self):
-        """Endpoint to work with contributors
-
-        :rtype: endpoints.ContributorsEndpoint
+        :param str name: Endpoint name to load
         """
-        return self.__fetch_attr('__contributors_endpoint',
-                                 lambda: ContributorsEndpoint(self))
-
-    def system_languages_endpoint(self):
-        """Endpoint to work with system languages
-
-        :rtype: endpoints.SystemLanguagesEndpoint
-        """
-        return self.__fetch_attr('__system_languages_endpoint',
-                                 lambda: SystemLanguagesEndpoint(self))
-
-    def languages_endpoint(self):
-        """Endpoint to work with languages
-
-        :rtype: endpoints.LanguagesEndpoint
-        """
-        return self.__fetch_attr('__languages_endpoint',
-                                 lambda: LanguagesEndpoint(self))
-
-    def projects_endpoint(self):
-        """Endpoint to work with contributors
-
-        :rtype: endpoints.ProjectsEndpoint
-        """
-        return self.__fetch_attr('__projects_endpoint',
-                                 lambda: ProjectsEndpoint(self))
+        name = name + "_endpoint"
+        camelized_name = utils.snake_to_camel(name)
+        endpoint_name = globals()[camelized_name]
+        return self.__fetch_attr(f"__{name}",
+                                 lambda: endpoint_name(self))
 
     def __fetch_attr(self, attr_name, populator):
         """Searches for the given attribute. Uses populator
-        to set the attribute if it cannot be found
+        to set the attribute if it cannot be found. Used to lazy-load
+        endpoints.
         """
         if not hasattr(self, attr_name):
             setattr(self, attr_name, populator())
