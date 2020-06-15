@@ -102,6 +102,7 @@ def respond_with_error(data, code):
     :param code: Response status code
     """
     msg = data['error']['message']
+
     if code in errors.ERROR_CODES:
         raise errors.ERROR_CODES[code](msg, code)
 

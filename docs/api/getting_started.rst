@@ -47,12 +47,16 @@ For example:
   project.name
   project.description
 
-Many resources respond to common methods like ``project_id`` or ``team_id``:
+Many resources respond to common methods like ``project_id``,
+``team_id``, and ``branch_id``:
 
 .. code-block:: python
 
   contributor = client.contributor('project.123.id', 456)
-  contributor.project_id
+  contributor.project_id # => 'project.123.id'
+
+  language = client.language('project.123.id', 21045)
+  language.branch # => 'master'
 
 You may also fetch raw data returned by the API:
 
@@ -101,6 +105,9 @@ Collections has the following attributes:
 * ``total_count`` - total number of records available.
 * ``page_count`` - total number of pages available.
 * ``limit`` - number of records per page.
+* ``project_id`` - ID of the project that the collection belongs to.
+* ``branch`` - project branch that the collection was fetched from.
+* ``errors`` - errors that occured during the request processing. Usually this attribute is empty, but may contain a list of error messages in certain cases. For example, suppose you are creating multiple project languages, and one of the languages is incorrect. All languages with proper attributes will be created and returned as collection. `errors` will contain a list of errors explaining that one of the languages has incorrect attributes.
 
 Collections respond to the following methods:
 

@@ -57,16 +57,18 @@ class BaseEndpoint(ABC):
         """Creates a new resource for the given endpoint.
 
         :param project_id: ID of the project to create resource for
+        :param resource_id: resource ID to perform creation for
         :param dict params: Resource parameters
         :rtype dict:
         """
 
         path = self.PATH.format(
-            project_id=project_id if project_id else ""
+            project_id=project_id if project_id else "",
+            resource_id=""
         ).strip('/')
         return request.post(self.client, path, params)
 
-    def update(self, project_id, params):
+    def update(self, project_id, params, resource_id=None):
         """Updates a resource for the given endpoint.
 
         :param project_id: ID of the project to update resource for
@@ -75,11 +77,12 @@ class BaseEndpoint(ABC):
         """
 
         path = self.PATH.format(
-            project_id=project_id if project_id else ""
+            project_id=project_id if project_id else "",
+            resource_id=resource_id if resource_id else ""
         ).strip('/')
         return request.put(self.client, path, params)
 
-    def delete(self, project_id):
+    def delete(self, project_id, resource_id=None):
         """Deletes a resource for the given endpoint.
 
         :param project_id: ID of the project to update resource for
@@ -87,6 +90,7 @@ class BaseEndpoint(ABC):
         """
 
         path = self.PATH.format(
-            project_id=project_id if project_id else ""
+            project_id=project_id if project_id else "",
+            resource_id=resource_id if resource_id else ""
         ).strip('/')
         return request.delete(self.client, path)

@@ -34,6 +34,8 @@ class BaseCollection(ABC):
         :param raw_data: Data returned by the API
         """
         self.project_id = raw_data.get('project_id', None)
+        self.branch = raw_data.get('branch', None)
+        self.errors = raw_data.get('errors', None)
         raw_items = raw_data[self.DATA_KEY]
         self.items = []
         for item in raw_items:

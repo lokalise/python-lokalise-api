@@ -31,12 +31,15 @@ class BaseModel(ABC):
         :param raw_data: Data returned by the API
         """
         self.raw_data = raw_data
+        self.branch = raw_data.get('branch', None)
+
         if 'project_id' not in self.ATTRS:
             self.project_id = raw_data.get('project_id', None)
 
+        if hasattr(self, 'DATA_KEY'):
+            raw_data = raw_data.get(self.DATA_KEY, raw_data)
+
         for attr in self.ATTRS:
-            if hasattr(self, 'DATA_KEY'):
-                raw_data = raw_data.get(self.DATA_KEY, raw_data)
             setattr(self, attr, raw_data.get(attr, None))
 
     def __str__(self):
