@@ -4,7 +4,7 @@ Official Python 3 interface for the Lokalise APIv2 that represents returned data
 
 ## Quick start
 
-Install it:
+This plugin requires Python 3.6 and above. Install it:
 
     pip install python-lokalise-api
 

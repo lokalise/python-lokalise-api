@@ -43,7 +43,7 @@ class Client:
         self.read_timeout = None
         self.__clear_endpoint_attrs()
 
-    def projects(self, params={}):
+    def projects(self, params=None):
         """Fetches all projects available to the currently authorized user
         (identified by the API token).
 
@@ -62,7 +62,44 @@ class Client:
         raw_project = self.projects_endpoint().find(project_id)
         return ProjectModel(raw_project)
 
-    def contributors(self, project_id, params={}):
+    def create_project(self, params):
+        """Creates a new project.
+
+        :param dict params: Project parameters
+        :return: Project model
+        """
+        raw_project = self.projects_endpoint().create(params)
+        return ProjectModel(raw_project)
+
+    def update_project(self, project_id, params):
+        """Updates a project.
+
+        :param str project_id: ID of the project to update
+        :param dict params: Project parameters
+        :return: Project model
+        """
+        raw_project = self.projects_endpoint().update(project_id, params)
+        return ProjectModel(raw_project)
+
+    def empty_project(self, project_id):
+        """Empties a given project by removing all keys and translations.
+
+        :param str project_id: ID of the project to empty
+        :return: Dictionary with the project ID and "keys_deleted" set to True
+        :rtype dict:
+        """
+        return self.projects_endpoint().empty(project_id)
+
+    def delete_project(self, project_id):
+        """Deletes a given project.
+
+        :param str project_id: ID of the project to empty
+        :return: Dictionary with project ID and "project_deleted" set to True
+        :rtype dict:
+        """
+        return self.projects_endpoint().delete(project_id)
+
+    def contributors(self, project_id, params=None):
         """Fetches all contributors for the given project.
 
         :param str project_id: ID of the project to fetch contributors for.

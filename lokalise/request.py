@@ -9,6 +9,7 @@ Attributes:
     PAGINATION_HEADERS - list of response headers that contain pagination data.
 """
 
+import json
 import requests
 from lokalise import errors
 from ._version import __version__
@@ -23,7 +24,7 @@ PAGINATION_HEADERS = [
 ]
 
 
-def get(client, path, params={}):
+def get(client, path, params=None):
     """Performs GET requests
 
     :param client: Lokalise API client
@@ -35,6 +36,46 @@ def get(client, path, params={}):
     return respond_with(requests.get(BASE_URL + path,
                                      params=params,
                                      **options(client)))
+
+
+def post(client, path, params=None):
+    """Performs POST requests
+
+    :param client: Lokalise API client
+    :type client: lokalise.Client
+    :param path: Relative path to the API endpoint
+    :param params: Other request params
+    :rtype dict:
+    """
+    return respond_with(requests.post(BASE_URL + path,
+                                      data=format_params(params),
+                                      **options(client)))
+
+
+def put(client, path, params=None):
+    """Performs PUT requests
+
+    :param client: Lokalise API client
+    :type client: lokalise.Client
+    :param path: Relative path to the API endpoint
+    :param params: Other request params
+    :rtype dict:
+    """
+    return respond_with(requests.put(BASE_URL + path,
+                                     data=format_params(params),
+                                     **options(client)))
+
+
+def delete(client, path):
+    """Performs DELETE requests
+
+    :param client: Lokalise API client
+    :type client: lokalise.Client
+    :param path: Relative path to the API endpoint
+    :rtype dict:
+    """
+    return respond_with(requests.delete(BASE_URL + path,
+                                        **options(client)))
 
 
 def respond_with(response):
@@ -96,3 +137,9 @@ def options(client):
         "timeout": (client.connect_timeout, client.read_timeout),
         "headers": headers
     }
+
+
+def format_params(params):
+    """Converts request params to JSON
+    """
+    return json.dumps(params) if params else None

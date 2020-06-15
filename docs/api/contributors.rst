@@ -6,7 +6,7 @@ Contributors endpoint
 Fetch all contributors
 ----------------------
 
-.. py:function:: contributors(project_id, [params={}])
+.. py:function:: contributors(project_id, [params=None])
 
   :param str project_id: ID of the project to fetch contributors for.
   :param dict params: (optional) :ref:`pagination options <collections-pagination>`

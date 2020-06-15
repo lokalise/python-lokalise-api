@@ -1,5 +1,3 @@
 # Changelog
 
-## 0.0.1 (unreleased)
-
-* Initial release
+Find full changelog at readthedocs.io.
