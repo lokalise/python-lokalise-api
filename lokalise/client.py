@@ -4,6 +4,7 @@ lokalise.client
 This module contains API client definition.
 """
 
+import importlib
 from lokalise import utils
 
 from .collections.projects import ProjectsCollection
@@ -12,12 +13,6 @@ from .collections.languages import LanguagesCollection
 from .models.project import ProjectModel
 from .models.contributor import ContributorModel
 from .models.language import LanguageModel
-# These are lazy-loaded:
-# pylint: disable=unused-import
-from .endpoints.system_languages_endpoint import SystemLanguagesEndpoint
-from .endpoints.contributors_endpoint import ContributorsEndpoint
-from .endpoints.projects_endpoint import ProjectsEndpoint
-from .endpoints.languages_endpoint import LanguagesEndpoint
 
 
 class Client:
@@ -243,16 +238,21 @@ class Client:
     def get_endpoint(self, name):
         """Lazily loads an endpoint with a given name and stores it
         under a specific instance attribute. For example, if the `name`
-        is "projects", then:
-        __projects_endpoint = ProjectsEndpoint(self)
+        is "projects", then it will load .endpoints.projects_endpoint module
+        and then set attribute like this:
+            self.__projects_endpoint = ProjectsEndpoint(self)
 
         :param str name: Endpoint name to load
         """
         name = name + "_endpoint"
         camelized_name = utils.snake_to_camel(name)
-        endpoint_name = globals()[camelized_name]
+        # Dynamically load the necessary endpoint module
+        module = importlib.import_module(
+            f".endpoints.{name}", package='lokalise')
+        # Find endpoint class in the module
+        endpoint_klass = getattr(module, camelized_name)
         return self.__fetch_attr(f"__{name}",
-                                 lambda: endpoint_name(self))
+                                 lambda: endpoint_klass(self))
 
     def __fetch_attr(self, attr_name, populator):
         """Searches for the given attribute. Uses populator
