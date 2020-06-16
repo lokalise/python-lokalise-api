@@ -244,14 +244,14 @@ class Client:
 
         :param str name: Endpoint name to load
         """
-        name = name + "_endpoint"
-        camelized_name = utils.snake_to_camel(name)
+        endpoint_name = name + "_endpoint"
+        camelized_name = utils.snake_to_camel(endpoint_name)
         # Dynamically load the necessary endpoint module
         module = importlib.import_module(
-            f".endpoints.{name}", package='lokalise')
+            f".endpoints.{endpoint_name}", package='lokalise')
         # Find endpoint class in the module
         endpoint_klass = getattr(module, camelized_name)
-        return self.__fetch_attr(f"__{name}",
+        return self.__fetch_attr(f"__{endpoint_name}",
                                  lambda: endpoint_klass(self))
 
     def __fetch_attr(self, attr_name, populator):
