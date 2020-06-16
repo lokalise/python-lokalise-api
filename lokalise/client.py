@@ -19,6 +19,7 @@ from .endpoints.contributors_endpoint import ContributorsEndpoint
 from .endpoints.projects_endpoint import ProjectsEndpoint
 from .endpoints.languages_endpoint import LanguagesEndpoint
 
+
 class Client:
     """Client used to send API requests.
 

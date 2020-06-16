@@ -3,12 +3,10 @@ lokalise.endpoints.base_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Endpoint parent class inherited by specific endpoints.
 """
-
-from abc import ABC
 from .. import request
 
 
-class BaseEndpoint(ABC):
+class BaseEndpoint:
     """Abstract base class for API endpoints. Endpoints are used to load
     the actual data.
 

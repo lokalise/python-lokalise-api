@@ -4,10 +4,8 @@ lokalise.models.base_model
 Model parent class inherited by specific models.
 """
 
-from abc import ABC
 
-
-class BaseModel(ABC):
+class BaseModel:
     """Abstract base class for model objects.
 
     :attribute ATTRS: list of attributes a resource contains. For example, a project
