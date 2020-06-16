@@ -34,11 +34,11 @@ class BaseModel:
         if 'project_id' not in self.ATTRS:
             self.project_id = raw_data.get('project_id', None)
 
-        if hasattr(self, 'DATA_KEY'):
-            raw_data = raw_data.get(self.DATA_KEY, raw_data)
+        # Fetch data with DATA_KEY or simply use the initial data
+        data = raw_data.get(self.DATA_KEY, raw_data)
 
         for attr in self.ATTRS:
-            setattr(self, attr, raw_data.get(attr, None))
+            setattr(self, attr, data.get(attr, None))
 
     def __str__(self):
         """Converts a model to string
