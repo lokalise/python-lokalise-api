@@ -13,12 +13,9 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-
-# -- Project information -----------------------------------------------------
-
 from lokalise._version import __version__
 
-
+# -- Project information -----------------------------------------------------
 project = 'python-lokalise-api'
 copyright = '2020, Lokalise team, Ilya Bodrov'
 author = 'Lokalise team, Ilya Bodrov'

@@ -1,0 +1,73 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/system/languages?page=2&limit=10
+  response:
+    body:
+      string: '{"languages":[{"lang_id":714,"lang_iso":"ar","lang_name":"Arabic","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":715,"lang_iso":"ar_DZ","lang_name":"Arabic
+        (Algeria)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":716,"lang_iso":"ar_BH","lang_name":"Arabic
+        (Bahrain)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":717,"lang_iso":"ar_EG","lang_name":"Arabic
+        (Egypt)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":718,"lang_iso":"ar_IQ","lang_name":"Arabic
+        (Iraq)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":719,"lang_iso":"ar_JO","lang_name":"Arabic
+        (Jordan)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":720,"lang_iso":"ar_KW","lang_name":"Arabic
+        (Kuwait)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":721,"lang_iso":"ar_LB","lang_name":"Arabic
+        (Lebanon)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":722,"lang_iso":"ar_LY","lang_name":"Arabic
+        (Libya)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":723,"lang_iso":"ar_MA","lang_name":"Arabic
+        (Morocco)","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 15 Jun 2020 13:33:24 GMT
+      Expires:
+      - Mon, 15 Jun 2020 13:33:24 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '10'
+      X-Pagination-Page:
+      - '2'
+      X-Pagination-Page-Count:
+      - '66'
+      X-Pagination-Total-Count:
+      - '654'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1363'
+    status:
+      code: 200
+      message: OK
+version: 1

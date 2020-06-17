@@ -4,10 +4,8 @@ lokalise.collections.base_collection
 Collection parent class inherited by specific collections.
 """
 
-from abc import ABC
 
-
-class BaseCollection(ABC):
+class BaseCollection:
     """Abstract base class for resources collections.
 
     :attribute DATA_KEY: contains the key name that should be used to fetch
@@ -34,6 +32,9 @@ class BaseCollection(ABC):
         :param raw_data: Data returned by the API
         """
         self.project_id = raw_data.get('project_id', None)
+        self.branch = raw_data.get('branch', None)
+        if 'errors' in raw_data:
+            self.errors = raw_data['errors']
         raw_items = raw_data[self.DATA_KEY]
         self.items = []
         for item in raw_items:

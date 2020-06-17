@@ -1,8 +1,14 @@
+"""
+Tests for the Client class
+"""
+
 import pytest
 import lokalise
 
 
 def test_client_arguments():
+    """Checks that client can receive token and timeout values
+    """
     client = lokalise.Client("123abc", connect_timeout=5, read_timeout=3)
     assert client.token == "123abc"
     assert client.connect_timeout == 5
@@ -11,6 +17,8 @@ def test_client_arguments():
 
 @pytest.mark.vcr
 def test_client_timeout(client):
+    """Checks that timeout value is used properly
+    """
     client.connect_timeout = 7
     projects = client.projects()
     assert projects.items[0].project_id == "638597985c913f818559f3.17106287"
@@ -18,6 +26,8 @@ def test_client_timeout(client):
 
 @pytest.mark.vcr
 def test_reset_client():
+    """Checks that the client can be reset
+    """
     client = lokalise.Client("123abc", connect_timeout=5, read_timeout=3)
     assert client.connect_timeout == 5
 

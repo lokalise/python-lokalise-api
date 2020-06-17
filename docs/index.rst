@@ -24,6 +24,7 @@ Usage
 
    api/getting_started
    api/contributors
+   api/languages
    api/projects
 
 Additional information

@@ -5,7 +5,7 @@
 3. Install the necessary dependencies `pipenv install`.
 4. Implement your feature or bug fix.
 5. Don't forget to add tests and make sure they pass by running `pipenv run pytest`. Tests will be linted automatically.
-6. Make sure your code complies with the style guide by running `pipenv run pylint lokalise/`. `pipenv run autopep8 -i -r . -a` can automatically many issues for you.
+6. Make sure your code complies with the style guide by running `pipenv run pylint lokalise/`. `pipenv run autopep8 -i -r lokalise/ -a` can automatically fix many issues for you.
 7. If necessary, add documentation for your feature or bug fix.
 8. Commit and push your changes.
 9. [Submit a pull request.][pr]

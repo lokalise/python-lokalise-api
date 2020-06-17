@@ -3,12 +3,10 @@ lokalise.endpoints.base_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Endpoint parent class inherited by specific endpoints.
 """
-
-from abc import ABC
 from .. import request
 
 
-class BaseEndpoint(ABC):
+class BaseEndpoint:
     """Abstract base class for API endpoints. Endpoints are used to load
     the actual data.
 
@@ -25,7 +23,7 @@ class BaseEndpoint(ABC):
         """
         self.client = client
 
-    def all(self, project_id=None, params={}):
+    def all(self, project_id=None, params=None):
         """Loads all items for the given endpoint
         (all projects, all contributors etc).
 
@@ -52,3 +50,45 @@ class BaseEndpoint(ABC):
             resource_id=resource_id if resource_id else ""
         ).strip('/')
         return request.get(self.client, path)
+
+    def create(self, params, project_id=None):
+        """Creates a new resource for the given endpoint.
+
+        :param project_id: ID of the project to create resource for
+        :param resource_id: resource ID to perform creation for
+        :param dict params: Resource parameters
+        :rtype dict:
+        """
+
+        path = self.PATH.format(
+            project_id=project_id if project_id else "",
+            resource_id=""
+        ).strip('/')
+        return request.post(self.client, path, params)
+
+    def update(self, project_id, params, resource_id=None):
+        """Updates a resource for the given endpoint.
+
+        :param project_id: ID of the project to update resource for
+        :param dict params: Resource parameters
+        :rtype dict:
+        """
+
+        path = self.PATH.format(
+            project_id=project_id if project_id else "",
+            resource_id=resource_id if resource_id else ""
+        ).strip('/')
+        return request.put(self.client, path, params)
+
+    def delete(self, project_id, resource_id=None):
+        """Deletes a resource for the given endpoint.
+
+        :param project_id: ID of the project to update resource for
+        :rtype dict:
+        """
+
+        path = self.PATH.format(
+            project_id=project_id if project_id else "",
+            resource_id=resource_id if resource_id else ""
+        ).strip('/')
+        return request.delete(self.client, path)
