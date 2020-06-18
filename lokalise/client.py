@@ -82,6 +82,68 @@ class Client:
             find(project_id, resource_id=branch_id)
         return BranchModel(raw_branch)
 
+    def create_branch(self,
+                      project_id: str,
+                      params: Dict[str, str]
+                      ) -> BranchModel:
+        """Creates a new branch inside the project
+
+        :param str project_id: ID of the project
+        :param dict params: Branch parameters
+        :return: Branch model
+        """
+        raw_branch = self.get_endpoint("branches"). \
+            create(params, project_id=project_id)
+
+        return BranchModel(raw_branch)
+
+    def update_branch(self,
+                      project_id: str,
+                      branch_id: Union[str, int],
+                      params: Dict[str, str]) -> BranchModel:
+        """Updates a branch.
+
+        :param str project_id: ID of the project
+        :param branch_id: ID of the branch to update
+        :type branch_id: int or str
+        :param dict params: Update parameters
+        :return: Branch model
+        """
+        raw_branch = self.get_endpoint("branches"). \
+            update(project_id, params, resource_id=branch_id)
+        return BranchModel(raw_branch)
+
+    def delete_branch(self, project_id: str,
+                      branch_id: Union[str, int]) -> Dict:
+        """Deletes a branch.
+
+        :param str project_id: ID of the project
+        :param branch_id: ID of the branch to delete
+        :type branch_id: int or str
+        :return: Dictionary with project ID and "branch_deleted" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("branches"). \
+            delete(project_id, resource_id=branch_id)
+        return response
+
+    def merge_branch(self, project_id: str,
+                     branch_id: Union[str, int],
+                     params: Optional[Dict[str, Union[str, int]]] = None
+                     ) -> Dict:
+        """Merges a branch.
+
+        :param str project_id: ID of the project
+        :param branch_id: ID of the source branch
+        :type branch_id: int or str
+        :param dict params: Merge parameters
+        :return: Dictionary with project ID, "branch_merged" set to True, and branches info
+        :rtype dict:
+        """
+        response = self.get_endpoint("branches"). \
+            merge(project_id, branch_id, params)
+        return response
+
     def contributors(self,
                      project_id: str,
                      params: Optional[Dict[str, Union[int, str]]] = None
@@ -121,10 +183,10 @@ class Client:
         :type params: list or dict
         :return: Contributors collection
         """
-        raw_contributor = self.get_endpoint("contributors"). \
+        raw_contributors = self.get_endpoint("contributors"). \
             create(params, project_id=project_id)
 
-        return ContributorsCollection(raw_contributor)
+        return ContributorsCollection(raw_contributors)
 
     def update_contributor(self,
                            project_id: str,
