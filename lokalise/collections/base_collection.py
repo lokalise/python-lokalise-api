@@ -37,6 +37,7 @@ class BaseCollection:
         self.branch = raw_data.get('branch', None)
         if 'errors' in raw_data:
             self.errors = raw_data['errors']
+
         raw_items = raw_data[self.DATA_KEY]
         self.items = []
         for item in raw_items:

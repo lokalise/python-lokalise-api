@@ -6,11 +6,13 @@ This module contains API client definition.
 from typing import Any, Optional, Union, Dict, Callable, List
 import importlib
 from lokalise import utils
-from .collections.projects import ProjectsCollection
+from .collections.branches import BranchesCollection
 from .collections.contributors import ContributorsCollection
+from .collections.projects import ProjectsCollection
 from .collections.languages import LanguagesCollection
-from .models.project import ProjectModel
+from .models.branch import BranchModel
 from .models.contributor import ContributorModel
+from .models.project import ProjectModel
 from .models.language import LanguageModel
 
 
@@ -52,11 +54,38 @@ class Client:
         self.__clear_endpoint_attrs()
 
     # === Endpoint methods ===
+    def branches(self,
+                 project_id: str,
+                 params: Optional[Dict[str, Union[int, str]]] = None
+                 ) -> BranchesCollection:
+        """Fetches all branches for the given project.
+
+        :param str project_id: ID of the project to fetch branches for.
+        :param dict params: (optional) Pagination params
+        :return: Collection of branches
+        """
+        raw_branches = self.get_endpoint("branches"). \
+            all(project_id=project_id, params=params)
+        return BranchesCollection(raw_branches)
+
+    def branch(self,
+               project_id: str,
+               branch_id: Union[str, int]) -> BranchModel:
+        """Fetches a single branch.
+
+        :param str project_id: ID of the project
+        :param branch_id: ID of the branch to fetch
+        :type branch_id: int or str
+        :return: Branch model
+        """
+        raw_branch = self.get_endpoint("branches"). \
+            find(project_id, resource_id=branch_id)
+        return BranchModel(raw_branch)
+
     def contributors(self,
                      project_id: str,
-                     params: Optional[Dict[str,
-                                           Union[int,
-                                                 str]]] = None) -> ContributorsCollection:
+                     params: Optional[Dict[str, Union[int, str]]] = None
+                     ) -> ContributorsCollection:
         """Fetches all contributors for the given project.
 
         :param str project_id: ID of the project to fetch contributors for.
@@ -69,8 +98,7 @@ class Client:
 
     def contributor(self,
                     project_id: str,
-                    contributor_id: Union[str,
-                                          int]) -> ContributorModel:
+                    contributor_id: Union[str, int]) -> ContributorModel:
         """Fetches a single contributor.
 
         :param str project_id: ID of the project
@@ -84,9 +112,8 @@ class Client:
 
     def create_contributors(self,
                             project_id: str,
-                            params: Union[Dict[str,
-                                               Any],
-                                          List[Dict]]) -> ContributorsCollection:
+                            params: Union[Dict[str, Any], List[Dict]]
+                            ) -> ContributorsCollection:
         """Creates one or more contributors inside the project
 
         :param str project_id: ID of the project
@@ -101,10 +128,8 @@ class Client:
 
     def update_contributor(self,
                            project_id: str,
-                           contributor_id: Union[str,
-                                                 int],
-                           params: Dict[str,
-                                        Any]) -> ContributorModel:
+                           contributor_id: Union[str, int],
+                           params: Dict[str, Any]) -> ContributorModel:
         """Updates a single contributor.
 
         :param str project_id: ID of the project
@@ -144,9 +169,8 @@ class Client:
 
     def project_languages(self,
                           project_id: str,
-                          params: Optional[Dict[str,
-                                                Union[str,
-                                                      int]]] = None) -> LanguagesCollection:
+                          params: Optional[Dict[str, Union[str, int]]] = None
+                          ) -> LanguagesCollection:
         """Fetches all languages for the given project.
 
         :param str project_id: ID of the project
@@ -159,8 +183,7 @@ class Client:
 
     def create_languages(self,
                          project_id: str,
-                         params: Dict[str,
-                                      Any]) -> LanguagesCollection:
+                         params: Dict[str, Any]) -> LanguagesCollection:
         """Create one or more languages for the given project.
 
         :param str project_id: ID of the project
@@ -174,8 +197,7 @@ class Client:
 
     def language(self,
                  project_id: str,
-                 language_id: Union[str,
-                                    int]) -> LanguageModel:
+                 language_id: Union[str, int]) -> LanguageModel:
         """Fetches a project language.
 
         :param str project_id: ID of the project
@@ -188,10 +210,8 @@ class Client:
 
     def update_language(self,
                         project_id: str,
-                        language_id: Union[str,
-                                           int],
-                        params: Dict[str,
-                                     Any]) -> LanguageModel:
+                        language_id: Union[str, int],
+                        params: Dict[str, Any]) -> LanguageModel:
         """Updates a project language.
 
         :param str project_id: ID of the project

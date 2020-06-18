@@ -8,7 +8,7 @@ Attributes:
     BASE_URL - path to the Lokalise APIv2.
     PAGINATION_HEADERS - list of response headers that contain pagination data.
 """
-from typing import Any, Optional, Union, Dict, NoReturn
+from typing import Any, Optional, Dict, NoReturn
 import json
 import requests
 from lokalise import errors

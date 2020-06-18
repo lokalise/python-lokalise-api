@@ -23,6 +23,7 @@ Usage
    :maxdepth: 2
 
    api/getting_started
+   api/branches
    api/contributors
    api/languages
    api/projects
