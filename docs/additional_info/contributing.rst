@@ -9,9 +9,10 @@ Contributing
 4. Implement your feature or bug fix.
 5. Don't forget to add tests and make sure they pass.
 6. Make sure your code complies with the style guide by running ``pipenv run pylint lokalise/``. ``pipenv run autopep8 -i -r lokalise/ -a`` can automatically fix many issues for you.
-7. If necessary, add documentation for your feature or bug fix.
-8. Commit and push your changes.
-9. Submit a pull request.
+7. We use type hinting so check if everything is okay by running `pipenv run mypy lokalise/`.
+8. If necessary, add documentation for your feature or bug fix.
+9. Commit and push your changes.
+10. Submit a pull request.
 
 .. index:: Tests (developers)
 

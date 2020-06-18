@@ -3,10 +3,9 @@ lokalise.client
 ~~~~~~~~~~~~~~~
 This module contains API client definition.
 """
-
+from typing import Any, Optional, Union, Dict, Callable, List
 import importlib
 from lokalise import utils
-
 from .collections.projects import ProjectsCollection
 from .collections.contributors import ContributorsCollection
 from .collections.languages import LanguagesCollection
@@ -25,29 +24,39 @@ class Client:
         client.projects()
     """
 
-    def __init__(self, token, connect_timeout=None, read_timeout=None):
+    def __init__(
+            self,
+            token: str,
+            connect_timeout: Optional[Union[int, float]] = None,
+            read_timeout: Optional[Union[int, float]] = None) -> None:
         """Instantiate a new Lokalise API client.
 
         :param token: Your Lokalise API token.
         :param connect_timeout: (optional) Server connection timeout
         (the value is in seconds). By default, the client will wait indefinitely.
+        :type connect_timeout: int or float
         :param read_timeout: (optional) Server read timeout
         (the value is in seconds). By default, the client will wait indefinitely.
+        :type read_timeout: int or float
         """
         self.token = token
         self.connect_timeout = connect_timeout
         self.read_timeout = read_timeout
 
-    def reset_client(self):
-        """Resets the API client by setting all options to None.
+    def reset_client(self) -> None:
+        """Resets the API client by clearing all attributes.
         """
-        self.token = None
+        self.token = ''
         self.connect_timeout = None
         self.read_timeout = None
         self.__clear_endpoint_attrs()
 
     # === Endpoint methods ===
-    def contributors(self, project_id, params=None):
+    def contributors(self,
+                     project_id: str,
+                     params: Optional[Dict[str,
+                                           Union[int,
+                                                 str]]] = None) -> ContributorsCollection:
         """Fetches all contributors for the given project.
 
         :param str project_id: ID of the project to fetch contributors for.
@@ -58,7 +67,10 @@ class Client:
             all(project_id=project_id, params=params)
         return ContributorsCollection(raw_contributors)
 
-    def contributor(self, project_id, contributor_id):
+    def contributor(self,
+                    project_id: str,
+                    contributor_id: Union[str,
+                                          int]) -> ContributorModel:
         """Fetches a single contributor.
 
         :param str project_id: ID of the project
@@ -70,7 +82,11 @@ class Client:
             find(project_id, resource_id=contributor_id)
         return ContributorModel(raw_contributor)
 
-    def create_contributors(self, project_id, params):
+    def create_contributors(self,
+                            project_id: str,
+                            params: Union[Dict[str,
+                                               Any],
+                                          List[Dict]]) -> ContributorsCollection:
         """Creates one or more contributors inside the project
 
         :param str project_id: ID of the project
@@ -83,7 +99,12 @@ class Client:
 
         return ContributorsCollection(raw_contributor)
 
-    def update_contributor(self, project_id, contributor_id, params):
+    def update_contributor(self,
+                           project_id: str,
+                           contributor_id: Union[str,
+                                                 int],
+                           params: Dict[str,
+                                        Any]) -> ContributorModel:
         """Updates a single contributor.
 
         :param str project_id: ID of the project
@@ -96,7 +117,8 @@ class Client:
             update(project_id, params, resource_id=contributor_id)
         return ContributorModel(raw_contributor)
 
-    def delete_contributor(self, project_id, contributor_id):
+    def delete_contributor(self, project_id: str,
+                           contributor_id: Union[str, int]) -> Dict:
         """Deletes a contributor.
 
         :param str project_id: ID of the project
@@ -109,7 +131,8 @@ class Client:
             delete(project_id, resource_id=contributor_id)
         return response
 
-    def system_languages(self, params=None):
+    def system_languages(
+            self, params: Optional[Dict[str, Union[str, int]]] = None) -> LanguagesCollection:
         """Fetches all languages that Lokalise supports.
 
         :param dict params: (optional) Pagination params
@@ -119,7 +142,11 @@ class Client:
             "system_languages").all(params=params)
         return LanguagesCollection(raw_languages)
 
-    def project_languages(self, project_id, params=None):
+    def project_languages(self,
+                          project_id: str,
+                          params: Optional[Dict[str,
+                                                Union[str,
+                                                      int]]] = None) -> LanguagesCollection:
         """Fetches all languages for the given project.
 
         :param str project_id: ID of the project
@@ -130,7 +157,10 @@ class Client:
             all(project_id=project_id, params=params)
         return LanguagesCollection(raw_languages)
 
-    def create_languages(self, project_id, params):
+    def create_languages(self,
+                         project_id: str,
+                         params: Dict[str,
+                                      Any]) -> LanguagesCollection:
         """Create one or more languages for the given project.
 
         :param str project_id: ID of the project
@@ -142,7 +172,10 @@ class Client:
             create(params, project_id=project_id)
         return LanguagesCollection(raw_languages)
 
-    def language(self, project_id, language_id):
+    def language(self,
+                 project_id: str,
+                 language_id: Union[str,
+                                    int]) -> LanguageModel:
         """Fetches a project language.
 
         :param str project_id: ID of the project
@@ -153,7 +186,12 @@ class Client:
             find(project_id, resource_id=language_id)
         return LanguageModel(raw_language)
 
-    def update_language(self, project_id, language_id, params):
+    def update_language(self,
+                        project_id: str,
+                        language_id: Union[str,
+                                           int],
+                        params: Dict[str,
+                                     Any]) -> LanguageModel:
         """Updates a project language.
 
         :param str project_id: ID of the project
@@ -165,7 +203,8 @@ class Client:
             update(project_id, params, resource_id=language_id)
         return LanguageModel(raw_language)
 
-    def delete_language(self, project_id, language_id):
+    def delete_language(self, project_id: str,
+                        language_id: Union[str, int]) -> Dict:
         """Deletes a project language.
 
         :param str project_id: ID of the project
@@ -177,7 +216,7 @@ class Client:
             delete(project_id, resource_id=language_id)
         return response
 
-    def projects(self, params=None):
+    def projects(self, params: Optional[str] = None) -> ProjectsCollection:
         """Fetches all projects available to the currently authorized user
         (identified by the API token).
 
@@ -187,7 +226,7 @@ class Client:
         raw_projects = self.get_endpoint("projects").all(params=params)
         return ProjectsCollection(raw_projects)
 
-    def project(self, project_id):
+    def project(self, project_id: str) -> ProjectModel:
         """Fetches a single project by ID.
 
         :param str project_id: ID of the project to fetch
@@ -196,7 +235,7 @@ class Client:
         raw_project = self.get_endpoint("projects").find(project_id)
         return ProjectModel(raw_project)
 
-    def create_project(self, params):
+    def create_project(self, params: Dict[str, Any]) -> ProjectModel:
         """Creates a new project.
 
         :param dict params: Project parameters
@@ -205,7 +244,8 @@ class Client:
         raw_project = self.get_endpoint("projects").create(params)
         return ProjectModel(raw_project)
 
-    def update_project(self, project_id, params):
+    def update_project(self, project_id: str,
+                       params: Dict[str, Any]) -> ProjectModel:
         """Updates a project.
 
         :param str project_id: ID of the project to update
@@ -215,7 +255,7 @@ class Client:
         raw_project = self.get_endpoint("projects").update(project_id, params)
         return ProjectModel(raw_project)
 
-    def empty_project(self, project_id):
+    def empty_project(self, project_id: str) -> Dict:
         """Empties a given project by removing all keys and translations.
 
         :param str project_id: ID of the project to empty
@@ -224,7 +264,7 @@ class Client:
         """
         return self.get_endpoint("projects").empty(project_id)
 
-    def delete_project(self, project_id):
+    def delete_project(self, project_id: str) -> Dict:
         """Deletes a given project.
 
         :param str project_id: ID of the project to empty
@@ -235,7 +275,7 @@ class Client:
     # === End of endpoint methods ===
 
     # === Endpoint helpers
-    def get_endpoint(self, name):
+    def get_endpoint(self, name: str) -> Any:
         """Lazily loads an endpoint with a given name and stores it
         under a specific instance attribute. For example, if the `name`
         is "projects", then it will load .endpoints.projects_endpoint module
@@ -254,7 +294,7 @@ class Client:
         return self.__fetch_attr(f"__{endpoint_name}",
                                  lambda: endpoint_klass(self))
 
-    def __fetch_attr(self, attr_name, populator):
+    def __fetch_attr(self, attr_name: str, populator: Callable) -> Any:
         """Searches for the given attribute. Uses populator
         to set the attribute if it cannot be found. Used to lazy-load
         endpoints.
@@ -264,7 +304,7 @@ class Client:
 
         return getattr(self, attr_name)
 
-    def __clear_endpoint_attrs(self):
+    def __clear_endpoint_attrs(self) -> None:
         """Clears all lazily-loaded endpoint attributes
         """
         endpoint_attrs = [a for a in vars(self) if a.endswith('_endpoint')]

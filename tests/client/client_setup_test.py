@@ -37,7 +37,7 @@ def test_reset_client():
 
     client.reset_client()
 
-    assert client.token is None
+    assert client.token == ''
     assert client.connect_timeout is None
     assert client.read_timeout is None
 

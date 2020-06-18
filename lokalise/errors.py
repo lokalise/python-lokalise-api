@@ -3,13 +3,14 @@ lokalise.errors
 ~~~~~~~~~~~~~~~
 Defines custom exception classes.
 """
+from typing import Union
 
 
 class ClientError(Exception):
     """General exception class.
     """
 
-    def __init__(self, msg, code):
+    def __init__(self, msg: str, code: Union[str, int]) -> None:
         """Initializes a new exception.
 
         :param msg: Exception message

@@ -3,7 +3,7 @@ lokalise.endpoints.contributors_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module containing contributors endpoint.
 """
-
+from typing import Dict, List, Union, Optional
 from .base_endpoint import BaseEndpoint
 
 
@@ -12,7 +12,8 @@ class ContributorsEndpoint(BaseEndpoint):
     """
     PATH = "projects/{project_id}/contributors/{resource_id}"
 
-    def create(self, params, project_id=None):
+    def create(self, params: Union[Dict, List],
+               project_id: Optional[str] = None) -> Dict:
         """Creates one or more contributors
 
         :param str project_id: ID of the project to create resource for

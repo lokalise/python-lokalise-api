@@ -3,6 +3,7 @@ lokalise.models.base_model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 Model parent class inherited by specific models.
 """
+from typing import List, Dict
 
 
 class BaseModel:
@@ -16,10 +17,10 @@ class BaseModel:
     {"project_id": "abc", contributor: {"user_id": 1}}
     In this case, the DATA_KEY would be "contributor"
     """
-    ATTRS = []
+    ATTRS: List[str] = []
     DATA_KEY = ''
 
-    def __init__(self, raw_data):
+    def __init__(self, raw_data: Dict) -> None:
         """Creates a new model.
         A model describes a single resource,
         for example a project or a contributor. Models respond to common
@@ -40,7 +41,7 @@ class BaseModel:
         for attr in self.ATTRS:
             setattr(self, attr, data.get(attr, None))
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Converts a model to string
         """
         result = ""

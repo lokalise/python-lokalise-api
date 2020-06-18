@@ -3,7 +3,7 @@ lokalise.endpoints.languages_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module containing project languages endpoint.
 """
-
+from typing import Dict, List, Union, Optional
 from .base_endpoint import BaseEndpoint
 
 
@@ -12,7 +12,8 @@ class LanguagesEndpoint(BaseEndpoint):
     """
     PATH = "projects/{project_id}/languages/{resource_id}"
 
-    def create(self, params, project_id=None):
+    def create(self, params: Union[Dict, List],
+               project_id: Optional[str] = None) -> Dict:
         """Creates one or more project languages
 
         :param params: Creation parameters

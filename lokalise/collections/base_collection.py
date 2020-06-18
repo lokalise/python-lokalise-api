@@ -3,6 +3,8 @@ lokalise.collections.base_collection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Collection parent class inherited by specific collections.
 """
+from typing import Any, Dict
+from ..models.base_model import BaseModel
 
 
 class BaseCollection:
@@ -16,10 +18,10 @@ class BaseCollection:
     :attribute MODEL_KLASS: tells which class to use to produce models for each
     item in the collection.
     """
-    DATA_KEY = ''
-    MODEL_KLASS = ''
+    DATA_KEY: str = ''
+    MODEL_KLASS: Any = BaseModel
 
-    def __init__(self, raw_data):
+    def __init__(self, raw_data: Dict[str, Any]) -> None:
         """Creates a new collection.
         To get access to collection data, use `items` attribute.
         Pagination-related data is stored inside the following attributes:
@@ -48,30 +50,30 @@ class BaseCollection:
             self.limit = int(pagination.get("x-pagination-limit", 0))
             self.current_page = int(pagination.get("x-pagination-page", 0))
 
-    def is_last_page(self):
+    def is_last_page(self) -> bool:
         """Checks whether the current collection set is the last page.
 
-        :rtype: boolean
+        :rtype: bool
         """
         return not self.has_next_page()
 
-    def is_first_page(self):
+    def is_first_page(self) -> bool:
         """Checks whether the current collection set is the first page.
 
-        :rtype: boolean
+        :rtype: bool
         """
         return not self.has_prev_page()
 
-    def has_next_page(self):
+    def has_next_page(self) -> bool:
         """Checks whether the current collection set has the next page.
 
-        :rtype: boolean
+        :rtype: bool
         """
         return self.current_page > 0 and self.current_page < self.page_count
 
-    def has_prev_page(self):
+    def has_prev_page(self) -> bool:
         """Checks whether the current collection set has the previous page.
 
-        :rtype: boolean
+        :rtype: bool
         """
         return self.current_page > 1

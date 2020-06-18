@@ -11,6 +11,7 @@ pytest-cov = "~=2.9.0"
 pylint = "~= 2.5"
 pytest-pylint = "~= 0.17"
 autopep8 = "~= 1.5"
+mypy = "~= 0.780"
 
 [packages]
 requests = "~=2.23"
