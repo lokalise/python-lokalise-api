@@ -35,7 +35,7 @@ def get(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.get(BASE_URL + path,
+    return respond_with(requests.get(__prepare(BASE_URL + path),
                                      params=params,
                                      **options(client)))
 
@@ -50,8 +50,8 @@ def post(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.post(BASE_URL + path,
-                                      data=format_params(params),
+    return respond_with(requests.post(__prepare(BASE_URL + path),
+                                      data=__format_params(params),
                                       **options(client)))
 
 
@@ -65,8 +65,8 @@ def put(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.put(BASE_URL + path,
-                                     data=format_params(params),
+    return respond_with(requests.put(__prepare(BASE_URL + path),
+                                     data=__format_params(params),
                                      **options(client)))
 
 
@@ -78,7 +78,7 @@ def delete(client: lokalise.client.Client, path: str) -> Dict:
     :param path: Relative path to the API endpoint
     :rtype dict:
     """
-    return respond_with(requests.delete(BASE_URL + path,
+    return respond_with(requests.delete(__prepare(BASE_URL + path),
                                         **options(client)))
 
 
@@ -146,7 +146,11 @@ def options(client: lokalise.client.Client) -> Dict:
     }
 
 
-def format_params(params: Optional[Dict] = None) -> Optional[str]:
+def __format_params(params: Optional[Dict] = None) -> Optional[str]:
     """Converts request params to JSON
     """
     return json.dumps(params) if params else None
+
+
+def __prepare(path: str) -> str:
+    return path.strip('/')

@@ -3,7 +3,7 @@ lokalise.endpoints.projects_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module containing projects endpoint.
 """
-from typing import Dict
+from typing import Dict, Optional, Union
 from .base_endpoint import BaseEndpoint
 from .. import request
 
@@ -11,15 +11,13 @@ from .. import request
 class ProjectsEndpoint(BaseEndpoint):
     """Describes projects endpoint.
     """
-    PATH = "projects/{project_id}"
+    PATH = "projects/$parent_id"
 
-    def empty(self, project_id: str) -> Dict:
+    def empty(self, **ids: Optional[Union[str, int]]) -> Dict:
         """Empties a given project by removing all keys and translations.
 
-        :param project_id: ID of the project to empty
+        :param ids: IDs to generate the proper path
         :rtype dict:
         """
-        path = self.PATH.format(
-            project_id=project_id
-        ) + '/empty'
-        return request.put(self.client, path)
+        path = self.path_with_params(**ids)
+        return request.put(self.client, path + '/empty')

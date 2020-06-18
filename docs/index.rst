@@ -24,6 +24,7 @@ Usage
 
    api/getting_started
    api/branches
+   api/comments
    api/contributors
    api/languages
    api/projects

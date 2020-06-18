@@ -91,3 +91,11 @@ def test_merge_branch(client):
     assert response['project_id'] == PROJECT_ID
     assert response['branch_merged']
     assert response['branch']['branch_id'] == BRANCH_ID
+
+
+@pytest.mark.vcr
+def test_branch_to_str(client):
+    """Tests converting branch object to string
+    """
+    branch = client.branch(PROJECT_ID, BRANCH_ID)
+    assert str(BRANCH_ID) in str(branch)

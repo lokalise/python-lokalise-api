@@ -9,4 +9,4 @@ from .base_endpoint import BaseEndpoint
 class ProjectCommentsEndpoint(BaseEndpoint):
     """Describes project comments endpoint.
     """
-    PATH = "projects/{project_id}/comments"
+    PATH = "projects/$parent_id/comments"

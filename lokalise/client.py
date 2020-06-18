@@ -5,7 +5,7 @@ This module contains API client definition.
 """
 from typing import Any, Optional, Union, Dict, Callable, List
 import importlib
-from lokalise import utils
+from lokalise.utils import snake_to_camel
 from .collections.branches import BranchesCollection
 from .collections.comments import CommentsCollection
 from .collections.contributors import ContributorsCollection
@@ -67,7 +67,7 @@ class Client:
         :return: Collection of branches
         """
         raw_branches = self.get_endpoint("branches"). \
-            all(project_id=project_id, params=params)
+            all(parent_id=project_id, params=params)
         return BranchesCollection(raw_branches)
 
     def branch(self,
@@ -81,7 +81,7 @@ class Client:
         :return: Branch model
         """
         raw_branch = self.get_endpoint("branches"). \
-            find(project_id, resource_id=branch_id)
+            find(parent_id=project_id, resource_id=branch_id)
         return BranchModel(raw_branch)
 
     def create_branch(self,
@@ -95,7 +95,7 @@ class Client:
         :return: Branch model
         """
         raw_branch = self.get_endpoint("branches"). \
-            create(params, project_id=project_id)
+            create(params, parent_id=project_id)
 
         return BranchModel(raw_branch)
 
@@ -112,7 +112,7 @@ class Client:
         :return: Branch model
         """
         raw_branch = self.get_endpoint("branches"). \
-            update(project_id, params, resource_id=branch_id)
+            update(params, parent_id=project_id, resource_id=branch_id)
         return BranchModel(raw_branch)
 
     def delete_branch(self, project_id: str,
@@ -126,7 +126,7 @@ class Client:
         :rtype dict:
         """
         response = self.get_endpoint("branches"). \
-            delete(project_id, resource_id=branch_id)
+            delete(parent_id=project_id, resource_id=branch_id)
         return response
 
     def merge_branch(self, project_id: str,
@@ -143,13 +143,13 @@ class Client:
         :rtype dict:
         """
         response = self.get_endpoint("branches"). \
-            merge(project_id, branch_id, params)
+            merge(params, parent_id=project_id, resource_id=branch_id)
         return response
 
     def project_comments(self,
                          project_id: str,
                          params: Optional[Dict[str, Union[int, str]]] = None
-                        ) -> CommentsCollection:
+                         ) -> CommentsCollection:
         """Fetches all comments for the given project.
 
         :param str project_id: ID of the project to fetch comments for.
@@ -157,8 +157,89 @@ class Client:
         :return: Collection of comments
         """
         raw_comments = self.get_endpoint("project_comments"). \
-            all(project_id=project_id, params=params)
+            all(parent_id=project_id, params=params)
         return CommentsCollection(raw_comments)
+
+    def key_comments(self,
+                     project_id: str,
+                     key_id: Union[str, int],
+                     params: Optional[Dict[str, Union[int, str]]] = None
+                     ) -> CommentsCollection:
+        """Fetches all comments for the given key inside a project.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of key to fetch comments for
+        :type key_id: int or str
+        :param dict params: (optional) Pagination params
+        :return: Collection of comments
+        """
+        raw_comments = self.get_endpoint("key_comments"). \
+            all(parent_id=project_id, resource_id=key_id, params=params)
+        return CommentsCollection(raw_comments)
+
+    def key_comment(self,
+                    project_id: str,
+                    key_id: Union[str, int],
+                    comment_id: Union[str, int]
+                    ) -> CommentModel:
+        """Fetches a single comment for a given key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of key to fetch comments for
+        :type key_id: int or str
+        :param comment_id: Comment identifier to fetch
+        :type comment_id: int or str
+        :return: Comment model
+        """
+        raw_comment = self.get_endpoint("key_comments").find(
+            parent_id=project_id,
+            resource_id=key_id,
+            subresource_id=comment_id
+        )
+        return CommentModel(raw_comment)
+
+    def create_key_comments(self,
+                            project_id: str,
+                            key_id: Union[str, int],
+                            params: Union[List[Dict], Dict[str, str]]
+                            ) -> CommentsCollection:
+        """Creates one or more comments for the given key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of key to create comments for
+        :type key_id: int or str
+        :param params: Comment parameters
+        :type params: list or dict
+        :return: Collection of comments
+        """
+        raw_comments = self.get_endpoint("key_comments").create(
+            params,
+            wrapper_attr="comments",
+            parent_id=project_id,
+            resource_id=key_id
+        )
+        return CommentsCollection(raw_comments)
+
+    def delete_key_comment(self,
+                           project_id: str,
+                           key_id: Union[str, int],
+                           comment_id: Union[str, int]
+                           ) -> Dict:
+        """Deletes a given key comment.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of key to delete comment for.
+        :type key_id: int or str
+        :param comment_id: Comment to delete
+        :type comment_id: int or str
+        :return: Dictionary with project ID and "comment_deleted" set to True
+        """
+        response = self.get_endpoint("key_comments").delete(
+            parent_id=project_id,
+            resource_id=key_id,
+            subresource_id=comment_id
+        )
+        return response
 
     def contributors(self,
                      project_id: str,
@@ -171,7 +252,7 @@ class Client:
         :return: Collection of contributors
         """
         raw_contributors = self.get_endpoint("contributors"). \
-            all(project_id=project_id, params=params)
+            all(parent_id=project_id, params=params)
         return ContributorsCollection(raw_contributors)
 
     def contributor(self,
@@ -185,7 +266,7 @@ class Client:
         :return: Contributor model
         """
         raw_contributor = self.get_endpoint("contributors"). \
-            find(project_id, resource_id=contributor_id)
+            find(parent_id=project_id, resource_id=contributor_id)
         return ContributorModel(raw_contributor)
 
     def create_contributors(self,
@@ -200,7 +281,7 @@ class Client:
         :return: Contributors collection
         """
         raw_contributors = self.get_endpoint("contributors"). \
-            create(params, project_id=project_id)
+            create(params, wrapper_attr="contributors", parent_id=project_id)
 
         return ContributorsCollection(raw_contributors)
 
@@ -217,7 +298,7 @@ class Client:
         :return: Contributor model
         """
         raw_contributor = self.get_endpoint("contributors"). \
-            update(project_id, params, resource_id=contributor_id)
+            update(params, parent_id=project_id, resource_id=contributor_id)
         return ContributorModel(raw_contributor)
 
     def delete_contributor(self, project_id: str,
@@ -231,7 +312,7 @@ class Client:
         :rtype dict:
         """
         response = self.get_endpoint("contributors"). \
-            delete(project_id, resource_id=contributor_id)
+            delete(parent_id=project_id, resource_id=contributor_id)
         return response
 
     def system_languages(
@@ -256,7 +337,7 @@ class Client:
         :return: Collection of languages
         """
         raw_languages = self.get_endpoint("languages"). \
-            all(project_id=project_id, params=params)
+            all(parent_id=project_id, params=params)
         return LanguagesCollection(raw_languages)
 
     def create_languages(self,
@@ -270,7 +351,7 @@ class Client:
         :return: Collection of languages
         """
         raw_languages = self.get_endpoint("languages"). \
-            create(params, project_id=project_id)
+            create(params, wrapper_attr="languages", parent_id=project_id)
         return LanguagesCollection(raw_languages)
 
     def language(self,
@@ -283,7 +364,7 @@ class Client:
         :return: Language model
         """
         raw_language = self.get_endpoint("languages"). \
-            find(project_id, resource_id=language_id)
+            find(parent_id=project_id, resource_id=language_id)
         return LanguageModel(raw_language)
 
     def update_language(self,
@@ -298,7 +379,7 @@ class Client:
         :return: Language model
         """
         raw_language = self.get_endpoint("languages"). \
-            update(project_id, params, resource_id=language_id)
+            update(params, parent_id=project_id, resource_id=language_id)
         return LanguageModel(raw_language)
 
     def delete_language(self, project_id: str,
@@ -311,7 +392,7 @@ class Client:
         :rtype dict:
         """
         response = self.get_endpoint("languages"). \
-            delete(project_id, resource_id=language_id)
+            delete(parent_id=project_id, resource_id=language_id)
         return response
 
     def projects(self, params: Optional[str] = None) -> ProjectsCollection:
@@ -330,7 +411,8 @@ class Client:
         :param str project_id: ID of the project to fetch
         :return: Project model
         """
-        raw_project = self.get_endpoint("projects").find(project_id)
+        raw_project = self.get_endpoint("projects"). \
+            find(parent_id=project_id)
         return ProjectModel(raw_project)
 
     def create_project(self, params: Dict[str, Any]) -> ProjectModel:
@@ -350,7 +432,8 @@ class Client:
         :param dict params: Project parameters
         :return: Project model
         """
-        raw_project = self.get_endpoint("projects").update(project_id, params)
+        raw_project = self.get_endpoint("projects").\
+            update(params, parent_id=project_id)
         return ProjectModel(raw_project)
 
     def empty_project(self, project_id: str) -> Dict:
@@ -360,7 +443,7 @@ class Client:
         :return: Dictionary with the project ID and "keys_deleted" set to True
         :rtype dict:
         """
-        return self.get_endpoint("projects").empty(project_id)
+        return self.get_endpoint("projects").empty(parent_id=project_id)
 
     def delete_project(self, project_id: str) -> Dict:
         """Deletes a given project.
@@ -369,7 +452,7 @@ class Client:
         :return: Dictionary with project ID and "project_deleted" set to True
         :rtype dict:
         """
-        return self.get_endpoint("projects").delete(project_id)
+        return self.get_endpoint("projects").delete(parent_id=project_id)
     # === End of endpoint methods ===
 
     # === Endpoint helpers
@@ -383,7 +466,7 @@ class Client:
         :param str name: Endpoint name to load
         """
         endpoint_name = name + "_endpoint"
-        camelized_name = utils.snake_to_camel(endpoint_name)
+        camelized_name = snake_to_camel(endpoint_name)
         # Dynamically load the necessary endpoint module
         module = importlib.import_module(
             f".endpoints.{endpoint_name}", package='lokalise')

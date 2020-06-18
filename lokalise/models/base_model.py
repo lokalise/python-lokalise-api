@@ -49,7 +49,7 @@ class BaseModel:
         # This is an edge case happening only twice, so to overcome it
         # just check the value type under the given key.
         if self.DATA_KEY in raw_data and \
-        (isinstance(raw_data[self.DATA_KEY], dict)):
+                (isinstance(raw_data[self.DATA_KEY], dict)):
             data = raw_data[self.DATA_KEY]
         else:
             data = raw_data
