@@ -7,10 +7,12 @@ from typing import Any, Optional, Union, Dict, Callable, List
 import importlib
 from lokalise import utils
 from .collections.branches import BranchesCollection
+from .collections.comments import CommentsCollection
 from .collections.contributors import ContributorsCollection
 from .collections.projects import ProjectsCollection
 from .collections.languages import LanguagesCollection
 from .models.branch import BranchModel
+from .models.comment import CommentModel
 from .models.contributor import ContributorModel
 from .models.project import ProjectModel
 from .models.language import LanguageModel
@@ -143,6 +145,20 @@ class Client:
         response = self.get_endpoint("branches"). \
             merge(project_id, branch_id, params)
         return response
+
+    def project_comments(self,
+                         project_id: str,
+                         params: Optional[Dict[str, Union[int, str]]] = None
+                        ) -> CommentsCollection:
+        """Fetches all comments for the given project.
+
+        :param str project_id: ID of the project to fetch comments for.
+        :param dict params: (optional) Pagination params
+        :return: Collection of comments
+        """
+        raw_comments = self.get_endpoint("project_comments"). \
+            all(project_id=project_id, params=params)
+        return CommentsCollection(raw_comments)
 
     def contributors(self,
                      project_id: str,
