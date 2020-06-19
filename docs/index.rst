@@ -26,8 +26,10 @@ Usage
    api/branches
    api/comments
    api/contributors
+   api/files
    api/languages
    api/projects
+   api/queued_processes
 
 Additional information
 ----------------------

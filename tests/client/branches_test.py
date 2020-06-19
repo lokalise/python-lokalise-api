@@ -90,7 +90,9 @@ def test_merge_branch(client):
                                    {"force_conflict_resolve_using": "target"})
     assert response['project_id'] == PROJECT_ID
     assert response['branch_merged']
-    assert response['branch']['branch_id'] == BRANCH_ID
+    assert response['branch'].branch_id == BRANCH_ID
+    assert response['branch'].name == "python-branch-upd"
+    assert response['target_branch'].name == "master"
 
 
 @pytest.mark.vcr

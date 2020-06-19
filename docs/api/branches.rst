@@ -93,5 +93,12 @@ Merge a branch
   :param branch_id: ID of the source branch
   :type branch_id: int or str
   :param dict params: Merge parameters
-  :return: Dictionary with project ID, "branch_merged" set to True, and branches info
+  :return: Dictionary with project ID, "branch_merged" set to True, and branches info stored under the "branch" and "target_branch" keys
   :rtype dict:
+
+Example:
+
+.. code-block:: python
+
+  client.merge_branch('123.abc', 34567,
+                      {"force_conflict_resolve_using": "target"})

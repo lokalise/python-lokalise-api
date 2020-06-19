@@ -12,6 +12,7 @@ def snake_to_camel(word: str) -> str:
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
+
 def to_list(obj: Union[List, Dict]) -> List:
     """Converts a dictionary to list. If the object is already a list,
     does nothing.

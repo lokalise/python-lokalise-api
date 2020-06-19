@@ -9,12 +9,15 @@ from lokalise.utils import snake_to_camel
 from .collections.branches import BranchesCollection
 from .collections.comments import CommentsCollection
 from .collections.contributors import ContributorsCollection
+from .collections.files import FilesCollection
 from .collections.projects import ProjectsCollection
+from .collections.queued_processes import QueuedProcessesCollection
 from .collections.languages import LanguagesCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
 from .models.project import ProjectModel
+from .models.queued_process import QueuedProcessModel
 from .models.language import LanguageModel
 
 
@@ -144,6 +147,8 @@ class Client:
         """
         response = self.get_endpoint("branches"). \
             merge(params, parent_id=project_id, resource_id=branch_id)
+        response['branch'] = BranchModel(response['branch'])
+        response['target_branch'] = BranchModel(response['target_branch'])
         return response
 
     def project_comments(self,
@@ -315,6 +320,44 @@ class Client:
             delete(parent_id=project_id, resource_id=contributor_id)
         return response
 
+    def files(self,
+              project_id: str,
+              params: Optional[Dict[str, Union[int, str]]] = None
+              ) -> FilesCollection:
+        """Fetches all files for the given project.
+
+        :param str project_id: ID of the project to fetch files for.
+        :param dict params: (optional) Pagination params
+        :return: Collection of files
+        """
+        raw_files = self.get_endpoint("files"). \
+            all(parent_id=project_id, params=params)
+        return FilesCollection(raw_files)
+
+    def upload_file(self, project_id: str,
+                    params: Dict[str, Any]) -> QueuedProcessModel:
+        """Uploads a file to the given project.
+
+        :param str project_id: ID of the project to upload file to
+        :param dict params: Upload params
+        :return: Queued process model
+        """
+        raw_process = self.get_endpoint("files"). \
+            upload(params, parent_id=project_id)
+        return QueuedProcessModel(raw_process)
+
+    def download_files(self, project_id: str,
+                       params: Dict[str, Any]) -> Dict:
+        """Downloads files from the given project.
+
+        :param str project_id: ID of the project to download from
+        :param dict params: Download params
+        :return: Dictionary with project ID and a bundle URL
+        """
+        response = self.get_endpoint("files"). \
+            download(params, parent_id=project_id)
+        return response
+
     def system_languages(
             self, params: Optional[Dict[str, Union[str, int]]] = None) -> LanguagesCollection:
         """Fetches all languages that Lokalise supports.
@@ -453,6 +496,30 @@ class Client:
         :rtype dict:
         """
         return self.get_endpoint("projects").delete(parent_id=project_id)
+
+    def queued_processes(self, project_id: str) -> QueuedProcessesCollection:
+        """Fetches all queued processes for the given project.
+
+        :param str project_id: ID of the project
+        :return: Collection of queued processes
+        """
+        raw_processes = self.get_endpoint("queued_processes"). \
+            all(parent_id=project_id)
+        return QueuedProcessesCollection(raw_processes)
+
+    def queued_process(self,
+                       project_id: str,
+                       queued_process_id: Union[str, int]) -> QueuedProcessModel:
+        """Fetches a queued process.
+
+        :param str project_id: ID of the project
+        :param queued_process_id: ID of the process to fetch
+        :type queued_process_id: int or str
+        :return: Queued process model
+        """
+        raw_process = self.get_endpoint("queued_processes"). \
+            find(parent_id=project_id, resource_id=queued_process_id)
+        return QueuedProcessModel(raw_process)
     # === End of endpoint methods ===
 
     # === Endpoint helpers
