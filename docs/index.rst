@@ -16,6 +16,17 @@ interface that represents returned data as Python objects.
   project = client.project('123.abc')
   print(project.title)
 
+  client.upload_file(project.project_id, {
+      "data": 'ZnI6DQogIHRlc3Q6IHRyYW5zbGF0aW9u',
+      "filename": 'python_upload.yml',
+      "lang_iso": 'en'
+  })
+
+  translation_keys = client.keys(project.project_id, {"page": 2,
+      "limit": 3,
+      "disable_references": "1"})
+  translation_keys.items[0].key_name['web'] # => "sign_up"
+
 Usage
 -----
 
@@ -27,6 +38,7 @@ Usage
    api/comments
    api/contributors
    api/files
+   api/keys
    api/languages
    api/projects
    api/queued_processes

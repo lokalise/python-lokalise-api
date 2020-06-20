@@ -39,24 +39,27 @@ class BaseEndpoint:
         """Loads all items for the given endpoint
         (all projects, all contributors etc).
 
-        :param params: Other request parameters like "page" or "limit"
+        :param dict params: Other request parameters like "page" or "limit"
         :param ids: Identifiers for path generation
         :rtype dict:
         """
         path = self.path_with_params(**ids)
         return request.get(self.client, path, params)
 
-    def find(self, **ids: Optional[Union[str, int]]) -> Dict:
+    def find(self, params: Optional[Dict[str, Any]] = None,
+             **ids: Optional[Union[str, int]]) -> Dict:
         """Loads an item for the given endpoint
         (one project, one contributor etc).
 
+        :param dict params: Other request parameters
         :param ids: Identifiers for path generation
         :rtype dict:
         """
         path = self.path_with_params(**ids)
-        return request.get(self.client, path)
+        return request.get(self.client, path, params)
 
-    def create(self, params: Dict, wrapper_attr: Optional[str] = None,
+    def create(self, params: Dict,
+               wrapper_attr: Optional[str] = None,
                **ids: Optional[Union[str, int]]) -> Dict:
         """Creates a new resource for the given endpoint.
 
@@ -75,24 +78,32 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.post(self.client, path, params)
 
-    def update(self, params: Dict, **ids: Optional[Union[str, int]]) -> Dict:
+    def update(self, params: Dict,
+               wrapper_attr: Optional[str] = None,
+               **ids: Optional[Union[str, int]]) -> Dict:
         """Updates a resource for the given endpoint.
 
         :param dict params: Resource parameters
         :param ids: Identifiers for path generation
         :rtype dict:
         """
+        if wrapper_attr:
+            params = {wrapper_attr: to_list(params)}
         path = self.path_with_params(**ids)
         return request.put(self.client, path, params)
 
-    def delete(self, **ids: Optional[Union[str, int]]) -> Dict:
+    def delete(self, params: Optional[Dict] = None,
+               wrapper_attr: Optional[str] = None,
+               **ids: Optional[Union[str, int]]) -> Dict:
         """Deletes a resource for the given endpoint.
 
         :param ids: Identifiers for path generation
         :rtype dict:
         """
+        if wrapper_attr:
+            params = {wrapper_attr: params}
         path = self.path_with_params(**ids)
-        return request.delete(self.client, path)
+        return request.delete(self.client, path, params)
 
     def path_with_params(self, **ids: Optional[Union[str, int]]) -> str:
         """Generates relative path to the endpoint using the template stored

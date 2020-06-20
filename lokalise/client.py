@@ -10,15 +10,17 @@ from .collections.branches import BranchesCollection
 from .collections.comments import CommentsCollection
 from .collections.contributors import ContributorsCollection
 from .collections.files import FilesCollection
+from .collections.keys import KeysCollection
+from .collections.languages import LanguagesCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
-from .collections.languages import LanguagesCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
+from .models.key import KeyModel
+from .models.language import LanguageModel
 from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
-from .models.language import LanguageModel
 
 
 class Client:
@@ -358,8 +360,110 @@ class Client:
             download(params, parent_id=project_id)
         return response
 
-    def system_languages(
-            self, params: Optional[Dict[str, Union[str, int]]] = None) -> LanguagesCollection:
+    def keys(self,
+             project_id: str,
+             params: Optional[Dict[str, Any]] = None
+             ) -> KeysCollection:
+        """Fetches all keys for the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: Request parameters
+        :return: Collection of keys
+        """
+        raw_keys = self.get_endpoint("keys"). \
+            all(parent_id=project_id, params=params)
+        return KeysCollection(raw_keys)
+
+    def create_keys(self,
+                    project_id: str,
+                    params: Union[Dict[str, Any], List[Dict]]
+                    ) -> KeysCollection:
+        """Creates one or more keys inside the project
+
+        :param str project_id: ID of the project
+        :param params: Keys parameters
+        :type params: list or dict
+        :return: Keys collection
+        """
+        raw_keys = self.get_endpoint("keys"). \
+            create(params, wrapper_attr="keys", parent_id=project_id)
+
+        return KeysCollection(raw_keys)
+
+    def key(self,
+            project_id: str,
+            key_id: Union[str, int],
+            params: Optional[Dict[str, Any]] = None) -> KeyModel:
+        """Fetches a translation key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of the key to fetch
+        :param dict params: Request parameters
+        :return: Key model
+        """
+        raw_key = self.get_endpoint("keys"). \
+            find(params, parent_id=project_id, resource_id=key_id)
+        return KeyModel(raw_key)
+
+    def update_key(self,
+                   project_id: str,
+                   key_id: Union[str, int],
+                   params: Optional[Dict[str, Any]] = None) -> KeyModel:
+        """Updates a translation key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of the key to update
+        :param dict params: Request parameters
+        :return: Key model
+        """
+        raw_key = self.get_endpoint("keys"). \
+            update(params, parent_id=project_id, resource_id=key_id)
+        return KeyModel(raw_key)
+
+    def update_keys(self,
+                    project_id: str,
+                    params: Dict[str, Any]) -> KeysCollection:
+        """Updates translation keys in bulk.
+
+        :param str project_id: ID of the project
+        :param dict params: Key parameters
+        :return: Key collection
+        """
+        raw_keys = self.get_endpoint("keys"). \
+            update(params, wrapper_attr="keys", parent_id=project_id)
+        return KeysCollection(raw_keys)
+
+    def delete_key(self, project_id: str,
+                   key_id: Union[str, int]) -> Dict:
+        """Deletes a key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of the key to delete
+        :type key_id: int or str
+        :return: Dictionary with project ID and "key_removed" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("keys"). \
+            delete(parent_id=project_id, resource_id=key_id)
+        return response
+
+    def delete_keys(self, project_id: str,
+                    key_ids: List[Union[str, int]]) -> Dict:
+        """Deletes keys in bulk.
+
+        :param str project_id: ID of the project
+        :type key_id: int or str
+        :param list key_ids: List of the key identifiers to delete
+        :return: Dictionary with project ID and "keys_removed" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("keys"). \
+            delete(params=key_ids, wrapper_attr="keys", parent_id=project_id)
+        return response
+
+    def system_languages(self,
+                         params: Optional[Dict[str, Union[str, int]]] = None
+                         ) -> LanguagesCollection:
         """Fetches all languages that Lokalise supports.
 
         :param dict params: (optional) Pagination params

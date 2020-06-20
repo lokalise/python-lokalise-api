@@ -15,6 +15,17 @@ import lokalise
 client = lokalise.Client('YOUR_API_TOKEN')
 project = client.project('123.abc')
 print(project.title)
+
+client.upload_file(project.project_id, {
+    "data": 'ZnI6DQogIHRlc3Q6IHRyYW5zbGF0aW9u',
+    "filename": 'python_upload.yml',
+    "lang_iso": 'en'
+})
+
+translation_keys = client.keys(project.project_id, {"page": 2,
+    "limit": 3,
+    "disable_references": "1"})
+translation_keys.items[0].key_name['web'] # => "sign_up"
 ```
 
 ## Documentation
