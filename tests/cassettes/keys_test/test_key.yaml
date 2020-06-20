@@ -1,0 +1,65 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/keys/34089721?disable_references=1
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","key":{"key_id":34089721,"created_at":"2019-12-27
+        12:53:16 (Etc\/UTC)","created_at_timestamp":1577451196,"key_name":{"ios":"manual_setup","android":"manual_setup","web":"manual_setup","other":"manual_setup"},"filenames":{"ios":"","android":"","web":"","other":""},"description":"Updated
+        by Python","platforms":["web"],"tags":["python"],"comments":[],"screenshots":[{"screenshot_id":343286,"title":"screenshot","description":"","screenshot_tags":["test"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/3a314ec8b721982c23c501dcc7bb9ce7153807af.jpg","key_ids":[34089721],"width":480,"height":800,"created_at":"2019-12-27
+        14:52:26 (Etc\/UTC)","created_at_timestamp":1577458346}],"translations":[{"translation_id":220681440,"key_id":34089721,"language_iso":"ru_RU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        12:53:16 (Etc\/UTC)","modified_at_timestamp":1577451196,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681442,"key_id":34089721,"language_iso":"en","translation":"Manual
+        setup","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        12:53:16 (Etc\/UTC)","modified_at_timestamp":1577451196,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":2,"custom_translation_statuses":[{"status_id":429,"title":"needs
+        context","color":"#61bd4f"}]}],"is_plural":false,"plural_name":"","is_hidden":false,"is_archived":false,"context":"","base_words":2,"char_limit":0,"custom_attributes":"","modified_at":"2020-06-20
+        13:02:37 (Etc\/UTC)","modified_at_timestamp":1592658157,"translations_modified_at":"2020-06-20
+        12:42:24 (Etc\/UTC)","translations_modified_at_timestamp":1592656944}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 20 Jun 2020 14:01:50 GMT
+      Expires:
+      - Sat, 20 Jun 2020 14:01:50 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1885'
+    status:
+      code: 200
+      message: OK
+version: 1
