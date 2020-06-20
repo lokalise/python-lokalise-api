@@ -12,6 +12,7 @@ from .collections.contributors import ContributorsCollection
 from .collections.files import FilesCollection
 from .collections.keys import KeysCollection
 from .collections.languages import LanguagesCollection
+from .collections.orders import OrdersCollection
 from .collections.payment_cards import PaymentCardsCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
@@ -20,6 +21,7 @@ from .models.comment import CommentModel
 from .models.contributor import ContributorModel
 from .models.key import KeyModel
 from .models.language import LanguageModel
+from .models.order import OrderModel
 from .models.payment_card import PaymentCardModel
 from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
@@ -543,6 +545,51 @@ class Client:
         response = self.get_endpoint("languages"). \
             delete(parent_id=project_id, resource_id=language_id)
         return response
+
+    def orders(self,
+               team_id: Union[int, str],
+               params: Optional[Dict[str, Union[str, int]]] = None
+               ) -> OrdersCollection:
+        """Fetches all orders for the given team.
+
+        :param team_id: ID of the team
+        :type team_id: int or str
+        :param dict params: (optional) Pagination params
+        :return: Collection of orders
+        """
+        raw_orders = self.get_endpoint("orders"). \
+            all(parent_id=team_id, params=params)
+        return OrdersCollection(raw_orders)
+
+    def order(self,
+              team_id: Union[int, str],
+              order_id: str
+              ) -> OrderModel:
+        """Fetches an order for the given team.
+
+        :param team_id: ID of the team
+        :type team_id: int or str
+        :param str order_id: ID of the order
+        :return: Order model
+        """
+        raw_order = self.get_endpoint("orders"). \
+            find(parent_id=team_id, resource_id=order_id)
+        return OrderModel(raw_order)
+
+    def create_order(self,
+                     team_id: Union[int, str],
+                     params: Optional[Dict[str, Any]]
+                     ) -> OrderModel:
+        """Creates a new order inside the given team.
+
+        :param team_id: ID of the team
+        :type team_id: int or str
+        :param dict params: Order parameters
+        :return: Order model
+        """
+        raw_order = self.get_endpoint("orders"). \
+            create(parent_id=team_id, params=params)
+        return OrderModel(raw_order)
 
     def payment_cards(self,
                       params: Optional[Dict] = None) -> PaymentCardsCollection:

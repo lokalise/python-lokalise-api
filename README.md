@@ -1,6 +1,6 @@
 # Lokalise API v2 official Python interface
 
-Official Python 3 interface for the Lokalise APIv2 that represents returned data as Python objects.
+Official Python 3 interface for the [Lokalise APIv2](https://app.lokalise.com/api2docs) that represents returned data as Python objects.
 
 ## Quick start
 
