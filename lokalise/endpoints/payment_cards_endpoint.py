@@ -9,4 +9,4 @@ from .base_endpoint import BaseEndpoint
 class PaymentCardsEndpoint(BaseEndpoint):
     """Describes payment cards endpoint.
     """
-    PATH = "payment_cards/$resource_id"
+    PATH = "payment_cards/$parent_id"
