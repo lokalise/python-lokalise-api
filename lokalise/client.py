@@ -438,7 +438,7 @@ class Client:
             delete(parent_id=project_id, resource_id=language_id)
         return response
 
-    def projects(self, params: Optional[str] = None) -> ProjectsCollection:
+    def projects(self, params: Optional[Dict] = None) -> ProjectsCollection:
         """Fetches all projects available to the currently authorized user
         (identified by the API token).
 
