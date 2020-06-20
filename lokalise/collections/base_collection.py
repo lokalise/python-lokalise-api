@@ -3,7 +3,7 @@ lokalise.collections.base_collection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Collection parent class inherited by specific collections.
 """
-from typing import Any, Dict
+from typing import Any, Dict, List
 from ..models.base_model import BaseModel
 
 
@@ -17,9 +17,18 @@ class BaseCollection:
 
     :attribute MODEL_KLASS: tells which class to use to produce models for each
     item in the collection.
+
+    :attribute COMMON_ATTRS: list of common attributes that the collections may have.
+    For example: project_id, user_id, branch, team_id.
     """
     DATA_KEY: str = ''
     MODEL_KLASS: Any = BaseModel
+    COMMON_ATTRS: List[str] = [
+        'project_id',
+        'user_id',
+        'branch',
+        'errors'
+    ]
 
     def __init__(self, raw_data: Dict[str, Any]) -> None:
         """Creates a new collection.
@@ -33,10 +42,7 @@ class BaseCollection:
 
         :param raw_data: Data returned by the API
         """
-        self.project_id = raw_data.get('project_id', None)
-        self.branch = raw_data.get('branch', None)
-        if 'errors' in raw_data:
-            self.errors = raw_data['errors']
+        self.__extract_common_attrs(raw_data)
 
         raw_items = raw_data[self.DATA_KEY]
         self.items = []
@@ -78,3 +84,11 @@ class BaseCollection:
         :rtype: bool
         """
         return self.current_page > 1
+
+    def __extract_common_attrs(self, raw_data: Dict) -> None:
+        """Fetches common data from the response and sets the
+        corresponding attributes.
+        """
+        for attr in self.COMMON_ATTRS:
+            if attr in raw_data:
+                setattr(self, attr, raw_data[attr])

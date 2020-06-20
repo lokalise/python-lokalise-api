@@ -12,6 +12,7 @@ from .collections.contributors import ContributorsCollection
 from .collections.files import FilesCollection
 from .collections.keys import KeysCollection
 from .collections.languages import LanguagesCollection
+from .collections.payment_cards import PaymentCardsCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
 from .models.branch import BranchModel
@@ -19,6 +20,7 @@ from .models.comment import CommentModel
 from .models.contributor import ContributorModel
 from .models.key import KeyModel
 from .models.language import LanguageModel
+from .models.payment_card import PaymentCardModel
 from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
 
@@ -542,7 +544,17 @@ class Client:
             delete(parent_id=project_id, resource_id=language_id)
         return response
 
-    def projects(self, params: Optional[str] = None) -> ProjectsCollection:
+    def payment_cards(self, params: Optional[Dict] = None) -> ProjectsCollection:
+        """Fetches all projects available to the currently authorized user
+        (identified by the API token).
+
+        :param dict params: (optional) Pagination params
+        :return: Collection of projects
+        """
+        raw_projects = self.get_endpoint("projects").all(params=params)
+        return ProjectsCollection(raw_projects)
+
+    def projects(self, params: Optional[Dict] = None) -> ProjectsCollection:
         """Fetches all projects available to the currently authorized user
         (identified by the API token).
 

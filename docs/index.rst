@@ -40,6 +40,7 @@ Usage
    api/files
    api/keys
    api/languages
+   api/payment_cards
    api/projects
    api/queued_processes
 

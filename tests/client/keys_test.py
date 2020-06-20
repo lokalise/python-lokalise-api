@@ -96,6 +96,7 @@ def test_key(client):
     """
     key = client.key(PROJECT_ID, KEY_ID, {"disable_references": "1"})
     assert key.project_id == PROJECT_ID
+    assert key.branch == 'master'
     assert key.key_id == KEY_ID
     assert key.created_at == "2019-12-27 12:53:16 (Etc/UTC)"
     assert key.created_at_timestamp == 1577451196
