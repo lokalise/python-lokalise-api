@@ -16,6 +16,7 @@ from .collections.orders import OrdersCollection
 from .collections.payment_cards import PaymentCardsCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
+from .collections.teams import TeamsCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
@@ -25,6 +26,7 @@ from .models.order import OrderModel
 from .models.payment_card import PaymentCardModel
 from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
+from .models.team import TeamModel
 
 
 class Client:
@@ -718,6 +720,16 @@ class Client:
         raw_process = self.get_endpoint("queued_processes"). \
             find(parent_id=project_id, resource_id=queued_process_id)
         return QueuedProcessModel(raw_process)
+
+    def teams(self, params: Optional[Dict] = None) -> TeamsCollection:
+        """Fetches all teams available to the currently authorized user
+        (identified by the API token).
+
+        :param dict params: (optional) Pagination params
+        :return: Collection of teams
+        """
+        raw_teams = self.get_endpoint("teams").all(params=params)
+        return TeamsCollection(raw_teams)
     # === End of endpoint methods ===
 
     # === Endpoint helpers
