@@ -3,6 +3,7 @@ lokalise.models.base_model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 Model parent class inherited by specific models.
 """
+from typing import List, Dict
 
 
 class BaseModel:
@@ -16,10 +17,10 @@ class BaseModel:
     {"project_id": "abc", contributor: {"user_id": 1}}
     In this case, the DATA_KEY would be "contributor"
     """
-    ATTRS = []
+    ATTRS: List[str] = []
     DATA_KEY = ''
 
-    def __init__(self, raw_data):
+    def __init__(self, raw_data: Dict) -> None:
         """Creates a new model.
         A model describes a single resource,
         for example a project or a contributor. Models respond to common
@@ -34,13 +35,29 @@ class BaseModel:
         if 'project_id' not in self.ATTRS:
             self.project_id = raw_data.get('project_id', None)
 
-        # Fetch data with DATA_KEY or simply use the initial data
-        data = raw_data.get(self.DATA_KEY, raw_data)
+        # Fetch data with DATA_KEY or simply use the initial data.
+        # In some cases the DATA_KEY is the same as the object attribute.
+        # For example:
+        # "comments": [{
+        #     "comment_id": 44444,
+        #     "comment": "Hello, world!"
+        # }]
+        # This object has a `comment` attribute but its DATA_KEY is also `comment`:
+        # "comment": {"comment_id": 44444,
+        #     "key_id": 12345,
+        #     "comment": "This is a test."}
+        # This is an edge case happening only twice, so to overcome it
+        # just check the value type under the given key.
+        if self.DATA_KEY in raw_data and \
+                (isinstance(raw_data[self.DATA_KEY], dict)):
+            data = raw_data[self.DATA_KEY]
+        else:
+            data = raw_data
 
         for attr in self.ATTRS:
             setattr(self, attr, data.get(attr, None))
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Converts a model to string
         """
         result = ""

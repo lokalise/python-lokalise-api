@@ -1,0 +1,69 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/keys/34089718/comments
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","comments":[{"comment_id":3838530,"key_id":34089718,"comment":"welcome
+        key","added_by":20181,"added_by_email":"bodrovis@protonmail.com","added_at":"2019-12-26
+        15:09:46 (Etc\/UTC)","added_at_timestamp":1577372986},{"comment_id":6892379,"key_id":34089718,"comment":"dsfsdf","added_by":20181,"added_by_email":"bodrovis@protonmail.com","added_at":"2020-06-17
+        17:13:43 (Etc\/UTC)","added_at_timestamp":1592414023},{"comment_id":6945725,"key_id":34089718,"comment":"another
+        comment for welcome","added_by":20181,"added_by_email":"bodrovis@protonmail.com","added_at":"2020-06-18
+        15:28:37 (Etc\/UTC)","added_at_timestamp":1592494117}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Jun 2020 15:30:08 GMT
+      Expires:
+      - Thu, 18 Jun 2020 15:30:08 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '100'
+      X-Pagination-Page:
+      - '1'
+      X-Pagination-Page-Count:
+      - '1'
+      X-Pagination-Total-Count:
+      - '3'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '693'
+    status:
+      code: 200
+      message: OK
+version: 1

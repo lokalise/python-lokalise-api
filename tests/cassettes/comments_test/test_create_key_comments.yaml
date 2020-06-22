@@ -1,0 +1,64 @@
+interactions:
+- request:
+    body: '{"comments": [{"comment": "python 1"}, {"comment": "python 2"}]}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '64'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/keys/34089718/comments
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","comments":[{"comment_id":6945736,"key_id":34089718,"comment":"python
+        1","added_by":20181,"added_by_email":"bodrovis@protonmail.com","added_at":"2020-06-18
+        16:18:02 (Etc\/UTC)","added_at_timestamp":1592497082},{"comment_id":6945737,"key_id":34089718,"comment":"python
+        2","added_by":20181,"added_by_email":"bodrovis@protonmail.com","added_at":"2020-06-18
+        16:18:02 (Etc\/UTC)","added_at_timestamp":1592497082}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - GET
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 18 Jun 2020 16:18:02 GMT
+      Expires:
+      - Thu, 18 Jun 2020 16:18:02 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '475'
+    status:
+      code: 200
+      message: OK
+version: 1

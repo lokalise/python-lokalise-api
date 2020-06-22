@@ -20,3 +20,4 @@ demo.py
 .env
 *.egg-info
 docs/_build
+.mypy_cache

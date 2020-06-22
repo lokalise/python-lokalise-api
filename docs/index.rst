@@ -23,9 +23,13 @@ Usage
    :maxdepth: 2
 
    api/getting_started
+   api/branches
+   api/comments
    api/contributors
+   api/files
    api/languages
    api/projects
+   api/queued_processes
 
 Additional information
 ----------------------
