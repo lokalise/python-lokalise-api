@@ -16,6 +16,7 @@ from .collections.orders import OrdersCollection
 from .collections.payment_cards import PaymentCardsCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
+from .collections.snapshots import SnapshotsCollection
 from .collections.teams import TeamsCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
@@ -26,7 +27,7 @@ from .models.order import OrderModel
 from .models.payment_card import PaymentCardModel
 from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
-from .models.team import TeamModel
+from .models.snapshot import SnapshotModel
 
 
 class Client:
@@ -720,6 +721,58 @@ class Client:
         raw_process = self.get_endpoint("queued_processes"). \
             find(parent_id=project_id, resource_id=queued_process_id)
         return QueuedProcessModel(raw_process)
+
+    def snapshots(self, project_id: str,
+                  params: Optional[Dict] = None) -> SnapshotsCollection:
+        """Fetches all snapshots for the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: (optional) Pagination params
+        :return: Collection of snapshots
+        """
+        raw_snapshots = self.get_endpoint("snapshots"). \
+            all(params=params, parent_id=project_id)
+        return SnapshotsCollection(raw_snapshots)
+
+    def create_snapshot(self, project_id: str,
+                        params: Optional[Dict[str, str]] = None
+                        ) -> SnapshotModel:
+        """Creates a snapshot of the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: (optional) Request params
+        :return: Snapshot model
+        """
+        raw_snapshot = self.get_endpoint("snapshots"). \
+            create(params=params, parent_id=project_id)
+        return SnapshotModel(raw_snapshot)
+
+    def restore_snapshot(self,
+                         project_id: str,
+                         snapshot_id: Union[str, int]) -> ProjectModel:
+        """Restores a snapshot of the given project by producing a new project.
+
+        :param str project_id: ID of the project
+        :param queued_process_id: ID of the snapshot to restore
+        :type snapshot_id: int or str
+        :return: Snapshot model
+        """
+        new_project = self.get_endpoint("snapshots"). \
+            create(parent_id=project_id, resource_id=snapshot_id)
+        return ProjectModel(new_project)
+
+    def delete_snapshot(self, project_id: str,
+                        snapshot_id: Union[str, int]) -> Dict:
+        """Deletes a project snapshot.
+
+        :param str project_id: ID of the project
+        :param snapshot_id: ID of the snapshot to delete
+        :return: Dictionary with project ID and "snapshot_deleted" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("snapshots"). \
+            delete(parent_id=project_id, resource_id=snapshot_id)
+        return response
 
     def teams(self, params: Optional[Dict] = None) -> TeamsCollection:
         """Fetches all teams available to the currently authorized user

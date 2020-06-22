@@ -44,6 +44,7 @@ Usage
    api/payment_cards
    api/projects
    api/queued_processes
+   api/snapshots
    api/teams
 
 Additional information
