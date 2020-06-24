@@ -1,5 +1,5 @@
 """
-Tests for the QueuedProcesses endpoint.
+Tests for the Snapshots endpoint.
 """
 
 import pytest

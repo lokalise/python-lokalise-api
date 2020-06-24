@@ -16,7 +16,8 @@ Example:
 
 .. code-block:: python
 
-  client.branches('123.abc')
+  branches = client.branches('123.abc')
+  branches.items[0].branch_id # => 3456
 
 Fetch a single branch
 ---------------------
@@ -32,7 +33,9 @@ Example:
 
 .. code-block:: python
 
-  client.branch('123.abc', 34567)
+  branch = client.branch('123.abc', 34567)
+  branch.name # => "deutch"
+  branch.created_at # => "2020-04-03 14:41:46 (Etc/UTC)"
 
 Create a branch
 ---------------
@@ -47,7 +50,8 @@ Example:
 
 .. code-block:: python
 
-  client.create_branch('123.abc', {"name": "python-branch"})
+  branch = client.create_branch('123.abc', {"name": "python-branch"})
+  branch.name # => "python-branch"
 
 Update a branch
 ---------------
@@ -64,8 +68,9 @@ Example:
 
 .. code-block:: python
 
-  client.update_branch('123.abc', 34567,
-                       {"name": "python-branch-updated"})
+  branch = client.update_branch('123.abc', 34567, {"name": "python-branch-updated"})
+  branch.name # => "python-branch-updated"
+
 
 Delete a branch
 ----------------
@@ -100,5 +105,7 @@ Example:
 
 .. code-block:: python
 
-  client.merge_branch('123.abc', 34567,
-                      {"force_conflict_resolve_using": "target"})
+  result = client.merge_branch('123.abc', 34567, {"force_conflict_resolve_using": "target"})
+  result['branch'].branch_id # => 34567
+  result['branch'].name # => "python-branch"
+  result['target_branch'].name # => "master"

@@ -47,8 +47,12 @@ For example:
   project.name
   project.description
 
-Many resources respond to common methods like ``project_id``,
-``team_id``, and ``branch_id``:
+  order = client.order(345, 5678)
+  order.status # => "completed"
+  order.provider_slug # => "gengo"
+
+Many resources respond to common methods: ``project_id``,
+``team_id``, ``user_id``, and ``branch``:
 
 .. code-block:: python
 
@@ -99,15 +103,16 @@ For example:
   client.projects({"limit": 2, "page": 3}) # 2 projects per page, get the 3rd page
   client.contributors('project.123', {"limit": 5}) # 5 contributors per page, get the 1st page
 
-Collections has the following attributes:
+Collections has the following attributes (some of the attributes may be absent depending on the endpoint):
 
 * ``current_page`` - the number of the current page.
 * ``total_count`` - total number of records available.
 * ``page_count`` - total number of pages available.
 * ``limit`` - number of records per page.
 * ``project_id`` - ID of the project that the collection belongs to.
+* ``user_id`` - ID of the user the collection belongs to.
 * ``branch`` - project branch that the collection was fetched from.
-* ``errors`` - errors that occured during the request processing. Usually this attribute is empty, but may contain a list of error messages in certain cases. For example, suppose you are creating multiple project languages, and one of the languages is incorrect. All languages with proper attributes will be created and returned as collection. `errors` will contain a list of errors explaining that one of the languages has incorrect attributes.
+* ``errors`` - errors that occured during the request processing. Usually this attribute is empty or absent, but it may contain a list of error messages in certain cases. For example, suppose you are creating multiple project languages, and one of the languages is incorrect. All languages with proper attributes will be created and returned as collection. ``errors`` will contain a list of errors explaining that one of the languages has incorrect attributes.
 
 Collections respond to the following methods:
 
@@ -134,4 +139,7 @@ For example, in order to access the ``new-feature`` branch for the project with 
 
 .. code-block:: python
 
-  client.contributors('123abcdef.01:new-feature')
+  contributors = client.contributors('123abcdef.01:new-feature')
+  contributors.branch # => "new-feature"
+  contributors.project_id # => "123abcdef.01"
+  contributors.items[0].contributor_id # => 12345

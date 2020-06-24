@@ -45,13 +45,15 @@ Usage
    api/projects
    api/queued_processes
    api/snapshots
+   api/screenshots
+   api/tasks
    api/teams
 
 Additional information
 ----------------------
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 1
 
   additional_info/manipulating_client
   additional_info/exception_handling

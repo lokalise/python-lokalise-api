@@ -51,7 +51,9 @@ Example:
 
 .. code-block:: python
 
-  client.key_comment('123.abc', 3456, 1234)
+  comment = client.key_comment('123.abc', 3456, 1234)
+  comment.key_id # => 3456
+  comment.added_by_email # => "test@example.com"
 
 Create key comments
 -------------------

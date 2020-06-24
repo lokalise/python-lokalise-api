@@ -1,6 +1,6 @@
 """
 lokalise.models.queued_process
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module containing queued process model.
 """
 
