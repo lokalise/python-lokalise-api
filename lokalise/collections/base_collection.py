@@ -27,7 +27,8 @@ class BaseCollection:
         'project_id',
         'user_id',
         'branch',
-        'errors'
+        'errors',
+        'team_id'
     ]
 
     def __init__(self, raw_data: Dict[str, Any]) -> None:
