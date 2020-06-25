@@ -53,6 +53,7 @@ Usage
    api/translations
    api/translation_providers
    api/translation_statuses
+   api/webhooks
 
 Additional information
 ----------------------

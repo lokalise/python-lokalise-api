@@ -25,6 +25,7 @@ from .collections.team_user_groups import TeamUserGroupsCollection
 from .collections.translations import TranslationsCollection
 from .collections.translation_providers import TranslationProvidersCollection
 from .collections.translation_statuses import TranslationStatusesCollection
+from .collections.webhooks import WebhooksCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
@@ -42,6 +43,7 @@ from .models.team_user_group import TeamUserGroupModel
 from .models.translation import TranslationModel
 from .models.translation_provider import TranslationProviderModel
 from .models.translation_status import TranslationStatusModel
+from .models.webhook import WebhookModel
 
 
 class Client:
@@ -1313,6 +1315,19 @@ class Client:
         response = self.get_endpoint("translation_statuses"). \
             colors(parent_id=project_id)
         return response["colors"]
+
+    def create_webhook(self, project_id: str,
+                       params: Dict[str, str]
+                       ) -> WebhookModel:
+        """Creates a webhook.
+
+        :param str project_id: ID of the project
+        :param dict params: Webhook parameters
+        :return: Webhook model
+        """
+        raw_webhook = self.get_endpoint("webhooks"). \
+            create(params, parent_id=project_id)
+        return WebhookModel(raw_webhook)
     # === End of endpoint methods ===
 
     # === Endpoint helpers
