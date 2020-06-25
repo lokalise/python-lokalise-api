@@ -52,6 +52,7 @@ Usage
    api/team_user_groups
    api/translations
    api/translation_providers
+   api/translation_statuses
 
 Additional information
 ----------------------
