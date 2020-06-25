@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Lokalise API v2 Python client
-=============================
+Lokalise API v2 Python interface
+================================
 
 Official `Lokalise APIv2 <https://app.lokalise.com/api2docs/curl/>`_ Python
 interface that represents returned data as Python objects.
@@ -51,6 +51,7 @@ Usage
    api/team_users
    api/team_user_groups
    api/translations
+   api/translation_providers
 
 Additional information
 ----------------------

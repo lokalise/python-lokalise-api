@@ -23,6 +23,7 @@ from .collections.teams import TeamsCollection
 from .collections.team_users import TeamUsersCollection
 from .collections.team_user_groups import TeamUserGroupsCollection
 from .collections.translations import TranslationsCollection
+from .collections.translation_providers import TranslationProvidersCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
@@ -38,6 +39,7 @@ from .models.task import TaskModel
 from .models.team_user import TeamUserModel
 from .models.team_user_group import TeamUserGroupModel
 from .models.translation import TranslationModel
+from .models.translation_provider import TranslationProviderModel
 
 
 class Client:
@@ -1196,6 +1198,35 @@ class Client:
         raw_translation = self.get_endpoint("translations"). \
             update(params, parent_id=project_id, resource_id=translation_id)
         return TranslationModel(raw_translation)
+
+    def translation_providers(self, team_id: Union[str, int],
+                              params: Optional[Dict] = None
+                              ) -> TranslationProvidersCollection:
+        """Fetches all translation providers.
+
+        :param team_id: ID of the team
+        :type team_id: str or int
+        :param dict params: (optional) Pagination parameters
+        :return: Collection of translation providers
+        """
+        raw_providers = self.get_endpoint("translation_providers"). \
+            all(params=params, parent_id=team_id)
+        return TranslationProvidersCollection(raw_providers)
+
+    def translation_provider(self, team_id: Union[str, int],
+                             translation_provider_id: Union[str, int]
+                             ) -> TranslationProviderModel:
+        """Fetches a translation provider.
+
+        :param team_id: ID of the team
+        :type team_id: str or int
+        :param translation_provider_id: ID of the translation provider to fetch
+        :type translation_provider_id: str or int
+        :return: Translation provider model
+        """
+        raw_provider = self.get_endpoint("translation_providers"). \
+            find(parent_id=team_id, resource_id=translation_provider_id)
+        return TranslationProviderModel(raw_provider)
     # === End of endpoint methods ===
 
     # === Endpoint helpers
