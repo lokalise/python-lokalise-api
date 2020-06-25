@@ -1,0 +1,60 @@
+interactions:
+- request:
+    body: '{"number": "4242424242420391", "cvc": 123, "exp_month": 9, "exp_year":
+      2025}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '76'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/payment_cards
+  response:
+    body:
+      string: '{"card_id":3514,"last4":"0391","brand":"Visa","created_at":"2020-06-20
+        15:07:22 (Etc\/UTC)","created_at_timestamp":1592665642}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 20 Jun 2020 15:07:20 GMT
+      Expires:
+      - Sat, 20 Jun 2020 15:07:22 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '126'
+    status:
+      code: 200
+      message: OK
+version: 1

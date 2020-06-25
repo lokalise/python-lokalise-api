@@ -70,16 +70,19 @@ def put(client: lokalise.client.Client, path: str,
                                      **options(client)))
 
 
-def delete(client: lokalise.client.Client, path: str) -> Dict:
+def delete(client: lokalise.client.Client, path: str,
+           params: Optional[Dict] = None) -> Dict:
     """Performs DELETE requests
 
     :param client: Lokalise API client
     :type client: lokalise.Client
     :param path: Relative path to the API endpoint
+    :param params: Other request params
     :rtype dict:
     """
     return respond_with(requests.delete(__prepare(BASE_URL + path),
-                                        **options(client)))
+                                        data=__format_params(params),
+                                        ** options(client)))
 
 
 def respond_with(response: requests.models.Response) -> Dict:

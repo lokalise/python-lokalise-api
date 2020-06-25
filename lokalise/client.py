@@ -10,15 +10,21 @@ from .collections.branches import BranchesCollection
 from .collections.comments import CommentsCollection
 from .collections.contributors import ContributorsCollection
 from .collections.files import FilesCollection
+from .collections.keys import KeysCollection
+from .collections.languages import LanguagesCollection
+from .collections.orders import OrdersCollection
+from .collections.payment_cards import PaymentCardsCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
-from .collections.languages import LanguagesCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
+from .models.key import KeyModel
+from .models.language import LanguageModel
+from .models.order import OrderModel
+from .models.payment_card import PaymentCardModel
 from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
-from .models.language import LanguageModel
 
 
 class Client:
@@ -358,8 +364,110 @@ class Client:
             download(params, parent_id=project_id)
         return response
 
-    def system_languages(
-            self, params: Optional[Dict[str, Union[str, int]]] = None) -> LanguagesCollection:
+    def keys(self,
+             project_id: str,
+             params: Optional[Dict[str, Any]] = None
+             ) -> KeysCollection:
+        """Fetches all keys for the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: Request parameters
+        :return: Collection of keys
+        """
+        raw_keys = self.get_endpoint("keys"). \
+            all(parent_id=project_id, params=params)
+        return KeysCollection(raw_keys)
+
+    def create_keys(self,
+                    project_id: str,
+                    params: Union[Dict[str, Any], List[Dict]]
+                    ) -> KeysCollection:
+        """Creates one or more keys inside the project
+
+        :param str project_id: ID of the project
+        :param params: Keys parameters
+        :type params: list or dict
+        :return: Keys collection
+        """
+        raw_keys = self.get_endpoint("keys"). \
+            create(params, wrapper_attr="keys", parent_id=project_id)
+
+        return KeysCollection(raw_keys)
+
+    def key(self,
+            project_id: str,
+            key_id: Union[str, int],
+            params: Optional[Dict[str, Any]] = None) -> KeyModel:
+        """Fetches a translation key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of the key to fetch
+        :param dict params: Request parameters
+        :return: Key model
+        """
+        raw_key = self.get_endpoint("keys"). \
+            find(params, parent_id=project_id, resource_id=key_id)
+        return KeyModel(raw_key)
+
+    def update_key(self,
+                   project_id: str,
+                   key_id: Union[str, int],
+                   params: Optional[Dict[str, Any]] = None) -> KeyModel:
+        """Updates a translation key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of the key to update
+        :param dict params: Request parameters
+        :return: Key model
+        """
+        raw_key = self.get_endpoint("keys"). \
+            update(params, parent_id=project_id, resource_id=key_id)
+        return KeyModel(raw_key)
+
+    def update_keys(self,
+                    project_id: str,
+                    params: Dict[str, Any]) -> KeysCollection:
+        """Updates translation keys in bulk.
+
+        :param str project_id: ID of the project
+        :param dict params: Key parameters
+        :return: Key collection
+        """
+        raw_keys = self.get_endpoint("keys"). \
+            update(params, wrapper_attr="keys", parent_id=project_id)
+        return KeysCollection(raw_keys)
+
+    def delete_key(self, project_id: str,
+                   key_id: Union[str, int]) -> Dict:
+        """Deletes a key.
+
+        :param str project_id: ID of the project
+        :param key_id: ID of the key to delete
+        :type key_id: int or str
+        :return: Dictionary with project ID and "key_removed" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("keys"). \
+            delete(parent_id=project_id, resource_id=key_id)
+        return response
+
+    def delete_keys(self, project_id: str,
+                    key_ids: List[Union[str, int]]) -> Dict:
+        """Deletes keys in bulk.
+
+        :param str project_id: ID of the project
+        :type key_id: int or str
+        :param list key_ids: List of the key identifiers to delete
+        :return: Dictionary with project ID and "keys_removed" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("keys"). \
+            delete(params=key_ids, wrapper_attr="keys", parent_id=project_id)
+        return response
+
+    def system_languages(self,
+                         params: Optional[Dict[str, Union[str, int]]] = None
+                         ) -> LanguagesCollection:
         """Fetches all languages that Lokalise supports.
 
         :param dict params: (optional) Pagination params
@@ -437,6 +545,96 @@ class Client:
         response = self.get_endpoint("languages"). \
             delete(parent_id=project_id, resource_id=language_id)
         return response
+      
+    def orders(self,
+               team_id: Union[int, str],
+               params: Optional[Dict[str, Union[str, int]]] = None
+               ) -> OrdersCollection:
+        """Fetches all orders for the given team.
+
+        :param team_id: ID of the team
+        :type team_id: int or str
+        :param dict params: (optional) Pagination params
+        :return: Collection of orders
+        """
+        raw_orders = self.get_endpoint("orders"). \
+            all(parent_id=team_id, params=params)
+        return OrdersCollection(raw_orders)
+
+    def order(self,
+              team_id: Union[int, str],
+              order_id: str
+              ) -> OrderModel:
+        """Fetches an order for the given team.
+
+        :param team_id: ID of the team
+        :type team_id: int or str
+        :param str order_id: ID of the order
+        :return: Order model
+        """
+        raw_order = self.get_endpoint("orders"). \
+            find(parent_id=team_id, resource_id=order_id)
+        return OrderModel(raw_order)
+
+    def create_order(self,
+                     team_id: Union[int, str],
+                     params: Optional[Dict[str, Any]]
+                     ) -> OrderModel:
+        """Creates a new order inside the given team.
+
+        :param team_id: ID of the team
+        :type team_id: int or str
+        :param dict params: Order parameters
+        :return: Order model
+        """
+        raw_order = self.get_endpoint("orders"). \
+            create(parent_id=team_id, params=params)
+        return OrderModel(raw_order)
+
+    def payment_cards(self,
+                      params: Optional[Dict] = None) -> PaymentCardsCollection:
+        """Fetches all payment cards available to the currently authorized user
+        (identified by the API token).
+
+        :param dict params: (optional) Pagination params
+        :return: Collection of payment cards
+        """
+        raw_cards = self.get_endpoint("payment_cards").all(params=params)
+        return PaymentCardsCollection(raw_cards)
+
+    def payment_card(self,
+                     payment_card_id: Union[str, int]) -> PaymentCardModel:
+        """Fetches a payment card by ID.
+
+        :param payment_card_id: ID of the payment card to fetch
+        :type payment_card_id: str or int
+        :return: Payment card model
+        """
+        raw_card = self.get_endpoint("payment_cards"). \
+            find(parent_id=payment_card_id)
+        return PaymentCardModel(raw_card)
+
+    def create_payment_card(self, params: Dict[str, Union[int, str]]
+                            ) -> PaymentCardModel:
+        """Creates a new payment card.
+
+        :param dict params: Payment card parameters
+        :return: Payment card model
+        """
+        raw_card = self.get_endpoint("payment_cards").create(params)
+        return PaymentCardModel(raw_card)
+
+    def delete_payment_card(self, payment_card_id: Union[str, int]) -> Dict:
+        """Deletes a payment card.
+
+        :param payment_card_id: ID of the payment card to delete
+        :type payment_card_id: int or str
+        :return: Dictionary with card ID and "card_deleted" set to True
+        :rtype dict:
+        """
+        resp = self.get_endpoint("payment_cards"). \
+            delete(parent_id=payment_card_id)
+        return resp
 
     def projects(self, params: Optional[Dict] = None) -> ProjectsCollection:
         """Fetches all projects available to the currently authorized user
@@ -491,7 +689,7 @@ class Client:
     def delete_project(self, project_id: str) -> Dict:
         """Deletes a given project.
 
-        :param str project_id: ID of the project to empty
+        :param str project_id: ID of the project to delete
         :return: Dictionary with project ID and "project_deleted" set to True
         :rtype dict:
         """

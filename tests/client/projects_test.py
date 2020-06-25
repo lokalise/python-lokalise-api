@@ -13,7 +13,6 @@ def test_all_projects(client):
     """Tests fetching of all projects
     """
     projects = client.projects()
-    assert projects.project_id is None
     assert projects.is_last_page()
     assert projects.is_first_page()
     assert isinstance(projects.items[0].raw_data, dict)

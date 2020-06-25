@@ -1,6 +1,6 @@
 # Lokalise API v2 official Python interface
 
-Official Python 3 interface for the Lokalise APIv2 that represents returned data as Python objects.
+Official Python 3 interface for the [Lokalise APIv2](https://app.lokalise.com/api2docs) that represents returned data as Python objects.
 
 ## Quick start
 
@@ -15,6 +15,17 @@ import lokalise
 client = lokalise.Client('YOUR_API_TOKEN')
 project = client.project('123.abc')
 print(project.title)
+
+client.upload_file(project.project_id, {
+    "data": 'ZnI6DQogIHRlc3Q6IHRyYW5zbGF0aW9u',
+    "filename": 'python_upload.yml',
+    "lang_iso": 'en'
+})
+
+translation_keys = client.keys(project.project_id, {"page": 2,
+    "limit": 3,
+    "disable_references": "1"})
+translation_keys.items[0].key_name['web'] # => "sign_up"
 ```
 
 ## Documentation
