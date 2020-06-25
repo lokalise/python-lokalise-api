@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/translations/220681425?disable_references=1
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","translation":{"translation_id":220681425,"key_id":34089718,"language_iso":"ru_RU","translation":"\u0414\u043e\u0431\u0440\u043e
+        \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c \u0432 Sample
+        App, [%s:name]!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:05:04 (Etc\/UTC)","modified_at_timestamp":1577372704,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":5,"custom_translation_statuses":[]}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Jun 2020 10:39:24 GMT
+      Expires:
+      - Thu, 25 Jun 2020 10:39:24 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '531'
+    status:
+      code: 200
+      message: OK
+version: 1

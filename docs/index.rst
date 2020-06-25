@@ -48,6 +48,7 @@ Usage
    api/screenshots
    api/tasks
    api/teams
+   api/translations
 
 Additional information
 ----------------------

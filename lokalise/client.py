@@ -20,6 +20,7 @@ from .collections.snapshots import SnapshotsCollection
 from .collections.screenshots import ScreenshotsCollection
 from .collections.teams import TeamsCollection
 from .collections.tasks import TasksCollection
+from .collections.translations import TranslationsCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
@@ -32,6 +33,7 @@ from .models.queued_process import QueuedProcessModel
 from .models.snapshot import SnapshotModel
 from .models.screenshot import ScreenshotModel
 from .models.task import TaskModel
+from .models.translation import TranslationModel
 
 
 class Client:
@@ -930,6 +932,50 @@ class Client:
         """
         raw_teams = self.get_endpoint("teams").all(params=params)
         return TeamsCollection(raw_teams)
+
+    def translations(self, project_id: str,
+                     params: Optional[Dict] = None) -> TranslationsCollection:
+        """Fetches all translations for the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: (optional) Request parameters
+        :return: Collection of translations
+        """
+        raw_translations = self.get_endpoint("translations"). \
+            all(params=params, parent_id=project_id)
+        return TranslationsCollection(raw_translations)
+
+    def translation(self,
+                    project_id: str,
+                    translation_id: Union[str, int],
+                    params: Optional[Dict] = None) -> TranslationModel:
+        """Fetches a translation.
+
+        :param str project_id: ID of the project
+        :param translation_id: ID of the translation to fetch
+        :type translation_id: int or str
+        :param dict params: (optional) Request parameters
+        :return: Task model
+        """
+        raw_translation = self.get_endpoint("translations"). \
+            find(params, parent_id=project_id, resource_id=translation_id)
+        return TranslationModel(raw_translation)
+
+    def update_translation(self,
+                           project_id: str,
+                           translation_id: Union[str, int],
+                           params: Dict[str, Any]) -> TranslationModel:
+        """Updates a translation.
+
+        :param str project_id: ID of the project
+        :param translation_id: ID of the translation to update
+        :type translation_id: int or str
+        :param dict params: Translation parameters
+        :return: Task model
+        """
+        raw_translation = self.get_endpoint("translations"). \
+            update(params, parent_id=project_id, resource_id=translation_id)
+        return TranslationModel(raw_translation)
     # === End of endpoint methods ===
 
     # === Endpoint helpers
