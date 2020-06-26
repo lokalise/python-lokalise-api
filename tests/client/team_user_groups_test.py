@@ -1,5 +1,5 @@
 """
-Tests for the Teams endpoint.
+Tests for the TeamUserGroups endpoint.
 """
 
 import pytest

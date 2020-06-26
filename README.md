@@ -30,7 +30,7 @@ translation_keys.items[0].key_name['web'] # => "sign_up"
 
 ## Documentation
 
-Find documentation at readthedocs.io.
+Find detailed documentation at readthedocs.io.
 
 ## License
 

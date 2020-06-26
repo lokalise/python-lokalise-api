@@ -23,7 +23,6 @@ Example:
   })
   tasks.items[0].task_id # => 89334
 
-
 Fetch a task
 ------------
 
@@ -41,7 +40,6 @@ Example:
   task = client.task('123.abc', 89334)
   task.task_id # => 89334
   task.title # => "Demo task"
-
 
 Create a task
 -------------
@@ -69,7 +67,6 @@ Example:
   task.title # => "Python task"
   task.languages[0]['language_iso'] # => "en"
   task.auto_close_task # => True
-
 
 Update a task
 -------------

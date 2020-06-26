@@ -6,20 +6,35 @@ Webhooks endpoint
 Fetch all webhooks
 ------------------
 
-.. py:function::
+.. py:function:: webhooks(project_id, [params = None])
+
+  :param str project_id: ID of the project
+  :param dict params: Pagination parameters
+  :return: Webhook collection
 
 Example:
 
 .. code-block:: python
+
+  webhooks = client.webhooks('123.abc', {"page": 2, "limit": 2})
+  webhooks.items[0].webhook_id # => "0efe309..."
 
 Fetch a single webhook
 ----------------------
 
-.. py:function::
+.. py:function:: webhook(project_id, webhook_id)
+
+  :param str project_id: ID of the project
+  :param str webhook_id: ID of the webhook to fetch
+  :return: Webhook model
 
 Example:
 
 .. code-block:: python
+
+  webhook = client.webhook('123.abc', "0efe...")
+  webhook.url # => "http://example.com/notify"
+  webhook.secret # => "xyz345890"
 
 Create webhook
 --------------
@@ -41,29 +56,48 @@ Example:
   webhook.url # => "http://example.com/notify"
   webhooks.events # => ["project.imported", "project.snapshot"]
 
-Fetch all webhooks
-------------------
+Update webhook
+--------------
 
-.. py:function::
+.. py:function:: update_webhook(project_id, webhook_id, [params = None])
 
-Example:
-
-.. code-block:: python
-
-Fetch all webhooks
-------------------
-
-.. py:function::
+  :param str project_id: ID of the project
+  :param str webhook_id: ID of the webhook to update
+  :param dict params: Webhook parameters
+  :return: Webhook model
 
 Example:
 
 .. code-block:: python
 
-Fetch all webhooks
-------------------
+  webhook = client.update_webhook('123.abc', "0efe...", {
+      "events": ["project.translation.updated"]
+  })
+  webhook.events # => ["project.translation.updated"]
 
-.. py:function::
+Delete webhook
+--------------
+
+.. py:function:: delete_webhook(project_id, webhook_id)
 
 Example:
 
 .. code-block:: python
+
+  client.delete_webhook('123.abc', "0efe...")
+
+Regenerate webhook secret
+-------------------------
+
+.. py:function:: regenerate_webhook_secret(project_id, webhook_id)
+
+  :param str project_id: ID of the project
+  :param str webhook_id: ID of the webhook to regenerate secret for
+  :return: Dict with project ID and `secret` with the new secret's value
+
+Example:
+
+.. code-block:: python
+
+  resp = client.regenerate_webhook_secret('123.abc', "0efe...")
+  resp['secret'] # => "xyz123abc"

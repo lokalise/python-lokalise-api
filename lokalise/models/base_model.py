@@ -13,7 +13,6 @@ class BaseModel:
     has a name, a description, and an ID.
 
     :attribute COMMON_ATTRS: list of common attributes that the models may have.
-    For example: project_id, user_id, branch, team_id.
 
     :attribute DATA_KEY: contains the key name that should be used to fetch
     data. Response usually arrives in the following format:
@@ -27,14 +26,12 @@ class BaseModel:
         'branch',
         'team_id'
     ]
-    DATA_KEY = ''
+    DATA_KEY: str = ''
 
     def __init__(self, raw_data: Dict) -> None:
         """Creates a new model.
-        A model describes a single resource,
-        for example a project or a contributor. Models respond to common
-        methods like `project_id` or `team_id`. To read raw data returned
-        by the API, use `raw_data` attribute.
+        A model describes a single resource, for example a project or a contributor.
+        To read raw data returned by the API, use the `raw_data` attribute.
 
         :param raw_data: Data returned by the API
         """

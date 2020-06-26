@@ -1,5 +1,5 @@
 """
-Tests for the orders endpoint.
+Tests for the Orders endpoint.
 """
 
 import pytest

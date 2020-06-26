@@ -30,7 +30,7 @@ class BaseEndpoint:
         """Creates a new endpoint.
 
         :param client: Lokalise API client
-        :type client: lokalise.Client
+        :type client: lokalise.client.Client
         """
         self.client = client
 
@@ -64,7 +64,7 @@ class BaseEndpoint:
         """Creates a new resource for the given endpoint.
 
         :param dict params: Resource parameters
-        :param wrapper_attr str: Attribute to wrap the params into. For example:
+        :param str wrapper_attr: Attribute to wrap the params into. For example:
             [{"comment": "test"}]
         becomes
             {"comments": [{"comment": "test"}]}
@@ -84,6 +84,7 @@ class BaseEndpoint:
         """Updates a resource for the given endpoint.
 
         :param dict params: Resource parameters
+        :param str wrapper_attr: Attribute to wrap the params into
         :param ids: Identifiers for path generation
         :rtype dict:
         """
@@ -97,6 +98,8 @@ class BaseEndpoint:
                **ids: Optional[Union[str, int]]) -> Dict:
         """Deletes a resource for the given endpoint.
 
+        :param dict params: Request parameters
+        :param str wrapper_attr: Attribute to wrap the params into
         :param ids: Identifiers for path generation
         :rtype dict:
         """

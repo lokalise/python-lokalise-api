@@ -19,7 +19,6 @@ class BaseCollection:
     item in the collection.
 
     :attribute COMMON_ATTRS: list of common attributes that the collections may have.
-    For example: project_id, user_id, branch, team_id.
     """
     DATA_KEY: str = ''
     MODEL_KLASS: Any = BaseModel

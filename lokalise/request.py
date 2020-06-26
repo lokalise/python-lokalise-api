@@ -5,8 +5,8 @@ This module sends HTTP requests, parses responses, and returns formatted data.
 
 Attributes:
 
-    BASE_URL - path to the Lokalise APIv2.
-    PAGINATION_HEADERS - list of response headers that contain pagination data.
+    :attribute str BASE_URL: path to the Lokalise APIv2.
+    :attribute list PAGINATION_HEADERS: list of response headers that contain pagination data.
 """
 from typing import Any, Optional, Dict, NoReturn
 import json
@@ -70,6 +70,21 @@ def put(client: lokalise.client.Client, path: str,
                                      **options(client)))
 
 
+def patch(client: lokalise.client.Client, path: str,
+          params: Optional[Dict] = None) -> Dict:
+    """Performs PATCH requests
+
+    :param client: Lokalise API client
+    :type client: lokalise.Client
+    :param path: Relative path to the API endpoint
+    :param params: Other request params
+    :rtype dict:
+    """
+    return respond_with(requests.patch(__prepare(BASE_URL + path),
+                                       data=__format_params(params),
+                                       **options(client)))
+
+
 def delete(client: lokalise.client.Client, path: str,
            params: Optional[Dict] = None) -> Dict:
     """Performs DELETE requests
@@ -86,7 +101,7 @@ def delete(client: lokalise.client.Client, path: str,
 
 
 def respond_with(response: requests.models.Response) -> Dict:
-    """Converts the response data to JSON.
+    """Converts the response data to JSON and attaches pagination-related data.
     An exception will be raised if the response status code is 4xx or 5xx,
     or contains an "error" key
 
@@ -156,4 +171,6 @@ def __format_params(params: Optional[Dict] = None) -> Optional[str]:
 
 
 def __prepare(path: str) -> str:
+    """Prepares the URI by stripping all unnecessary slashes
+    """
     return path.strip('/')

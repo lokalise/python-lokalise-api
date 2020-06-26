@@ -9,7 +9,7 @@ from ..models.webhook import WebhookModel
 
 
 class WebhooksCollection(BaseCollection):
-    """Describes translations.
+    """Describes webhooks.
     """
     DATA_KEY = "webhooks"
     MODEL_KLASS = WebhookModel

@@ -96,7 +96,6 @@ Example:
 
   client.empty_project('123.abc')
 
-
 Delete project
 --------------
 

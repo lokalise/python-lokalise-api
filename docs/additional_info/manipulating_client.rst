@@ -29,6 +29,6 @@ To reset your client, simply use the `reset_client()` method:
   client = lokalise.Client('token', connect_timeout=5, read_timeout=7)
   # do something with the client
   client.reset_client()
-  client.token # => None
+  client.token # => ''
   client.connect_timeout # => None
   client.read_timeout # => None

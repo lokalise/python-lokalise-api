@@ -32,7 +32,6 @@ To handle an exception you would do the following:
       print(err.message)
       print(err.code)
 
-
 Rate limits
 -----------
 

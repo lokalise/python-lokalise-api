@@ -57,7 +57,6 @@ Example:
   }])
   screenshots.items[0].title # => "Python screenshot"
 
-
 Update a screenshot
 -------------------
 

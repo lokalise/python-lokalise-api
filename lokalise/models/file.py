@@ -1,6 +1,6 @@
 """
 lokalise.models.file
-~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 Module containing file model.
 """
 
