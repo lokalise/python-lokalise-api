@@ -122,7 +122,7 @@ class Client:
         :return: Branch model
         """
         raw_branch = self.get_endpoint("branches"). \
-            create(params, parent_id=project_id)
+            create(params=params, parent_id=project_id)
 
         return BranchModel(raw_branch)
 
@@ -139,7 +139,7 @@ class Client:
         :return: Branch model
         """
         raw_branch = self.get_endpoint("branches"). \
-            update(params, parent_id=project_id, resource_id=branch_id)
+            update(params=params, parent_id=project_id, resource_id=branch_id)
         return BranchModel(raw_branch)
 
     def delete_branch(self, project_id: str,
@@ -170,7 +170,7 @@ class Client:
         :rtype dict:
         """
         response = self.get_endpoint("branches"). \
-            merge(params, parent_id=project_id, resource_id=branch_id)
+            merge(params=params, parent_id=project_id, resource_id=branch_id)
         response['branch'] = BranchModel(response['branch'])
         response['target_branch'] = BranchModel(response['target_branch'])
         return response
@@ -242,7 +242,7 @@ class Client:
         :return: Collection of comments
         """
         raw_comments = self.get_endpoint("key_comments").create(
-            params,
+            params=params,
             wrapper_attr="comments",
             parent_id=project_id,
             resource_id=key_id
@@ -309,8 +309,11 @@ class Client:
         :type params: list or dict
         :return: Contributors collection
         """
-        raw_contributors = self.get_endpoint("contributors"). \
-            create(params, wrapper_attr="contributors", parent_id=project_id)
+        raw_contributors = self.get_endpoint("contributors").create(
+            params=params,
+            wrapper_attr="contributors",
+            parent_id=project_id
+        )
 
         return ContributorsCollection(raw_contributors)
 
@@ -326,8 +329,11 @@ class Client:
         :param dict params: Update parameters
         :return: Contributor model
         """
-        raw_contributor = self.get_endpoint("contributors"). \
-            update(params, parent_id=project_id, resource_id=contributor_id)
+        raw_contributor = self.get_endpoint("contributors").update(
+            params=params,
+            parent_id=project_id,
+            resource_id=contributor_id
+        )
         return ContributorModel(raw_contributor)
 
     def delete_contributor(self, project_id: str,
@@ -367,7 +373,7 @@ class Client:
         :return: Queued process model
         """
         raw_process = self.get_endpoint("files"). \
-            upload(params, parent_id=project_id)
+            upload(params=params, parent_id=project_id)
         return QueuedProcessModel(raw_process)
 
     def download_files(self, project_id: str,
@@ -379,7 +385,7 @@ class Client:
         :return: Dictionary with project ID and a bundle URL
         """
         response = self.get_endpoint("files"). \
-            download(params, parent_id=project_id)
+            download(params=params, parent_id=project_id)
         return response
 
     def keys(self,
@@ -408,7 +414,7 @@ class Client:
         :return: Keys collection
         """
         raw_keys = self.get_endpoint("keys"). \
-            create(params, wrapper_attr="keys", parent_id=project_id)
+            create(params=params, wrapper_attr="keys", parent_id=project_id)
 
         return KeysCollection(raw_keys)
 
@@ -424,7 +430,7 @@ class Client:
         :return: Key model
         """
         raw_key = self.get_endpoint("keys"). \
-            find(params, parent_id=project_id, resource_id=key_id)
+            find(params=params, parent_id=project_id, resource_id=key_id)
         return KeyModel(raw_key)
 
     def update_key(self,
@@ -439,7 +445,7 @@ class Client:
         :return: Key model
         """
         raw_key = self.get_endpoint("keys"). \
-            update(params, parent_id=project_id, resource_id=key_id)
+            update(params=params, parent_id=project_id, resource_id=key_id)
         return KeyModel(raw_key)
 
     def update_keys(self,
@@ -452,7 +458,7 @@ class Client:
         :return: Key collection
         """
         raw_keys = self.get_endpoint("keys"). \
-            update(params, wrapper_attr="keys", parent_id=project_id)
+            update(params=params, wrapper_attr="keys", parent_id=project_id)
         return KeysCollection(raw_keys)
 
     def delete_key(self, project_id: str,
@@ -519,8 +525,11 @@ class Client:
         :type params: dict or list
         :return: Collection of languages
         """
-        raw_languages = self.get_endpoint("languages"). \
-            create(params, wrapper_attr="languages", parent_id=project_id)
+        raw_languages = self.get_endpoint("languages").create(
+            params=params,
+            wrapper_attr="languages",
+            parent_id=project_id
+        )
         return LanguagesCollection(raw_languages)
 
     def language(self,
@@ -547,8 +556,11 @@ class Client:
         :param dict params: Update parameters
         :return: Language model
         """
-        raw_language = self.get_endpoint("languages"). \
-            update(params, parent_id=project_id, resource_id=language_id)
+        raw_language = self.get_endpoint("languages").update(
+            params=params,
+            parent_id=project_id,
+            resource_id=language_id
+        )
         return LanguageModel(raw_language)
 
     def delete_language(self, project_id: str,
@@ -563,7 +575,7 @@ class Client:
         response = self.get_endpoint("languages"). \
             delete(parent_id=project_id, resource_id=language_id)
         return response
-      
+
     def orders(self,
                team_id: Union[int, str],
                params: Optional[Dict[str, Union[str, int]]] = None
@@ -639,7 +651,7 @@ class Client:
         :param dict params: Payment card parameters
         :return: Payment card model
         """
-        raw_card = self.get_endpoint("payment_cards").create(params)
+        raw_card = self.get_endpoint("payment_cards").create(params=params)
         return PaymentCardModel(raw_card)
 
     def delete_payment_card(self, payment_card_id: Union[str, int]) -> Dict:
@@ -680,7 +692,7 @@ class Client:
         :param dict params: Project parameters
         :return: Project model
         """
-        raw_project = self.get_endpoint("projects").create(params)
+        raw_project = self.get_endpoint("projects").create(params=params)
         return ProjectModel(raw_project)
 
     def update_project(self, project_id: str,
@@ -692,7 +704,7 @@ class Client:
         :return: Project model
         """
         raw_project = self.get_endpoint("projects").\
-            update(params, parent_id=project_id)
+            update(params=params, parent_id=project_id)
         return ProjectModel(raw_project)
 
     def empty_project(self, project_id: str) -> Dict:
@@ -845,8 +857,11 @@ class Client:
         :param dict params: Screenshots parameters
         :return: Screenshot model
         """
-        screenshot = self.get_endpoint("screenshots"). \
-            update(params, parent_id=project_id, resource_id=screenshot_id)
+        screenshot = self.get_endpoint("screenshots").update(
+            params=params,
+            parent_id=project_id,
+            resource_id=screenshot_id
+        )
         return ScreenshotModel(screenshot)
 
     def delete_screenshot(self,
@@ -898,7 +913,7 @@ class Client:
         :return: Task model
         """
         raw_task = self.get_endpoint("tasks"). \
-            create(params, parent_id=project_id)
+            create(params=params, parent_id=project_id)
         return TaskModel(raw_task)
 
     def update_task(self,
@@ -915,7 +930,7 @@ class Client:
         :return: Task model
         """
         raw_task = self.get_endpoint("tasks"). \
-            update(params, parent_id=project_id, resource_id=task_id)
+            update(params=params, parent_id=project_id, resource_id=task_id)
         return TaskModel(raw_task)
 
     def delete_task(self,
@@ -982,7 +997,7 @@ class Client:
         :return: Team user model
         """
         raw_team_user = self.get_endpoint("team_users"). \
-            update(params, parent_id=team_id, resource_id=team_user_id)
+            update(params=params, parent_id=team_id, resource_id=team_user_id)
         return TeamUserModel(raw_team_user)
 
     def delete_team_user(self, team_id: Union[str, int],
@@ -1055,8 +1070,11 @@ class Client:
         :param dict params: Team user group parameters
         :return: Team user group model
         """
-        raw_group = self.get_endpoint("team_user_groups"). \
-            update(params, parent_id=team_id, resource_id=team_user_group_id)
+        raw_group = self.get_endpoint("team_user_groups").update(
+            params=params,
+            parent_id=team_id,
+            resource_id=team_user_group_id
+        )
         return TeamUserGroupModel(raw_group)
 
     def delete_team_user_group(self, team_id: Union[str, int],
@@ -1089,7 +1107,7 @@ class Client:
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").add_projects(
-            params,
+            params=params,
             parent_id=team_id,
             resource_id=team_user_group_id
         )
@@ -1110,7 +1128,7 @@ class Client:
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").remove_projects(
-            params,
+            params=params,
             parent_id=team_id,
             resource_id=team_user_group_id
         )
@@ -1131,7 +1149,7 @@ class Client:
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").add_members(
-            params,
+            params=params,
             parent_id=team_id,
             resource_id=team_user_group_id
         )
@@ -1152,7 +1170,7 @@ class Client:
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").remove_members(
-            params,
+            params=params,
             parent_id=team_id,
             resource_id=team_user_group_id
         )
@@ -1198,8 +1216,11 @@ class Client:
         :param dict params: Translation parameters
         :return: Task model
         """
-        raw_translation = self.get_endpoint("translations"). \
-            update(params, parent_id=project_id, resource_id=translation_id)
+        raw_translation = self.get_endpoint("translations").update(
+            params=params,
+            parent_id=project_id,
+            resource_id=translation_id
+        )
         return TranslationModel(raw_translation)
 
     def translation_providers(self, team_id: Union[str, int],
@@ -1268,7 +1289,7 @@ class Client:
         :return: Translation status model
         """
         raw_status = self.get_endpoint("translation_statuses"). \
-            create(params, parent_id=project_id)
+            create(params=params, parent_id=project_id)
         return TranslationStatusModel(raw_status)
 
     def update_translation_status(self, project_id: str,
@@ -1284,7 +1305,7 @@ class Client:
         :return: Translation status model
         """
         raw_status = self.get_endpoint("translation_statuses").update(
-            params,
+            params=params,
             parent_id=project_id,
             resource_id=translation_status_id
         )
@@ -1325,7 +1346,7 @@ class Client:
         :return: Webhook collection
         """
         raw_webhooks = self.get_endpoint("webhooks"). \
-            all(params, parent_id=project_id)
+            all(params=params, parent_id=project_id)
         return WebhooksCollection(raw_webhooks)
 
     def webhook(self, project_id: str, webhook_id: str) -> WebhookModel:
@@ -1349,7 +1370,7 @@ class Client:
         :return: Webhook model
         """
         raw_webhook = self.get_endpoint("webhooks"). \
-            create(params, parent_id=project_id)
+            create(params=params, parent_id=project_id)
         return WebhookModel(raw_webhook)
 
     def update_webhook(self, project_id: str, webhook_id: str,
@@ -1362,7 +1383,7 @@ class Client:
         :return: Webhook model
         """
         raw_webhook = self.get_endpoint("webhooks"). \
-            update(params, parent_id=project_id, resource_id=webhook_id)
+            update(params=params, parent_id=project_id, resource_id=webhook_id)
         return WebhookModel(raw_webhook)
 
     def delete_webhook(self, project_id: str, webhook_id: str) -> Dict:
