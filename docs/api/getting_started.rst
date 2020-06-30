@@ -111,6 +111,7 @@ Collections has the following attributes (some of the attributes may be absent d
 * ``limit`` - number of records per page.
 * ``project_id`` - ID of the project that the collection belongs to.
 * ``user_id`` - ID of the user the collection belongs to.
+* ``team_id`` - ID of the team the collection belongs to.
 * ``branch`` - project branch that the collection was fetched from.
 * ``errors`` - errors that occured during the request processing. Usually this attribute is empty or absent, but it may contain a list of error messages in certain cases. For example, suppose you are creating multiple project languages, and one of the languages is incorrect. All languages with proper attributes will be created and returned as collection. ``errors`` will contain a list of errors explaining that one of the languages has incorrect attributes.
 

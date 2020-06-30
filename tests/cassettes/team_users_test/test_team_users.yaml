@@ -1,0 +1,80 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/teams/176692/users
+  response:
+    body:
+      string: '{"team_id":176692,"team_users":[{"user_id":68139,"email":"demo3@python.org","fullname":"Python
+        demo 3","created_at":"2020-06-15 12:29:13 (Etc\/UTC)","created_at_timestamp":1592224153,"role":"member"},{"user_id":68133,"email":"demo@python.org","fullname":"Python
+        demo 1","created_at":"2020-06-15 12:19:03 (Etc\/UTC)","created_at_timestamp":1592223543,"role":"member"},{"user_id":68134,"email":"demo2@python.org","fullname":"Python
+        demo 2","created_at":"2020-06-15 12:19:03 (Etc\/UTC)","created_at_timestamp":1592223543,"role":"member"},{"user_id":61151,"email":"ilkrukowski@gmail.com","fullname":"Il","created_at":"2020-04-06
+        10:41:35 (Etc\/UTC)","created_at_timestamp":1586169695,"role":"member"},{"user_id":52911,"email":"elf@lorien.com","fullname":"Mr.
+        Elf","created_at":"2019-12-29 13:47:23 (Etc\/UTC)","created_at_timestamp":1577627243,"role":"member"},{"user_id":49436,"email":"ilya@lokalise.com","fullname":"Ilya","created_at":"2019-11-06
+        12:57:29 (Etc\/UTC)","created_at_timestamp":1573045049,"role":"member"},{"user_id":35555,"email":"john@example.com","fullname":"John","created_at":"2019-04-17
+        13:41:12 (Etc\/UTC)","created_at_timestamp":1555508472,"role":"member"},{"user_id":35554,"email":"golosizpru@ya.ru","fullname":"Joanne","created_at":"2019-04-17
+        13:39:19 (Etc\/UTC)","created_at_timestamp":1555508359,"role":"member"},{"user_id":34052,"email":"translator@example.com","fullname":"Translator
+        Demo","created_at":"2019-03-29 14:18:15 (Etc\/UTC)","created_at_timestamp":1553869095,"role":"member"},{"user_id":34051,"email":"demo2@example.com","fullname":"Demo
+        2 User","created_at":"2019-03-29 14:16:05 (Etc\/UTC)","created_at_timestamp":1553868965,"role":"member"},{"user_id":33599,"email":"twilight_church@list.ru","fullname":"Joe","created_at":"2019-03-26
+        15:46:41 (Etc\/UTC)","created_at_timestamp":1553615201,"role":"member"},{"user_id":31113,"email":"translator@mycompany.com","fullname":"Mr.
+        Translator","created_at":"2019-02-28 12:36:18 (Etc\/UTC)","created_at_timestamp":1551357378,"role":"member"},{"user_id":25753,"email":"test2@example.com","fullname":"Unnamed","created_at":"2018-12-04
+        17:13:19 (Etc\/UTC)","created_at_timestamp":1543943599,"role":"member"},{"user_id":25261,"email":"kutanov@gmail.com","fullname":"Roman","created_at":"2018-11-26
+        13:04:14 (Etc\/UTC)","created_at_timestamp":1543237454,"role":"owner"},{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
+        B","created_at":"2018-08-21 15:35:25 (Etc\/UTC)","created_at_timestamp":1534865725,"role":"owner"},{"user_id":5870,"email":"test@example.com","fullname":"John
+        Doe","created_at":"2017-06-09 11:56:00 (Etc\/UTC)","created_at_timestamp":1497009360,"role":"member"}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Jun 2020 11:07:40 GMT
+      Expires:
+      - Thu, 25 Jun 2020 11:07:40 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '100'
+      X-Pagination-Page:
+      - '1'
+      X-Pagination-Page-Count:
+      - '1'
+      X-Pagination-Total-Count:
+      - '16'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '2675'
+    status:
+      code: 200
+      message: OK
+version: 1

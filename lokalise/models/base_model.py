@@ -24,7 +24,8 @@ class BaseModel:
     COMMON_ATTRS: List[str] = [
         'project_id',
         'user_id',
-        'branch'
+        'branch',
+        'team_id'
     ]
     DATA_KEY = ''
 

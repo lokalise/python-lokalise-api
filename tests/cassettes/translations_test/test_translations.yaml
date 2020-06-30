@@ -1,0 +1,185 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/translations
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","translations":[{"translation_id":220681425,"key_id":34089718,"language_iso":"ru_RU","translation":"\u0414\u043e\u0431\u0440\u043e
+        \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c \u0432 Sample
+        App, [%s:name]!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:05:04 (Etc\/UTC)","modified_at_timestamp":1577372704,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":5,"custom_translation_statuses":[]},{"translation_id":220681430,"key_id":34089719,"language_iso":"ru_RU","translation":"\u0417\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u0442\u044c\u0441\u044f","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:31:15 (Etc\/UTC)","modified_at_timestamp":1577374275,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":true,"words":1,"custom_translation_statuses":[]},{"translation_id":220681435,"key_id":34089720,"language_iso":"ru_RU","translation":"{\"one\":\"\\u0423
+        \\u0432\\u0430\\u0441 [%i:count] \\u0441\\u043e\\u043e\\u0431\\u0449\\u0435\\u043d\\u0438\\u0435\",\"few\":\"\\u0423
+        \\u0432\\u0430\\u0441 [%i:count] \\u043d\\u043e\\u0432\\u044b\\u0445 \\u0441\\u043e\\u043e\\u0431\\u0449\\u0435\\u043d\\u0438\\u044f\",\"many\":\"\\u0423
+        \\u0432\\u0430\\u0441 [%i:count] \\u043d\\u043e\\u0432\\u044b\\u0445 \\u0441\\u043e\\u043e\\u0431\\u0449\\u0435\\u043d\\u0438\\u0439\",\"other\":\"\\u0423
+        \\u0432\\u0430\\u0441 [%i:count] \\u043d\\u043e\\u0432\\u044b\\u0445 \\u0441\\u043e\\u043e\\u0431\\u0449\\u0435\\u043d\\u0438\\u044f\"}","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        14:05:39 (Etc\/UTC)","modified_at_timestamp":1577714739,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":15,"custom_translation_statuses":[]},{"translation_id":220681440,"key_id":34089721,"language_iso":"ru_RU","translation":"\u0420\u0443\u0447\u043d\u0430\u044f
+        \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430","modified_by":1,"modified_by_email":"support@lokalise.co","modified_at":"2020-06-20
+        23:06:20 (Etc\/UTC)","modified_at_timestamp":1592694380,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":2,"custom_translation_statuses":[]},{"translation_id":220681450,"key_id":34089723,"language_iso":"ru_RU","translation":"\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c
+        \u043d\u043e\u043c\u0435\u0440","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        15:30:16 (Etc\/UTC)","modified_at_timestamp":1577460616,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":2,"custom_translation_statuses":[]},{"translation_id":220681455,"key_id":34089724,"language_iso":"ru_RU","translation":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430,
+        \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u0435 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435
+        PNG","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        16:09:38 (Etc\/UTC)","modified_at_timestamp":1577462978,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":4,"custom_translation_statuses":[]},{"translation_id":220681460,"key_id":34089725,"language_iso":"ru_RU","translation":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430,
+        \u0443\u043a\u0430\u0436\u0438\u0442\u0435 \u0444\u0443\u043d\u043a\u0446\u0438\u044e
+        \u043e\u0431\u0440\u0430\u0442\u043d\u043e\u0433\u043e \u0432\u044b\u0437\u043e\u0432\u0430!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        16:12:25 (Etc\/UTC)","modified_at_timestamp":1577463145,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":5,"custom_translation_statuses":[]},{"translation_id":220681465,"key_id":34089726,"language_iso":"ru_RU","translation":"[!!!
+        \u00de\u2113\u00e8\u00e1\u01a8\u00e8 \u01a8\u00e8\u2113\u00e8\u00e7\u01ad
+        \u00deNG \u0192\u00ef\u2113\u00e8 \u00a3\u00f4\u0159\u00e8 !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":5,"custom_translation_statuses":[]},{"translation_id":220681470,"key_id":34089727,"language_iso":"ru_RU","translation":"[!!!
+        W\u00e1\u00ef\u01ad, \u03c9\u00e8''\u0159\u00e8 \u00fa\u01a5\u2113\u00f4\u00e1\u03b4\u00ef\u00f1\u03f1
+        \u0192\u00ef\u2113\u00e8 [%1$s:file] \u00a3\u00f4\u0159\u00e8\u20a5 \u00ef
+        !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":true,"words":6,"custom_translation_statuses":[]},{"translation_id":220681475,"key_id":34089728,"language_iso":"ru_RU","translation":"\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430
+        \u0444\u0430\u0439\u043b\u0430 [%1$s:file]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        13:57:35 (Etc\/UTC)","modified_at_timestamp":1577714255,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":false,"words":2,"custom_translation_statuses":[{"status_id":429,"title":"needs
+        context","color":"#61bd4f"},{"status_id":430,"title":"waiting for approval
+        by director","color":"#c377e0"}]},{"translation_id":251659925,"key_id":38057972,"language_iso":"ru_RU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-02-28
+        11:52:02 (Etc\/UTC)","modified_at_timestamp":1582890722,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":330266929,"key_id":47252209,"language_iso":"ru_RU","translation":"\u0431\u0440\u0430\u0443\u0437\u0435\u0440","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-03
+        09:39:16 (Etc\/UTC)","modified_at_timestamp":1591177156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":1,"custom_translation_statuses":[]},{"translation_id":344002157,"key_id":48815323,"language_iso":"ru_RU","translation":"translation","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-19
+        12:22:01 (Etc\/UTC)","modified_at_timestamp":1592569321,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":1,"custom_translation_statuses":[]},{"translation_id":220681426,"key_id":34089718,"language_iso":"en_AU","translation":"Welcome!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-04-06
+        12:53:57 (Etc\/UTC)","modified_at_timestamp":1586177637,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":1,"custom_translation_statuses":[]},{"translation_id":220681431,"key_id":34089719,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        12:42:22 (Etc\/UTC)","modified_at_timestamp":1592656942,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681436,"key_id":34089720,"language_iso":"en_AU","translation":"{\"one\":\"\",\"other\":\"\"}","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        12:42:23 (Etc\/UTC)","modified_at_timestamp":1592656943,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681441,"key_id":34089721,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        12:42:24 (Etc\/UTC)","modified_at_timestamp":1592656944,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681451,"key_id":34089723,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        12:42:26 (Etc\/UTC)","modified_at_timestamp":1592656946,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681456,"key_id":34089724,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        12:35:26 (Etc\/UTC)","modified_at_timestamp":1577709326,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681461,"key_id":34089725,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        12:35:26 (Etc\/UTC)","modified_at_timestamp":1577709326,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681466,"key_id":34089726,"language_iso":"en_AU","translation":"[!!!
+        \u00de\u2113\u00e8\u00e1\u01a8\u00e8 \u01a8\u00e8\u2113\u00e8\u00e7\u01ad
+        \u00deNG \u0192\u00ef\u2113\u00e8 \u00a3\u00f4\u0159\u00e8 !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":5,"custom_translation_statuses":[]},{"translation_id":220681471,"key_id":34089727,"language_iso":"en_AU","translation":"[!!!
+        W\u00e1\u00ef\u01ad, \u03c9\u00e8''\u0159\u00e8 \u00fa\u01a5\u2113\u00f4\u00e1\u03b4\u00ef\u00f1\u03f1
+        \u0192\u00ef\u2113\u00e8 [%1$s:file] \u00a3\u00f4\u0159\u00e8\u20a5 \u00ef
+        !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":true,"words":6,"custom_translation_statuses":[]},{"translation_id":220681476,"key_id":34089728,"language_iso":"en_AU","translation":"Downloading
+        file [%1$s:file]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        13:53:11 (Etc\/UTC)","modified_at_timestamp":1577713991,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":2,"custom_translation_statuses":[{"status_id":429,"title":"needs
+        context","color":"#61bd4f"}]},{"translation_id":251659928,"key_id":38057972,"language_iso":"en_AU","translation":"Proceed","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-02-28
+        11:56:12 (Etc\/UTC)","modified_at_timestamp":1582890972,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":1,"custom_translation_statuses":[]},{"translation_id":330266932,"key_id":47252209,"language_iso":"en_AU","translation":"Please
+        open your browser","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-03
+        09:35:26 (Etc\/UTC)","modified_at_timestamp":1591176926,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":4,"custom_translation_statuses":[]},{"translation_id":344002154,"key_id":48815323,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        12:42:27 (Etc\/UTC)","modified_at_timestamp":1592656947,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681427,"key_id":34089718,"language_iso":"en","translation":"Welcome!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-04-06
+        12:53:56 (Etc\/UTC)","modified_at_timestamp":1586177636,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":1,"custom_translation_statuses":[]},{"translation_id":220681432,"key_id":34089719,"language_iso":"en","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-02-28
+        12:24:45 (Etc\/UTC)","modified_at_timestamp":1582892685,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681437,"key_id":34089720,"language_iso":"en","translation":"{\"one\":\"You
+        have 1 message\",\"other\":\"You have [%i:count] messages\"}","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:00:55 (Etc\/UTC)","modified_at_timestamp":1577372455,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":7,"custom_translation_statuses":[]},{"translation_id":220681442,"key_id":34089721,"language_iso":"en","translation":"Manual
+        setup","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        12:53:16 (Etc\/UTC)","modified_at_timestamp":1577451196,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":2,"custom_translation_statuses":[{"status_id":429,"title":"needs
+        context","color":"#61bd4f"}]},{"translation_id":220681452,"key_id":34089723,"language_iso":"en","translation":"Copy
+        number","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        15:15:10 (Etc\/UTC)","modified_at_timestamp":1577459710,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":2,"custom_translation_statuses":[]},{"translation_id":220681457,"key_id":34089724,"language_iso":"en","translation":"Please
+        upload PNG image","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        16:09:34 (Etc\/UTC)","modified_at_timestamp":1577462974,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":4,"custom_translation_statuses":[]},{"translation_id":220681462,"key_id":34089725,"language_iso":"en","translation":"Please
+        provide a callback function!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        16:11:16 (Etc\/UTC)","modified_at_timestamp":1577463076,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":5,"custom_translation_statuses":[]},{"translation_id":220681467,"key_id":34089726,"language_iso":"en","translation":"Please
+        select PNG file","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        16:22:58 (Etc\/UTC)","modified_at_timestamp":1577463778,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":4,"custom_translation_statuses":[]},{"translation_id":220681472,"key_id":34089727,"language_iso":"en","translation":"Wait,
+        we''re uploading file [%1$s:file]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        13:53:19 (Etc\/UTC)","modified_at_timestamp":1577713999,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":false,"words":4,"custom_translation_statuses":[]},{"translation_id":220681477,"key_id":34089728,"language_iso":"en","translation":"Downloading
+        file [%1$s:file]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        13:53:11 (Etc\/UTC)","modified_at_timestamp":1577713991,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":false,"words":2,"custom_translation_statuses":[]},{"translation_id":251659924,"key_id":38057972,"language_iso":"en","translation":"Proceed","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-02-28
+        11:56:12 (Etc\/UTC)","modified_at_timestamp":1582890972,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":1,"custom_translation_statuses":[]},{"translation_id":330266928,"key_id":47252209,"language_iso":"en","translation":"Please
+        open your browser","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-03
+        09:35:26 (Etc\/UTC)","modified_at_timestamp":1591176926,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":4,"custom_translation_statuses":[]},{"translation_id":344002153,"key_id":48815323,"language_iso":"en","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-19
+        12:22:01 (Etc\/UTC)","modified_at_timestamp":1592569321,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681428,"key_id":34089718,"language_iso":"de_DE","translation":"Willkommen
+        bei Sample App, [%s:name]!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:25:07 (Etc\/UTC)","modified_at_timestamp":1577373907,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":true,"words":4,"custom_translation_statuses":[]},{"translation_id":220681433,"key_id":34089719,"language_iso":"de_DE","translation":"Anmelden!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:24:39 (Etc\/UTC)","modified_at_timestamp":1577373879,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":1,"custom_translation_statuses":[]},{"translation_id":220681438,"key_id":34089720,"language_iso":"de_DE","translation":"{\"one\":\"\",\"other\":\"\"}","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:24:42 (Etc\/UTC)","modified_at_timestamp":1577373882,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681443,"key_id":34089721,"language_iso":"de_DE","translation":"Manuelle
+        Einrichtung","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-01-05
+        14:49:10 (Etc\/UTC)","modified_at_timestamp":1578235750,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":false,"words":2,"custom_translation_statuses":[]},{"translation_id":220681453,"key_id":34089723,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-28
+        15:25:09 (Etc\/UTC)","modified_at_timestamp":1577546709,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681458,"key_id":34089724,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-28
+        15:25:06 (Etc\/UTC)","modified_at_timestamp":1577546706,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681463,"key_id":34089725,"language_iso":"de_DE","translation":"Bitte
+        geben Sie eine R\u00fcckruffunktion an!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        14:01:38 (Etc\/UTC)","modified_at_timestamp":1577714498,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":6,"custom_translation_statuses":[]},{"translation_id":220681468,"key_id":34089726,"language_iso":"de_DE","translation":"[!!!
+        \u00de\u2113\u00e8\u00e1\u01a8\u00e8 \u01a8\u00e8\u2113\u00e8\u00e7\u01ad
+        \u00deNG \u0192\u00ef\u2113\u00e8 \u00a3\u00f4\u0159\u00e8 !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":5,"custom_translation_statuses":[]},{"translation_id":220681473,"key_id":34089727,"language_iso":"de_DE","translation":"[!!!
+        W\u00e1\u00ef\u01ad, \u03c9\u00e8''\u0159\u00e8 \u00fa\u01a5\u2113\u00f4\u00e1\u03b4\u00ef\u00f1\u03f1
+        \u0192\u00ef\u2113\u00e8 [%1$s:file] \u00a3\u00f4\u0159\u00e8\u20a5 \u00ef
+        !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":false,"words":6,"custom_translation_statuses":[]},{"translation_id":220681478,"key_id":34089728,"language_iso":"de_DE","translation":"Datei
+        wird heruntergeladen [%1$s:file]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        14:01:38 (Etc\/UTC)","modified_at_timestamp":1577714498,"is_reviewed":false,"reviewed_by":20181,"is_fuzzy":false,"words":3,"custom_translation_statuses":[]},{"translation_id":251659926,"key_id":38057972,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-02-28
+        11:52:02 (Etc\/UTC)","modified_at_timestamp":1582890722,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":330266930,"key_id":47252209,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-03
+        09:35:26 (Etc\/UTC)","modified_at_timestamp":1591176926,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":344002156,"key_id":48815323,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-19
+        12:22:01 (Etc\/UTC)","modified_at_timestamp":1592569321,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681429,"key_id":34089718,"language_iso":"que","translation":"welcome
+        [%s:name]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:38:15 (Etc\/UTC)","modified_at_timestamp":1577374695,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":1,"custom_translation_statuses":[]},{"translation_id":220681434,"key_id":34089719,"language_iso":"que","translation":"demo","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-01-05
+        14:41:28 (Etc\/UTC)","modified_at_timestamp":1578235288,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":1,"custom_translation_statuses":[]},{"translation_id":220681439,"key_id":34089720,"language_iso":"que","translation":"{\"zero\":\"\",\"one\":\"\",\"two\":\"\",\"few\":\"\",\"many\":\"\",\"other\":\"\"}","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
+        15:24:42 (Etc\/UTC)","modified_at_timestamp":1577373882,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681444,"key_id":34089721,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        12:53:16 (Etc\/UTC)","modified_at_timestamp":1577451196,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681454,"key_id":34089723,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        15:15:10 (Etc\/UTC)","modified_at_timestamp":1577459710,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681459,"key_id":34089724,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        16:07:37 (Etc\/UTC)","modified_at_timestamp":1577462857,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681464,"key_id":34089725,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-27
+        16:11:16 (Etc\/UTC)","modified_at_timestamp":1577463076,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":220681469,"key_id":34089726,"language_iso":"que","translation":"[!!!
+        \u00de\u2113\u00e8\u00e1\u01a8\u00e8 \u01a8\u00e8\u2113\u00e8\u00e7\u01ad
+        \u00deNG \u0192\u00ef\u2113\u00e8 \u00a3\u00f4\u0159\u00e8 !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":5,"custom_translation_statuses":[]},{"translation_id":220681474,"key_id":34089727,"language_iso":"que","translation":"[!!!
+        W\u00e1\u00ef\u01ad, \u03c9\u00e8''\u0159\u00e8 \u00fa\u01a5\u2113\u00f4\u00e1\u03b4\u00ef\u00f1\u03f1
+        \u0192\u00ef\u2113\u00e8 [%1$s:file] \u00a3\u00f4\u0159\u00e8\u20a5 \u00ef
+        !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:53 (Etc\/UTC)","modified_at_timestamp":1577725553,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":6,"custom_translation_statuses":[]},{"translation_id":220681479,"key_id":34089728,"language_iso":"que","translation":"[!!!
+        \u00d0\u00f4\u03c9\u00f1\u2113\u00f4\u00e1\u03b4\u00ef\u00f1\u03f1 \u0192\u00ef\u2113\u00e8
+        [%1$s:file] !!!]","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        17:05:00 (Etc\/UTC)","modified_at_timestamp":1577725500,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":true,"words":2,"custom_translation_statuses":[{"status_id":430,"title":"waiting
+        for approval by director","color":"#c377e0"}]},{"translation_id":251659927,"key_id":38057972,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-02-28
+        11:52:02 (Etc\/UTC)","modified_at_timestamp":1582890722,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":330266931,"key_id":47252209,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-03
+        09:35:26 (Etc\/UTC)","modified_at_timestamp":1591176926,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":344002155,"key_id":48815323,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-19
+        12:22:01 (Etc\/UTC)","modified_at_timestamp":1592569321,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Jun 2020 10:25:19 GMT
+      Expires:
+      - Thu, 25 Jun 2020 10:25:19 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '100'
+      X-Pagination-Page:
+      - '1'
+      X-Pagination-Page-Count:
+      - '1'
+      X-Pagination-Total-Count:
+      - '65'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '25571'
+    status:
+      code: 200
+      message: OK
+version: 1
