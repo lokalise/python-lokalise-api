@@ -58,7 +58,7 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.get(self.client, path, params)
 
-    def create(self, params: Dict,
+    def create(self, params: Optional[Dict] = None,
                wrapper_attr: Optional[str] = None,
                **ids: Optional[Union[str, int]]) -> Dict:
         """Creates a new resource for the given endpoint.
@@ -72,7 +72,7 @@ class BaseEndpoint:
         :param ids: Identifiers for path generation
         :rtype dict:
         """
-        if wrapper_attr:
+        if wrapper_attr and params:
             params = {wrapper_attr: to_list(params)}
 
         path = self.path_with_params(**ids)

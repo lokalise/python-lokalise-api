@@ -29,7 +29,9 @@ Example:
 
 .. code-block:: python
 
-  client.project('123.abc')
+  project = client.project('123.abc')
+  project.project_type # => "localization_files"
+  project.name # => "Sample Project"
 
 Create project
 --------------

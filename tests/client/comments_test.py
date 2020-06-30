@@ -66,15 +66,15 @@ def test_key_comments_pagination(client):
 def test_key_comment(client):
     """Tests fetching of a key comment
     """
-    comments = client.key_comment(PROJECT_ID, KEY_ID, COMMENT_ID)
-    assert comments.project_id == PROJECT_ID
-    assert comments.comment_id == COMMENT_ID
-    assert comments.key_id == KEY_ID
-    assert comments.comment == "welcome key"
-    assert comments.added_by == 20181
-    assert comments.added_by_email == "bodrovis@protonmail.com"
-    assert comments.added_at == "2019-12-26 15:09:46 (Etc/UTC)"
-    assert comments.added_at_timestamp == 1577372986
+    comment = client.key_comment(PROJECT_ID, KEY_ID, COMMENT_ID)
+    assert comment.project_id == PROJECT_ID
+    assert comment.comment_id == COMMENT_ID
+    assert comment.key_id == KEY_ID
+    assert comment.comment == "welcome key"
+    assert comment.added_by == 20181
+    assert comment.added_by_email == "bodrovis@protonmail.com"
+    assert comment.added_at == "2019-12-26 15:09:46 (Etc/UTC)"
+    assert comment.added_at_timestamp == 1577372986
 
 
 @pytest.mark.vcr

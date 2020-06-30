@@ -32,7 +32,9 @@ Example:
 
 .. code-block:: python
 
-  client.contributor('123.abc', 2345)
+  contributor = client.contributor('123.abc', 2345)
+  contributor.email == "test@example.com"
+  contributor.fullname == "John Doe"
 
 Create one or multiple contributors
 -----------------------------------

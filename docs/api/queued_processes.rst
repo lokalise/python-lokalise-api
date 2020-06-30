@@ -33,4 +33,6 @@ Example:
 
 .. code-block:: python
 
-  client.queued_process('123.abc', '1234abcf456zyx')
+  process = client.queued_process('123.abc', '1234abcf456zyx')
+  process.type # => 'file-import'
+  process.status # => 'finished'

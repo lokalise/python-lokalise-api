@@ -1,0 +1,64 @@
+interactions:
+- request:
+    body: '{"title": "Python task", "languages": [{"language_iso": "en", "users":
+      [20181]}], "keys": [34089721], "auto_close_task": true}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '126'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/tasks
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","task":{"task_id":135506,"title":"Python
+        task","can_be_parent":true,"task_type":"translation","parent_task_id":null,"closing_tags":[],"description":"","status":"created","progress":0,"due_date":null,"due_date_timestamp":null,"keys_count":1,"words_count":2,"created_at":"2020-06-24
+        15:01:41 (Etc\/UTC)","created_at_timestamp":1593010901,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","languages":[{"language_iso":"en","users":[{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
+        B"}],"groups":[],"keys":[34089721],"status":"created","progress":0,"initial_tm_leverage":{"0%+":1,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":1,"words_count":2,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null}],"auto_close_languages":true,"auto_close_task":true,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null,"do_lock_translations":false,"custom_translation_status_ids":[]}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - GET
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 24 Jun 2020 15:01:41 GMT
+      Expires:
+      - Wed, 24 Jun 2020 15:01:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1053'
+    status:
+      code: 200
+      message: OK
+version: 1

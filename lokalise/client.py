@@ -16,6 +16,10 @@ from .collections.orders import OrdersCollection
 from .collections.payment_cards import PaymentCardsCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
+from .collections.snapshots import SnapshotsCollection
+from .collections.screenshots import ScreenshotsCollection
+from .collections.teams import TeamsCollection
+from .collections.tasks import TasksCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
@@ -25,6 +29,9 @@ from .models.order import OrderModel
 from .models.payment_card import PaymentCardModel
 from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
+from .models.snapshot import SnapshotModel
+from .models.screenshot import ScreenshotModel
+from .models.task import TaskModel
 
 
 class Client:
@@ -718,6 +725,211 @@ class Client:
         raw_process = self.get_endpoint("queued_processes"). \
             find(parent_id=project_id, resource_id=queued_process_id)
         return QueuedProcessModel(raw_process)
+
+    def snapshots(self, project_id: str,
+                  params: Optional[Dict] = None) -> SnapshotsCollection:
+        """Fetches all snapshots for the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: (optional) Pagination params
+        :return: Collection of snapshots
+        """
+        raw_snapshots = self.get_endpoint("snapshots"). \
+            all(params=params, parent_id=project_id)
+        return SnapshotsCollection(raw_snapshots)
+
+    def create_snapshot(self, project_id: str,
+                        params: Optional[Dict[str, str]] = None
+                        ) -> SnapshotModel:
+        """Creates a snapshot of the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: (optional) Request params
+        :return: Snapshot model
+        """
+        raw_snapshot = self.get_endpoint("snapshots"). \
+            create(params=params, parent_id=project_id)
+        return SnapshotModel(raw_snapshot)
+
+    def restore_snapshot(self,
+                         project_id: str,
+                         snapshot_id: Union[str, int]) -> ProjectModel:
+        """Restores a snapshot of the given project by producing a new project.
+
+        :param str project_id: ID of the project
+        :param queued_process_id: ID of the snapshot to restore
+        :type snapshot_id: int or str
+        :return: Snapshot model
+        """
+        new_project = self.get_endpoint("snapshots"). \
+            create(parent_id=project_id, resource_id=snapshot_id)
+        return ProjectModel(new_project)
+
+    def delete_snapshot(self, project_id: str,
+                        snapshot_id: Union[str, int]) -> Dict:
+        """Deletes a project snapshot.
+
+        :param str project_id: ID of the project
+        :param snapshot_id: ID of the snapshot to delete
+        :return: Dictionary with project ID and "snapshot_deleted" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("snapshots"). \
+            delete(parent_id=project_id, resource_id=snapshot_id)
+        return response
+
+    def screenshots(self, project_id: str,
+                    params: Optional[Dict] = None) -> ScreenshotsCollection:
+        """Fetches all screenshots for the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: (optional) Pagination params
+        :return: Collection of screenshots
+        """
+        raw_screenshots = self.get_endpoint("screenshots"). \
+            all(params=params, parent_id=project_id)
+        return ScreenshotsCollection(raw_screenshots)
+
+    def screenshot(self,
+                   project_id: str,
+                   screenshot_id: Union[str, int]) -> ScreenshotModel:
+        """Fetches a screenshot.
+
+        :param str project_id: ID of the project
+        :param screenshot_id: ID of the screenshot to fetch
+        :type screenshot_id: int or str
+        :return: Screenshot model
+        """
+        screenshot = self.get_endpoint("screenshots"). \
+            find(parent_id=project_id, resource_id=screenshot_id)
+        return ScreenshotModel(screenshot)
+
+    def create_screenshots(self, project_id: str,
+                           params: Union[List[Dict], Dict[str, Any]]
+                           ) -> ScreenshotsCollection:
+        """Creates one or more screenshots in the given project.
+
+        :param str project_id: ID of the project
+        :param params: Screenshots parameters
+        :type params: dict or list
+        :return: Collection of screenshots
+        """
+        raw_screenshots = self.get_endpoint("screenshots").create(
+            params=params,
+            wrapper_attr="screenshots",
+            parent_id=project_id
+        )
+        return ScreenshotsCollection(raw_screenshots)
+
+    def update_screenshot(self,
+                          project_id: str,
+                          screenshot_id: Union[str, int],
+                          params: Optional[Dict[str, Any]] = None
+                          ) -> ScreenshotModel:
+        """Updates a screenshot.
+
+        :param str project_id: ID of the project
+        :param screenshot_id: ID of the screenshot to update
+        :type screenshot_id: int or str
+        :param dict params: Screenshots parameters
+        :return: Screenshot model
+        """
+        screenshot = self.get_endpoint("screenshots"). \
+            update(params, parent_id=project_id, resource_id=screenshot_id)
+        return ScreenshotModel(screenshot)
+
+    def delete_screenshot(self,
+                          project_id: str,
+                          screenshot_id: Union[str, int]) -> Dict:
+        """Deletes a screenshot.
+
+        :param str project_id: ID of the project
+        :param screenshot_id: ID of the screenshot to delete
+        :type screenshot_id: int or str
+        :return: Dictionary with the project ID and "screenshot_deleted": True
+        """
+        response = self.get_endpoint("screenshots"). \
+            delete(parent_id=project_id, resource_id=screenshot_id)
+        return response
+
+    def tasks(self, project_id: str,
+              params: Optional[Dict] = None) -> TasksCollection:
+        """Fetches all tasks for the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: (optional) Request parameters
+        :return: Collection of tasks
+        """
+        raw_tasks = self.get_endpoint("tasks"). \
+            all(params=params, parent_id=project_id)
+        return TasksCollection(raw_tasks)
+
+    def task(self,
+             project_id: str,
+             task_id: Union[str, int]) -> TaskModel:
+        """Fetches a task.
+
+        :param str project_id: ID of the project
+        :param task_id: ID of the task to fetch
+        :type task_id: int or str
+        :return: Task model
+        """
+        raw_task = self.get_endpoint("tasks"). \
+            find(parent_id=project_id, resource_id=task_id)
+        return TaskModel(raw_task)
+
+    def create_task(self, project_id: str,
+                    params: Dict[str, Any]) -> TaskModel:
+        """Creates a task in the given project.
+
+        :param str project_id: ID of the project
+        :param dict params: Task parameters
+        :return: Task model
+        """
+        raw_task = self.get_endpoint("tasks"). \
+            create(params, parent_id=project_id)
+        return TaskModel(raw_task)
+
+    def update_task(self,
+                    project_id: str,
+                    task_id: Union[str, int],
+                    params: Optional[Dict[str, Any]] = None
+                    ) -> TaskModel:
+        """Updates a task.
+
+        :param str project_id: ID of the project
+        :param task_id: ID of the task to update
+        :type task_id: int or str
+        :param dict params: Task parameters
+        :return: Task model
+        """
+        raw_task = self.get_endpoint("tasks"). \
+            update(params, parent_id=project_id, resource_id=task_id)
+        return TaskModel(raw_task)
+
+    def delete_task(self,
+                    project_id: str,
+                    task_id: Union[str, int]) -> Dict:
+        """Deletes a task.
+
+        :param str project_id: ID of the project
+        :param task_id: ID of the task to delete
+        :type task_id: int or str
+        :return: Dictionary with the project ID and "task_deleted": True
+        """
+        response = self.get_endpoint("tasks"). \
+            delete(parent_id=project_id, resource_id=task_id)
+        return response
+
+    def teams(self, params: Optional[Dict] = None) -> TeamsCollection:
+        """Fetches all teams available to the currently authorized user
+        (identified by the API token).
+
+        :param dict params: (optional) Pagination params
+        :return: Collection of teams
+        """
+        raw_teams = self.get_endpoint("teams").all(params=params)
+        return TeamsCollection(raw_teams)
     # === End of endpoint methods ===
 
     # === Endpoint helpers

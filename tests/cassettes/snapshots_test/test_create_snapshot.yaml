@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: '{"title": "Python snapshot"}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '28'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/snapshots
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","snapshot":{"snapshot_id":277888,"title":"Python
+        snapshot","created_by":20181,"created_by_email":"bodrovis@protonmail.com","created_at":"2020-06-22
+        12:10:16 (Etc\/UTC)","created_at_timestamp":1592827816}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - GET
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Jun 2020 12:10:16 GMT
+      Expires:
+      - Mon, 22 Jun 2020 12:10:16 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '270'
+    status:
+      code: 200
+      message: OK
+version: 1

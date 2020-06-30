@@ -76,7 +76,9 @@ Example:
 
 .. code-block:: python
 
-  client.language('123.abc', 345)
+  language = client.language('123.abc', 345)
+  language.lang_iso # => 'lv'
+  language.is_rtl # => False
 
 Update project language
 -----------------------
