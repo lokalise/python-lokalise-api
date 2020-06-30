@@ -1,5 +1,8 @@
 # Lokalise API v2 official Python interface
 
+[![Build Status](https://travis-ci.org/lokalise/python-lokalise-api.svg?branch=master)](https://travis-ci.org/lokalise/python-lokalise-api)
+[![Test Coverage](https://codecov.io/gh/lokalise/python-lokalise-api/graph/badge.svg)](https://codecov.io/gh/lokalise/python-lokalise-api)
+
 Official Python 3 interface for the [Lokalise APIv2](https://app.lokalise.com/api2docs) that represents returned data as Python objects.
 
 ## Quick start
@@ -34,6 +37,6 @@ Find detailed documentation at [python-lokalise-api.readthedocs.io](https://pyth
 
 ## License
 
-This plugin is licensed under the BSD 3 Clause License.
+This plugin is licensed under the [BSD 3 Clause License](https://github.com/lokalise/python-lokalise-api/blob/master/LICENSE).
 
 Copyright (c) [Lokalise team](https://lokalise.com), [Ilya Bodrov](http://bodrovis.tech)
