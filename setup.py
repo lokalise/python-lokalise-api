@@ -18,8 +18,11 @@ setup(
     url="https://github.com/lokalise/python-lokalise-api",
     keywords='lokalise api client',
     license='MIT',
-    packages=find_packages(where='lokalise'),
-    package_dir={'': 'lokalise'},
+    packages=find_packages(exclude=['tests*']),
+    package_data={
+        'lokalise': ['py.typed'],
+    },
+    package_dir={'lokalise': 'lokalise'},
     platforms=['Any'],
     install_requires=['requests>2,<3'],
     tests_require=['pytest', 'vcrpy', 'pytest-vcr', 'pytest-cov'],
