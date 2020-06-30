@@ -6,7 +6,7 @@ python:
   - "3.8"
 before_install:
   - pip install pipenv
-  - pip install --user codecov
+  - pip install codecov
 install:
   - pipenv install
 script:
