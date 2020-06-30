@@ -11,7 +11,7 @@ and `PIP <https://pypi.org/project/pip/>`_.
 
 Install it by running:
 
-.. code-block::
+.. code-block:: bash
 
   pip install python-lokalise-api
 
