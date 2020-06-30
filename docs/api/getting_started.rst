@@ -19,7 +19,7 @@ Initializing the client
 -----------------------
 
 In order to perform API requests, you `require a special token <https://app.lokalise.com/api2docs/curl/#resource-authentication>`_
-that can be obtained in your personal Lokalise profile (API tokens section).
+that can be obtained in your personal Lokalise profile (*API tokens* section).
 
 After you've obtained the token, import the plugin and initialize the client:
 
@@ -28,15 +28,15 @@ After you've obtained the token, import the plugin and initialize the client:
   import lokalise
   client = lokalise.Client('YOUR_API_TOKEN')
 
-Now use the `client` variable to perform API requests!
-You may also check :ref:`customizing-client`.
+Now use the ``client`` variable to perform API requests!
+You may also check the :ref:`customizing-client` section to learn how to set timeouts.
 
 Objects and models
 ------------------
 
 Individual objects retrieved from the API (projects, contributors, translation keys etc)
 are represented as instances of
-Python classes which are called *models*. Each model responds to the methods
+Python classes. They are called *models*. Each model responds to the methods
 that are named after the API object attributes.
 
 For example:
@@ -44,8 +44,8 @@ For example:
 .. code-block:: python
 
   project = client.project('123.abc')
-  project.name
-  project.description
+  project.name # => "Sample Project"
+  project.description # => "This is a demo project."
 
   order = client.order(345, 5678)
   order.status # => "completed"
@@ -136,7 +136,7 @@ Branching
 
 If you are using `project branching feature <https://docs.lokalise.com/en/articles/3391861-project-branching>`_,
 simply add a branch name separated by semicolon to your project ID in any endpoint to access the branch.
-For example, in order to access the ``new-feature`` branch for the project with an id ``123abcdef.01``:
+For example, in order to access the ``new-feature`` branch for the project with an id of ``123abcdef.01``:
 
 .. code-block:: python
 
