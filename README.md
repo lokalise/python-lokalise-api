@@ -30,7 +30,7 @@ translation_keys.items[0].key_name['web'] # => "sign_up"
 
 ## Documentation
 
-Find detailed documentation at readthedocs.io.
+Find detailed documentation at [python-lokalise-api.readthedocs.io](https://python-lokalise-api.readthedocs.io).
 
 ## License
 
