@@ -1,0 +1,70 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/contributors?limit=3&page=2
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","contributors":[{"user_id":34051,"email":"demo2@example.com","fullname":"Demo
+        2 User","created_at":"2019-03-29 14:16:05 (Etc\/UTC)","created_at_timestamp":1553868965,"is_admin":true,"is_reviewer":true,"languages":[{"lang_id":10052,"lang_iso":"que","lang_name":"Quenya","is_writable":true},{"lang_id":640,"lang_iso":"en","lang_name":"English","is_writable":true},{"lang_id":611,"lang_iso":"en_AU","lang_name":"English
+        (Australia)","is_writable":true},{"lang_id":672,"lang_iso":"de_DE","lang_name":"German
+        (Germany)","is_writable":true},{"lang_id":10153,"lang_iso":"lv","lang_name":"Latvian","is_writable":true},{"lang_id":600,"lang_iso":"ru_RU","lang_name":"Russian
+        (Russia)","is_writable":true}],"admin_rights":["download","tasks","screenshots","keys","languages","settings","activity","statistics"]},{"user_id":35554,"email":"golosizpru@ya.ru","fullname":"Joanne","created_at":"2019-04-17
+        13:39:19 (Etc\/UTC)","created_at_timestamp":1555508359,"is_admin":false,"is_reviewer":false,"languages":[{"lang_id":640,"lang_iso":"en","lang_name":"English","is_writable":false}],"admin_rights":[]},{"user_id":35555,"email":"john@example.com","fullname":"John","created_at":"2019-04-17
+        13:41:12 (Etc\/UTC)","created_at_timestamp":1555508472,"is_admin":false,"is_reviewer":false,"languages":[{"lang_id":640,"lang_iso":"en","lang_name":"English","is_writable":false}],"admin_rights":[]}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 09 Jun 2020 14:03:04 GMT
+      Expires:
+      - Tue, 09 Jun 2020 14:03:04 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '3'
+      X-Pagination-Page:
+      - '2'
+      X-Pagination-Page-Count:
+      - '2'
+      X-Pagination-Total-Count:
+      - '6'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1424'
+    status:
+      code: 200
+      message: OK
+version: 1

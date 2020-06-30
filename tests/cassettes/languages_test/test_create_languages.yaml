@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: '{"languages": [{"lang_iso": "ar", "custom_name": "Custom AR"}, {"lang_iso":
+      "be_BY", "custom_iso": "by_2"}]}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '108'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/languages
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","languages":[{"lang_id":714,"lang_iso":"ar","lang_name":"Custom
+        AR","is_rtl":true,"plural_forms":["zero","one","two","few","many","other"]},{"lang_id":906,"lang_iso":"by_2","lang_name":"Belarusian
+        (Belarus)","is_rtl":false,"plural_forms":["one","few","many","other"]}],"errors":[]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - GET
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 15 Jun 2020 14:23:26 GMT
+      Expires:
+      - Mon, 15 Jun 2020 14:23:26 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '347'
+    status:
+      code: 200
+      message: OK
+version: 1

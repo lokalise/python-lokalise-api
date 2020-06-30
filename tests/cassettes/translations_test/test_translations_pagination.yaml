@@ -1,0 +1,69 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/translations?page=2&limit=5&disable_references=1&filter_untranslated=1
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","translations":[{"translation_id":220681461,"key_id":34089725,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-30
+        12:35:26 (Etc\/UTC)","modified_at_timestamp":1577709326,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344002154,"key_id":48815323,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        12:42:27 (Etc\/UTC)","modified_at_timestamp":1592656947,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681432,"key_id":34089719,"language_iso":"en","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-02-28
+        12:24:45 (Etc\/UTC)","modified_at_timestamp":1582892685,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344002153,"key_id":48815323,"language_iso":"en","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-19
+        12:22:01 (Etc\/UTC)","modified_at_timestamp":1592569321,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":220681453,"key_id":34089723,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-28
+        15:25:09 (Etc\/UTC)","modified_at_timestamp":1577546709,"is_reviewed":true,"reviewed_by":20181,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Jun 2020 10:26:54 GMT
+      Expires:
+      - Thu, 25 Jun 2020 10:26:54 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '5'
+      X-Pagination-Page:
+      - '2'
+      X-Pagination-Page-Count:
+      - '5'
+      X-Pagination-Total-Count:
+      - '21'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1740'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: '{"format": "json", "original_filenames": true, "replace_breaks": false}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '71'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/files/download
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","bundle_url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/export\/454087345e09f3e7e7eae3.57891254\/aa2ea5d3b48a15f2069305b5e91c3e6c\/OnBoarding-locale.zip"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 19 Jun 2020 12:32:33 GMT
+      Expires:
+      - Fri, 19 Jun 2020 12:32:33 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '240'
+    status:
+      code: 200
+      message: OK
+version: 1

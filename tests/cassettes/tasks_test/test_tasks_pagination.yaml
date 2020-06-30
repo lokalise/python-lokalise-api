@@ -1,0 +1,74 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/tasks?page=2&limit=3&filter_statuses=completed
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","tasks":[{"task_id":89364,"title":"Review
+        English","can_be_parent":false,"task_type":"review","parent_task_id":null,"closing_tags":[],"description":"Typical
+        task to be used as a template","status":"completed","progress":0,"due_date":"2020-04-23
+        22:00:00 (Etc\/UTC)","due_date_timestamp":1587679200,"keys_count":7,"words_count":20,"created_at":"2020-03-25
+        13:39:06 (Etc\/UTC)","created_at_timestamp":1585143546,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","languages":[{"language_iso":"en_AU","users":[{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
+        B"}],"groups":[],"keys":[34089718,34089719,34089720,34089721,34089723,34089724,34089725],"status":"created","progress":0,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":7,"words_count":20,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null}],"auto_close_languages":false,"auto_close_task":false,"completed_at":"2020-04-02
+        14:37:17 (Etc\/UTC)","completed_at_timestamp":1585838237,"completed_by":20181,"completed_by_email":"bodrovis@protonmail.com","do_lock_translations":true,"custom_translation_status_ids":[]},{"task_id":78189,"title":"Translate
+        English","can_be_parent":false,"task_type":"translation","parent_task_id":null,"closing_tags":[],"description":"","status":"completed","progress":50,"due_date":null,"due_date_timestamp":null,"keys_count":2,"words_count":0,"created_at":"2020-02-28
+        12:10:57 (Etc\/UTC)","created_at_timestamp":1582891857,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","languages":[{"language_iso":"en","users":[{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
+        B"}],"groups":[],"keys":[34089718,34089719],"status":"in progress","progress":50,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":2,"words_count":0,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null}],"auto_close_languages":false,"auto_close_task":false,"completed_at":"2020-04-02
+        14:37:20 (Etc\/UTC)","completed_at_timestamp":1585838240,"completed_by":20181,"completed_by_email":"bodrovis@protonmail.com","do_lock_translations":false,"custom_translation_status_ids":[]}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 24 Jun 2020 14:45:40 GMT
+      Expires:
+      - Wed, 24 Jun 2020 14:45:48 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '3'
+      X-Pagination-Page:
+      - '2'
+      X-Pagination-Page-Count:
+      - '2'
+      X-Pagination-Total-Count:
+      - '5'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '2304'
+    status:
+      code: 200
+      message: OK
+version: 1

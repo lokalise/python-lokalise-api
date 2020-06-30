@@ -1,0 +1,81 @@
+interactions:
+- request:
+    body: '{"keys": [{"key_name": "python_1", "platforms": ["ios", "android"], "description":
+      "Created by Python"}, {"key_name": "python_2", "platforms": ["web"], "translations":
+      [{"language_iso": "en", "translation": "Hi from Python"}]}]}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '228'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/keys
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","keys":[{"key_id":48855757,"created_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","created_at_timestamp":1592658156,"key_name":{"ios":"python_1","android":"python_1","web":"python_1","other":"python_1"},"filenames":{"ios":"","android":"","web":"","other":""},"description":"Created
+        by Python","platforms":["ios","android"],"tags":[],"comments":[],"screenshots":[],"translations":[{"translation_id":344441731,"key_id":48855757,"language_iso":"ru_RU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344441734,"key_id":48855757,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344441730,"key_id":48855757,"language_iso":"en","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344441732,"key_id":48855757,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344441733,"key_id":48855757,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]}],"is_plural":false,"plural_name":"","is_hidden":false,"is_archived":false,"context":"","base_words":0,"char_limit":0,"custom_attributes":"","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"translations_modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","translations_modified_at_timestamp":1592658156},{"key_id":48855758,"created_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","created_at_timestamp":1592658156,"key_name":{"ios":"python_2","android":"python_2","web":"python_2","other":"python_2"},"filenames":{"ios":"","android":"","web":"","other":""},"description":"","platforms":["web"],"tags":[],"comments":[],"screenshots":[],"translations":[{"translation_id":344441736,"key_id":48855758,"language_iso":"ru_RU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":344441739,"key_id":48855758,"language_iso":"en_AU","translation":"Hi
+        from Python","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":3,"custom_translation_statuses":[]},{"translation_id":344441735,"key_id":48855758,"language_iso":"en","translation":"Hi
+        from Python","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":3,"custom_translation_statuses":[]},{"translation_id":344441737,"key_id":48855758,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]},{"translation_id":344441738,"key_id":48855758,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":0,"custom_translation_statuses":[]}],"is_plural":false,"plural_name":"","is_hidden":false,"is_archived":false,"context":"","base_words":3,"char_limit":0,"custom_attributes":"","modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","modified_at_timestamp":1592658156,"translations_modified_at":"2020-06-20
+        13:02:36 (Etc\/UTC)","translations_modified_at_timestamp":1592658156}],"errors":[]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - GET
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 20 Jun 2020 13:02:36 GMT
+      Expires:
+      - Sat, 20 Jun 2020 13:02:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '4772'
+    status:
+      code: 200
+      message: OK
+version: 1

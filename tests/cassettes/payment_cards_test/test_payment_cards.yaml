@@ -1,0 +1,67 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/payment_cards?page=2&limit=1
+  response:
+    body:
+      string: '{"user_id":20181,"payment_cards":[{"card_id":2185,"last4":"8148","brand":"MasterCard","created_at":"2019-06-19
+        15:51:54 (Etc\/UTC)","created_at_timestamp":1560959514}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - POST
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 20 Jun 2020 14:50:35 GMT
+      Expires:
+      - Sat, 20 Jun 2020 14:50:35 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '1'
+      X-Pagination-Page:
+      - '2'
+      X-Pagination-Page-Count:
+      - '2'
+      X-Pagination-Total-Count:
+      - '2'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '168'
+    status:
+      code: 200
+      message: OK
+version: 1

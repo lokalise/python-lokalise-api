@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","project_type":"localization_files","name":"OnBoarding","description":"Demo
+        project for onboarding course","created_at":"2019-12-30 12:56:07 (Etc\/UTC)","created_at_timestamp":1577710567,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","team_id":176692,"base_language_id":640,"base_language_iso":"en","settings":{"per_platform_key_names":true,"reviewing":true,"upvoting":true,"auto_toggle_unverified":true,"offline_translation":false,"key_editing":true,"inline_machine_translations":true,"branching":false},"statistics":{"progress_total":53,"keys_total":12,"team":8,"base_words":36,"qa_issues_total":104,"qa_issues":{"not_reviewed":60,"unverified":30,"spelling_grammar":4,"inconsistent_placeholders":1,"inconsistent_html":0,"different_number_of_urls":0,"different_urls":0,"leading_whitespace":0,"trailing_whitespace":0,"different_number_of_email_address":0,"different_email_address":0,"different_brackets":9,"different_numbers":0,"double_space":0,"special_placeholder":0},"languages":[{"language_id":640,"language_iso":"en","progress":100,"words_to_do":0},{"language_id":600,"language_iso":"ru_RU","progress":91,"words_to_do":3},{"language_id":672,"language_iso":"de_DE","progress":50,"words_to_do":18},{"language_id":10052,"language_iso":"que","progress":30,"words_to_do":25},{"language_id":611,"language_iso":"en_AU","progress":44,"words_to_do":20},{"language_id":10153,"language_iso":"lv","progress":2,"words_to_do":35}]}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 08 Jun 2020 14:12:15 GMT
+      Expires:
+      - Mon, 08 Jun 2020 14:12:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '1488'
+    status:
+      code: 200
+      message: OK
+version: 1

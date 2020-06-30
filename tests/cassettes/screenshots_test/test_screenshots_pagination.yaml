@@ -1,0 +1,66 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/screenshots?page=2&limit=3
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","screenshots":[{"screenshot_id":343907,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/58cd296e54cf3eba2a1eefa7b409c27d68fc3607.jpg","key_ids":[],"width":574,"height":236,"created_at":"2020-01-03
+        19:21:38 (Etc\/UTC)","created_at_timestamp":1578079298},{"screenshot_id":343943,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/7e60683df8005ea371b2ebe9d8abc6f72d5084f6.jpg","key_ids":[39929065,39929066,0],"width":574,"height":236,"created_at":"2020-01-05
+        14:09:47 (Etc\/UTC)","created_at_timestamp":1578233387}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Jun 2020 13:03:27 GMT
+      Expires:
+      - Mon, 22 Jun 2020 13:03:27 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '3'
+      X-Pagination-Page:
+      - '2'
+      X-Pagination-Page-Count:
+      - '9'
+      X-Pagination-Total-Count:
+      - '26'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '823'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,71 @@
+interactions:
+- request:
+    body: '{"keys": [{"key_name": "python_3", "platforms": ["ios", "android"], "translations":
+      [{"language_iso": "ru_RU", "translation": "\u041f\u0440\u0438\u0432\u0435\u0442
+      \u043e\u0442 Python"}]}]}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '189'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/keys
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","keys":[{"key_id":48855760,"created_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","created_at_timestamp":1592658300,"key_name":{"ios":"python_3","android":"python_3","web":"python_3","other":"python_3"},"filenames":{"ios":"","android":"","web":"","other":""},"description":"","platforms":["ios","android"],"tags":[],"comments":[],"screenshots":[],"translations":[{"translation_id":344441746,"key_id":48855760,"language_iso":"ru_RU","translation":"\u041f\u0440\u0438\u0432\u0435\u0442
+        \u043e\u0442 Python","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","modified_at_timestamp":1592658300,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":3,"custom_translation_statuses":[]},{"translation_id":344441749,"key_id":48855760,"language_iso":"en_AU","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","modified_at_timestamp":1592658300,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344441745,"key_id":48855760,"language_iso":"en","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","modified_at_timestamp":1592658300,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344441747,"key_id":48855760,"language_iso":"de_DE","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","modified_at_timestamp":1592658300,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]},{"translation_id":344441748,"key_id":48855760,"language_iso":"que","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","modified_at_timestamp":1592658300,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":false,"words":0,"custom_translation_statuses":[]}],"is_plural":false,"plural_name":"","is_hidden":false,"is_archived":false,"context":"","base_words":0,"char_limit":0,"custom_attributes":"","modified_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","modified_at_timestamp":1592658300,"translations_modified_at":"2020-06-20
+        13:05:00 (Etc\/UTC)","translations_modified_at_timestamp":1592658300}],"errors":[]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Allow:
+      - GET
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 20 Jun 2020 13:05:00 GMT
+      Expires:
+      - Sat, 20 Jun 2020 13:05:00 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '2470'
+    status:
+      code: 200
+      message: OK
+version: 1

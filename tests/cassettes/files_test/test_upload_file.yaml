@@ -1,0 +1,54 @@
+interactions:
+- request:
+    body: '{"data": "ZnI6DQogIHRlc3Q6IHRyYW5zbGF0aW9u", "filename": "python_upload.yml",
+      "lang_iso": "ru_RU", "queue": true}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '113'
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/files/upload
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","process":{"process_id":"9db05dcdce6a15e2550051d13d5eb39c700bf8dd","type":"file-import","status":"queued","message":"","created_by":20181,"created_by_email":"bodrovis@protonmail.com","created_at":"2020-06-19
+        12:24:19 (Etc\/UTC)","created_at_timestamp":1592569459}}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 19 Jun 2020 12:24:18 GMT
+      Expires:
+      - Fri, 19 Jun 2020 12:24:19 GMT
+      Location:
+      - /api2/projects/454087345e09f3e7e7eae3.57891254/processes/9db05dcdce6a15e2550051d13d5eb39c700bf8dd
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 202
+      message: Accepted
+version: 1

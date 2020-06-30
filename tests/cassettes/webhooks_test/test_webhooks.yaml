@@ -1,0 +1,64 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/0.0.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/webhooks
+  response:
+    body:
+      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","webhooks":[{"webhook_id":"b5873ff8a70084e98ef8b0d3f40335fe75d44046","url":"http:\/\/bodrovis.tech\/lokalise","branch":null,"secret":"10657d6f0c33cbbbe44a72099084d8fa96147591","events":["project.snapshot","project.imported"],"event_lang_map":[]},{"webhook_id":"94efcd99c03f06a175ab434fbe73183b78199d48","url":"http:\/\/bodrovis.tech\/lokalise","branch":null,"secret":"996d70a7e00794e9663596c37ddd2c21c3e05848","events":["project.language.settings_changed"],"event_lang_map":[]},{"webhook_id":"0efe309ba1c83f966ab3c76b05d25f62fc67cd7d","url":"http:\/\/bodrovis.tech\/lokalise","branch":null,"secret":"a7ea737bdf13698c4ab38ade4ab79c25b2345fb6","events":["project.branch.added"],"event_lang_map":[]}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 26 Jun 2020 09:57:53 GMT
+      Expires:
+      - Fri, 26 Jun 2020 09:57:53 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Pagination-Limit:
+      - '100'
+      X-Pagination-Page:
+      - '1'
+      X-Pagination-Page-Count:
+      - '1'
+      X-Pagination-Total-Count:
+      - '3'
+      X-XSS-Protection:
+      - 1; mode=block
+      content-length:
+      - '746'
+    status:
+      code: 200
+      message: OK
+version: 1
