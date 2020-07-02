@@ -74,8 +74,8 @@ html_sidebars = {
 }
 
 html_theme_options = {
-    'logo': 'logo.png',
-    'description': 'Official Lokalise APIv2 Python interface',
+    'logo': 'lok_logo.png',
+    #'description': 'Official Lokalise APIv2 Python interface',
     'github_user': 'lokalise',
     'github_repo': 'python-lokalise-api',
     'github_button': 'true',
