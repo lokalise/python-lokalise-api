@@ -21,7 +21,6 @@ class FilesEndpoint(BaseEndpoint):
         :param ids: Identifiers for path generation
         :rtype dict:
         """
-        params['queue'] = True
         path = self.path_with_params(**ids)
         return request.post(self.client, path + '/upload', params)
 
