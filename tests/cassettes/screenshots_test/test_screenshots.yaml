@@ -9,19 +9,16 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/0.1.0
       x-api-token:
       - FILTERED
     method: GET
-    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/screenshots
+    uri: https://api.lokalise.com/api2/projects/404021655ce68d0f36ad23.02802891/screenshots
   response:
     body:
-      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","screenshots":[{"screenshot_id":343286,"title":"screenshot","description":"","screenshot_tags":["test"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/3a314ec8b721982c23c501dcc7bb9ce7153807af.jpg","key_ids":[34089721,34089723,34090320,34090321,34090322,34090368,34090369,34090370,0,34090423,34090424,34090425,39929058,39929059,48678051,48678052],"width":480,"height":800,"created_at":"2019-12-27
-        14:52:26 (Etc\/UTC)","created_at_timestamp":1577458346},{"screenshot_id":343904,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/2c084ffe50890f33688683bcf9d70d560a98150a.jpg","key_ids":[],"width":574,"height":236,"created_at":"2020-01-03
-        19:13:40 (Etc\/UTC)","created_at_timestamp":1578078820},{"screenshot_id":343906,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/d5ffaea112218cc1520038b5a36cfc531e0c51ef.jpg","key_ids":[],"width":574,"height":236,"created_at":"2020-01-03
-        19:20:37 (Etc\/UTC)","created_at_timestamp":1578079237},{"screenshot_id":343907,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/58cd296e54cf3eba2a1eefa7b409c27d68fc3607.jpg","key_ids":[],"width":574,"height":236,"created_at":"2020-01-03
-        19:21:38 (Etc\/UTC)","created_at_timestamp":1578079298},{"screenshot_id":343943,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/7e60683df8005ea371b2ebe9d8abc6f72d5084f6.jpg","key_ids":[39929065,39929066,0],"width":574,"height":236,"created_at":"2020-01-05
-        14:09:47 (Etc\/UTC)","created_at_timestamp":1578233387}]}'
+      string: '{"project_id":"404021655ce68d0f36ad23.02802891","screenshots":[{"screenshot_id":519938,"title":"Manual","description":"","screenshot_tags":["manual"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/404021655ce68d0f36ad23.02802891\/95845f1bf3c20243ac24c2cbdd4d3f6319aaf9ed.jpg","key_ids":[],"width":480,"height":800,"created_at":"2020-07-21
+        14:50:51 (Etc\/UTC)","created_at_timestamp":1595343051},{"screenshot_id":519946,"title":"enter_number","description":"","screenshot_tags":[],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/404021655ce68d0f36ad23.02802891\/6a7cc6ede91af2d75ac5cdfcceb027ec691e8e1f.jpg","key_ids":[],"width":640,"height":1136,"created_at":"2020-07-21
+        15:19:53 (Etc\/UTC)","created_at_timestamp":1595344793}]}'
     headers:
       Access-Control-Allow-Headers:
       - Content-Type
@@ -34,9 +31,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 22 Jun 2020 12:52:29 GMT
+      - Mon, 27 Jul 2020 09:40:57 GMT
       Expires:
-      - Mon, 22 Jun 2020 12:52:29 GMT
+      - Mon, 27 Jul 2020 09:40:57 GMT
       Pragma:
       - no-cache
       Server:
@@ -58,11 +55,11 @@ interactions:
       X-Pagination-Page-Count:
       - '1'
       X-Pagination-Total-Count:
-      - '26'
+      - '2'
       X-XSS-Protection:
       - 1; mode=block
       content-length:
-      - '2050'
+      - '797'
     status:
       code: 200
       message: OK

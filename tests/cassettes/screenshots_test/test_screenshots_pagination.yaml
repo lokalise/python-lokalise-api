@@ -9,16 +9,15 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/0.1.0
       x-api-token:
       - FILTERED
     method: GET
-    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/screenshots?page=2&limit=3
+    uri: https://api.lokalise.com/api2/projects/404021655ce68d0f36ad23.02802891/screenshots?page=2&limit=1
   response:
     body:
-      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","screenshots":[{"screenshot_id":343907,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/58cd296e54cf3eba2a1eefa7b409c27d68fc3607.jpg","key_ids":[],"width":574,"height":236,"created_at":"2020-01-03
-        19:21:38 (Etc\/UTC)","created_at_timestamp":1578079298},{"screenshot_id":343943,"title":"","description":"","screenshot_tags":["Sketch"],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/454087345e09f3e7e7eae3.57891254\/7e60683df8005ea371b2ebe9d8abc6f72d5084f6.jpg","key_ids":[39929065,39929066,0],"width":574,"height":236,"created_at":"2020-01-05
-        14:09:47 (Etc\/UTC)","created_at_timestamp":1578233387}]}'
+      string: '{"project_id":"404021655ce68d0f36ad23.02802891","screenshots":[{"screenshot_id":519946,"title":"enter_number","description":"","screenshot_tags":[],"url":"https:\/\/s3-eu-west-1.amazonaws.com\/lokalise-assets\/files\/screenshots\/404021655ce68d0f36ad23.02802891\/6a7cc6ede91af2d75ac5cdfcceb027ec691e8e1f.jpg","key_ids":[],"width":640,"height":1136,"created_at":"2020-07-21
+        15:19:53 (Etc\/UTC)","created_at_timestamp":1595344793}]}'
     headers:
       Access-Control-Allow-Headers:
       - Content-Type
@@ -31,9 +30,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 22 Jun 2020 13:03:27 GMT
+      - Mon, 27 Jul 2020 09:42:51 GMT
       Expires:
-      - Mon, 22 Jun 2020 13:03:27 GMT
+      - Mon, 27 Jul 2020 09:42:51 GMT
       Pragma:
       - no-cache
       Server:
@@ -49,17 +48,17 @@ interactions:
       X-Frame-Options:
       - deny
       X-Pagination-Limit:
-      - '3'
+      - '1'
       X-Pagination-Page:
       - '2'
       X-Pagination-Page-Count:
-      - '9'
+      - '2'
       X-Pagination-Total-Count:
-      - '26'
+      - '2'
       X-XSS-Protection:
       - 1; mode=block
       content-length:
-      - '823'
+      - '430'
     status:
       code: 200
       message: OK
