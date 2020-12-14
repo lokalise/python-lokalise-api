@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "~=5.4"
+pytest = "~=6.2"
 vcrpy = "~=4.0"
 pytest-vcr = "~=1.0.2"
 pytest-cov = "~=2.9.0"
