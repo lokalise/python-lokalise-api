@@ -4,18 +4,17 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "~=5.4"
-vcrpy = "~=4.0"
+pytest = "~=6.2"
+vcrpy = "~=4.1"
 pytest-vcr = "~=1.0.2"
-pytest-cov = "~=2.9.0"
-pylint = "~= 2.5"
-pytest-pylint = "~= 0.17"
-autopep8 = "~= 1.5"
-mypy = "~= 0.780"
-python-dotenv = "~= 0.13.0"
+pytest-cov = "~=2.10"
+pylint = "~= 2.6"
+pytest-pylint = "~= 0.3"
+mypy = "~= 0.790"
+python-dotenv = "~= 0.15.0"
 
 [packages]
-requests = "~=2.23"
+requests = "~=2.25"
 
 [requires]
 python_version = "3.8"
