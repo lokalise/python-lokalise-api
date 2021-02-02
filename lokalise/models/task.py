@@ -34,6 +34,7 @@ class TaskModel(BaseModel):
         'languages',
         'auto_close_languages',
         'auto_close_task',
+        'auto_close_items',
         'completed_at',
         'completed_at_timestamp',
         'completed_by',

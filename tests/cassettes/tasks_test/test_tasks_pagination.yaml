@@ -9,24 +9,27 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/0.1.1
       x-api-token:
       - FILTERED
     method: GET
-    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/tasks?page=2&limit=3&filter_statuses=completed
+    uri: https://api.lokalise.com/api2/projects/803826145ba90b42d5d860.46800099/tasks?page=2&limit=3&filter_statuses=completed
   response:
     body:
-      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","tasks":[{"task_id":89364,"title":"Review
-        English","can_be_parent":false,"task_type":"review","parent_task_id":null,"closing_tags":[],"description":"Typical
-        task to be used as a template","status":"completed","progress":0,"due_date":"2020-04-23
-        22:00:00 (Etc\/UTC)","due_date_timestamp":1587679200,"keys_count":7,"words_count":20,"created_at":"2020-03-25
-        13:39:06 (Etc\/UTC)","created_at_timestamp":1585143546,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","languages":[{"language_iso":"en_AU","users":[{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
-        B"}],"groups":[],"keys":[34089718,34089719,34089720,34089721,34089723,34089724,34089725],"status":"created","progress":0,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":7,"words_count":20,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null}],"auto_close_languages":false,"auto_close_task":false,"completed_at":"2020-04-02
-        14:37:17 (Etc\/UTC)","completed_at_timestamp":1585838237,"completed_by":20181,"completed_by_email":"bodrovis@protonmail.com","do_lock_translations":true,"custom_translation_status_ids":[]},{"task_id":78189,"title":"Translate
-        English","can_be_parent":false,"task_type":"translation","parent_task_id":null,"closing_tags":[],"description":"","status":"completed","progress":50,"due_date":null,"due_date_timestamp":null,"keys_count":2,"words_count":0,"created_at":"2020-02-28
-        12:10:57 (Etc\/UTC)","created_at_timestamp":1582891857,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","languages":[{"language_iso":"en","users":[{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
-        B"}],"groups":[],"keys":[34089718,34089719],"status":"in progress","progress":50,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":2,"words_count":0,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null}],"auto_close_languages":false,"auto_close_task":false,"completed_at":"2020-04-02
-        14:37:20 (Etc\/UTC)","completed_at_timestamp":1585838240,"completed_by":20181,"completed_by_email":"bodrovis@protonmail.com","do_lock_translations":false,"custom_translation_status_ids":[]}]}'
+      string: '{"project_id":"803826145ba90b42d5d860.46800099","branch":"master","tasks":[{"task_id":10001,"title":"My
+        new task","can_be_parent":false,"task_type":"translation","parent_task_id":null,"closing_tags":["finalized"],"description":"Description
+        is here","status":"completed","progress":0,"due_date":"2019-04-29 22:00:00
+        (Etc\/UTC)","due_date_timestamp":1556575200,"keys_count":2,"words_count":16,"created_at":"2019-04-17
+        13:44:00 (Etc\/UTC)","created_at_timestamp":1555508640,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","source_language_iso":"en","languages":[{"language_iso":"es","users":[{"user_id":34051,"email":"demo2@example.com","fullname":"Demo
+        2 User"},{"user_id":35554,"email":"golosizpru@ya.ru","fullname":"Joanne"}],"groups":[],"keys":[],"status":"created","progress":0,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":2,"words_count":5,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null},{"language_iso":null,"users":[{"user_id":35555,"email":"john@example.com","fullname":"John"}],"groups":[],"keys":[],"status":"created","progress":0,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":2,"words_count":8,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null}],"auto_close_items":true,"auto_close_languages":true,"auto_close_task":true,"completed_at":"2019-10-01
+        11:14:10 (Etc\/UTC)","completed_at_timestamp":1569928450,"completed_by":20181,"completed_by_email":"bodrovis@protonmail.com","do_lock_translations":false,"custom_translation_status_ids":[]},{"task_id":8221,"title":"Demo
+        task","can_be_parent":false,"task_type":"translation","parent_task_id":null,"closing_tags":[],"description":"description
+        goes here","status":"completed","progress":0,"due_date":"2019-04-29 22:00:00
+        (Etc\/UTC)","due_date_timestamp":1556575200,"keys_count":4,"words_count":26,"created_at":"2019-03-26
+        15:26:16 (Etc\/UTC)","created_at_timestamp":1553613976,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","source_language_iso":"en","languages":[{"language_iso":"ca","users":[{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
+        B"}],"groups":[],"keys":[],"status":"created","progress":0,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":4,"words_count":13,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null},{"language_iso":"bm","users":[{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
+        B"}],"groups":[],"keys":[],"status":"created","progress":0,"initial_tm_leverage":{"0%+":0,"60%+":0,"75%+":0,"95%+":0,"100%":0},"keys_count":4,"words_count":13,"completed_at":null,"completed_at_timestamp":null,"completed_by":null,"completed_by_email":null}],"auto_close_items":true,"auto_close_languages":true,"auto_close_task":true,"completed_at":"2019-11-13
+        12:37:30 (Etc\/UTC)","completed_at_timestamp":1573648650,"completed_by":20181,"completed_by_email":"bodrovis@protonmail.com","do_lock_translations":false,"custom_translation_status_ids":[]}]}'
     headers:
       Access-Control-Allow-Headers:
       - Content-Type
@@ -39,11 +42,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 24 Jun 2020 14:45:40 GMT
+      - Tue, 02 Feb 2021 12:40:44 GMT
       Expires:
-      - Wed, 24 Jun 2020 14:45:48 GMT
+      - Tue, 02 Feb 2021 12:40:44 GMT
       Pragma:
       - no-cache
+      Referrer-Policy:
+      - origin
       Server:
       - nginx
       Strict-Transport-Security:
@@ -67,7 +72,7 @@ interactions:
       X-XSS-Protection:
       - 1; mode=block
       content-length:
-      - '2304'
+      - '3119'
     status:
       code: 200
       message: OK
