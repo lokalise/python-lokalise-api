@@ -7,14 +7,15 @@ verify_ssl = true
 pytest = "~=6.2"
 vcrpy = "~=4.1"
 pytest-vcr = "~=1.0.2"
-pytest-cov = "~=2.10"
+pytest-cov = "~=2.11"
 pylint = "~= 2.6"
 pytest-pylint = "~= 0.3"
 mypy = "~= 0.790"
 python-dotenv = "~= 0.15.0"
+autopep8 = "~= 1.5"
 
 [packages]
 requests = "~=2.25"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"

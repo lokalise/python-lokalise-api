@@ -6,7 +6,9 @@ import pytest
 
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
+ANOTHER_PROJECT_ID = "803826145ba90b42d5d860.46800099"
 NEW_TASK_ID = 135506
+ANOTHER_TASK_ID = 10001
 
 @pytest.mark.vcr
 def test_tasks(client):
@@ -21,13 +23,13 @@ def test_tasks(client):
 def test_tasks_pagination(client):
     """Tests fetching of all tasks with pagination
     """
-    tasks = client.tasks(PROJECT_ID, {
+    tasks = client.tasks(ANOTHER_PROJECT_ID, {
         "page": 2,
         "limit": 3,
         "filter_statuses": "completed"
     })
-    assert tasks.project_id == PROJECT_ID
-    assert tasks.items[0].task_id == 89364
+    assert tasks.project_id == ANOTHER_PROJECT_ID
+    assert tasks.items[0].task_id == ANOTHER_TASK_ID
     assert tasks.current_page == 2
     assert tasks.total_count == 5
     assert tasks.page_count == 2
@@ -43,33 +45,34 @@ def test_tasks_pagination(client):
 def test_task(client):
     """Tests fetching of a task
     """
-    task = client.task(PROJECT_ID, 89364)
-    assert task.project_id == PROJECT_ID
-    assert task.task_id == 89364
-    assert task.title == "Review English"
-    assert task.description == "Typical task to be used as a template"
+    task = client.task(ANOTHER_PROJECT_ID, ANOTHER_TASK_ID)
+    assert task.project_id == ANOTHER_PROJECT_ID
+    assert task.task_id == ANOTHER_TASK_ID
+    assert task.title == "My new task"
+    assert task.description == "Description is here"
     assert task.status == "completed"
     assert task.progress == 0
-    assert task.due_date == "2020-04-23 22:00:00 (Etc/UTC)"
-    assert task.due_date_timestamp == 1587679200
+    assert task.due_date == "2019-04-29 22:00:00 (Etc/UTC)"
+    assert task.due_date_timestamp == 1556575200
     assert not task.can_be_parent
-    assert task.task_type == "review"
+    assert task.task_type == "translation"
     assert not task.parent_task_id
-    assert task.closing_tags == []
-    assert task.keys_count == 7
-    assert task.words_count == 20
-    assert task.created_at == "2020-03-25 13:39:06 (Etc/UTC)"
-    assert task.created_at_timestamp == 1585143546
+    assert task.closing_tags == ["finalized"]
+    assert task.keys_count == 2
+    assert task.words_count == 16
+    assert task.created_at == "2019-04-17 13:44:00 (Etc/UTC)"
+    assert task.created_at_timestamp == 1555508640
     assert task.created_by == 20181
     assert task.created_by_email == "bodrovis@protonmail.com"
-    assert task.languages[0]['language_iso'] == "en_AU"
-    assert not task.auto_close_languages
-    assert not task.auto_close_task
-    assert task.completed_at == "2020-04-02 14:37:17 (Etc/UTC)"
-    assert task.completed_at_timestamp == 1585838237
+    assert task.languages[0]['language_iso'] == "es"
+    assert task.auto_close_languages
+    assert task.auto_close_task
+    assert task.auto_close_items
+    assert task.completed_at == "2019-10-01 11:14:10 (Etc/UTC)"
+    assert task.completed_at_timestamp == 1569928450
     assert task.completed_by == 20181
     assert task.completed_by_email == "bodrovis@protonmail.com"
-    assert task.do_lock_translations
+    assert not task.do_lock_translations
     assert task.custom_translation_status_ids == []
 
 

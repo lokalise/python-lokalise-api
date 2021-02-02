@@ -737,7 +737,8 @@ class Client:
 
     def queued_process(self,
                        project_id: str,
-                       queued_process_id: Union[str, int]) -> QueuedProcessModel:
+                       queued_process_id: Union[str,
+                                                int]) -> QueuedProcessModel:
         """Fetches a queued process.
 
         :param str project_id: ID of the project
