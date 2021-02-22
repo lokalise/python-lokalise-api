@@ -10,7 +10,7 @@ pytest-vcr = "~=1.0.2"
 pytest-cov = "~=2.11"
 pylint = "~= 2.6"
 pytest-pylint = "~= 0.3"
-mypy = "~= 0.790"
+mypy = "~= 0.812"
 python-dotenv = "~= 0.15.0"
 autopep8 = "~= 1.5"
 
