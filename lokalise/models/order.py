@@ -31,5 +31,6 @@ class OrderModel(BaseModel):
         'translation_tier_name',
         'briefing',
         'total',
-        'dry_run'
+        'dry_run',
+        'payment_method'
     ]
