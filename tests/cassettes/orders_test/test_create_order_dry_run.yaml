@@ -1,9 +1,8 @@
 interactions:
 - request:
-    body: '{"project_id": "454087345e09f3e7e7eae3.57891254", "card_id": 2185, "briefing":
-      "nothing special", "source_language_iso": "en", "target_language_isos": ["ru_RU"],
-      "keys": [34089723], "provider_slug": "gengo", "translation_tier": 1, "dry_run":
-      true}'
+    body: '{"project_id": "803826145ba90b42d5d860.46800099", "card_id": 2185, "briefing":
+      "DRY RUN", "source_language_iso": "en", "target_language_isos": ["ru_RU"], "keys":
+      [74189435], "provider_slug": "gengo", "translation_tier": 1, "dry_run": true}'
     headers:
       Accept:
       - application/json
@@ -12,18 +11,18 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '247'
+      - '239'
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/0.3.0
       x-api-token:
       - FILTERED
     method: POST
     uri: https://api.lokalise.com/api2/teams/176692/orders
   response:
     body:
-      string: '{"order_id":null,"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","card_id":2185,"status":"draft","created_at":"2020-06-20
-        16:02:28 (Etc\/UTC)","created_at_timestamp":1592668948,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","source_language_iso":"en","target_language_isos":["ru_RU"],"keys":["34089723"],"source_words":{"ru_RU":2},"provider_slug":"gengo","translation_tier":1,"translation_tier_name":"Native
-        speaker","briefing":"nothing special","total":0.14,"dry_run":true}'
+      string: '{"order_id":null,"project_id":"803826145ba90b42d5d860.46800099","branch":"master","card_id":2185,"payment_method":"credit_card","status":"draft","created_at":"2021-02-26
+        15:23:23 (Etc\/UTC)","created_at_timestamp":1614353003,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","source_language_iso":"en","target_language_isos":["ru_RU"],"keys":["74189435"],"source_words":{"ru_RU":2},"provider_slug":"gengo","translation_tier":1,"translation_tier_name":"Native
+        speaker","briefing":"DRY RUN","total":0.14,"dry_run":true}'
     headers:
       Access-Control-Allow-Headers:
       - Content-Type
@@ -38,11 +37,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 20 Jun 2020 16:02:28 GMT
+      - Fri, 26 Feb 2021 15:23:23 GMT
       Expires:
-      - Sat, 20 Jun 2020 16:02:28 GMT
+      - Fri, 26 Feb 2021 15:23:23 GMT
       Pragma:
       - no-cache
+      Referrer-Policy:
+      - origin
       Server:
       - nginx
       Strict-Transport-Security:
@@ -58,7 +59,7 @@ interactions:
       X-XSS-Protection:
       - 1; mode=block
       content-length:
-      - '508'
+      - '531'
     status:
       code: 200
       message: OK
