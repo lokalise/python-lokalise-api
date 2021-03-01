@@ -9,14 +9,14 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/0.3.0
       x-api-token:
       - FILTERED
     method: GET
     uri: https://api.lokalise.com/api2/teams/176692/orders/20200122FTR
   response:
     body:
-      string: '{"order_id":"20200122FTR","project_id":"124505395e2074d880f724.35422706","branch":null,"card_id":2185,"status":"completed","created_at":"2020-01-22
+      string: '{"order_id":"20200122FTR","project_id":"124505395e2074d880f724.35422706","branch":null,"payment_method":null,"card_id":2185,"status":"completed","created_at":"2020-01-22
         12:04:15 (Etc\/UTC)","created_at_timestamp":1579694655,"created_by":20181,"created_by_email":"bodrovis@protonmail.com","source_language_iso":"en","target_language_isos":["ru_RU"],"keys":[35400063,35400274,35434575],"source_words":{"ru_RU":3},"provider_slug":"gengo","translation_style":"friendly","translation_tier":1,"translation_tier_name":"Professional
         translator","briefing":"test","total":0.21}'
     headers:
@@ -31,11 +31,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 20 Jun 2020 15:43:09 GMT
+      - Fri, 26 Feb 2021 15:16:40 GMT
       Expires:
-      - Sat, 20 Jun 2020 15:43:09 GMT
+      - Fri, 26 Feb 2021 15:16:40 GMT
       Pragma:
       - no-cache
+      Referrer-Policy:
+      - origin
       Server:
       - nginx
       Strict-Transport-Security:
@@ -51,7 +53,7 @@ interactions:
       X-XSS-Protection:
       - 1; mode=block
       content-length:
-      - '547'
+      - '569'
     status:
       code: 200
       message: OK

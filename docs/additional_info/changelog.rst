@@ -3,6 +3,11 @@
 Changelog
 =========
 
+0.3.0 (01-Mar-21)
+-----------------
+
+* Add `payment_method` attribute to `Order`
+
 0.2.0 (02-Feb-21)
 -----------------
 

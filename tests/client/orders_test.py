@@ -8,6 +8,7 @@ import pytest
 TEAM_ID = 176692
 ORDER_ID = "20200122FTR"
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
+SECOND_PROJECT_ID = "803826145ba90b42d5d860.46800099"
 
 @pytest.mark.vcr
 def test_orders(client):
@@ -58,6 +59,7 @@ def test_order(client):
     assert order.translation_tier_name == "Professional translator"
     assert order.briefing == "test"
     assert order.total == 0.21
+    assert order.payment_method is None
 
 
 @pytest.mark.vcr
@@ -87,18 +89,18 @@ def test_create_order_dry_run(client):
     """Tests creation of an order with a dry run option
     """
     order = client.create_order(TEAM_ID, {
-        "project_id": PROJECT_ID,
+        "project_id": SECOND_PROJECT_ID,
         "card_id": 2185,
-        "briefing": "nothing special",
+        "briefing": "DRY RUN",
         "source_language_iso": "en",
         "target_language_isos": ["ru_RU"],
-        "keys": [34089723],
+        "keys": [74189435],
         "provider_slug": "gengo",
         "translation_tier": 1,
         "dry_run": True
     })
     assert not order.order_id
-    assert order.project_id == PROJECT_ID
+    assert order.project_id == SECOND_PROJECT_ID
     assert order.branch == 'master'
     assert order.status == "draft"
     assert order.dry_run
