@@ -25,5 +25,6 @@ class TranslationModel(BaseModel):
         'is_reviewed',
         'reviewed_by',
         'words',
-        'custom_translation_statuses'
+        'custom_translation_statuses',
+        'task_id'
     ]

@@ -139,6 +139,7 @@ def test_add_members_to_group(client):
     assert 52911 in group.members
     assert 35555 in group.members
 
+
 @pytest.mark.vcr
 def test_add_member_to_group(client):
     """Tests adding a member to a team user group
@@ -148,6 +149,7 @@ def test_add_member_to_group(client):
     assert group.group_id == GROUP_ID
     assert 35555 in group.members
 
+
 @pytest.mark.vcr
 def test_remove_member_from_group(client):
     """Tests removing a member from a team user group
@@ -156,6 +158,7 @@ def test_remove_member_from_group(client):
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
     assert 35555 not in group.members
+
 
 @pytest.mark.vcr
 def test_remove_members_from_group(client):

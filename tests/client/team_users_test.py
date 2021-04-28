@@ -8,6 +8,7 @@ import pytest
 TEAM_ID = 176692
 USER_ID = 52911
 
+
 @pytest.mark.vcr
 def test_team_users(client):
     """Tests fetching of all team users

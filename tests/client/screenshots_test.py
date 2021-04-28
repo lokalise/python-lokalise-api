@@ -9,6 +9,7 @@ PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 SECOND_PROJECT_ID = "404021655ce68d0f36ad23.02802891"
 SCREENSHOT_ID = 343286
 
+
 @pytest.mark.vcr
 def test_screenshots(client):
     """Tests fetching of all screenshots
@@ -22,7 +23,9 @@ def test_screenshots(client):
 def test_screenshots_pagination(client):
     """Tests fetching of all screenshots with pagination
     """
-    screenshots = client.screenshots(SECOND_PROJECT_ID, {"page": 2, "limit": 1})
+    screenshots = client.screenshots(
+        SECOND_PROJECT_ID, {
+            "page": 2, "limit": 1})
     assert screenshots.project_id == SECOND_PROJECT_ID
     assert screenshots.current_page == 2
     assert screenshots.total_count == 2

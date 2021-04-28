@@ -9,6 +9,7 @@ PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 WEBHOOK_ID = "0efe309ba1c83f966ab3c76b05d25f62fc67cd7d"
 ANOTHER_WEBHOOK_ID = "b5873ff8a70084e98ef8b0d3f40335fe75d44046"
 
+
 @pytest.mark.vcr
 def test_webhooks(client):
     """Tests fetching of all webhooks

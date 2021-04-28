@@ -9,17 +9,15 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/0.4.0
       x-api-token:
       - FILTERED
     method: GET
-    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/translations/220681425?disable_references=1
+    uri: https://api.lokalise.com/api2/projects/803826145ba90b42d5d860.46800099/translations/304581218?disable_references=1
   response:
     body:
-      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","translation":{"translation_id":220681425,"key_id":34089718,"language_iso":"ru_RU","translation":"\u0414\u043e\u0431\u0440\u043e
-        \u043f\u043e\u0436\u0430\u043b\u043e\u0432\u0430\u0442\u044c \u0432 Sample
-        App, [%s:name]!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2019-12-26
-        15:05:04 (Etc\/UTC)","modified_at_timestamp":1577372704,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":5,"custom_translation_statuses":[]}}'
+      string: '{"project_id":"803826145ba90b42d5d860.46800099","branch":"master","translation":{"translation_id":304581218,"key_id":44596059,"language_iso":"ru","translation":"\u0421\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-05-15
+        10:44:42 (Etc\/UTC)","modified_at_timestamp":1589539482,"is_reviewed":false,"reviewed_by":0,"is_unverified":false,"is_fuzzy":false,"words":1,"custom_translation_statuses":[],"task_id":null}}'
     headers:
       Access-Control-Allow-Headers:
       - Content-Type
@@ -32,11 +30,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 25 Jun 2020 10:39:24 GMT
+      - Wed, 28 Apr 2021 12:33:42 GMT
       Expires:
-      - Thu, 25 Jun 2020 10:39:24 GMT
-      Pragma:
-      - no-cache
+      - Wed, 28 Apr 2021 12:33:42 GMT
+      Referrer-Policy:
+      - origin
       Server:
       - nginx
       Strict-Transport-Security:
@@ -52,7 +50,9 @@ interactions:
       X-XSS-Protection:
       - 1; mode=block
       content-length:
-      - '531'
+      - '499'
+      pragma:
+      - no-cache
     status:
       code: 200
       message: OK

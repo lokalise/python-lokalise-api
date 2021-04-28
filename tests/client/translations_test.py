@@ -6,7 +6,10 @@ import pytest
 
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
+ANOTHER_PROJECT_ID = "803826145ba90b42d5d860.46800099"
+ANOTHER_TRANSLATION_ID = 304581218
 TRANSLATION_ID = 220681425
+
 
 @pytest.mark.vcr
 def test_translations(client):
@@ -44,22 +47,22 @@ def test_translations_pagination(client):
 def test_translation(client):
     """Tests fetching of a translation
     """
-    translation = client.translation(PROJECT_ID, TRANSLATION_ID, {
-        "disable_references": 1
-    })
-    assert translation.project_id == PROJECT_ID
-    assert translation.translation_id == TRANSLATION_ID
-    assert translation.key_id == 34089718
-    assert translation.language_iso == "ru_RU"
-    assert translation.modified_at == "2019-12-26 15:05:04 (Etc/UTC)"
-    assert translation.modified_at_timestamp == 1577372704
+    translation = client.translation(
+        ANOTHER_PROJECT_ID, ANOTHER_TRANSLATION_ID, {
+            "disable_references": 1})
+    assert translation.project_id == ANOTHER_PROJECT_ID
+    assert translation.translation_id == ANOTHER_TRANSLATION_ID
+    assert translation.key_id == 44596059
+    assert translation.language_iso == "ru"
+    assert translation.modified_at == "2020-05-15 10:44:42 (Etc/UTC)"
+    assert translation.modified_at_timestamp == 1589539482
     assert translation.modified_by == 20181
     assert translation.modified_by_email == "bodrovis@protonmail.com"
-    assert translation.translation == "Добро пожаловать в Sample App, [%s:name]!"
-    assert translation.is_fuzzy
+    assert translation.translation == "Сообщение"
+    assert not translation.is_fuzzy
     assert not translation.is_reviewed
     assert translation.reviewed_by == 0
-    assert translation.words == 5
+    assert translation.words == 1
     assert translation.custom_translation_statuses == []
 
 
