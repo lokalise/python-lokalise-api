@@ -3,6 +3,11 @@
 Changelog
 =========
 
+0.4.0 (28-Apr-21)
+-----------------
+
+* Add `task_id` attribute to `Translation`
+
 0.3.0 (01-Mar-21)
 -----------------
 
