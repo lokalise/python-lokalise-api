@@ -8,6 +8,7 @@ import pytest
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 SNAPSHOT_ID = 164513
 
+
 @pytest.mark.vcr
 def test_snapshots(client):
     """Tests fetching of all snapshots

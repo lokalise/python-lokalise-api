@@ -10,6 +10,7 @@ ORDER_ID = "20200122FTR"
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 SECOND_PROJECT_ID = "803826145ba90b42d5d860.46800099"
 
+
 @pytest.mark.vcr
 def test_orders(client):
     """Tests fetching of all orders

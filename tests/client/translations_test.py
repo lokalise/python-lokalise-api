@@ -10,6 +10,7 @@ ANOTHER_PROJECT_ID = "803826145ba90b42d5d860.46800099"
 ANOTHER_TRANSLATION_ID = 304581218
 TRANSLATION_ID = 220681425
 
+
 @pytest.mark.vcr
 def test_translations(client):
     """Tests fetching of all translations
@@ -46,9 +47,9 @@ def test_translations_pagination(client):
 def test_translation(client):
     """Tests fetching of a translation
     """
-    translation = client.translation(ANOTHER_PROJECT_ID, ANOTHER_TRANSLATION_ID, {
-        "disable_references": 1
-    })
+    translation = client.translation(
+        ANOTHER_PROJECT_ID, ANOTHER_TRANSLATION_ID, {
+            "disable_references": 1})
     assert translation.project_id == ANOTHER_PROJECT_ID
     assert translation.translation_id == ANOTHER_TRANSLATION_ID
     assert translation.key_id == 44596059

@@ -8,6 +8,7 @@ import pytest
 CARD_ID = 2185
 NEW_CARD_ID = 3514
 
+
 @pytest.mark.vcr
 def test_payment_cards(client):
     """Tests fetching of all payment cards

@@ -9,6 +9,7 @@ PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 STATUS_ID = 429
 NEW_STATUS_ID = 1357
 
+
 @pytest.mark.vcr
 def test_translation_statuses(client):
     """Tests fetching of all translation statuses

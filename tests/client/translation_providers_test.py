@@ -8,12 +8,14 @@ import pytest
 TEAM_ID = 176692
 PROVIDER_ID = 4
 
+
 @pytest.mark.vcr
 def test_translation_providers(client):
     """Tests fetching of all translation providers
     """
     providers = client.translation_providers(TEAM_ID)
     assert providers.items[0].name == "Gengo"
+
 
 @pytest.mark.vcr
 def test_translation_providers_pagination(client):
@@ -33,6 +35,7 @@ def test_translation_providers_pagination(client):
     assert not providers.is_first_page()
     assert not providers.has_next_page()
     assert providers.has_prev_page()
+
 
 @pytest.mark.vcr
 def test_translation_provider(client):

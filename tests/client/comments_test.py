@@ -8,6 +8,7 @@ PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 KEY_ID = 34089718
 COMMENT_ID = 3838530
 
+
 @pytest.mark.vcr
 def test_project_comments(client):
     """Tests fetching of all project comments

@@ -10,6 +10,7 @@ ANOTHER_PROJECT_ID = "803826145ba90b42d5d860.46800099"
 NEW_TASK_ID = 135506
 ANOTHER_TASK_ID = 10001
 
+
 @pytest.mark.vcr
 def test_tasks(client):
     """Tests fetching of all tasks
