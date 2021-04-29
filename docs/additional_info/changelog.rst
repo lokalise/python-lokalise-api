@@ -3,6 +3,11 @@
 Changelog
 =========
 
+1.0.0 (29-Apr-21)
+-----------------
+
+* The plugin is being actively used for nearly a year, the code is fully reviewed therefore we now consider it to be stable and the first 1.x version is now live. No breaking changes were introduced in this release.
+
 0.4.0 (28-Apr-21)
 -----------------
 
