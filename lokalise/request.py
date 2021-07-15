@@ -157,7 +157,12 @@ def options(client: lokalise.client.Client) -> Dict:
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
         "X-Api-Token": client.token,
+        "Accept-Encoding": None
     }
+
+    if client.enable_compression:
+        headers["Accept-Encoding"] = "gzip,deflate,br"
+
     return {
         "timeout": (client.connect_timeout, client.read_timeout),
         "headers": headers

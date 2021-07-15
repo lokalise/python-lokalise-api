@@ -3,6 +3,15 @@
 Changelog
 =========
 
+1.1.0 (15-Jul-21)
+-----------------
+
+* Added support for gzip compression. It's off by default but you can enable it by setting the `enable_compression` option to `True`:
+
+.. code-block:: python
+
+  client = lokalise.Client('token', connect_timeout=5, read_timeout=7, enable_compression=True)
+
 1.0.0 (29-Apr-21)
 -----------------
 

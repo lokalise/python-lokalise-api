@@ -15,7 +15,7 @@ python-dotenv = "~= 0.18.0"
 autopep8 = "~= 1.5"
 
 [packages]
-requests = "~=2.25"
+requests = "~=2.26"
 
 [requires]
 python_version = "3.9"
