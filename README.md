@@ -20,7 +20,7 @@ Obtain a Lokalise API token (in your *Personal profile*) and use it:
 import lokalise
 client = lokalise.Client('YOUR_API_TOKEN')
 project = client.project('123.abc')
-print(project.title)
+print(project.name)
 
 client.upload_file(project.project_id, {
     "data": 'ZnI6DQogIHRlc3Q6IHRyYW5zbGF0aW9u',
