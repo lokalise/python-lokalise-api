@@ -16,7 +16,7 @@ The plugin may raise the following exceptions:
 * ``lokalise.errors.NotAcceptable`` (406) - posted resource is malformed.
 * ``lokalise.errors.Conflict`` (409) - request conflicts with another request.
 * ``lokalise.errors.Locked`` (423) - your token is used simultaneously in multiple requests.
-* ``lokalise.errors.TooManyRequests`` (429) - too many requests hit the API too quickly.
+* ``lokalise.errors.TooManyRequests`` (429) - too many requests hit the API too quickly (check the section below to learn more).
 * ``lokalise.errors.ServerError`` (500).
 * ``lokalise.errors.BadGateway`` (502).
 * ``lokalise.errors.ServiceUnavailable`` (503).
@@ -35,8 +35,6 @@ To handle an exception you would do the following:
 Rate limits
 -----------
 
-Lokalise does not rate-limit requests to the API, however retain a right to
-decline the service in case of excessive use
-Please note that only one concurrent request per token is allowed.
-To ensure data consistency, it is not recommended to access the same project
-simultaneously using multiple tokens.
+Access to all endpoints is limited to 6 requests per second from 14 September, 2021. This limit is applied per API token and per IP address. If you exceed the limit, a 429 HTTP status code will be returned and the corresponding exception will be raised that you should handle properly. To handle such errors, we recommend an exponential backoff mechanism with a limited number of retries.
+
+Only one concurrent request per token is allowed.
