@@ -33,7 +33,8 @@ def screenshot_data():
     """Loads base64-encoded screenshot data.
     """
     try:
-        with open(os.path.join("tests/fixtures/screenshot_base64.txt"), 'r') as file:
+        path = "tests/fixtures/screenshot_base64.txt"
+        with open(os.path.join(path), 'r', encoding='utf-8') as file:
             data = file.read()
     except FileNotFoundError:
         return ''
