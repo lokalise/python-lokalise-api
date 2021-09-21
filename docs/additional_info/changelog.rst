@@ -3,6 +3,12 @@
 Changelog
 =========
 
+1.1.1 (21-Sep-21)
+-----------------
+
+* Fixed an issue with exception handling when the returned response doesn't contain an `error` key
+* Update dependencies
+
 1.1.0 (15-Jul-21)
 -----------------
 
