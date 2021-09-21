@@ -7,12 +7,12 @@ verify_ssl = true
 pytest = "~=6.2"
 vcrpy = "~=4.1"
 pytest-vcr = "~=1.0.2"
-pytest-cov = "~=2.11"
-pylint = "~= 2.7"
+pytest-cov = "~=2.12"
+pylint = "~= 2.11"
 pytest-pylint = "~= 0.3"
-mypy = "~= 0.812"
-python-dotenv = "~= 0.17.1"
-autopep8 = "~= 1.5.7"
+mypy = "~= 0.910"
+python-dotenv = "~= 0.18.0"
+autopep8 = "~= 1.5"
 
 [packages]
 requests = "~=2.26"
