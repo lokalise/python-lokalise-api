@@ -27,8 +27,17 @@ def test_unknown_error(client):
     """
     with pytest.raises(lokalise.errors.ClientError) as excinfo:
         client.project("very/invalid/path")
-
     assert excinfo.value.args[1] == 407
+
+
+@pytest.mark.vcr
+def test_no_error_key(client):
+    """Checks that the error gets handled even if the `error`
+    key is not found in the response
+    """
+    with pytest.raises(lokalise.errors.ClientError) as excinfo:
+        client.project("wrong/path")
+    assert excinfo.value.args[1] == 404
 
 
 @pytest.mark.vcr

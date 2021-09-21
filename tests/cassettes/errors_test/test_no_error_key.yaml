@@ -11,10 +11,10 @@ interactions:
       x-api-token:
       - FILTERED
     method: GET
-    uri: https://api.lokalise.com/api2/projects/123/invalid
+    uri: https://api.lokalise.com/api2/projects/wrong/path
   response:
     body:
-      string: '{"error":{"message":"Not Found","code":404}}'
+      string: '{"message":"Not Found","code":404}'
     headers:
       Cache-Control:
       - max-age=0, must-revalidate, no-cache, no-store, private
@@ -23,9 +23,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 21 Sep 2021 11:31:50 GMT
+      - Tue, 21 Sep 2021 11:42:34 GMT
       Expires:
-      - Tue, 21 Sep 2021 11:31:50 GMT
+      - Tue, 21 Sep 2021 11:42:34 GMT
       Referrer-Policy:
       - origin
       Server:

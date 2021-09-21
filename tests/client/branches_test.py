@@ -4,7 +4,6 @@ Tests for the Branches endpoint.
 
 import pytest
 
-
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 BRANCH_ID = 55312
 NEW_BRANCH_ID = 66307

@@ -110,7 +110,7 @@ def respond_with(response: requests.models.Response) -> Dict:
     """
     data = response.json()
 
-    if response.status_code > 399 or "error" in data:
+    if response.status_code > 399 or 'error' in data:
         respond_with_error(data, response.status_code)
 
     return {**data, **extract_headers_from(response)}
@@ -123,7 +123,11 @@ def respond_with_error(data: Dict[str, Any], code: Any) -> NoReturn:
     :param data: Response body from the API that usually contains error message
     :param code: Response status code
     """
-    msg: str = data['error']['message']
+    msg: str = ''
+    if 'error' in data:
+        msg = data['error']['message']
+    else:
+        msg = data['message']
 
     if code in errors.ERROR_CODES:
         raise errors.ERROR_CODES[code](msg, code)

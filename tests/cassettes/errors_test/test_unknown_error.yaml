@@ -4,12 +4,10 @@ interactions:
     headers:
       Accept:
       - application/json
-      Accept-Encoding:
-      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/1.1.0
       x-api-token:
       - FILTERED
     method: GET
@@ -25,24 +23,28 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 09 Jun 2020 15:30:45 GMT
+      - Tue, 21 Sep 2021 11:36:25 GMT
       Expires:
-      - Tue, 09 Jun 2020 15:30:45 GMT
-      Pragma:
-      - no-cache
+      - Tue, 21 Sep 2021 11:36:25 GMT
+      Referrer-Policy:
+      - origin
       Server:
       - nginx
       Strict-Transport-Security:
       - max-age=31536000
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       X-Frame-Options:
       - deny
       X-XSS-Protection:
       - 1; mode=block
+      pragma:
+      - no-cache
     status:
       code: 407
-      message: Something very bad happened
+      message: "Something very bad happened"
 version: 1
