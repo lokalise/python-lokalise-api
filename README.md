@@ -34,6 +34,14 @@ translation_keys = client.keys(project.project_id, {"page": 2,
 translation_keys.items[0].key_name['web'] # => "sign_up"
 ```
 
+You can also use [OAuth 2 tokens](https://docs.lokalise.com/en/articles/5574713-oauth-2):
+
+```python
+client = lokalise.OAuthClient('YOUR_OAUTH2_API_TOKEN')
+
+project = client.project('123.abc')
+```
+
 ## Documentation
 
 Find detailed documentation at [python-lokalise-api.readthedocs.io](https://python-lokalise-api.readthedocs.io).
