@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip,deflate,br
+      Authorization:
+      - Bearer 123abc
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/1.1.1
+    method: GET
+    uri: https://api.lokalise.com/api2/projects
+  response:
+    body:
+      string: '{"error":{"message":"Invalid `X-Api-Token` header","code":400}}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 22 Oct 2021 15:03:57 GMT
+      Expires:
+      - Fri, 22 Oct 2021 15:03:57 GMT
+      Referrer-Policy:
+      - origin
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      pragma:
+      - no-cache
+    status:
+      code: 400
+      message: Bad Request
+version: 1

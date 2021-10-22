@@ -78,6 +78,7 @@ class Client:
         self.connect_timeout = connect_timeout
         self.read_timeout = read_timeout
         self.enable_compression = enable_compression
+        self.token_header = 'X-Api-Token'
 
     def reset_client(self) -> None:
         """Resets the API client by clearing all attributes.
