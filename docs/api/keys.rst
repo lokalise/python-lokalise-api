@@ -16,7 +16,7 @@ Please note that this endpoint should not be treated as a content delivery netwo
 for your language files. It means that you should not perform a new request to this endpoint
 with every website/app visitor. Instead, fetch this endpoint from time to time,
 store the result locally and serve your visitors with static files/your database content.
-Alternatively, you may use our Amazon S3/Google CouldStorage integrations in
+Alternatively, you may use our Amazon S3/Google CloudStorage integrations in
 automatically upload your language files to a bucket of your choice.
 
 Example:
