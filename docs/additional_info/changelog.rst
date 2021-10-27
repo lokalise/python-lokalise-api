@@ -9,6 +9,7 @@ Changelog
 * Add ability to use [OAuth 2 tokens](https://docs.lokalise.com/en/articles/5574713-oauth-2) instead of API tokens obtained from Lokalise profile.
 
 .. code-block:: python
+
   client = lokalise.OAuthClient('YOUR_OAUTH2_API_TOKEN')
 
   project = client.project('123.abc')
