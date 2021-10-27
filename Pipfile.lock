@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "b341d2fac64dcfe991cb9e9489d5ea9db9b18bd08107fd218d37c586b625368a"
+            "sha256": "5ddeb53512fedd6986fdf53ba8db775d82e7a90ab44473a36d4570d0fd511bd6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -59,11 +59,11 @@
     "develop": {
         "astroid": {
             "hashes": [
-                "sha256:0e361da0744d5011d4f5d57e64473ba9b7ab4da1e2d45d6631ebd67dd28c3cce",
-                "sha256:f9d66e3a4a0e5b52819b2ff41ac2b179df9d180697db71c92beb33a60c661794"
+                "sha256:0755c998e7117078dcb7d0bda621391dd2a85da48052d948c7411ab187325346",
+                "sha256:1e83a69fd51b013ebf5912d26b9338d6643a55fec2f20c787792680610eed4a2"
             ],
             "markers": "python_version ~= '3.6'",
-            "version": "==2.8.3"
+            "version": "==2.8.4"
         },
         "atomicwrites": {
             "hashes": [
@@ -83,11 +83,11 @@
         },
         "autopep8": {
             "hashes": [
-                "sha256:276ced7e9e3cb22e5d7c14748384a5cf5d9002257c0ed50c0e075b68011bb6d0",
-                "sha256:aa213493c30dcdac99537249ee65b24af0b2c29f2e83cd8b3f68760441ed0db9"
+                "sha256:44f0932855039d2c15c4510d6df665e4730f2b8582704fa48f9c55bd3e17d979",
+                "sha256:ed77137193bbac52d029a52c59bec1b0629b5a186c495f1eb21b126ac466083f"
             ],
             "index": "pypi",
-            "version": "==1.5.7"
+            "version": "==1.6.0"
         },
         "colorama": {
             "hashes": [
@@ -358,11 +358,11 @@
         },
         "pyparsing": {
             "hashes": [
-                "sha256:c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1",
-                "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"
+                "sha256:09fa60a2e3bc3c6a23c2ed23332199d0e57b2c676b9193750cfc22a4358b69c2",
+                "sha256:9366e57ad2d2faa8dd89775ef284ecae0fc4012c24717f3705613b262d712090"
             ],
-            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
-            "version": "==2.4.7"
+            "markers": "python_version >= '3.6'",
+            "version": "==3.0.2"
         },
         "pytest": {
             "hashes": [

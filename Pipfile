@@ -12,7 +12,7 @@ pylint = "~= 2.11"
 pytest-pylint = "~= 0.3"
 mypy = "~= 0.910"
 python-dotenv = "~= 0.18.0"
-autopep8 = "~= 1.5"
+autopep8 = "~= 1.6"
 
 [packages]
 requests = "~=2.26"
