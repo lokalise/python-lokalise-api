@@ -18,6 +18,7 @@ def test_client_arguments():
     assert client.connect_timeout == 5
     assert client.read_timeout == 3
     assert client.enable_compression
+    assert client.token_header == "X-Api-Token"
 
 
 @pytest.mark.vcr

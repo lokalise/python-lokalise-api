@@ -31,6 +31,19 @@ After you've obtained the token, import the plugin and initialize the client:
 Now use the ``client`` variable to perform API requests!
 You may also check the :ref:`customizing-client` section to learn how to set timeouts.
 
+Initializing the client with OAuth 2 token
+------------------------------------------
+
+You can also send API requests with `OAuth 2 tokens <https://docs.lokalise.com/en/articles/5574713-oauth-2>`_. To achieve that, you have to
+instantiate a proper class:
+
+.. code-block:: python
+
+  import lokalise
+  client = lokalise.OAuthClient('YOUR_OAUTH_API_TOKEN')
+
+This class accepts the same options as a regular ``Client``ю
+
 Objects and models
 ------------------
 

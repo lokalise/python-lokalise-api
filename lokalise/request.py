@@ -160,9 +160,10 @@ def options(client: lokalise.client.Client) -> Dict:
     headers = {
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
-        "X-Api-Token": client.token,
         "Accept-Encoding": None
     }
+
+    headers[client.token_header] = client.token
 
     if client.enable_compression:
         headers["Accept-Encoding"] = "gzip,deflate,br"

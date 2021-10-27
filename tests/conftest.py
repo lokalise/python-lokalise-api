@@ -48,3 +48,15 @@ def client():
     """Creates a sample client object using the token from the ENV.
     """
     return lokalise.Client(os.getenv("LOKALISE_API_TOKEN"))
+
+
+@pytest.fixture(scope='module')
+def oauth_client():
+    """Creates a sample client object using the OAuth token from the ENV.
+    """
+    return lokalise.OAuthClient(
+        "123abc",
+        connect_timeout=4,
+        read_timeout=2,
+        enable_compression=True
+    )
