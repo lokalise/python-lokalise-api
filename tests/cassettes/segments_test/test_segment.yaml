@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/1.2.0
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/39066161618d4ecb9fdc12.00274309/keys/134490810/segments/en/1?disable_references=1
+  response:
+    body:
+      string: '{"project_id":"39066161618d4ecb9fdc12.00274309","key_id":134490810,"language_iso":"en","segment":{"segment_number":1,"language_iso":"en","value":"Hello!","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2021-12-16
+        17:00:53 (Etc\/UTC)","modified_at_timestamp":1639674053,"is_reviewed":false,"reviewed_by":0,"is_fuzzy":true,"words":1,"custom_translation_statuses":[]}}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 16 Dec 2021 19:50:11 GMT
+      Expires:
+      - Thu, 16 Dec 2021 19:50:11 GMT
+      Referrer-Policy:
+      - origin
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - c70772f7-b7a8-45a5-a329-a11deb3cedd3
+      X-XSS-Protection:
+      - 1; mode=block
+      pragma:
+      - no-cache
+    status:
+      code: 200
+      message: OK
+version: 1

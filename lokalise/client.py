@@ -18,6 +18,7 @@ from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
 from .collections.snapshots import SnapshotsCollection
 from .collections.screenshots import ScreenshotsCollection
+from .collections.segments import SegmentsCollection
 from .collections.tasks import TasksCollection
 from .collections.teams import TeamsCollection
 from .collections.team_users import TeamUsersCollection
@@ -37,6 +38,7 @@ from .models.project import ProjectModel
 from .models.queued_process import QueuedProcessModel
 from .models.snapshot import SnapshotModel
 from .models.screenshot import ScreenshotModel
+from .models.segment import SegmentModel
 from .models.task import TaskModel
 from .models.team_user import TeamUserModel
 from .models.team_user_group import TeamUserGroupModel
@@ -886,6 +888,74 @@ class Client:
         response = self.get_endpoint("screenshots"). \
             delete(parent_id=project_id, resource_id=screenshot_id)
         return response
+
+    def segments(self, project_id: str, key_id: Union[str, int], lang_iso: str,
+                 params: Optional[Dict] = None) -> SegmentsCollection:
+        """Fetches all segments for the given key and language inside a project.
+
+        :param str project_id: ID of the project
+        :param str key_id: ID of the key
+        :type key_id: int or str
+        :param str lang_iso: Language ISO code
+        :param dict params: (optional) Additional params
+        :return: Collection of segments
+        """
+        raw_segments = self.get_endpoint("segments").all(
+            params=params,
+            parent_id=project_id,
+            resource_id=key_id,
+            subresource_id=lang_iso)
+        return SegmentsCollection(raw_segments)
+
+    # pylint: disable=too-many-arguments
+    def segment(self,
+                project_id: str,
+                key_id: Union[str, int],
+                lang_iso: str,
+                segment_number: Union[str, int],
+                params: Optional[Dict] = None) -> SegmentModel:
+        """Fetches a segment for the given key and language inside a project.
+
+        :param str project_id: ID of the project
+        :param str key_id: ID of the key
+        :type key_id: int or str
+        :param str lang_iso: Language ISO code
+        :param str segment_number: Number of the segment
+        :type segment_number: int or str
+        :param dict params: (optional) Additional params
+        :return: Segment model
+        """
+        raw_segment = self.get_endpoint("segments").find(
+            params=params,
+            parent_id=project_id,
+            resource_id=key_id,
+            subresource_id=f"{lang_iso}/{segment_number}")
+        return SegmentModel(raw_segment)
+
+    def update_segment(self,
+                       project_id: str,
+                       key_id: Union[str, int],
+                       lang_iso: str,
+                       segment_number: Union[str, int],
+                       params: Dict) -> SegmentModel:
+        """Updates a segment.
+
+        :param str project_id: ID of the project
+        :param str key_id: ID of the key
+        :type key_id: int or str
+        :param str lang_iso: Language ISO code
+        :param str segment_number: Number of the segment
+        :type segment_number: int or str
+        :param dict params: New segment attributes
+        :return: Segment model
+        """
+        raw_segment = self.get_endpoint("segments").update(
+            params=params,
+            parent_id=project_id,
+            resource_id=key_id,
+            subresource_id=f"{lang_iso}/{segment_number}")
+        return SegmentModel(raw_segment)
+    # pylint: enable=too-many-arguments
 
     def tasks(self, project_id: str,
               params: Optional[Dict] = None) -> TasksCollection:
