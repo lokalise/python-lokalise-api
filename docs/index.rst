@@ -54,10 +54,12 @@ Usage
    api/queued_processes
    api/snapshots
    api/screenshots
+   api/segments
    api/tasks
    api/teams
    api/team_users
    api/team_user_groups
+   api/team_user_billing_details
    api/translations
    api/translation_providers
    api/translation_statuses

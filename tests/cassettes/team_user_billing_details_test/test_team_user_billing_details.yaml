@@ -1,0 +1,55 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/1.2.0
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/teams/176692/billing_details
+  response:
+    body:
+      string: '{"company":"Self-employed","address1":"Sample line 1","address2":"Sample
+        line 2","city":"Riga","zip":"LV-6543","phone":"+371123456","vatnumber":"123","country_code":"LV","billing_email":"hello@example.com","state_code":""}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 23 Nov 2021 15:32:27 GMT
+      Expires:
+      - Tue, 23 Nov 2021 15:32:27 GMT
+      Referrer-Policy:
+      - origin
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-XSS-Protection:
+      - 1; mode=block
+      pragma:
+      - no-cache
+    status:
+      code: 200
+      message: OK
+version: 1
