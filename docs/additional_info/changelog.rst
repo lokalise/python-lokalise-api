@@ -3,16 +3,16 @@
 Changelog
 =========
 
-1.3.0
------
+1.3.0 (17-Dec-2021)
+-------------------
 
-* Added support for `TeamUserBillingDetails` endpoint
-* Added support for `Segments` endpoint
+* Added support for `TeamUserBillingDetails endpoint <https://python-lokalise-api.readthedocs.io/en/latest/api/team_user_billing_details.html>`_
+* Added support for `Segments endpoint <https://python-lokalise-api.readthedocs.io/en/latest/api/segments.html>`_
 
 1.2.0 (27-Oct-21)
 -----------------
 
-* Add ability to use [OAuth 2 tokens](https://docs.lokalise.com/en/articles/5574713-oauth-2) instead of API tokens obtained from Lokalise profile.
+* Add ability to use `OAuth 2 tokens <https://docs.lokalise.com/en/articles/5574713-oauth-2>`_ instead of API tokens obtained from Lokalise profile.
 
 .. code-block:: python
 
