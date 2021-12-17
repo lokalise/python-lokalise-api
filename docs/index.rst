@@ -54,6 +54,7 @@ Usage
    api/queued_processes
    api/snapshots
    api/screenshots
+   api/segments
    api/tasks
    api/teams
    api/team_users

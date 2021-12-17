@@ -7,6 +7,7 @@ Changelog
 -----
 
 * Added support for `TeamUserBillingDetails` endpoint
+* Added support for `Segments` endpoint
 
 1.2.0 (27-Oct-21)
 -----------------
