@@ -10,12 +10,12 @@ pytest-vcr = "~=1.0.2"
 pytest-cov = "~=3.0"
 pylint = "~= 2.11"
 pytest-pylint = "~= 0.3"
-mypy = "~= 0.910"
+mypy = "~= 0.931"
 python-dotenv = "~= 0.19.2"
 autopep8 = "~= 1.6"
 
 [packages]
-requests = "~=2.26"
+requests = "~=2.27"
 
 [requires]
 python_version = "3.10"
