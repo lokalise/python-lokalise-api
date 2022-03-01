@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  pull_request:
+
+  push:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: ['3.7', '3.8', '3.9', '3.10']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Python, pipenv and Pipfile packages
+        uses: palewire/install-python-pipenv-pipfile@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install importlib_metadata
+        if: matrix.os == '3.7'
+        run: pipenv install importlib_metadata
+      - run: pipenv run mypy lokalise/ --ignore-missing-imports . || true
+      - run: pipenv run pytest --cov=lokalise --cov-report=xml --verbose --cov-report term
+      - uses: codecov/codecov-action@v2
+        with:
+          fail_ci_if_error: true
+          verbose: true
