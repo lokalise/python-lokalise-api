@@ -16,6 +16,3 @@ autopep8 = "~= 1.6"
 
 [packages]
 requests = "~=2.27"
-
-[requires]
-python_version = "3.10"
