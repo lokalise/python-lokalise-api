@@ -19,6 +19,9 @@ jobs:
         uses: palewire/install-python-pipenv-pipfile@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Install importlib_metadata
+        if: matrix.os == '3.6' || matrix.os == '3.7'
+        run: pipenv install importlib_metadata
       - run: pipenv run mypy lokalise/ --ignore-missing-imports . || true
       - run: pipenv run pytest --cov=lokalise --cov-report=xml --verbose --cov-report term
       - uses: codecov/codecov-action@v2
