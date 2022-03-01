@@ -1,7 +1,7 @@
 # Lokalise API v2 official Python interface
 
 ![PyPI](https://img.shields.io/pypi/v/python-lokalise-api)
-[![Build Status](https://travis-ci.com/lokalise/python-lokalise-api.svg?branch=master)](https://travis-ci.com/github/lokalise/python-lokalise-api)
+![CI](https://github.com/lokalise/python-lokalise-api/actions/workflows/ci.yml/badge.svg)
 [![Test Coverage](https://codecov.io/gh/lokalise/python-lokalise-api/graph/badge.svg)](https://codecov.io/gh/lokalise/python-lokalise-api)
 [![Downloads](https://pepy.tech/badge/python-lokalise-api)](https://pepy.tech/project/python-lokalise-api)
 [![Docs](https://readthedocs.org/projects/python-lokalise-api/badge/?version=latest&style=flat)](https://python-lokalise-api.readthedocs.io)
