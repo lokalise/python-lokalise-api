@@ -39,7 +39,7 @@ class Auth:
         :param scope: Requested scopes
         :type scope: list or str
         :param str redirect_uri: Optional redirect URI
-        :param str redirect_uri: Optional state to protect from CSRF attacks
+        :param str state: Optional state to protect from CSRF attacks
         :rtype str:
         """
         if isinstance(scope, List):
