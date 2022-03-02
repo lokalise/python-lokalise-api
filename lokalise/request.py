@@ -8,10 +8,9 @@ Attributes:
     :attribute str BASE_URL: path to the Lokalise APIv2.
     :attribute list PAGINATION_HEADERS: list of response headers that contain pagination data.
 """
-from typing import Any, Optional, Dict, NoReturn
-import json
+from typing import Optional, Dict
 import requests
-from lokalise import errors
+from lokalise.request_utils import raise_on_error, __format_params, __prepare
 import lokalise.client
 from ._version import __version__
 
@@ -109,30 +108,9 @@ def respond_with(response: requests.models.Response) -> Dict:
     :rtype dict:
     """
     data = response.json()
-
-    if response.status_code > 399 or 'error' in data:
-        respond_with_error(data, response.status_code)
+    raise_on_error(response, data)
 
     return {**data, **extract_headers_from(response)}
-
-
-def respond_with_error(data: Dict[str, Any], code: Any) -> NoReturn:
-    """Raises an error based on the HTTP status code.
-    If the status code is unknown, raises a generic ClientError
-
-    :param data: Response body from the API that usually contains error message
-    :param code: Response status code
-    """
-    msg: str = ''
-    if 'error' in data:
-        msg = data['error']['message']
-    else:
-        msg = data['message']
-
-    if code in errors.ERROR_CODES:
-        raise errors.ERROR_CODES[code](msg, code)
-
-    raise errors.ClientError(msg, code)
 
 
 def extract_headers_from(response: requests.models.Response) -> Dict:
@@ -172,15 +150,3 @@ def options(client: lokalise.client.Client) -> Dict:
         "timeout": (client.connect_timeout, client.read_timeout),
         "headers": headers
     }
-
-
-def __format_params(params: Optional[Dict] = None) -> Optional[str]:
-    """Converts request params to JSON
-    """
-    return json.dumps(params) if params else None
-
-
-def __prepare(path: str) -> str:
-    """Prepares the URI by stripping all unnecessary slashes
-    """
-    return path.strip('/')
