@@ -60,6 +60,16 @@ def test_project(client):
 
 
 @pytest.mark.vcr
+def test_project_oauth2(oauth_client):
+    """Tests fetching of a single project with OAuth 2 token
+    """
+    project_id = '41927157619e6abd190863.11993227'
+    project = oauth_client.project(project_id)
+    assert project.project_id == project_id
+    assert project.name == "My Web App"
+
+
+@pytest.mark.vcr
 def test_create_project(client):
     """Tests project creation
     """

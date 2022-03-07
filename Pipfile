@@ -13,7 +13,7 @@ pytest-pylint = "~= 0.3"
 mypy = "~= 0.931"
 python-dotenv = "~= 0.19.2"
 autopep8 = "~= 1.6"
+importlib-metadata = "*"
 
 [packages]
 requests = "~=2.27"
-importlib-metadata = "*"

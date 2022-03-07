@@ -1,16 +1,19 @@
 from setuptools import setup, find_packages
 from os import path
-from lokalise._version import __version__
 
 
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
+about = {}
+with open(path.join(this_directory, 'lokalise', '_version.py'), encoding='utf-8') as f:
+    exec(f.read(), about)
+
 setup(
     name="python-lokalise-api",
-    version=__version__,
-    author="Ilya Bodrov",
+    version=about['__version__'],
+    author="Ilya Bodrov-Krukowski",
     author_email="bodrovis@protonmail.com",
     description="Official Python interface for the Lokalise API v2",
     long_description=long_description,
@@ -24,7 +27,7 @@ setup(
     },
     package_dir={'lokalise': 'lokalise'},
     platforms=['Any'],
-    install_requires=['requests>2,<3'],
+    install_requires=['requests'],
     tests_require=['pytest', 'vcrpy', 'pytest-vcr', 'pytest-cov'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
