@@ -27,9 +27,10 @@ interface that represents returned data as Python objects.
       "disable_references": "1"})
   translation_keys.items[0].key_name['web'] # => "sign_up"
 
-You can also use `OAuth 2 tokens <https://python-lokalise-api.readthedocs.io/en/latest/additional_info/oauth2_flow.html>`_:
+You can also use `OAuth 2 tokens <https://python-lokalise-api.readthedocs.io/en/latest/additional_info/oauth2_flow.html>`_ and perform requests on the user's behalf:
 
 .. code-block:: python
+
   client = lokalise.OAuthClient('YOUR_OAUTH2_API_TOKEN')
 
   project = client.project('123.abc')
