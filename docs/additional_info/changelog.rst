@@ -3,8 +3,8 @@
 Changelog
 =========
 
-1.4.0
------
+1.4.0 (07-Mar-2022)
+-------------------
 
 * Added support for OAuth 2 flow. You can now request `OAuth 2 tokens using this client <https://python-lokalise-api.readthedocs.io/en/latest/additional_info/oauth2_flow.html>`_:
 
