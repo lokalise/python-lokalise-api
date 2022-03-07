@@ -16,9 +16,14 @@ def vcr_config():
     """Configuration for the VCR module
     """
     return {
-        "filter_headers": [('x-api-token', 'FILTERED')],
-        "decode_compressed_response": True
-    }
+        "filter_headers": [
+            ('x-api-token',
+             'FILTERED'),
+            ('Authorization',
+             'FILTERED')],
+        "filter_post_data_parameters": [
+            'client_secret', 'client_id', 'refresh_token'],
+        "decode_compressed_response": True}
 
 
 @pytest.fixture(scope='module')
@@ -55,8 +60,18 @@ def oauth_client():
     """Creates a sample client object using the OAuth token from the ENV.
     """
     return lokalise.OAuthClient(
-        "123abc",
+        os.getenv("OAUTH2_TOKEN"),
         connect_timeout=4,
         read_timeout=2,
         enable_compression=True
+    )
+
+
+@pytest.fixture(scope='module')
+def auth_client():
+    """Create a sample client object to manage OAuth 2 tokens.
+    """
+    return lokalise.Auth(
+        os.getenv("OAUTH2_CLIENT_ID"),
+        os.getenv("OAUTH2_CLIENT_SECRET")
     )

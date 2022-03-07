@@ -10,7 +10,7 @@ Official Python 3 interface for the [Lokalise APIv2](https://app.lokalise.com/ap
 
 ## Quick start
 
-This plugin requires Python 3.6 and above. Install it:
+This plugin requires Python 3.7 and above. Install it:
 
     pip install python-lokalise-api
 
@@ -34,7 +34,7 @@ translation_keys = client.keys(project.project_id, {"page": 2,
 translation_keys.items[0].key_name['web'] # => "sign_up"
 ```
 
-You can also use [OAuth 2 tokens](https://docs.lokalise.com/en/articles/5574713-oauth-2):
+You can also use [OAuth 2 tokens](https://python-lokalise-api.readthedocs.io/en/latest/additional_info/oauth2_flow.html):
 
 ```python
 client = lokalise.OAuthClient('YOUR_OAUTH2_API_TOKEN')
