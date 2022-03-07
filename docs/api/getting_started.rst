@@ -42,7 +42,7 @@ instantiate a proper class:
   import lokalise
   client = lokalise.OAuthClient('YOUR_OAUTH_API_TOKEN')
 
-This class accepts the same options as a regular ``Client``ю
+This class accepts the same options as a regular ``Client``.
 
 Objects and models
 ------------------
