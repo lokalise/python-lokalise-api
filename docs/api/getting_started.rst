@@ -34,7 +34,7 @@ You may also check the :ref:`customizing-client` section to learn how to set tim
 Initializing the client with OAuth 2 token
 ------------------------------------------
 
-You can also send API requests with `OAuth 2 tokens <https://docs.lokalise.com/en/articles/5574713-oauth-2>`_. To achieve that, you have to
+You can also send API requests with `OAuth 2 tokens <https://python-lokalise-api.readthedocs.io/en/latest/additional_info/oauth2_flow.html>`_. To achieve that, you have to
 instantiate a proper class:
 
 .. code-block:: python
