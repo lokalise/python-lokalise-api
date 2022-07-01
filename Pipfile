@@ -16,4 +16,4 @@ autopep8 = "~= 1.6"
 importlib-metadata = "*"
 
 [packages]
-requests = "~=2.27"
+requests = "~=2.28"
