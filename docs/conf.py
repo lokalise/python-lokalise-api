@@ -17,8 +17,8 @@ from lokalise._version import __version__
 
 # -- Project information -----------------------------------------------------
 project = 'python-lokalise-api'
-copyright = '2020, Lokalise team, Ilya Bodrov'
-author = 'Lokalise team, Ilya Bodrov'
+copyright = '2020, Lokalise group, Ilya Krukowski'
+author = 'Lokalise group, Ilya Krukowski'
 
 # The full version, including alpha/beta/rc tags
 release = __version__
