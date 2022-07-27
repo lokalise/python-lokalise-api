@@ -34,7 +34,8 @@ class Auth:
              scope: Union[List, str],
              redirect_uri: Optional[str] = None,
              state: Optional[str] = None) -> str:
-        """Generate a new auth URL. Users have to visit it and explicitly approve the requested permissions
+        """Generate a new auth URL. Users have to visit it and
+        explicitly approve the requested permissions
 
         :param scope: Requested scopes
         :type scope: list or str
