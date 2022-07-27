@@ -1,7 +1,7 @@
 Team users endpoint
 ===================
 
-`Team users documentation <https://app.lokalise.com/api2docs/curl/#resource-team-users>`_
+`Team users documentation <https://developers.lokalise.com/reference/list-all-team-users>`_
 
 Fetch all team users
 --------------------

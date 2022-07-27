@@ -1,7 +1,7 @@
 Translation providers endpoint
 ==============================
 
-`Translation providers documentation <https://app.lokalise.com/api2docs/curl/#resource-translation-providers>`_
+`Translation providers documentation <https://developers.lokalise.com/reference/list-all-providers>`_
 
 Fetch all translation providers
 -------------------------------

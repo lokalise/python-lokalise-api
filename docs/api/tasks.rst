@@ -1,7 +1,7 @@
 Tasks endpoint
 ==============
 
-`Tasks documentation <https://app.lokalise.com/api2docs/curl/#resource-tasks>`_
+`Tasks documentation <https://developers.lokalise.com/reference/list-all-tasks>`_
 
 Fetch all tasks
 ---------------

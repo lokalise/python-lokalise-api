@@ -6,11 +6,13 @@ This module provides helpers to send HTTP requests.
 
 import json
 from typing import Any, Optional, Dict, NoReturn
-from lokalise import errors
 from requests import Response
+from lokalise import errors
 
 
 def raise_on_error(response: Response, data: Dict[str, Any]) -> None:
+    """Raises an error for HTTP codes 400+
+    """
     if response.status_code > 399 or 'error' in data:
         respond_with_error(data, response.status_code)
 

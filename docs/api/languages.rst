@@ -1,7 +1,7 @@
 Languages endpoint
 ==================
 
-`Languages documentation <https://app.lokalise.com/api2docs/curl/#resource-languages>`_
+`Languages documentation <https://developers.lokalise.com/reference/list-system-languages>`_
 
 Fetch all system languages
 --------------------------

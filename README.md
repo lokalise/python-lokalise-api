@@ -6,7 +6,7 @@
 [![Downloads](https://pepy.tech/badge/python-lokalise-api)](https://pepy.tech/project/python-lokalise-api)
 [![Docs](https://readthedocs.org/projects/python-lokalise-api/badge/?version=latest&style=flat)](https://python-lokalise-api.readthedocs.io)
 
-Official Python 3 interface for the [Lokalise APIv2](https://app.lokalise.com/api2docs) that represents returned data as Python objects.
+Official Python 3 interface for the [Lokalise APIv2](https://developers.lokalise.com/reference/lokalise-rest-api) that represents returned data as Python objects.
 
 ## Quick start
 
@@ -50,4 +50,4 @@ Find detailed documentation at [python-lokalise-api.readthedocs.io](https://pyth
 
 This plugin is licensed under the [BSD 3 Clause License](https://github.com/lokalise/python-lokalise-api/blob/master/LICENSE).
 
-Copyright (c) [Lokalise team](https://lokalise.com) and [Ilya Bodrov](http://bodrovis.tech)
+Copyright (c) [Lokalise team](https://lokalise.com) and [Ilya Krukowski](http://bodrovis.tech)

@@ -1,7 +1,7 @@
 Files endpoint
 ==============
 
-`Files documentation <https://app.lokalise.com/api2docs/curl/#resource-files>`_
+`Files documentation <https://developers.lokalise.com/reference/list-all-files>`_
 
 Fetch all files
 ---------------
@@ -69,3 +69,21 @@ Example:
       "replace_breaks": False
   })
   response['bundle_url'] # => "https://s3-eu-west-1.amazonaws.com/path/to/bundle.zip"
+
+Delete file
+-----------
+
+Please note that this endpoint does not support "software localization" projects.
+
+.. py:function:: delete_file(project_id, file_id)
+
+  :param str project_id: ID of the project
+  :param file_id: ID of the file to delete
+  :return: Dictionary with project ID and "file_deleted" set to True
+
+Example:
+
+.. code-block:: python
+
+  response = client.delete_file("123.abc", 1234)
+  response['file_deleted'] # => True

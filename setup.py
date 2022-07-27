@@ -13,7 +13,7 @@ with open(path.join(this_directory, 'lokalise', '_version.py'), encoding='utf-8'
 setup(
     name="python-lokalise-api",
     version=about['__version__'],
-    author="Ilya Bodrov-Krukowski",
+    author="Ilya Krukowski",
     author_email="bodrovis@protonmail.com",
     description="Official Python interface for the Lokalise API v2",
     long_description=long_description,

@@ -1,7 +1,7 @@
 Teams endpoint
 ==============
 
-`Teams documentation <https://app.lokalise.com/api2docs/curl/#resource-teams>`_
+`Teams documentation <https://developers.lokalise.com/reference/list-all-teams>`_
 
 Fetch all teams
 ---------------

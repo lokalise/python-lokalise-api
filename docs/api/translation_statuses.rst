@@ -1,7 +1,7 @@
 Translation statuses endpoint
 =============================
 
-`Translation statuses documentation <https://app.lokalise.com/api2docs/curl/#resource-translation-statuses>`_
+`Translation statuses documentation <https://developers.lokalise.com/reference/list-all-statuses>`_
 
 Fetch all translation statuses
 ------------------------------

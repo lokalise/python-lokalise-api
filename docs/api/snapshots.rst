@@ -1,7 +1,7 @@
 Snapshots endpoint
 ==================
 
-`Snapshots documentation <https://app.lokalise.com/api2docs/curl/#resource-snapshots>`_
+`Snapshots documentation <https://developers.lokalise.com/reference/list-all-snapshots>`_
 
 Fetch all snapshots
 -------------------

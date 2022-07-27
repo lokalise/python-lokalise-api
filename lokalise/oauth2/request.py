@@ -4,8 +4,8 @@ lokalise.oauth2.request
 This module provides HTTP request methods specifically for OAuth 2 flow.
 """
 
-import requests
 from typing import Optional, Dict
+import requests
 from lokalise.request_utils import raise_on_error, __format_params, __prepare
 from lokalise._version import __version__
 

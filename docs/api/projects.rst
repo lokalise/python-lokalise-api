@@ -1,7 +1,7 @@
 Projects endpoint
 =================
 
-`Projects documentation <https://app.lokalise.com/api2docs/curl/#resource-projects>`_
+`Projects documentation <https://developers.lokalise.com/reference/list-all-projects>`_
 
 Fetch all projects
 ------------------

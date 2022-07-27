@@ -63,3 +63,14 @@ def test_download_files(client):
     })
     assert response['project_id'] == PROJECT_ID
     assert r"amazonaws.com" in response['bundle_url']
+
+
+@pytest.mark.vcr
+def test_delete_file(client):
+    """Tests file deletion
+    """
+    docs_file_project_id = "507504186242fccb32f015.15252556"
+
+    response = client.delete_file(docs_file_project_id, 1161474)
+    assert response['project_id'] == docs_file_project_id
+    assert response['file_deleted']
