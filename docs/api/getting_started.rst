@@ -18,7 +18,7 @@ Install it by running:
 Initializing the client
 -----------------------
 
-In order to perform API requests, you `require a special token <https://app.lokalise.com/api2docs/curl/#resource-authentication>`_
+In order to perform API requests, you `require a special token <https://developers.lokalise.com/reference/api-authentication>`_
 that can be obtained in your personal Lokalise profile (*API tokens* section).
 
 After you've obtained the token, import the plugin and initialize the client:
@@ -34,7 +34,7 @@ You may also check the :ref:`customizing-client` section to learn how to set tim
 Initializing the client with OAuth 2 token
 ------------------------------------------
 
-You can also send API requests with `OAuth 2 tokens <https://python-lokalise-api.readthedocs.io/en/latest/additional_info/oauth2_flow.html>`_. To achieve that, you have to
+You can also send API requests with `OAuth 2 tokens <https://developers.lokalise.com/reference/api-authentication#oauth-2-authentication>`_. To achieve that, you have to
 instantiate a proper class:
 
 .. code-block:: python
@@ -103,7 +103,7 @@ To get access to the actual data, use ``items``:
   first_project.name
   first_project.description
 
-Bulk fetches support `pagination <https://app.lokalise.com/api2docs/curl/#resource-pagination>`_.
+Bulk fetches support `pagination <https://developers.lokalise.com/reference/api-pagination>`_.
 There are two common options available:
 
 * ``"limit"`` (defaults to ``100``, maximum is ``5000``) - number of records to display per page.

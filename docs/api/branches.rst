@@ -1,7 +1,7 @@
 Branches endpoint
 =================
 
-`Branches documentation <https://app.lokalise.com/api2docs/curl/#resource-branches>`_
+`Branches documentation <https://developers.lokalise.com/reference/list-all-branches>`_
 
 Fetch all branches
 ------------------

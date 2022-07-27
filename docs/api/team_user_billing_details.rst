@@ -1,7 +1,7 @@
 Team user billing details endpoint
 ==================================
 
-`Team user billing details documentation <https://app.lokalise.com/api2docs/curl/#resource-team-user-billing-details>`_
+`Team user billing details documentation <https://developers.lokalise.com/reference/retrieve-team-user-billing-details>`_
 
 Fetch team user billing details
 -------------------------------

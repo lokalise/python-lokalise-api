@@ -1,7 +1,7 @@
 Orders endpoint
 ===============
 
-`Orders documentation <https://app.lokalise.com/api2docs/curl/#resource-orders>`_
+`Orders documentation <https://developers.lokalise.com/reference/list-all-orders>`_
 
 Fetch all orders
 ----------------

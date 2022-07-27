@@ -1,7 +1,7 @@
 Segments endpoint
 =================
 
-`Segments documentation <https://app.lokalise.com/api2docs/curl/#resource-segments>`_
+`Segments documentation <https://developers.lokalise.com/reference/list-all-segments-for-key-language>`_
 
 Fetch all segments
 ------------------

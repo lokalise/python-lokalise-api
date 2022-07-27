@@ -6,7 +6,7 @@
 Lokalise API v2 Python interface
 ================================
 
-Official `Lokalise APIv2 <https://app.lokalise.com/api2docs/curl/>`_ Python
+Official `Lokalise APIv2 <https://developers.lokalise.com/reference/lokalise-rest-api>`_ Python
 interface that represents returned data as Python objects.
 
 .. code-block:: python

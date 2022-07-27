@@ -1,7 +1,7 @@
 Team user groups endpoint
 =========================
 
-`Team user groups documentation <https://app.lokalise.com/api2docs/curl/#resource-team-user-groups>`_
+`Team user groups documentation <https://developers.lokalise.com/reference/list-all-groups>`_
 
 Fetch all team user groups
 --------------------------

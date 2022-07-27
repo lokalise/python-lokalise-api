@@ -3,7 +3,7 @@
 Exception handling
 ==================
 
-`Learn more about error codes in the official doc <https://app.lokalise.com/api2docs/curl/#resource-errors>`_.
+`Learn more about error codes in the official doc <https://developers.lokalise.com/reference/api-errors>`_.
 
 The plugin may raise the following exceptions:
 

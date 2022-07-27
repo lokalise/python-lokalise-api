@@ -3,6 +3,16 @@
 Changelog
 =========
 
+1.5.0 (07-Jul-2022)
+-------------------
+
+* Added support for `Delete file endpoint <https://python-lokalise-api.readthedocs.io/en/latest/api/files.html#delete-file>`_:
+
+.. code-block:: python
+
+  response = client.delete_file(project_id, file_id)
+  response['file_deleted'] # => True
+
 1.4.0 (07-Mar-2022)
 -------------------
 

@@ -1,7 +1,7 @@
 Keys endpoint
 =============
 
-`Keys documentation <https://app.lokalise.com/api2docs/curl/#resource-keys>`_
+`Keys documentation <https://developers.lokalise.com/reference/list-all-keys>`_
 
 Fetch all keys
 --------------

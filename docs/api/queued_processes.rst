@@ -1,7 +1,7 @@
 Queued processes endpoint
 =========================
 
-`Queued processes documentation <https://app.lokalise.com/api2docs/curl/#resource-queued-processes>`_
+`Queued processes documentation <https://developers.lokalise.com/reference/list-all-processes>`_
 
 Fetch all queued processes
 --------------------------

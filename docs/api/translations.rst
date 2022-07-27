@@ -1,7 +1,7 @@
 Translations endpoint
 =====================
 
-`Translations documentation <https://app.lokalise.com/api2docs/curl/#resource-translations>`_
+`Translations documentation <https://developers.lokalise.com/reference/list-all-translations>`_
 
 Fetch all translations
 ----------------------

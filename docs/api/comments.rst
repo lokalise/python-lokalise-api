@@ -1,7 +1,7 @@
 Comments endpoint
 =================
 
-`Comments documentation <https://app.lokalise.com/api2docs/curl/#resource-comments>`_
+`Comments documentation <https://developers.lokalise.com/reference/list-project-comments>`_
 
 Fetch all project comments
 --------------------------
