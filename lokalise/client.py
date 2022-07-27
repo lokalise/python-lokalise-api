@@ -398,6 +398,21 @@ class Client:
             download(params=params, parent_id=project_id)
         return response
 
+    def delete_file(self, project_id: str,
+                    file_id: Union[str, int]) -> Dict:
+        """Deletes a file and it's associated keys from the project.
+        File __unassigned__ cannot be deleted.
+        This endpoint does not support "software localization" projects.
+
+        :param str project_id: ID of the project
+        :param file_id: ID of the file to delete
+        :return: Dictionary with project ID and "file_deleted" set to True
+        :rtype dict:
+        """
+        response = self.get_endpoint("files"). \
+            delete(parent_id=project_id, resource_id=file_id)
+        return response
+
     def keys(self,
              project_id: str,
              params: Optional[Dict[str, Any]] = None

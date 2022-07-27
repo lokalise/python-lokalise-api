@@ -11,7 +11,7 @@ from .. import request
 class FilesEndpoint(BaseEndpoint):
     """Describes files endpoint.
     """
-    PATH = "projects/$parent_id/files"
+    PATH = "projects/$parent_id/files/$resource_id"
 
     def upload(self, params: Dict[str, Any],
                **ids: Optional[Union[str, int]]) -> Dict:
@@ -22,7 +22,7 @@ class FilesEndpoint(BaseEndpoint):
         :rtype dict:
         """
         path = self.path_with_params(**ids)
-        return request.post(self.client, path + '/upload', params)
+        return request.post(self.client, path + 'upload', params)
 
     def download(self, params: Dict[str, Any],
                  **ids: Optional[Union[str, int]]) -> Dict:
@@ -33,4 +33,4 @@ class FilesEndpoint(BaseEndpoint):
         :rtype dict:
         """
         path = self.path_with_params(**ids)
-        return request.post(self.client, path + '/download', params)
+        return request.post(self.client, path + 'download', params)

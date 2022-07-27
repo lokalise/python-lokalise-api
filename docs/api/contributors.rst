@@ -1,7 +1,7 @@
 Contributors endpoint
 =====================
 
-`Contributors documentation <https://app.lokalise.com/api2docs/curl/#resource-contributors>`_
+`Contributors documentation <https://developers.lokalise.com/reference/list-all-contributors>`_
 
 Fetch all contributors
 ----------------------

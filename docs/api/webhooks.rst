@@ -1,7 +1,7 @@
 Webhooks endpoint
 =================
 
-`Webhooks documentation <https://app.lokalise.com/api2docs/curl/#resource-webhooks>`_
+`Webhooks documentation <https://developers.lokalise.com/reference/list-all-webhooks>`_
 
 Fetch all webhooks
 ------------------

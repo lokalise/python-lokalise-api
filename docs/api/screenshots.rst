@@ -1,7 +1,7 @@
 Screenshots endpoint
 ====================
 
-`Screenshots documentation <https://app.lokalise.com/api2docs/curl/#resource-screenshots>`_
+`Screenshots documentation <https://developers.lokalise.com/reference/list-all-screenshots>`_
 
 Fetch all screenshots
 ---------------------
