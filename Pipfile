@@ -11,7 +11,7 @@ pytest-cov = "~=3.0"
 pylint = "~= 2.14"
 pytest-pylint = "~= 0.3"
 mypy = "~= 0.961"
-python-dotenv = "~= 0.19.2"
+python-dotenv = "~= 0.21.0"
 autopep8 = "~= 1.6"
 importlib-metadata = "*"
 
