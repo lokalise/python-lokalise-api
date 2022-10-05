@@ -11,9 +11,11 @@ PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 def test_files(client):
     """Tests fetching of all files
     """
-    files = client.files(PROJECT_ID)
-    assert files.project_id == PROJECT_ID
-    assert files.items[0].filename == "%LANG_ISO%.xml"
+    project_id = "71749499610303a83ad8a2.67103833"
+    files = client.files(project_id)
+    assert files.project_id == project_id
+    assert files.items[0].filename == "%LANG_ISO%.yml"
+    assert files.items[0].file_id == 839819
 
 
 @pytest.mark.vcr

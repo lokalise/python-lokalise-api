@@ -4,19 +4,17 @@ interactions:
     headers:
       Accept:
       - application/json
-      Accept-Encoding:
-      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/1.5.0
       x-api-token:
       - FILTERED
     method: GET
-    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/files
+    uri: https://api.lokalise.com/api2/projects/71749499610303a83ad8a2.67103833/files
   response:
     body:
-      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","files":[{"filename":"%LANG_ISO%.xml","key_count":1},{"filename":"%LANG_ISO%.yml","key_count":4},{"filename":"__unassigned__","key_count":8}]}'
+      string: '{"project_id":"71749499610303a83ad8a2.67103833","branch":"master","files":[{"file_id":839819,"filename":"%LANG_ISO%.yml","key_count":58},{"file_id":1275799,"filename":"test.yml","key_count":1},{"file_id":-1,"filename":"__unassigned__","key_count":0}]}'
     headers:
       Access-Control-Allow-Headers:
       - Content-Type
@@ -29,13 +27,16 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 19 Jun 2020 12:08:41 GMT
+      - Wed, 05 Oct 2022 10:45:54 GMT
       Expires:
-      - Fri, 19 Jun 2020 12:08:41 GMT
-      Pragma:
-      - no-cache
+      - Wed, 05 Oct 2022 10:45:54 GMT
+      Referrer-Policy:
+      - origin
       Server:
       - nginx
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Tue, 05-Oct-2021 10:45:53 GMT; Max-Age=0; path=/;
+        httponly
       Strict-Transport-Security:
       - max-age=31536000
       Transfer-Encoding:
@@ -46,6 +47,8 @@ interactions:
       - nosniff
       X-Frame-Options:
       - deny
+      X-Lokalise-Process-Id:
+      - bf28fa21-fc3a-4d4b-b4c3-e05f728ef8b6
       X-Pagination-Limit:
       - '100'
       X-Pagination-Page:
@@ -56,8 +59,8 @@ interactions:
       - '3'
       X-XSS-Protection:
       - 1; mode=block
-      content-length:
-      - '208'
+      pragma:
+      - no-cache
     status:
       code: 200
       message: OK

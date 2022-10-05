@@ -11,6 +11,7 @@ class FileModel(BaseModel):
     """Describes file.
     """
     ATTRS = [
+        'file_id',
         'filename',
         'key_count'
     ]

@@ -3,6 +3,16 @@
 Changelog
 =========
 
+1.6.0 (05-Oct-2022)
+-------------------
+
+* Added `file_id` attribute to `File` model:
+
+.. code-block:: python
+
+  files = client.files(project_id)
+  files.items[0].file_id # => 839819
+
 1.5.0 (07-Jul-2022)
 -------------------
 
