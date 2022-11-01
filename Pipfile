@@ -12,7 +12,7 @@ pylint = "~= 2.15"
 pytest-pylint = "~= 0.3"
 mypy = "~= 0.982"
 python-dotenv = "~= 0.19.2"
-autopep8 = "~= 1.7"
+autopep8 = "~= 2.0"
 importlib-metadata = "*"
 
 [packages]
