@@ -6,6 +6,7 @@ This module contains API client definition.
 from typing import Any, Optional, Union, Dict, Callable, List
 import importlib
 from lokalise.utils import snake_to_camel
+from .base_client import BaseClient
 from .collections.branches import BranchesCollection
 from .collections.comments import CommentsCollection
 from .collections.contributors import ContributorsCollection
@@ -30,6 +31,7 @@ from .collections.webhooks import WebhooksCollection
 from .models.branch import BranchModel
 from .models.comment import CommentModel
 from .models.contributor import ContributorModel
+from .models.jwt import JwtModel
 from .models.key import KeyModel
 from .models.language import LanguageModel
 from .models.order import OrderModel
@@ -49,7 +51,7 @@ from .models.webhook import WebhookModel
 from .models.team_user_billing_details import TeamUsersBillingDetailsModel
 
 
-class Client:
+class Client(BaseClient):
     """Client used to send API requests.
 
     Usage:
@@ -58,30 +60,6 @@ class Client:
         client = lokalise.Client('api_token')
         client.projects()
     """
-
-    def __init__(self,
-                 token: str,
-                 connect_timeout: Optional[Union[int, float]] = None,
-                 read_timeout: Optional[Union[int, float]] = None,
-                 enable_compression: Optional[bool] = False) -> None:
-        """Instantiate a new Lokalise API client.
-
-        :param str token: Your Lokalise API token.
-        :param connect_timeout: (optional) Server connection timeout
-        (the value is in seconds). By default, the client will wait indefinitely.
-        :type connect_timeout: int or float
-        :param read_timeout: (optional) Server read timeout
-        (the value is in seconds). By default, the client will wait indefinitely.
-        :type read_timeout: int or float
-        :param enable_compression: (optional) Whether to enable gzip compression.
-        By default it's off.
-        :type enable_compression: bool
-        """
-        self.token = token
-        self.connect_timeout = connect_timeout
-        self.read_timeout = read_timeout
-        self.enable_compression = enable_compression
-        self.token_header = 'X-Api-Token'
 
     def reset_client(self) -> None:
         """Resets the API client by clearing all attributes.
@@ -412,6 +390,14 @@ class Client:
         response = self.get_endpoint("files"). \
             delete(parent_id=project_id, resource_id=file_id)
         return response
+
+    def jwt(self) -> JwtModel:
+        """Fetches OTA JWT.
+
+        :return: JWT model
+        """
+        raw_jwt = self.get_endpoint("jwt").find()
+        return JwtModel(raw_jwt)
 
     def keys(self,
              project_id: str,

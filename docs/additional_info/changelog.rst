@@ -3,6 +3,16 @@
 Changelog
 =========
 
+1.7.0 (30-Nov-2022)
+-------------------
+
+* Added support for the `JWT endpoint <https://developers.lokalise.com/reference/get-ota-jwt>`_.
+
+.. code-block:: python
+
+  response = client.jwt()
+  response.jwt # => "eyJ0eXAiOiJK..."
+
 1.6.0 (05-Oct-2022)
 -------------------
 

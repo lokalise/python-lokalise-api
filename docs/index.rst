@@ -47,6 +47,7 @@ Usage
    api/comments
    api/contributors
    api/files
+   api/jwt
    api/keys
    api/languages
    api/orders
