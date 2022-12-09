@@ -3,6 +3,13 @@
 Changelog
 =========
 
+2.0.0 (09-Dec-2022)
+-------------------
+
+* Drop support for Python 3.6
+* Switch to Poetry to perform dependency management and build
+* Minor updates
+
 1.7.0 (30-Nov-2022)
 -------------------
 

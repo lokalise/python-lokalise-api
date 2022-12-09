@@ -50,4 +50,4 @@ Find detailed documentation at [python-lokalise-api.readthedocs.io](https://pyth
 
 This plugin is licensed under the [BSD 3 Clause License](https://github.com/lokalise/python-lokalise-api/blob/master/LICENSE).
 
-Copyright (c) [Lokalise team](https://lokalise.com) and [Ilya Krukowski](http://bodrovis.tech)
+Copyright (c) [Lokalise group](https://lokalise.com) and [Ilya Krukowski](http://bodrovis.tech)

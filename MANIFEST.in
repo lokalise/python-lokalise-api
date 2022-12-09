@@ -1,7 +1,0 @@
-include LICENSE
-include *.md
-prune .DS_Store
-recursive-include tests *.py
-include Pipfile
-include Pipfile.lock
-include .env.sample
