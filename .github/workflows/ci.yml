@@ -6,13 +6,16 @@ on:
   push:
     branches: [ master ]
 
+env:
+  CODECOV_TOKEN: 690ea968-186e-40df-b491-478de6dc0746
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
     steps:
       - uses: actions/checkout@v3
       - name: Install Python, pipenv and Pipfile packages
