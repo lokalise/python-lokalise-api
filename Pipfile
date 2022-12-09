@@ -14,6 +14,7 @@ mypy = "~= 0.991"
 python-dotenv = "~= 0.21"
 autopep8 = "~= 2.0"
 importlib-metadata = "*"
+exceptiongroup = { version = "*", python = "< 3.11" } 
 
 [packages]
 requests = "~=2.28"
