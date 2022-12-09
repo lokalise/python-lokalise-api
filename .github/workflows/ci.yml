@@ -26,6 +26,7 @@ jobs:
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: ${{ matrix.poetry-version }}
+      - run: poetry install
       - run: poetry run mypy lokalise/ --ignore-missing-imports . || true
       - run: poetry run pytest --cov=lokalise --cov-report=xml --verbose --cov-report term
       - uses: codecov/codecov-action@v3
