@@ -29,7 +29,3 @@ jobs:
       - run: poetry install
       - run: poetry run mypy lokalise/ --ignore-missing-imports . || true
       - run: poetry run pytest --cov=lokalise --cov-report=xml --verbose --cov-report term
-      - uses: codecov/codecov-action@v3
-        with:
-          fail_ci_if_error: true
-          verbose: true

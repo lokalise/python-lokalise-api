@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-lokalise-api"
-version = "2.0.0"
+version = "2.1.0"
 description = "Official Python interface for the Lokalise API v2"
 authors = ["Ilya Krukowski <golosizpru@gmail.com>"]
 readme = "README.md"

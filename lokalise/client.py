@@ -391,12 +391,20 @@ class Client(BaseClient):
             delete(parent_id=project_id, resource_id=file_id)
         return response
 
-    def jwt(self) -> JwtModel:
-        """Fetches OTA JWT.
+    def jwt(
+        self,
+        project_id: str,
+        params: Optional[Dict[str, Any]] = None
+    ) -> JwtModel:
+        """Creates OTA JWT.
 
         :return: JWT model
         """
-        raw_jwt = self.get_endpoint("jwt").find()
+        if params is None:
+            params = {"service": "ota"}
+
+        raw_jwt = self.get_endpoint("jwt").create(
+            parent_id=project_id, params=params)
         return JwtModel(raw_jwt)
 
     def keys(self,

@@ -9,4 +9,4 @@ from .base_endpoint import BaseEndpoint
 class JwtEndpoint(BaseEndpoint):
     """Describes JWT endpoint.
     """
-    PATH = "jwt-tokens/ota"
+    PATH = "projects/$parent_id/tokens"

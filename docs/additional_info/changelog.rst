@@ -3,6 +3,16 @@
 Changelog
 =========
 
+2.1.0 (11-Jan-2023)
+-------------------
+
+* Updated the `jwt()` method. To request a JWT, you must provide the project ID:
+
+.. code-block:: python
+
+  response = client.jwt("1234.abcd")
+  response.jwt # => "eyJ0eXAiOiJK..."
+
 2.0.0 (09-Dec-2022)
 -------------------
 
