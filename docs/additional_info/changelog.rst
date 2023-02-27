@@ -3,6 +3,12 @@
 Changelog
 =========
 
+2.1.1 (27-Feb-2023)
+-------------------
+
+* Added the `source_language_iso` attribute for the `Task` model (thanks, @MVasquezDXC)
+* Updated dependencies
+
 2.1.0 (11-Jan-2023)
 -------------------
 

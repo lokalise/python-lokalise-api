@@ -75,6 +75,7 @@ def test_task(client):
     assert task.completed_by_email == "bodrovis@protonmail.com"
     assert not task.do_lock_translations
     assert task.custom_translation_status_ids == []
+    assert task.source_language_iso == 'en'
 
 
 @pytest.mark.vcr
