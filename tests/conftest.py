@@ -43,9 +43,8 @@ def screenshot_data():
             data = file.read()
     except FileNotFoundError:
         return ''
-    else:
-        file.close()
-        return data
+    file.close()
+    return data
 
 
 @pytest.fixture(scope='module')

@@ -113,5 +113,5 @@ class BaseEndpoint:
         in PATH and the provided ids. Some or all ids may be omitted depending
         on the actual endpoint.
         """
-        defaults = dict(parent_id='', resource_id='', subresource_id='')
+        defaults = {"parent_id": '', "resource_id": '', "subresource_id": ''}
         return Template(self.PATH).substitute(defaults, **ids)
