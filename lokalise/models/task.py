@@ -39,5 +39,6 @@ class TaskModel(BaseModel):
         'completed_at_timestamp',
         'completed_by',
         'completed_by_email',
-        'custom_translation_status_ids'
+        'custom_translation_status_ids',
+        'source_language_iso'
     ]
