@@ -21,3 +21,4 @@ demo.py
 *.egg-info
 docs/_build
 .mypy_cache
+coverage.lcov

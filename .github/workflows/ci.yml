@@ -28,4 +28,5 @@ jobs:
           poetry-version: ${{ matrix.poetry-version }}
       - run: poetry install
       - run: poetry run mypy lokalise/ --ignore-missing-imports . || true
-      - run: poetry run pytest --cov=lokalise --cov-report=xml --verbose --cov-report term
+      - run: poetry run pytest --cov=lokalise --cov-report=lcov
+      - uses: coverallsapp/github-action@v2
