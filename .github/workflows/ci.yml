@@ -27,7 +27,7 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - run: poetry install
-      - run: poetry run mypy lokalise/ --ignore-missing-imports . || true
+      - run: poetry run mypy lokalise/
       - run: poetry run pytest --cov=lokalise --cov-report=lcov
       - name: Coveralls
         uses: coverallsapp/github-action@v2

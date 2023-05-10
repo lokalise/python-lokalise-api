@@ -2,6 +2,7 @@
 
 ![PyPI](https://img.shields.io/pypi/v/python-lokalise-api)
 ![CI](https://github.com/lokalise/python-lokalise-api/actions/workflows/ci.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/lokalise/python-lokalise-api/badge.svg?branch=master)](https://coveralls.io/github/lokalise/python-lokalise-api?branch=master)
 [![Downloads](https://pepy.tech/badge/python-lokalise-api)](https://pepy.tech/project/python-lokalise-api)
 [![Docs](https://readthedocs.org/projects/python-lokalise-api/badge/?version=latest&style=flat)](https://python-lokalise-api.readthedocs.io)
 
