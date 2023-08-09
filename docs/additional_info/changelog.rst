@@ -3,6 +3,12 @@
 Changelog
 =========
 
+2.1.2 (09-Aug-2023)
+-------------------
+
+* Relaxed typings for `create_webhook` and `update_webhook` to allow passing the necessary parameters
+* Test with Python 3.12
+
 2.1.1 (27-Feb-2023)
 -------------------
 

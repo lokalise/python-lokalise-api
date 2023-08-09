@@ -1486,7 +1486,7 @@ class Client(BaseClient):
         return WebhookModel(raw_webhook)
 
     def create_webhook(self, project_id: str,
-                       params: Dict[str, str]
+                       params: Dict[str, Any]
                        ) -> WebhookModel:
         """Creates a webhook.
 
@@ -1499,7 +1499,7 @@ class Client(BaseClient):
         return WebhookModel(raw_webhook)
 
     def update_webhook(self, project_id: str, webhook_id: str,
-                       params: Optional[Dict[str, str]] = None) -> WebhookModel:
+                       params: Optional[Dict[str, Any]] = None) -> WebhookModel:
         """Updates a webhook.
 
         :param str project_id: ID of the project

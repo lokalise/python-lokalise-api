@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-lokalise-api"
-version = "2.1.1"
+version = "2.1.2"
 description = "Official Python interface for the Lokalise API v2"
 authors = ["Ilya Krukowski <golosizpru@gmail.com>"]
 readme = "README.md"
@@ -25,7 +25,6 @@ python = "^3.7"
 requests = "^2.28"
 exceptiongroup = { version = "*", python = "< 3.11" }
 importlib-metadata = { version = "*", python = "<= 3.7" }
-urllib3 = "<2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2"
