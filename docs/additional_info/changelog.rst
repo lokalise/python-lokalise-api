@@ -3,6 +3,11 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+* Require Python 3.8
+
 2.1.2 (09-Aug-2023)
 -------------------
 
