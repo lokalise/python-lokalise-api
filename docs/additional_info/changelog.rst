@@ -39,7 +39,7 @@ Unreleased
 1.7.0 (30-Nov-2022)
 -------------------
 
-* Added support for the `JWT endpoint <https://developers.lokalise.com/reference/get-ota-jwt>`_.
+* Added support for the `JWT endpoint <https://developers.lokalise.com/reference/create-service-jwt>`_.
 
 .. code-block:: python
 
