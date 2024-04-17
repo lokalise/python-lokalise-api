@@ -3,10 +3,11 @@
 Changelog
 =========
 
-Unreleased
-----------
+2.2.0 (17-Apr-2024)
+-------------------
 
 * Require Python 3.8
+* Update dependencies
 
 2.1.2 (09-Aug-2023)
 -------------------
