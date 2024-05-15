@@ -144,6 +144,27 @@ For example:
   projects.has_next_page() # => False, no more pages available
   projects.has_prev_page() # => True, there is a previous page available
 
+Cursor pagination
+-----------------
+
+The `List Keys <https://developers.lokalise.com/reference/list-all-keys>`_ and `List Translations <https://developers.lokalise.com/reference/list-all-translations>`_ endpoints support cursor pagination, which is recommended for its faster performance compared to traditional "offset" pagination. By default, "offset" pagination is used, so you must explicitly set `pagination` to `"cursor"` to use cursor pagination.
+
+.. code-block:: python
+
+  keys = client.keys(YOUR_PROJECT_ID, {
+      "limit": 2, # The number of items to fetch. Optional, default is 100
+      "pagination": "cursor",
+      "cursor": "eyIxIjo0NDU5NjA2MX0=" # The starting cursor. Optional, string
+  })
+
+After retrieving data from the Lokalise API, you can check for the availability of the next cursor and proceed accordingly:
+
+.. code-block:: python
+
+  keys.has_next_cursor() # => True or False
+  keys.next_cursor # => String or None
+
+
 Branching
 ---------
 

@@ -24,6 +24,8 @@ Example:
   })
   translations.items[0].translation_id # => 220681321
 
+This endpoint also supports cursor pagination which is now a recommended approach, especially for fetching large amounts of data. Please `learn more in the docs <https://python-lokalise-api.readthedocs.io/en/latest/api/getting-started#cursor-pagination>`_.
+
 Fetch a translation
 -------------------
 

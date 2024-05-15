@@ -3,6 +3,22 @@
 Changelog
 =========
 
+2.3.0 (15-May-2024)
+-------------------
+
+* Add support for `cursor pagination <https://python-lokalise-api.readthedocs.io/en/latest/api/getting-started#cursor-pagination>`_ for List keys and List translation endpoints:
+
+.. code-block:: python
+
+  keys = client.keys(YOUR_PROJECT_ID, {
+      "limit": 2, # The number of items to fetch. Optional, default is 100
+      "pagination": "cursor",
+      "cursor": "eyIxIjo0NDU5NjA2MX0=" # The starting cursor. Optional, string
+  })
+
+  keys.has_next_cursor() # => True or False
+  keys.next_cursor # => String or None
+
 2.2.0 (17-Apr-2024)
 -------------------
 

@@ -5,6 +5,7 @@ Tests for the Keys endpoint.
 import pytest
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
+PROJECT_ID2 = "2273827860c1e2473eb195.11207948"
 KEY_ID = 34089721
 
 
@@ -29,7 +30,30 @@ def test_keys(client):
     assert not keys.is_first_page()
     assert keys.has_next_page()
     assert keys.has_prev_page()
+    assert not keys.has_next_cursor()
+    assert keys.next_cursor is None
 
+@pytest.mark.vcr
+def test_keys_cursor(client):
+    """Tests fetching of keys with cursor
+    """
+    keys = client.keys(PROJECT_ID2, {
+        "disable_references": "1",
+        "limit": 2,
+        "pagination": "cursor",
+        "cursor": "eyIxIjo0NDU5NjA2MX0="
+    })
+    assert keys.project_id == PROJECT_ID2
+    assert keys.items[0].key_id == 94981678
+    assert keys.current_page == 0
+    assert keys.total_count == 0
+    assert keys.page_count == 0
+    assert keys.limit == 2
+    assert keys.next_cursor == "eyIxIjoyNTU5ODU3MTB9"
+
+    assert keys.has_next_cursor()
+    assert not keys.has_next_page()
+    assert not keys.has_prev_page()
 
 @pytest.mark.vcr
 def test_create_keys(client):

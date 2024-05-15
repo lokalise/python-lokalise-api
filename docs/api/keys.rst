@@ -12,12 +12,9 @@ Fetch all keys
   :param dict params: Request parameters
   :return: Collection of keys
 
-Please note that this endpoint should not be treated as a content delivery network
-for your language files. It means that you should not perform a new request to this endpoint
-with every website/app visitor. Instead, fetch this endpoint from time to time,
-store the result locally and serve your visitors with static files/your database content.
-Alternatively, you may use our Amazon S3/Google CloudStorage integrations in
-automatically upload your language files to a bucket of your choice.
+This endpoint also supports cursor pagination which is now a recommended approach, especially for fetching large amounts of data. Please `learn more in the docs <https://python-lokalise-api.readthedocs.io/en/latest/api/getting-started#cursor-pagination>`_.
+
+Please note that this endpoint should not be treated as a content delivery network for your language files. It means that you should not perform a new request to this endpoint with every website/app visitor. Instead, fetch this endpoint from time to time, store the result locally and serve your visitors with static files/your database content. Alternatively, you may use our Amazon S3/Google CloudStorage integrations in automatically upload your language files to a bucket of your choice.
 
 Example:
 

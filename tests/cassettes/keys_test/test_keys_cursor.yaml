@@ -1,0 +1,68 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/2.1.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/2273827860c1e2473eb195.11207948/keys?disable_references=1&limit=2&pagination=cursor&cursor=eyIxIjo0NDU5NjA2MX0%3D
+  response:
+    body:
+      string: '{"project_id":"2273827860c1e2473eb195.11207948","branch":"master","keys":[{"key_id":94981678,"created_at":"2021-06-10
+        09:59:09 (Etc\/UTC)","created_at_timestamp":1623319149,"key_name":{"ios":"f986261c453f5e38fc1c390b4d903b63765aed86","android":"f986261c453f5e38fc1c390b4d903b63765aed86","web":"f986261c453f5e38fc1c390b4d903b63765aed86","other":"f986261c453f5e38fc1c390b4d903b63765aed86"},"filenames":{"ios":"","android":"","web":"messages.%LANG_ISO%.xlf","other":""},"description":"","platforms":["web"],"tags":[],"is_plural":false,"plural_name":"","is_hidden":false,"is_archived":true,"context":"ng2.template","base_words":2,"char_limit":0,"custom_attributes":"{\"datatype\":
+        \"html\", \"context-groups\": [{\"purpose\": \"location\", \"contexts\": [{\"value\":
+        \"src\/app\/home\/home.component.html\", \"context-type\": \"sourcefile\"},
+        {\"value\": \"21\", \"context-type\": \"linenumber\"}]}]}","modified_at":"2022-12-15
+        13:15:58 (Etc\/UTC)","modified_at_timestamp":1671110158,"translations_modified_at":"2023-05-24
+        12:10:16 (Etc\/UTC)","translations_modified_at_timestamp":1684930216},{"key_id":255985710,"created_at":"2022-12-27
+        19:26:12 (Etc\/UTC)","created_at_timestamp":1672169172,"key_name":{"ios":"your_order","android":"your_order","web":"your_order","other":"your_order"},"filenames":{"ios":"","android":"%LANG_ISO%.xml","web":"%LANG_ISO%.json","other":""},"description":"","platforms":["android","web"],"tags":[],"is_plural":false,"plural_name":"","is_hidden":false,"is_archived":true,"context":"","base_words":3,"char_limit":0,"custom_attributes":"","modified_at":"2023-02-13
+        10:47:24 (Etc\/UTC)","modified_at_timestamp":1676285244,"translations_modified_at":"2023-05-24
+        12:10:16 (Etc\/UTC)","translations_modified_at_timestamp":1684930216}]}'
+    headers:
+      Cache-Control:
+      - max-age=-172800, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 May 2024 11:25:21 GMT
+      Expires:
+      - Fri, 17 May 2024 11:25:21 GMT
+      Referrer-Policy:
+      - origin
+      Server:
+      - nginx
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Tue, 16-May-2023 11:25:20 GMT; Max-Age=0; path=/;
+        httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - 520fe42e-326d-4d46-8de2-c8973b1ccd51
+      X-Pagination-Limit:
+      - '2'
+      X-Pagination-Next-Cursor:
+      - eyIxIjoyNTU5ODU3MTB9
+      X-XSS-Protection:
+      - 1; mode=block
+      pragma:
+      - no-cache
+    status:
+      code: 200
+      message: OK
+version: 1

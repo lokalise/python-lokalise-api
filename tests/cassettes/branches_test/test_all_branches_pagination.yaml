@@ -4,39 +4,36 @@ interactions:
     headers:
       Accept:
       - application/json
-      Accept-Encoding:
-      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/0.0.1
+      - python-lokalise-api plugin/2.1.1
       x-api-token:
       - FILTERED
     method: GET
-    uri: https://api.lokalise.com/api2/projects/454087345e09f3e7e7eae3.57891254/branches?page=2&limit=1
+    uri: https://api.lokalise.com/api2/projects/2273827860c1e2473eb195.11207948/branches?page=2&limit=1
   response:
     body:
-      string: '{"project_id":"454087345e09f3e7e7eae3.57891254","branch":"master","branches":[{"branch_id":45845,"name":"master","created_at":"2019-12-30
-        12:56:07 (Etc\/UTC)","created_at_timestamp":1577710567,"created_by":20181,"created_by_email":"bodrovis@protonmail.com"}]}'
+      string: '{"project_id":"2273827860c1e2473eb195.11207948","branch":"master","branches":[{"branch_id":362586,"name":"demo","created_at":"2023-11-20
+        19:04:57 (Etc\/UTC)","created_at_timestamp":1700507097,"created_by":20181,"created_by_email":"bodrovis@protonmail.com"}]}'
     headers:
-      Access-Control-Allow-Headers:
-      - Content-Type
-      Access-Control-Allow-Origin:
-      - '*'
       Cache-Control:
-      - max-age=0, must-revalidate, no-cache, no-store, private
+      - max-age=-172799, must-revalidate, no-cache, no-store, private
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Thu, 18 Jun 2020 11:18:41 GMT
+      - Wed, 15 May 2024 11:18:28 GMT
       Expires:
-      - Thu, 18 Jun 2020 11:18:41 GMT
-      Pragma:
-      - no-cache
+      - Fri, 17 May 2024 11:18:27 GMT
+      Referrer-Policy:
+      - origin
       Server:
       - nginx
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Tue, 16-May-2023 11:18:27 GMT; Max-Age=0; path=/;
+        httponly
       Strict-Transport-Security:
       - max-age=31536000
       Transfer-Encoding:
@@ -47,18 +44,20 @@ interactions:
       - nosniff
       X-Frame-Options:
       - deny
+      X-Lokalise-Process-Id:
+      - 6b47b661-500a-4115-af9b-543cdde665d2
       X-Pagination-Limit:
       - '1'
       X-Pagination-Page:
       - '2'
       X-Pagination-Page-Count:
-      - '1'
+      - '4'
       X-Pagination-Total-Count:
-      - '1'
+      - '4'
       X-XSS-Protection:
       - 1; mode=block
-      content-length:
-      - '259'
+      pragma:
+      - no-cache
     status:
       code: 200
       message: OK

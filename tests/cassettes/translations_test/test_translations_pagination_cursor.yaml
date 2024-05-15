@@ -1,0 +1,61 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/2.1.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/803826145ba90b42d5d860.46800099/translations?limit=2&disable_references=1&filter_untranslated=1&pagination=cursor&cursor=eyIxIjozMDQ1ODEyMTJ9
+  response:
+    body:
+      string: '{"project_id":"803826145ba90b42d5d860.46800099","branch":"master","translations":[{"translation_id":304581213,"segment_number":1,"key_id":44596059,"language_iso":"sq","translation":"","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2023-09-22
+        16:23:59 (Etc\/UTC)","modified_at_timestamp":1695399839,"is_reviewed":false,"reviewed_by":0,"is_unverified":true,"is_fuzzy":true,"words":0,"custom_translation_statuses":[],"task_id":null},{"translation_id":304581223,"segment_number":1,"key_id":44596060,"language_iso":"ar_001","translation":"{\"zero\":\"\",\"one\":\"\",\"two\":\"\",\"few\":\"\",\"many\":\"\",\"other\":\"\"}","modified_by":20181,"modified_by_email":"bodrovis@protonmail.com","modified_at":"2020-05-11
+        11:20:33 (Etc\/UTC)","modified_at_timestamp":1589196033,"is_reviewed":false,"reviewed_by":0,"is_unverified":true,"is_fuzzy":true,"words":0,"custom_translation_statuses":[],"task_id":null}]}'
+    headers:
+      Cache-Control:
+      - max-age=-172800, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 May 2024 11:30:19 GMT
+      Expires:
+      - Fri, 17 May 2024 11:30:19 GMT
+      Referrer-Policy:
+      - origin
+      Server:
+      - nginx
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Tue, 16-May-2023 11:30:18 GMT; Max-Age=0; path=/;
+        httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - 556a9602-6878-4a97-90ee-0271bf22793f
+      X-Pagination-Limit:
+      - '2'
+      X-Pagination-Next-Cursor:
+      - eyIxIjozMDQ1ODEyMjN9
+      X-XSS-Protection:
+      - 1; mode=block
+      pragma:
+      - no-cache
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -36,12 +36,34 @@ def test_translations_pagination(client):
     assert translations.total_count == 21
     assert translations.page_count == 5
     assert translations.limit == 5
+    assert translations.next_cursor is None
 
     assert not translations.is_last_page()
+    assert not translations.has_next_cursor()
     assert not translations.is_first_page()
     assert translations.has_next_page()
     assert translations.has_prev_page()
 
+@pytest.mark.vcr
+def test_translations_pagination_cursor(client):
+    """Tests fetching of all translations with pagination and cursor
+    """
+    translations = client.translations(ANOTHER_PROJECT_ID, {
+        "limit": 2,
+        "disable_references": "1",
+        "filter_untranslated": 1,
+        "pagination": "cursor",
+        "cursor": "eyIxIjozMDQ1ODEyMTJ9"
+    })
+    assert translations.project_id == ANOTHER_PROJECT_ID
+    assert translations.items[0].translation_id == 304581213
+    assert translations.current_page == 0
+    assert translations.total_count == 0
+    assert translations.page_count == 0
+    assert translations.limit == 2
+    assert translations.next_cursor == "eyIxIjozMDQ1ODEyMjN9"
+
+    assert translations.has_next_cursor()
 
 @pytest.mark.vcr
 def test_translation(client):

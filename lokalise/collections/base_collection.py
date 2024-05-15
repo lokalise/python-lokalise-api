@@ -56,6 +56,7 @@ class BaseCollection:
             self.page_count = int(pagination.get("x-pagination-page-count", 0))
             self.limit = int(pagination.get("x-pagination-limit", 0))
             self.current_page = int(pagination.get("x-pagination-page", 0))
+            self.next_cursor = pagination.get("x-pagination-next-cursor", None)
 
     def is_last_page(self) -> bool:
         """Checks whether the current collection set is the last page.
@@ -84,6 +85,13 @@ class BaseCollection:
         :rtype: bool
         """
         return self.current_page > 1
+
+    def has_next_cursor(self) -> bool:
+        """Checks whether the current collection set has the next cursor.
+
+        :rtype: bool
+        """
+        return self.next_cursor is not None
 
     def __extract_common_attrs(self, raw_data: Dict) -> None:
         """Fetches common data from the response and sets the

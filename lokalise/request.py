@@ -20,7 +20,8 @@ PAGINATION_HEADERS = [
     "x-pagination-total-count",
     "x-pagination-page-count",
     "x-pagination-limit",
-    "x-pagination-page"
+    "x-pagination-page",
+    "x-pagination-next-cursor"
 ]
 
 
