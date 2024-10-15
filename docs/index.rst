@@ -52,6 +52,7 @@ Usage
    api/languages
    api/orders
    api/payment_cards
+   api/permission_templates
    api/projects
    api/queued_processes
    api/snapshots

@@ -19,5 +19,6 @@ class TeamUserGroupModel(BaseModel):
         'created_at_timestamp',
         'team_id',
         'projects',
-        'members'
+        'members',
+        "role_id",
     ]

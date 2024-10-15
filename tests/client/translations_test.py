@@ -44,6 +44,7 @@ def test_translations_pagination(client):
     assert translations.has_next_page()
     assert translations.has_prev_page()
 
+
 @pytest.mark.vcr
 def test_translations_pagination_cursor(client):
     """Tests fetching of all translations with pagination and cursor
@@ -64,6 +65,7 @@ def test_translations_pagination_cursor(client):
     assert translations.next_cursor == "eyIxIjozMDQ1ODEyMjN9"
 
     assert translations.has_next_cursor()
+
 
 @pytest.mark.vcr
 def test_translation(client):

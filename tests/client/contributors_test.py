@@ -51,6 +51,7 @@ def test_contributor(client):
     assert contributor.is_reviewer
     assert contributor.languages[0]["lang_id"] == 10052
     assert contributor.admin_rights[0] == "upload"
+    assert contributor.role_id == 5
 
 
 @pytest.mark.vcr

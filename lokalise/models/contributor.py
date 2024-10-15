@@ -22,4 +22,5 @@ class ContributorModel(BaseModel):
         "is_reviewer",
         "languages",
         "admin_rights",
+        "role_id",
     ]

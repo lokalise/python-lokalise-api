@@ -1,0 +1,75 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/2.1.1
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/teams/176692/roles
+  response:
+    body:
+      string: '{"roles":[{"id":1,"role":"Manager","permissions":["activity","branches_main_modify","branches_create","branches_merge","statistics","tasks","contributors","settings","manage_languages","download","upload","glossary_delete","glossary_edit","manage_keys","screenshots","review","custom_status_modify"],"description":"Manage
+        project settings, contributors and tasks","tag":"Full access","tagColor":"green","tagInfo":null,"doesEnableAllReadOnlyLanguages":true},{"id":2,"role":"Developer","permissions":["activity","branches_main_modify","branches_create","download","upload","manage_keys","screenshots"],"description":"Create
+        keys, upload and download content","tag":"Advanced","tagColor":"cyan","tagInfo":null,"doesEnableAllReadOnlyLanguages":true},{"id":3,"role":"Content
+        creator","permissions":["activity","manage_keys","manage_languages","screenshots","branches_main_modify"],"description":"Create,
+        translate and edit keys, manage screenshots","tag":"Advanced","tagColor":"cyan","tagInfo":null,"doesEnableAllReadOnlyLanguages":true},{"id":4,"role":"Reviewer","permissions":["branches_main_modify","review","custom_status_modify"],"description":"Translate
+        keys, control key statuses","tag":"Basic","tagColor":"grey","tagInfo":"All
+        users, regardless of their assigned roles and permissions, are granted entry-level
+        access, such as: View glossary, View source content, Collaborate via comments,
+        Limited access to editor, Generate API tokens","doesEnableAllReadOnlyLanguages":false},{"id":5,"role":"Translator","permissions":["branches_main_modify"],"description":"Translate
+        keys","tag":"Basic","tagColor":"grey","tagInfo":"All users, regardless of
+        their assigned roles and permissions, are granted entry-level access, such
+        as: View glossary, View source content, Collaborate via comments, Limited
+        access to editor, Generate API tokens","doesEnableAllReadOnlyLanguages":false}]}'
+    headers:
+      Cache-Control:
+      - max-age=-172800, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 15 Oct 2024 16:26:21 GMT
+      Expires:
+      - Thu, 17 Oct 2024 16:26:21 GMT
+      Referrer-Policy:
+      - origin
+      Server:
+      - nginx
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Mon, 16-Oct-2023 16:26:20 GMT; Max-Age=0; path=/;
+        httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - aa5c55d8-3117-40a6-bbba-d781e1ee9dcf
+      X-Pagination-Limit:
+      - '5'
+      X-Pagination-Page:
+      - '1'
+      X-Pagination-Page-Count:
+      - '1'
+      X-Pagination-Total-Count:
+      - '5'
+      X-XSS-Protection:
+      - 1; mode=block
+      pragma:
+      - no-cache
+    status:
+      code: 200
+      message: OK
+version: 1

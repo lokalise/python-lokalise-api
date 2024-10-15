@@ -54,6 +54,7 @@ def test_team_user_group(client):
     assert group.team_id == 176692
     assert "531138705d0ba0c18f5b43.63503311" in group.projects
     assert 20181 in group.members
+    assert group.role_id == 5
 
 
 @pytest.mark.vcr

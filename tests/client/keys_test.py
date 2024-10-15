@@ -33,6 +33,7 @@ def test_keys(client):
     assert not keys.has_next_cursor()
     assert keys.next_cursor is None
 
+
 @pytest.mark.vcr
 def test_keys_cursor(client):
     """Tests fetching of keys with cursor
@@ -54,6 +55,7 @@ def test_keys_cursor(client):
     assert keys.has_next_cursor()
     assert not keys.has_next_page()
     assert not keys.has_prev_page()
+
 
 @pytest.mark.vcr
 def test_create_keys(client):

@@ -6,7 +6,35 @@ Changelog
 3.0.0 (15-Oct-2024)
 -------------------
 
-* Drop support for Python 3.8 (EOL)
+* Drop support for Python 3.8 (EOL), test with Python 3.13
+* Added support for `PermissionTemplates` endpoint:
+
+.. code-block:: python
+
+  templates = client.permission_templates(TEAM_ID)
+  
+  template.id # => 1
+  template.role # => "Manager"
+  template.permissions # => ['branches_main_modify', ...]
+  template.description # => 'Manage project settings ...'
+  template.tag # => 'Full access'
+  template.tagColor # => 'green'
+  template.tagInfo # => ''
+  template.doesEnableAllReadOnlyLanguages # => true
+
+* Added `role_id` to the `Contributor` model
+
+.. code-block:: python
+
+  contributor = client.contributor(PROJECT_ID, CONTRIBUTOR_ID)
+  contributor.role_id # => 5
+
+* Added `role_id` to the `TeamUserGroup` model
+
+.. code-block:: python
+
+  group = client.team_user_group(TEAM_ID, GROUP_ID)
+  group.role_id # => 5
 
 2.3.0 (15-May-2024)
 -------------------

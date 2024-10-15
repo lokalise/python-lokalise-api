@@ -15,6 +15,7 @@ from .collections.keys import KeysCollection
 from .collections.languages import LanguagesCollection
 from .collections.orders import OrdersCollection
 from .collections.payment_cards import PaymentCardsCollection
+from .collections.permission_templates import PermissionTemplatesCollection
 from .collections.projects import ProjectsCollection
 from .collections.queued_processes import QueuedProcessesCollection
 from .collections.snapshots import SnapshotsCollection
@@ -685,6 +686,18 @@ class Client(BaseClient):
             delete(parent_id=payment_card_id)
         return resp
 
+    def permission_templates(
+            self, team_id: Union[int, str]) -> PermissionTemplatesCollection:
+        """Fetches all permission templates for the given team.
+
+        :param team_id: ID of the team
+        :type team_id: int or str
+        :return: Collection of permission templates
+        """
+        raw_templates = self.get_endpoint("permission_templates"). \
+            all(parent_id=team_id)
+        return PermissionTemplatesCollection(raw_templates)
+
     def projects(self, params: Optional[Dict] = None) -> ProjectsCollection:
         """Fetches all projects available to the currently authorized user
         (identified by the API token).
@@ -916,7 +929,7 @@ class Client(BaseClient):
             subresource_id=lang_iso)
         return SegmentsCollection(raw_segments)
 
-    # pylint: disable=too-many-arguments
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
     def segment(self,
                 project_id: str,
                 key_id: Union[str, int],
@@ -964,7 +977,7 @@ class Client(BaseClient):
             resource_id=key_id,
             subresource_id=f"{lang_iso}/{segment_number}")
         return SegmentModel(raw_segment)
-    # pylint: enable=too-many-arguments
+    # pylint: enable=too-many-arguments,too-many-positional-arguments
 
     def tasks(self, project_id: str,
               params: Optional[Dict] = None) -> TasksCollection:
