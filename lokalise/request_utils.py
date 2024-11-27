@@ -8,6 +8,7 @@ import json
 from typing import Any, Optional, Dict, NoReturn
 from requests import Response
 from lokalise import errors
+import lokalise.client
 
 
 def raise_on_error(response: Response, data: Dict[str, Any]) -> None:
@@ -36,6 +37,16 @@ def respond_with_error(data: Dict[str, Any], code: Any) -> NoReturn:
         raise errors.ERROR_CODES[code](msg, code)
 
     raise errors.ClientError(msg, code)
+
+
+def path_to_endpoint(
+        client: lokalise.client.Client,
+        default_base_uri: str,
+        path: str) -> str:
+    """Prepares the URI to send request to."""
+    base_uri: str = client.api_host or default_base_uri
+    full_path = base_uri + path
+    return __prepare(full_path)
 
 
 def __format_params(params: Optional[Dict] = None) -> Optional[str]:

@@ -17,11 +17,13 @@ class OAuthClient(Client):
         client.projects()
     """
 
+    # pylint: disable=too-many-arguments,too-many-positional-arguments
     def __init__(self,
                  token: str,
                  connect_timeout: Optional[Union[int, float]] = None,
                  read_timeout: Optional[Union[int, float]] = None,
-                 enable_compression: Optional[bool] = False) -> None:
+                 enable_compression: Optional[bool] = False,
+                 api_host: Optional[str] = None) -> None:
         """Instantiate a new Lokalise API client with OAuth 2 token.
 
         :param str token: Your Lokalise API token obtained via OAuth 2 flow.
@@ -32,10 +34,17 @@ class OAuthClient(Client):
         (the value is in seconds). By default, the client will wait indefinitely.
         :type read_timeout: int or float
         :param enable_compression: (optional) Whether to enable gzip compression.
+        :param api_host: (optional) Custom API host to send requests to.
         By default it's off.
         :type enable_compression: bool
         """
-        super().__init__(token, connect_timeout, read_timeout, enable_compression)
+        super().__init__(
+            token,
+            connect_timeout,
+            read_timeout,
+            enable_compression,
+            api_host)
 
         self.token = f"Bearer {token}"
         self.token_header = 'Authorization'
+    # pylint: enable=too-many-arguments,too-many-positional-arguments

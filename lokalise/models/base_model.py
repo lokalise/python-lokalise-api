@@ -63,13 +63,8 @@ class BaseModel:
     def __str__(self) -> str:
         """Converts a model to string
         """
-        result = ""
-        for attr in self.ATTRS:
-            if len(result) != 0:
-                result += "\n"
-            result += f"{attr}: {getattr(self, attr)}"
-
-        return result
+        return "\n".join(
+            f"{attr}: {getattr(self, attr)}" for attr in self.ATTRS)
 
     def __extract_common_attrs(self, raw_data: Dict) -> None:
         """Fetches common data from the response and sets the

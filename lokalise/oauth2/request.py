@@ -9,6 +9,7 @@ import requests
 from lokalise.request_utils import raise_on_error, __format_params, __prepare
 from lokalise._version import __version__
 
+
 BASE_URL = "https://app.lokalise.com/oauth2/"
 
 
@@ -20,9 +21,11 @@ def post(path: str,
     :param params: Other request params
     :rtype dict:
     """
+    # pylint: disable=missing-timeout
     return respond_with(requests.post(__prepare(BASE_URL + path),
                                       data=__format_params(params),
                                       **options()))
+    # pylint: enable=missing-timeout
 
 
 def respond_with(response: requests.models.Response) -> Dict:

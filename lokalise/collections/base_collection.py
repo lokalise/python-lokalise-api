@@ -44,7 +44,7 @@ class BaseCollection:
         """
         self.__extract_common_attrs(raw_data)
 
-        raw_items = raw_data[self.DATA_KEY]
+        raw_items = raw_data.get(self.DATA_KEY, [])
         self.items = []
         for item in raw_items:
             self.items.append(self.MODEL_KLASS(item))  # pylint: disable=E1102
@@ -93,7 +93,7 @@ class BaseCollection:
         """
         return self.next_cursor is not None
 
-    def __extract_common_attrs(self, raw_data: Dict) -> None:
+    def __extract_common_attrs(self, raw_data: Dict[str, Any]) -> None:
         """Fetches common data from the response and sets the
         corresponding attributes.
         """

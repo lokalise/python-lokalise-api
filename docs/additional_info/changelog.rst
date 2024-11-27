@@ -3,6 +3,21 @@
 Changelog
 =========
 
+3.1.0 (27-Nov-2024)
+-------------------
+
+* Allow to provide a custom API host:
+
+.. code-block:: python
+
+  custom_api_host = "http://example.com/api/"
+  client = lokalise.Client(
+      "token",
+      connect_timeout=5,
+      read_timeout=3,
+      enable_compression=True,
+      api_host=custom_api_host)
+
 3.0.0 (15-Oct-2024)
 -------------------
 

@@ -25,6 +25,18 @@ You can also enable gzip compression by setting the `enable_compression` option 
 
   client = lokalise.Client('token', connect_timeout=5, read_timeout=7, enable_compression=True)
 
+It's also possible to use a different API host:
+
+.. code-block:: python
+  
+  custom_api_host = "http://example.com/api/"
+  client = lokalise.Client(
+      "token",
+      connect_timeout=5,
+      read_timeout=3,
+      enable_compression=True,
+      api_host=custom_api_host)
+
 Resetting client
 ----------------
 

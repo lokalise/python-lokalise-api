@@ -10,7 +10,7 @@ Attributes:
 """
 from typing import Optional, Dict
 import requests
-from lokalise.request_utils import raise_on_error, __format_params, __prepare
+from lokalise.request_utils import raise_on_error, path_to_endpoint, __format_params
 import lokalise.client
 from ._version import __version__
 
@@ -35,7 +35,7 @@ def get(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.get(__prepare(BASE_URL + path),
+    return respond_with(requests.get(path_to_endpoint(client, BASE_URL, path),
                                      params=params,
                                      **options(client)))
 
@@ -50,7 +50,7 @@ def post(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.post(__prepare(BASE_URL + path),
+    return respond_with(requests.post(path_to_endpoint(client, BASE_URL, path),
                                       data=__format_params(params),
                                       **options(client)))
 
@@ -65,7 +65,7 @@ def put(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.put(__prepare(BASE_URL + path),
+    return respond_with(requests.put(path_to_endpoint(client, BASE_URL, path),
                                      data=__format_params(params),
                                      **options(client)))
 
@@ -80,9 +80,14 @@ def patch(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.patch(__prepare(BASE_URL + path),
-                                       data=__format_params(params),
-                                       **options(client)))
+    return respond_with(
+        requests.patch(
+            path_to_endpoint(
+                client,
+                BASE_URL,
+                path),
+            data=__format_params(params),
+            **options(client)))
 
 
 def delete(client: lokalise.client.Client, path: str,
@@ -95,9 +100,14 @@ def delete(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.delete(__prepare(BASE_URL + path),
-                                        data=__format_params(params),
-                                        ** options(client)))
+    return respond_with(
+        requests.delete(
+            path_to_endpoint(
+                client,
+                BASE_URL,
+                path),
+            data=__format_params(params),
+            ** options(client)))
 
 
 def respond_with(response: requests.models.Response) -> Dict:
