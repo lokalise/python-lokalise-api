@@ -1,8 +1,10 @@
-[tool.poetry]
+[project]
 name = "python-lokalise-api"
 version = "3.1.1"
 description = "Official Python interface for the Lokalise API v2"
-authors = ["Ilya Krukowski <golosizpru@gmail.com>"]
+authors = [
+    {name = "Ilya Krukowski", email = "golosizpru@gmail.com"}
+]
 readme = "README.md"
 license = "BSD-3-Clause"
 repository = "https://github.com/lokalise/python-lokalise-api"
@@ -16,18 +18,30 @@ classifiers=[
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
 ]
+
+
+
+requires-python = ">=3.9"
+
+dependencies = [
+    "requests (>=2.32.0,<3.0.0)",
+    "exceptiongroup (>=1.0,<2.0) ; python_version < '3.11'"
+]
+
+[project.urls]
+homepage = "https://python-lokalise-api.readthedocs.io/"
+repository = "https://github.com/lokalise/python-lokalise-api/issues"
+
+
+[tool.poetry]
+
 packages = [
     { include = "lokalise" }
 ]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-requests = ">=2.31,<3.0"
-exceptiongroup = { version = "*", python = "< 3.11" }
-
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3"
-vcrpy = "^6.0"
+vcrpy = "^7.0"
 pytest-vcr = "^1.0.2"
 pytest-cov = "^6.0"
 pylint = "^3.3"
@@ -36,17 +50,16 @@ mypy = "^1.7"
 python-dotenv = "^1.0"
 autopep8 = "^2.0"
 
-[tool.poetry.urls]
-"Bug Tracker" = "https://github.com/lokalise/python-lokalise-api/issues"
-
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 testpaths = "tests"
 norecursedirs = ".git .github tmp* .eggs bin build include lib share src lokalise docs"
 addopts = "-s --cov=lokalise --cov-report html --cov-report=term --pylint"
+
+
 
 [tool.pylint.MASTER]
 min-public-methods="0"
