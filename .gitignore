@@ -13,7 +13,6 @@ env/
 .eggs/
 .tox/
 .pytest_cache/
-.eggs/
 dist/
 __pycache__/
 demo.py
