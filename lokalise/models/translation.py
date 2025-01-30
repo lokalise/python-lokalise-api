@@ -22,6 +22,7 @@ class TranslationModel(BaseModel):
         'modified_by_email',
         'translation',
         'is_fuzzy',
+        'is_unverified',
         'is_reviewed',
         'reviewed_by',
         'words',
