@@ -22,3 +22,4 @@ demo.py
 docs/_build
 .mypy_cache
 coverage.lcov
+.idea/

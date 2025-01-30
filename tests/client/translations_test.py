@@ -81,6 +81,7 @@ def test_translation(client):
     assert translation.modified_at == "2020-05-15 10:44:42 (Etc/UTC)"
     assert translation.modified_at_timestamp == 1589539482
     assert translation.modified_by == 20181
+    assert translation.is_unverified is True
     assert translation.modified_by_email == "bodrovis@protonmail.com"
     assert translation.translation == "Сообщение"
     assert not translation.is_fuzzy
