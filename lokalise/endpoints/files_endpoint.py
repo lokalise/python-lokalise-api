@@ -34,3 +34,14 @@ class FilesEndpoint(BaseEndpoint):
         """
         path = self.path_with_params(**ids)
         return request.post(self.client, path + 'download', params)
+
+    def download_async(self, params: Dict[str, Any],
+                       **ids: Optional[Union[str, int]]) -> Dict:
+        """Downloads files from the project asynchronously.
+
+        :param dict params: Upload parameters
+        :param ids: Identifiers for path generation
+        :rtype dict:
+        """
+        path = self.path_with_params(**ids)
+        return request.post(self.client, path + 'async-download', params)

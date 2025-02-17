@@ -3,6 +3,26 @@
 Changelog
 =========
 
+3.2.0 (17-Feb-2025)
+-------------------
+
+* Add support for `async file downloads <https://developers.lokalise.com/reference/download-files-async>`_:
+
+.. code-block:: python
+
+  process = client.download_files_async(PROJECT_ID, {
+      "format": "json",
+      "original_filenames": True,
+      "replace_breaks": False
+  })
+
+  process_info = client.queued_process(
+    PROJECT_ID,
+    process.process_id
+  )
+
+  process_info.status # => 'finished'
+
 3.1.1 (30-Jan-2025)
 -------------------
 

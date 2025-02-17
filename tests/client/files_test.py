@@ -68,6 +68,19 @@ def test_download_files(client):
 
 
 @pytest.mark.vcr
+def test_download_files_async(client):
+    """Tests async files downloading
+    """
+    process = client.download_files_async("6504960967ab53d45e0ed7.15877499", {
+        "format": "json",
+        "original_filenames": True,
+        "replace_breaks": False
+    })
+
+    assert process.process_id == "1efed4e6-461a-6d6e-a779-dea3ae8b7e9e"
+
+
+@pytest.mark.vcr
 def test_delete_file(client):
     """Tests file deletion
     """

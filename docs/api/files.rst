@@ -70,6 +70,37 @@ Example:
   })
   response['bundle_url'] # => "https://s3-eu-west-1.amazonaws.com/path/to/bundle.zip"
 
+
+Download files async
+--------------------
+
+.. py:function:: download_files_async(project_id, params)
+
+  :param str project_id: ID of the project to download file from
+  :param dict params: Download params
+  :return: Queued process model
+
+Please note that the async file download will be performed in the background, and this method will
+return a :ref:`QueuedProcess <queued-process>` with a process ID.
+
+Example:
+
+.. code-block:: python
+
+  process = client.download_files_async(PROJECT_ID, {
+      "format": "json",
+      "original_filenames": True,
+      "replace_breaks": False
+  })
+
+  process_info = client.queued_process(
+    PROJECT_ID,
+    process.process_id
+  )
+
+  process_info.status # => 'finished'
+
+
 Delete file
 -----------
 

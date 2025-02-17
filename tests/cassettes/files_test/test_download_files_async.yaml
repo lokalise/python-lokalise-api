@@ -1,0 +1,53 @@
+interactions:
+- request:
+    body: '{"format": "json", "original_filenames": true, "replace_breaks": false}'
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '71'
+      User-Agent:
+      - python-lokalise-api plugin/3.1.0
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/6504960967ab53d45e0ed7.15877499/files/async-download
+  response:
+    body:
+      string: '{"process_id":"1efed4e6-461a-6d6e-a779-dea3ae8b7e9e"}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 17 Feb 2025 16:44:01 GMT
+      Expires:
+      - Mon, 17 Feb 2025 16:44:01 GMT
+      Referrer-Policy:
+      - origin
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Sun, 18-Feb-2024 16:44:00 GMT; Max-Age=0; path=/;
+        httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - 108b4847-b35e-403a-9cf0-dbaf286ae1c2
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

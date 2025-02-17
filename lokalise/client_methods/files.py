@@ -51,6 +51,18 @@ class FileMethods(EndpointProviderMixin):
             download(params=params, parent_id=project_id)
         return response
 
+    def download_files_async(self, project_id: str,
+                             params: Dict[str, Any]) -> QueuedProcessModel:
+        """Downloads files from the given project asynchronously.
+
+        :param str project_id: ID of the project to download file from
+        :param dict params: Download params
+        :return: Queued process model
+        """
+        raw_process = self.get_endpoint("files"). \
+            download_async(params=params, parent_id=project_id)
+        return QueuedProcessModel(raw_process)
+
     def delete_file(self, project_id: str,
                     file_id: Union[str, int]) -> Dict:
         """Deletes a file and it's associated keys from the project.

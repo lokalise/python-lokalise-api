@@ -1,0 +1,54 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/3.1.0
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/6504960967ab53d45e0ed7.15877499/processes/1efed4e6-461a-6d6e-a779-dea3ae8b7e9e
+  response:
+    body:
+      string: '{"process":{"process_id":"1efed4e6-461a-6d6e-a779-dea3ae8b7e9e","type":"async-export","status":"finished","message":null,"created_by":20181,"created_at":"2025-02-17
+        17:44:02 (Europe\/Berlin)","created_at_timestamp":1739810642,"details":{"file_size_kb":1,"total_number_of_keys":4,"download_url":"https:\/\/lokalise-live-lok-s3-fss-export.s3.eu-central-1.amazonaws.com\/export\/176692\/6504960967ab53d45e0ed7.15877499\/export\/d28ed227-ee26-49a3-8630-4f00e7629d2b?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAQVSVRZDELRGVB7RH%2F20250217%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20250217T164609Z&X-Amz-Expires=86400&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFEaDGV1LWNlbnRyYWwtMSJHMEUCIQDZ07HeySK1LMUEe3iuBfL7plZdgJGwmmsyOX2BOaHHaAIgKV4EUKjCc7oruE7l%2BOhZ5FDE%2FIyQqPrXyre0EmGRH6wqjgUIehABGgwwNDYzNTAzMjE4NjQiDDMhgC2ljQQxZHkhZirrBF%2FHuTF7gyP0Tt9qq3yYrITevELsg%2Fdhl1HUirQGm%2FE%2Fh9DELYLL5Z%2F0HbvHqKAfG32RE5A6vvX32FNrY%2BduyH2yC%2BM4xJ97Zk6e4cnyXj5tN%2FJw%2Bmke7GpBsK0%2BDM9zeABQs%2Fhczcq%2Fur2hfSPRVDkw1FZsOrvVqfzUdaOOBpL8zSCT2AkDitb5P74u1j4ZyDpxuU7f3xJwyzkrDzOrah%2BQL3Nxy3E4QYQo2HLetVttTKK4yAGF1gL2N2TsTsrIDeEETYJ9QB1pGTyOE2f0XkV3nS6HrAkYwJZpeeg2yTKc5h6Zgj5mmUkuO%2FlgargqSxndZT0GxN6Jpq9ctt40VqfRG7PA0epVhzEuHRcr1jMYEuX0Lsz9Njn3NDtP1rtMLIdwBq%2FOH5xC8sQ9d1h8BZacVPR4TQmALWDDPK%2FMzfwVbhKP3zpoxhMQcmA2B98tnmNIo0zRWra%2F9ozm79mKFhf0dAYGXFNYEAfhe0koDgZG58V6Gq4P%2BBLqaK%2FEJo0rE50E8q54bQcyo%2BU%2BQrExDmCyhUelHoffEK8MX4rrVs%2FHSPVlnTaPjzSLofWy1rD1AZiP%2BK%2Bp9knAmWPxYS4ScTkIBGn0MK9rBwz2czMpZ%2Biv2hVMamsSCGkb9qDWQcWyUdm0rhbkHmxN8815AFv7i2Lc0I5VhWzdHIWVfvp2aGLeCvo4cQYiqX%2BmkOyeGZV0N9Z2LhLqbKKqUPAilzDxwH3jrKP%2BCiGUy0FhPjSDziufoPQuqtz67%2BHYjc68rHXKTKvvKI3lpP8oQFnMd6LmenBK75uus9A6IHsiqYtBJ%2Fjw4oM7pre8BF8ySI0ws87NvQY6mgEVModVeG44pcxxXH9b1CAOe9sVdtURWYTUg6yy%2FU%2FXpK2IE1xQbm3c1kWd998MRxIsaea%2Fo7PIuxhu9UBgFehIE2lB9BFMrGp%2Fv1RqcmATVwv6BdsWJ6s9BYl1uKJoufqJ3vwx9%2FeziarO%2FS5On67OXAvbjxQNBNlo%2BehGvNcNloAtogmRso5%2BYW0%2BwFR4Iq2kxICjx5tk8Uzc&X-Amz-Signature=7e7efee586bdcd34d3288002df2255d23ff6d24f35b1e1c1569d9ed1648c55b7&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"}}}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, no-cache, no-store, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 17 Feb 2025 16:46:09 GMT
+      Expires:
+      - Mon, 17 Feb 2025 16:46:09 GMT
+      Pragma:
+      - no-cache
+      Referrer-Policy:
+      - origin
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Sun, 18-Feb-2024 16:46:08 GMT; Max-Age=0; path=/;
+        httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - f2a1f9b1-4c9f-4305-bc1a-dbb0d2067f87
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1
