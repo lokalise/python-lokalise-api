@@ -39,7 +39,7 @@ class FilesEndpoint(BaseEndpoint):
                        **ids: Optional[Union[str, int]]) -> Dict:
         """Downloads files from the project asynchronously.
 
-        :param dict params: Upload parameters
+        :param dict params: Download parameters
         :param ids: Identifiers for path generation
         :rtype dict:
         """
