@@ -6,8 +6,7 @@ Getting started
 Installation and requirements
 -----------------------------
 
-This plugin requires `Python 3.6 <http://www.python.org/>`_ or above
-and `PIP <https://pypi.org/project/pip/>`_.
+This plugin requires `Python 3.9 <http://www.python.org/>`_ or above and `PIP <https://pypi.org/project/pip/>`_.
 
 Install it by running:
 
@@ -147,7 +146,7 @@ For example:
 Cursor pagination
 -----------------
 
-The `List Keys <https://developers.lokalise.com/reference/list-all-keys>`_ and `List Translations <https://developers.lokalise.com/reference/list-all-translations>`_ endpoints support cursor pagination, which is recommended for its faster performance compared to traditional "offset" pagination. By default, "offset" pagination is used, so you must explicitly set `pagination` to `"cursor"` to use cursor pagination.
+The `List Keys <https://developers.lokalise.com/reference/list-all-keys>`_,  `List Translations <https://developers.lokalise.com/reference/list-all-translations>`_ and some other endpoints support cursor pagination, which is recommended for its faster performance compared to traditional "offset" pagination. By default, "offset" pagination is used, so you must explicitly set `pagination` to `"cursor"` to use cursor pagination.
 
 .. code-block:: python
 
