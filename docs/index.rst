@@ -40,33 +40,34 @@ Usage
 -----
 
 .. toctree::
-   :maxdepth: 2
+  :maxdepth: 2
 
-   api/getting_started
-   api/branches
-   api/comments
-   api/contributors
-   api/files
-   api/jwt
-   api/keys
-   api/languages
-   api/orders
-   api/payment_cards
-   api/permission_templates
-   api/projects
-   api/queued_processes
-   api/snapshots
-   api/screenshots
-   api/segments
-   api/tasks
-   api/teams
-   api/team_users
-   api/team_user_groups
-   api/team_user_billing_details
-   api/translations
-   api/translation_providers
-   api/translation_statuses
-   api/webhooks
+  api/getting_started
+  api/branches
+  api/comments
+  api/contributors
+  api/files
+  api/glossary_terms
+  api/jwt
+  api/keys
+  api/languages
+  api/orders
+  api/payment_cards
+  api/permission_templates
+  api/projects
+  api/queued_processes
+  api/snapshots
+  api/screenshots
+  api/segments
+  api/tasks
+  api/teams
+  api/team_users
+  api/team_user_groups
+  api/team_user_billing_details
+  api/translations
+  api/translation_providers
+  api/translation_statuses
+  api/webhooks
 
 Additional information
 ----------------------

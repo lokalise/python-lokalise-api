@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/3.1.0
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/6504960967ab53d45e0ed7.15877499/glossary-terms?limit=2
+  response:
+    body:
+      string: '{"data":[{"id":5319746,"term":"router","description":"A network device","caseSensitive":false,"translatable":true,"forbidden":false,"translations":[{"langId":597,"langName":"Russian","langIso":"ru","translation":"","description":""},{"langId":640,"langName":"English","langIso":"en","translation":"","description":""},{"langId":674,"langName":"French
+        (Canada)","langIso":"fr_CA","translation":"","description":""}],"tags":[],"createdAt":"2025-03-31
+        15:01:00 (Etc\/UTC)","updatedAt":null},{"id":5489103,"term":"sample term","description":"and
+        desc","caseSensitive":false,"translatable":false,"forbidden":false,"translations":[{"langId":597,"langName":"Russian","langIso":"ru","translation":"","description":""},{"langId":640,"langName":"English","langIso":"en","translation":"","description":""},{"langId":674,"langName":"French
+        (Canada)","langIso":"fr_CA","translation":"","description":""}],"tags":[],"createdAt":"2025-04-22
+        12:36:34 (Etc\/UTC)","updatedAt":null}],"meta":{"count":2,"limit":2,"cursor":0,"hasMore":true,"nextCursor":5489103}}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 22 Apr 2025 13:43:47 GMT
+      Expires:
+      - Tue, 22 Apr 2025 13:43:47 GMT
+      Referrer-Policy:
+      - origin
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Mon, 22-Apr-2024 13:43:46 GMT; Max-Age=0; path=/;
+        secure; httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - 49507807-f08e-4269-a896-c501ffa9c5e3
+      X-Pagination-Next-Cursor:
+      - '5489103'
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

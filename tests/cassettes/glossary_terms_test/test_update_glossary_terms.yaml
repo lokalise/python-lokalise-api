@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: '{"terms": [{"id": 5319746, "description": "A commonly used network device",
+      "caseSensitive": false}]}'
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '101'
+      User-Agent:
+      - python-lokalise-api plugin/3.3.0
+      x-api-token:
+      - FILTERED
+    method: PUT
+    uri: https://api.lokalise.com/api2/projects/6504960967ab53d45e0ed7.15877499/glossary-terms
+  response:
+    body:
+      string: '{"data":[{"id":5319746,"term":"router","description":"A commonly used
+        network device","caseSensitive":false,"translatable":true,"forbidden":false,"translations":[{"langId":597,"langName":"Russian","langIso":"ru","translation":"","description":""},{"langId":640,"langName":"English","langIso":"en","translation":"","description":""},{"langId":674,"langName":"French
+        (Canada)","langIso":"fr_CA","translation":"","description":""}],"tags":[],"createdAt":"2025-03-31
+        15:01:00 (Etc\/UTC)","updatedAt":"2025-04-22 14:48:03 (Etc\/UTC)"}],"meta":{"count":1,"updated":1,"limit":500},"errors":[]}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 22 Apr 2025 14:48:03 GMT
+      Expires:
+      - Tue, 22 Apr 2025 14:48:03 GMT
+      Referrer-Policy:
+      - origin
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Mon, 22-Apr-2024 14:48:02 GMT; Max-Age=0; path=/;
+        secure; httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - 27411bad-8c2c-41be-9e0d-ef532805ee71
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

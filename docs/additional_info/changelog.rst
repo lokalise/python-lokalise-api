@@ -3,6 +3,52 @@
 Changelog
 =========
 
+3.3.0 (22-Apr-2025)
+-------------------
+
+* Added support for `GlossaryTerms <https://developers.lokalise.com/reference/list-glossary-terms>`_ endpoint:
+
+.. code-block:: python
+
+  glossary_terms = client.glossary_terms(PROJECT_ID, {
+    "limit": 2,
+  })
+
+  glossary_term = glossary_terms.items[0]
+  glossary_term.term # => "router"
+  glossary_terms.next_cursor # => "5489103"
+
+
+  new_glossary_terms = client.create_glossary_terms(PROJECT_ID, [
+      {
+          "term": "python",
+          "description": "sample desc",
+          "caseSensitive": False,
+          "forbidden": False,
+          "translatable": True,
+          "tags": ["term1"]
+      },
+      {
+          "term": "code editor",
+          "description": "",
+          "caseSensitive": False,
+          "forbidden": False,
+          "translatable": True,
+          "translations": [{
+              "langId": 674,
+              "translation": "éditeur de code",
+              "description": (
+                  "Logiciel permettant d’écrire, modifier "
+                  "et organiser du code informatique."
+              )
+          }],
+          "tags": ["term2"]
+      },
+  ])
+
+  new_glossary_terms.items[0].term # => "python"
+
+
 3.2.0 (17-Feb-2025)
 -------------------
 

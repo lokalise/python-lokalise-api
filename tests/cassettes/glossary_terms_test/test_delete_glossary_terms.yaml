@@ -1,0 +1,53 @@
+interactions:
+- request:
+    body: '{"terms": [5489361, 5489360]}'
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '29'
+      User-Agent:
+      - python-lokalise-api plugin/3.3.0
+      x-api-token:
+      - FILTERED
+    method: DELETE
+    uri: https://api.lokalise.com/api2/projects/6504960967ab53d45e0ed7.15877499/glossary-terms
+  response:
+    body:
+      string: '{"data":{"deleted":{"count":2,"ids":[5489360,5489361]}},"meta":[]}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 22 Apr 2025 14:59:34 GMT
+      Expires:
+      - Tue, 22 Apr 2025 14:59:34 GMT
+      Referrer-Policy:
+      - origin
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Mon, 22-Apr-2024 14:59:33 GMT; Max-Age=0; path=/;
+        secure; httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - bbb08468-4c4a-4a77-8a6e-1aa6601a9f47
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

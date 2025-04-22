@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: '{"terms": [{"term": "python", "description": "sample desc", "caseSensitive":
+      false, "forbidden": false, "translatable": true, "tags": ["term1"]}, {"term":
+      "code editor", "description": "", "caseSensitive": false, "forbidden": false,
+      "translatable": true, "translations": [{"langId": 674, "translation": "\u00e9diteur
+      de code", "description": "Logiciel permettant d\u2019\u00e9crire, modifier et
+      organiser du code informatique."}], "tags": ["term2"]}]}'
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '451'
+      User-Agent:
+      - python-lokalise-api plugin/3.3.0
+      x-api-token:
+      - FILTERED
+    method: POST
+    uri: https://api.lokalise.com/api2/projects/6504960967ab53d45e0ed7.15877499/glossary-terms
+  response:
+    body:
+      string: '{"data":[{"id":5489362,"term":"python","description":"sample desc","caseSensitive":false,"translatable":true,"forbidden":false,"translations":[{"langId":597,"langName":"Russian","langIso":"ru","translation":"","description":""},{"langId":640,"langName":"English","langIso":"en","translation":"","description":""},{"langId":674,"langName":"French
+        (Canada)","langIso":"fr_CA","translation":"","description":""}],"tags":["term1"],"createdAt":"2025-04-22
+        15:04:48 (Etc\/UTC)","updatedAt":null},{"id":5489363,"term":"code editor","description":"","caseSensitive":false,"translatable":true,"forbidden":false,"translations":[{"langId":597,"langName":"Russian","langIso":"ru","translation":"","description":""},{"langId":640,"langName":"English","langIso":"en","translation":"","description":""},{"langId":674,"langName":"French
+        (Canada)","langIso":"fr_CA","translation":"\u00e9diteur de code","description":"Logiciel
+        permettant d\u2019\u00e9crire, modifier et organiser du code informatique."}],"tags":["term2"],"createdAt":"2025-04-22
+        15:04:48 (Etc\/UTC)","updatedAt":null}],"meta":{"count":2,"created":2,"limit":500},"errors":[]}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 22 Apr 2025 15:04:48 GMT
+      Expires:
+      - Tue, 22 Apr 2025 15:04:48 GMT
+      Referrer-Policy:
+      - origin
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Mon, 22-Apr-2024 15:04:47 GMT; Max-Age=0; path=/;
+        secure; httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - ab643d45-8717-452c-9357-86677c3a985e
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -26,12 +26,15 @@ def respond_with_error(data: Dict[str, Any], code: Any) -> NoReturn:
     :param code: Response status code
     """
     msg: str = ''
+
     if 'error' in data:
         msg = data['error']
         if isinstance(msg, Dict):
-            msg = msg['message']
+            msg = msg.get('message', '')
+    elif 'errors' in data and isinstance(data['errors'], list):
+        msg = '; '.join(data['errors'])
     else:
-        msg = data['message']
+        msg = data.get('message', 'Unknown error')
 
     if code in errors.ERROR_CODES:
         raise errors.ERROR_CODES[code](msg, code)

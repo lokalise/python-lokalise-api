@@ -11,6 +11,7 @@ from .client_methods.branches import BranchMethods
 from .client_methods.comments import CommentMethods
 from .client_methods.contributors import ContributorMethods
 from .client_methods.files import FileMethods
+from .client_methods.glossary_terms import GlossaryTermsMethods
 from .client_methods.jwt import JwtMethods
 from .client_methods.keys import KeyMethods
 from .client_methods.languages import LanguageMethods
@@ -39,6 +40,7 @@ class Client(
         CommentMethods,
         ContributorMethods,
         FileMethods,
+        GlossaryTermsMethods,
         JwtMethods,
         KeyMethods,
         LanguageMethods,
