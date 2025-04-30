@@ -14,6 +14,7 @@ class GlossaryTermModel(BaseModel):
 
     ATTRS = [
         'id',
+        'projectId',
         'term',
         'description',
         'caseSensitive',

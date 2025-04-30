@@ -1,6 +1,6 @@
 [project]
 name = "python-lokalise-api"
-version = "3.3.0"
+version = "3.4.0"
 description = "Official Python interface for the Lokalise API v2"
 authors = [
     {name = "Ilya Krukowski", email = "golosizpru@gmail.com"}
@@ -18,8 +18,6 @@ classifiers=[
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
 ]
-
-
 
 requires-python = ">=3.9"
 
@@ -58,8 +56,6 @@ build-backend = "poetry.core.masonry.api"
 testpaths = "tests"
 norecursedirs = ".git .github tmp* .eggs bin build include lib share src lokalise docs"
 addopts = "-s --cov=lokalise --cov-report html --cov-report=term --pylint"
-
-
 
 [tool.pylint.MASTER]
 min-public-methods="0"

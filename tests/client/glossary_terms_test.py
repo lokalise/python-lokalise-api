@@ -33,6 +33,7 @@ def test_glossary_term(client):
     glossary_term = client.glossary_term(PROJECT_ID, GLOSSARY_TERM_ID)
 
     assert glossary_term.term == "router"
+    assert glossary_term.projectId == PROJECT_ID
     assert glossary_term.description == "A network device"
     assert not glossary_term.caseSensitive
     assert glossary_term.translatable

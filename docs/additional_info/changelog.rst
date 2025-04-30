@@ -3,6 +3,11 @@
 Changelog
 =========
 
+3.4.0 (30-Apr-2025)
+-------------------
+
+* Added `projectId` field for glossary entries
+
 3.3.0 (22-Apr-2025)
 -------------------
 
