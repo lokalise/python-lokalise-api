@@ -41,6 +41,17 @@ class ContributorMethods(EndpointProviderMixin):
             find(parent_id=project_id, resource_id=contributor_id)
         return ContributorModel(raw_contributor)
 
+    def current_contributor(self,
+                            project_id: str) -> ContributorModel:
+        """Fetches current contributor (on per-token basis).
+
+        :param str project_id: ID of the project
+        :return: Contributor model
+        """
+        raw_contributor = self.get_endpoint("contributors"). \
+            find(parent_id=project_id, resource_id="me")
+        return ContributorModel(raw_contributor)
+
     def create_contributors(self,
                             project_id: str,
                             params: Union[Dict[str, Any], List[Dict]]

@@ -36,6 +36,24 @@ Example:
   contributor.email == "test@example.com"
   contributor.fullname == "John Doe"
 
+Fetch current contributor
+-------------------------
+
+This endpoint returns contributor in the given project based on the user whose token is used to send the request. In other words, it returns information about self in scope of a project.
+
+.. py:function:: current_contributor(project_id)
+
+  :param str project_id: ID of the project
+  :return: Contributor model
+
+Example:
+
+.. code-block:: python
+
+  contributor = client.current_contributor('123.abc')
+  
+  contributor.fullname == "John Doe"
+
 Create one or multiple contributors
 -----------------------------------
 

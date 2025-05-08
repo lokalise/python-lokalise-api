@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/3.5.0
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/5868381966b39e5053ff15.63486389/contributors/me
+  response:
+    body:
+      string: '{"contributor":{"user_id":20181,"email":"bodrovis@protonmail.com","fullname":"Ilya
+        B","created_at":"2018-08-21 15:35:25 (Etc\/UTC)","created_at_timestamp":1534865725,"is_admin":true,"is_reviewer":true,"languages":[{"lang_id":640,"lang_iso":"en","lang_name":"English","is_writable":true},{"lang_id":673,"lang_iso":"fr","lang_name":"French","is_writable":true}],"admin_rights":["upload","download","tasks","contributors","screenshots","glossary","keys","languages","settings","create_branches","activity","statistics","branches_create","branches_merge","glossary_edit","glossary_delete","review","branches_main_modify","custom_status_modify"],"role_id":1,"uuid":"01655d20-5648-7d1e-8dd7-6206606b7818"},"project_id":"5868381966b39e5053ff15.63486389","project_uuid":"01912da2-6880-73d6-8ad4-e91557e36a78"}'
+    headers:
+      Cache-Control:
+      - max-age=0, must-revalidate, private
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 08 May 2025 13:27:43 GMT
+      Expires:
+      - Thu, 08 May 2025 13:27:43 GMT
+      Referrer-Policy:
+      - origin
+      Set-Cookie:
+      - PHPSESSID=deleted; expires=Wed, 08-May-2024 13:27:42 GMT; Max-Age=0; path=/;
+        secure; httponly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Lokalise-Process-Id:
+      - f9c1c6ce-adc0-4544-903b-3d2fd4645933
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

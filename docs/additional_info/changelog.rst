@@ -3,6 +3,12 @@
 Changelog
 =========
 
+3.5.0 (08-May-2025)
+-------------------
+
+* Added support for `Current contributor <https://developers.lokalise.com/reference/retrieve-me-as-a-contributor>`_ endpoint
+* Added support for `Fetch team <https://developers.lokalise.com/reference/get-team-details>`_ endpoint
+
 3.4.0 (30-Apr-2025)
 -------------------
 

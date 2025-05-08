@@ -55,6 +55,16 @@ def test_contributor(client):
 
 
 @pytest.mark.vcr
+def test_current_contributor(client):
+    """Tests fetching of current contributor
+    """
+    contributor = client.current_contributor("5868381966b39e5053ff15.63486389")
+
+    assert contributor.user_id == CONTRIBUTOR_ID
+    assert contributor.fullname == "Ilya B"
+
+
+@pytest.mark.vcr
 def test_create_contributors(client):
     """Tests creation of multiple contributors
     """

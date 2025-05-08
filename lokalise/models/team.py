@@ -11,6 +11,8 @@ class TeamModel(BaseModel):
     """Describes team model.
     """
 
+    DATA_KEY = 'team'
+
     ATTRS = [
         'team_id',
         'name',

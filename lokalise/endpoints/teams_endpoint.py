@@ -9,4 +9,4 @@ from .base_endpoint import BaseEndpoint
 class TeamsEndpoint(BaseEndpoint):
     """Describes teams endpoint.
     """
-    PATH = "teams"
+    PATH = "teams/$parent_id"

@@ -5,6 +5,9 @@ Tests for the Teams endpoint.
 import pytest
 
 
+TEAM_ID = 176692
+
+
 @pytest.mark.vcr
 def test_teams(client):
     """Tests fetching of all teams
@@ -35,3 +38,13 @@ def test_teams_pagination(client):
     assert not teams.is_first_page()
     assert not teams.has_next_page()
     assert teams.has_prev_page()
+
+
+@pytest.mark.vcr
+def test_team(client):
+    """Tests fetching of a team
+    """
+    team = client.team(TEAM_ID)
+
+    assert team.team_id == TEAM_ID
+    assert team.name == "Ilya's Team"
