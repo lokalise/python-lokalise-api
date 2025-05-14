@@ -3,12 +3,13 @@ lokalise.endpoints.files_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module containing files endpoint.
 """
+import warnings
 from typing import Dict, Union, Any, Optional
 from .base_endpoint import BaseEndpoint
 from .. import request
 
-import warnings
 warnings.formatwarning = lambda msg, *args, **kwargs: f"{msg}\n"
+
 
 class FilesEndpoint(BaseEndpoint):
     """Describes files endpoint.
@@ -39,7 +40,9 @@ class FilesEndpoint(BaseEndpoint):
         response = request.post(self.client, path + 'download', params)
 
         if '_response_too_big' in response:
-            warnings.warn('Warning: ' + response['_response_too_big'], UserWarning)
+            warnings.warn(
+                'Warning: Project is too big for sync export. Please use our async export function '
+                'instead (download_files_async)', UserWarning)
 
         return response
 

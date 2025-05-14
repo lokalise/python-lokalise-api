@@ -8,7 +8,7 @@ Attributes:
     :attribute str BASE_URL: path to the Lokalise APIv2.
     :attribute list PAGINATION_HEADERS: list of response headers that contain pagination data.
 """
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 import requests
 from lokalise.request_utils import raise_on_error, path_to_endpoint, __format_params
 import lokalise.client
@@ -124,25 +124,27 @@ def respond_with(response: requests.models.Response) -> Dict:
     return {**data, **extract_headers_from(response)}
 
 
-def extract_headers_from(response: requests.models.Response) -> Dict:
-    """Fetches pagination-related data from the response headers
+def extract_headers_from(response: requests.models.Response) -> Dict[str, Any]:
+    """
+    Pull pagination metadata (and the oversized flag) out of an HTTP response.
 
-    :param response: Response from the API
-    :rtype dict:
+    Returns a dict like:
+    {
+        "_pagination": { "x-pagination-page": "3", ... },
+        "_response_too_big": True   # only when x-response-too-big header is present
+    }
     """
 
-    pagination_headers = {
-        k.lower(): v for k, v in response.headers.items()
-        if k.lower() in PAGINATION_HEADERS
-    }
+    headers_lower = {k.lower(): v for k, v in response.headers.items()}
 
-    too_big_export_header = None
-    if 'X-Response-Too-Big' in response.headers:
-        too_big_export_header = response.headers['X-Response-Too-Big']
+    pagination = {
+        k: v for k,
+        v in headers_lower.items() if k in PAGINATION_HEADERS}
 
-    result = {"_pagination": pagination_headers}
-    if too_big_export_header is not None:
-        result["_response_too_big"] = 'Project too big for sync export. Please use our async export function instead (download_files_async)'
+    result: Dict[str, Any] = {"_pagination": pagination}
+
+    if "x-response-too-big" in headers_lower:
+        result["_response_too_big"] = True
 
     return result
 
