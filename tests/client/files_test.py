@@ -65,6 +65,23 @@ def test_download_files(client):
     })
     assert response['project_id'] == PROJECT_ID
     assert r"amazonaws.com" in response['bundle_url']
+    assert '_response_too_big' not in response
+
+
+@pytest.mark.vcr
+def test_download_files_too_big(client):
+    """Tests files downloading with X-Response-Too-Big header
+    """
+    with pytest.warns(UserWarning, match="Project is too big for sync export"):
+        response = client.download_files(PROJECT_ID, {
+            "format": "json",
+            "original_filenames": True,
+            "replace_breaks": False
+        })
+
+    assert response['project_id'] == PROJECT_ID
+    assert r"amazonaws.com" in response['bundle_url']
+    assert '_response_too_big' in response
 
 
 @pytest.mark.vcr

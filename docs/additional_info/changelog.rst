@@ -3,6 +3,11 @@
 Changelog
 =========
 
+3.5.1 (14-May-2025)
+-------------------
+
+* Added `_response_too_big` param in the `download_files` method for `Current contributor <https://developers.lokalise.com/reference/download-files>`_ endpoint
+
 3.5.0 (08-May-2025)
 -------------------
 

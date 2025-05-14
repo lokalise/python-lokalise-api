@@ -13,8 +13,10 @@ class GlossaryTermsMethods(EndpointProviderMixin):
     """Glossary term client methods.
     """
 
-    def glossary_terms(self, project_id: str,
-                       params: Optional[Dict] = None) -> GlossaryTermsCollection:
+    def glossary_terms(
+            self,
+            project_id: str,
+            params: Optional[Dict] = None) -> GlossaryTermsCollection:
         """Fetches all glossary terms for the given project.
 
         :param str project_id: ID of the project
@@ -56,7 +58,8 @@ class GlossaryTermsMethods(EndpointProviderMixin):
 
     def update_glossary_terms(self,
                               project_id: str,
-                              params: Dict[str, Any]) -> GlossaryTermsCollection:
+                              params: Dict[str,
+                                           Any]) -> GlossaryTermsCollection:
         """Updates one or more glossary terms.
 
         :param str project_id: ID of the project

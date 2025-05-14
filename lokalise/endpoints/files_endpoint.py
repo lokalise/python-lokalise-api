@@ -3,9 +3,12 @@ lokalise.endpoints.files_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module containing files endpoint.
 """
+import warnings
 from typing import Dict, Union, Any, Optional
 from .base_endpoint import BaseEndpoint
 from .. import request
+
+warnings.formatwarning = lambda msg, *args, **kwargs: f"{msg}\n"
 
 
 class FilesEndpoint(BaseEndpoint):
@@ -33,7 +36,15 @@ class FilesEndpoint(BaseEndpoint):
         :rtype dict:
         """
         path = self.path_with_params(**ids)
-        return request.post(self.client, path + 'download', params)
+
+        response = request.post(self.client, path + 'download', params)
+
+        if '_response_too_big' in response:
+            warnings.warn(
+                'Warning: Project is too big for sync export. Please use our async export function '
+                'instead (download_files_async)', UserWarning)
+
+        return response
 
     def download_async(self, params: Dict[str, Any],
                        **ids: Optional[Union[str, int]]) -> Dict:
