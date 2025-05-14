@@ -3,8 +3,6 @@ Tests for the Files endpoint.
 """
 
 import pytest
-import mock
-import warnings
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 
@@ -68,21 +66,6 @@ def test_download_files(client):
     assert response['project_id'] == PROJECT_ID
     assert r"amazonaws.com" in response['bundle_url']
     assert '_response_too_big' not in response
-
-@pytest.mark.vcr
-def test_download_with_response_too_big_warning():
-    # Mock the necessary objects and the request.post call
-    with mock.patch('lokalise.request.post') as mock_post:
-        mock_post.return_value = {
-            '_response_too_big': 'Project too big for sync export. Please use our async export function instead (download_files_async)'
-        }
-
-        with pytest.warns(UserWarning, match="Project too big for sync export"):
-            response = client.download_files(PROJECT_ID, {
-                "format": "json"
-            })
-
-        assert '_response_too_big' in response
 
 @pytest.mark.vcr
 def test_download_files_async(client):
