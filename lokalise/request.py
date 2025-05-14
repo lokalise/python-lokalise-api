@@ -130,12 +130,21 @@ def extract_headers_from(response: requests.models.Response) -> Dict:
     :param response: Response from the API
     :rtype dict:
     """
-    return {
-        "_pagination": {
-            k.lower(): v for k,
-            v in response.headers.items() if k.lower() in PAGINATION_HEADERS
-        }
+
+    pagination_headers = {
+        k.lower(): v for k, v in response.headers.items()
+        if k.lower() in PAGINATION_HEADERS
     }
+
+    too_big_export_header = None
+    if 'X-Response-Too-Big' in response.headers:
+        too_big_export_header = response.headers['X-Response-Too-Big']
+
+    result = {"_pagination": pagination_headers}
+    if too_big_export_header is not None:
+        result["_response_too_big"] = 'Project too big for sync export. Please use our async export function instead (download_files_async)'
+
+    return result
 
 
 def options(client: lokalise.client.Client) -> Dict:

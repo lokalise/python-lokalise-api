@@ -7,6 +7,8 @@ from typing import Dict, Union, Any, Optional
 from .base_endpoint import BaseEndpoint
 from .. import request
 
+import warnings
+warnings.formatwarning = lambda msg, *args, **kwargs: f"{msg}\n"
 
 class FilesEndpoint(BaseEndpoint):
     """Describes files endpoint.
@@ -33,7 +35,13 @@ class FilesEndpoint(BaseEndpoint):
         :rtype dict:
         """
         path = self.path_with_params(**ids)
-        return request.post(self.client, path + 'download', params)
+
+        response = request.post(self.client, path + 'download', params)
+
+        if '_response_too_big' in response:
+            warnings.warn('Warning: ' + response['_response_too_big'], UserWarning)
+
+        return response
 
     def download_async(self, params: Dict[str, Any],
                        **ids: Optional[Union[str, int]]) -> Dict:
