@@ -12,7 +12,9 @@ Official Python 3 interface for the [Lokalise APIv2](https://developers.lokalise
 
 This plugin requires Python 3.9 and above. Install it:
 
-    pip install python-lokalise-api
+```
+pip install python-lokalise-api
+```
 
 Obtain a Lokalise API token (in your *Personal profile*) and use it:
 

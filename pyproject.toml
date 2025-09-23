@@ -6,9 +6,7 @@ authors = [
     {name = "Ilya Krukowski", email = "golosizpru@gmail.com"}
 ]
 readme = "README.md"
-license = "BSD-3-Clause"
-repository = "https://github.com/lokalise/python-lokalise-api"
-documentation = "https://python-lokalise-api.readthedocs.io/"
+requires-python = ">=3.9"
 keywords = ["lokalise", "api", "client"]
 classifiers=[
     'Development Status :: 5 - Production/Stable',
@@ -18,39 +16,37 @@ classifiers=[
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
 ]
-
-requires-python = ">=3.9"
-
 dependencies = [
-    "requests (>=2.32.0,<3.0.0)",
-    "exceptiongroup (>=1.0,<2.0) ; python_version < '3.11'"
+    "exceptiongroup>=1.0,<2.0 ; python_version < '3.11'",
+    "requests>=2.32.5,<3",
 ]
 
 [project.urls]
-homepage = "https://python-lokalise-api.readthedocs.io/"
-repository = "https://github.com/lokalise/python-lokalise-api/issues"
+Homepage = "https://python-lokalise-api.readthedocs.io/"
+Repository = "https://github.com/lokalise/python-lokalise-api"
+Issues = "https://github.com/lokalise/python-lokalise-api/issues"
+Documentation = "https://python-lokalise-api.readthedocs.io/"
 
-
-[tool.poetry]
-
-packages = [
-    { include = "lokalise" }
+[dependency-groups]
+dev = [
+    "autopep8>=2.3.2",
+    "mypy>=1.18.2",
+    "pylint>=3.3.8",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "pytest-pylint>=0.21.0",
+    "pytest-vcr>=1.0.2",
+    "python-dotenv>=1.1.1",
+    "types-requests>=2.31.0.6",
+    "vcrpy>=7.0.0",
 ]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3"
-vcrpy = "^7.0"
-pytest-vcr = "^1.0.2"
-pytest-cov = "^6.0"
-pylint = "^3.3"
-pytest-pylint = "^0.21"
-mypy = "^1.7"
-python-dotenv = "^1.0"
-autopep8 = "^2.0"
-
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["lokalise"]
 
 [tool.pytest.ini_options]
 testpaths = "tests"
@@ -58,6 +54,8 @@ norecursedirs = ".git .github tmp* .eggs bin build include lib share src lokalis
 addopts = "-s --cov=lokalise --cov-report html --cov-report=term --pylint"
 
 [tool.pylint.MASTER]
-min-public-methods="0"
-min-similarity-lines="5"
-disable="R0901"
+min-public-methods = "0"
+min-similarity-lines = "5"
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = ["R0901"]
