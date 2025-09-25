@@ -8,20 +8,20 @@ from .base_model import BaseModel
 
 
 class GlossaryTermModel(BaseModel):
-    """Describes a glossary term.
-    """
-    DATA_KEY = 'data'
+    """Describes a glossary term."""
+
+    DATA_KEY = "data"
 
     ATTRS = [
-        'id',
-        'projectId',
-        'term',
-        'description',
-        'caseSensitive',
-        'translatable',
-        'forbidden',
-        'translations',
-        'tags',
-        'createdAt',
-        'updatedAt'
+        "id",
+        "projectId",
+        "term",
+        "description",
+        "caseSensitive",
+        "translatable",
+        "forbidden",
+        "translations",
+        "tags",
+        "createdAt",
+        "updatedAt",
     ]

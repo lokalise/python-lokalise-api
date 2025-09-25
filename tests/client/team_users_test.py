@@ -3,29 +3,24 @@ Tests for the TeamUsers endpoint.
 """
 
 import pytest
-
+from lokalise.client import Client
 
 TEAM_ID = 176692
 USER_ID = 52911
 
 
 @pytest.mark.vcr
-def test_team_users(client):
-    """Tests fetching of all team users
-    """
+def test_team_users(client: Client) -> None:
+    """Tests fetching of all team users"""
     users = client.team_users(TEAM_ID)
     assert users.team_id == TEAM_ID
     assert users.items[0].user_id == 68139
 
 
 @pytest.mark.vcr
-def test_team_users_pagination(client):
-    """Tests fetching of all team users with pagination
-    """
-    users = client.team_users(TEAM_ID, {
-        "page": 2,
-        "limit": 4
-    })
+def test_team_users_pagination(client: Client) -> None:
+    """Tests fetching of all team users with pagination"""
+    users = client.team_users(TEAM_ID, {"page": 2, "limit": 4})
     assert users.team_id == TEAM_ID
     assert users.items[0].user_id == USER_ID
     assert users.current_page == 2
@@ -40,9 +35,8 @@ def test_team_users_pagination(client):
 
 
 @pytest.mark.vcr
-def test_team_user(client):
-    """Tests fetching of a team user
-    """
+def test_team_user(client: Client) -> None:
+    """Tests fetching of a team user"""
     user = client.team_user(TEAM_ID, USER_ID)
     assert user.team_id == TEAM_ID
     assert user.user_id == USER_ID
@@ -54,9 +48,8 @@ def test_team_user(client):
 
 
 @pytest.mark.vcr
-def test_update_team_user(client):
-    """Tests updating of a team user
-    """
+def test_update_team_user(client: Client) -> None:
+    """Tests updating of a team user"""
     user = client.update_team_user(TEAM_ID, USER_ID, {"role": "admin"})
     assert user.team_id == TEAM_ID
     assert user.user_id == USER_ID
@@ -64,9 +57,8 @@ def test_update_team_user(client):
 
 
 @pytest.mark.vcr
-def test_delete_team_user(client):
-    """Tests deletion of a team user
-    """
+def test_delete_team_user(client: Client) -> None:
+    """Tests deletion of a team user"""
     resp = client.delete_team_user(TEAM_ID, 68139)
-    assert resp['team_id'] == TEAM_ID
-    assert resp['team_user_deleted']
+    assert resp["team_id"] == TEAM_ID
+    assert resp["team_user_deleted"]

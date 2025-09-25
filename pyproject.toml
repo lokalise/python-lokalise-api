@@ -6,7 +6,7 @@ authors = [
     {name = "Ilya Krukowski", email = "golosizpru@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = ["lokalise", "api", "client"]
 classifiers=[
     'Development Status :: 5 - Production/Stable',
@@ -29,14 +29,12 @@ Documentation = "https://python-lokalise-api.readthedocs.io/"
 
 [dependency-groups]
 dev = [
-    "autopep8>=2.3.2",
-    "mypy>=1.18.2",
-    "pylint>=3.3.8",
+    "pyright>=1.1.405",
     "pytest>=8.4.2",
     "pytest-cov>=7.0.0",
-    "pytest-pylint>=0.21.0",
     "pytest-vcr>=1.0.2",
     "python-dotenv>=1.1.1",
+    "ruff>=0.13.1",
     "types-requests>=2.31.0.6",
     "vcrpy>=7.0.0",
 ]
@@ -47,15 +45,45 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["lokalise"]
+force-include = { "typings/lokalise" = "lokalise", "lokalise/py.typed" = "lokalise/py.typed" }
 
 [tool.pytest.ini_options]
-testpaths = "tests"
+testpaths = ["tests"]
 norecursedirs = ".git .github tmp* .eggs bin build include lib share src lokalise docs"
-addopts = "-s --cov=lokalise --cov-report html --cov-report=term --pylint"
+addopts = "-s --cov=lokalise --cov-report html --cov-report=term"
 
-[tool.pylint.MASTER]
-min-public-methods = 0
-min-similarity-lines = 5
+[tool.ruff]
+target-version = "py39"
+line-length = 100
 
-[tool.pylint."MESSAGES CONTROL"]
-disable = ["R0901"]
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = []
+fixable = ["ALL"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pyright]
+include = ["lokalise", "tests"]
+exclude = [
+  "**/dist/**",
+  "**/build/**",
+  "**/.eggs/**",
+  "**/*.egg-info/**",
+  "**/.venv/**",
+  "**/__pycache__/**",
+  "**/docs/_build/**",
+  "tmp*"
+]
+ignore = ["**/dist/**"]
+stubPath = "typings"
+typeCheckingMode = "strict"
+pythonVersion = "3.10"
+reportMissingImports = true
+reportMissingTypeStubs = "warning"
+reportUnknownVariableType = "warning"
+reportUnknownArgumentType = "warning"
+reportUnknownMemberType = "warning"
+reportUnusedImport = "warning"

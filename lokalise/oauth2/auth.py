@@ -1,92 +1,94 @@
 """
 lokalise.oauth2.auth
 ~~~~~~~~~~~~~~~~~~~~
-This module contains OAuth 2 flow client definition.
+OAuth 2.0 client for generating auth URLs and exchanging/refreshing tokens.
 """
 
 import urllib.parse
-from typing import Optional, Union, Dict, List
-from .request import post, BASE_URL
+from typing import Any, Sequence
+
+from .request import BASE_URL, post
 
 
 class Auth:
-    """OAuth 2 flow client used to request tokens.
+    """OAuth 2.0 flow client.
 
     Usage:
 
         import lokalise
-        client = lokalise.Auth('client id', 'client secret')
-        url = client.auth()
-        client.token('secret code')
-        client.refresh('refresh token')
+        client = lokalise.Auth("client id", "client secret")
+        url = client.auth(scope=["read_projects", "write_keys"], redirect_uri="https://app.example.com/callback", state="csrf123")
+        token = client.token("auth_code_from_callback")
+        refreshed = client.refresh(token["refresh_token"])
     """
 
-    def __init__(self, client_id: str, client_secret: str):
-        """Instantiate a new client.
+    def __init__(self, client_id: str, client_secret: str) -> None:
+        """Instantiate a new OAuth 2 client.
 
-        :param str token: Your Lokalise client ID.
-        :param str token: Your Lokalise client secret.
+        :param client_id: Lokalise OAuth client ID
+        :param client_secret: Lokalise OAuth client secret
         """
         self.client_id = client_id
         self.client_secret = client_secret
 
-    def auth(self,
-             scope: Union[List, str],
-             redirect_uri: Optional[str] = None,
-             state: Optional[str] = None) -> str:
-        """Generate a new auth URL. Users have to visit it and
-        explicitly approve the requested permissions
+    def auth(
+        self,
+        scope: Sequence[str] | str,
+        redirect_uri: str | None = None,
+        state: str | None = None,
+    ) -> str:
+        """Generate the authorization URL users should visit to approve access.
 
-        :param scope: Requested scopes
-        :type scope: list or str
-        :param str redirect_uri: Optional redirect URI
-        :param str state: Optional state to protect from CSRF attacks
-        :rtype str:
+        :param scope: Requested scopes (either a sequence of scope strings or a single space-delimited string)
+        :param redirect_uri: Optional redirect URI registered with your OAuth client
+        :param state: Optional state to protect from CSRF (will be returned back)
+        :return: Absolute URL to redirect the user to
         """
-        if isinstance(scope, List):
-            scope = ' '.join(scope)
+        scope_str = " ".join(scope) if not isinstance(scope, str) else scope
 
-        params = {
+        params: dict[str, str] = {
             "client_id": self.client_id,
-            "scope": scope
+            "scope": scope_str,
         }
         if state:
             params["state"] = state
-
         if redirect_uri:
             params["redirect_uri"] = redirect_uri
 
         return self.__build_uri(params)
 
-    def token(self, code: str) -> Dict:
-        """Requests a new OAuth 2 token by sending a HTTP POST request.
+    def token(self, code: str) -> dict[str, Any]:
+        """Exchange an authorization code for an access/refresh token.
 
-        :param code: Code obtained with the `auth` method
+        :param code: Authorization code received from the `auth()` redirect
+        :return: Parsed JSON payload with tokens and metadata
         """
-        params = {
+        params: dict[str, str] = {
+            "grant_type": "authorization_code",
             "code": code,
-            "grant_type": 'authorization_code'
+            **self.__base_params(),
         }
-        params = {**self.__base_params(), **params}
-        return post('token', params)
+        return post("token", params)
 
-    def refresh(self, refresh_token: str) -> Dict:
-        """Refreshes OAuth 2 token by sending a HTTP POST request.
+    def refresh(self, refresh_token: str) -> dict[str, Any]:
+        """Refresh an access token using a refresh token.
 
-        :param refresh_token: Refresh token obtained with the `token` method
+        :param refresh_token: Refresh token obtained from a previous `token()` call
+        :return: Parsed JSON payload with new tokens and metadata
         """
-        params = {
+        params: dict[str, str] = {
+            "grant_type": "refresh_token",
             "refresh_token": refresh_token,
-            "grant_type": 'refresh_token'
+            **self.__base_params(),
         }
-        params = {**self.__base_params(), **params}
-        return post('token', params)
+        return post("token", params)
 
-    def __base_params(self) -> Dict:
-        return {
-            "client_id": self.client_id,
-            "client_secret": self.client_secret
-        }
+    # --- internals ---------------------------------------------------------
 
-    def __build_uri(self, params: Dict) -> str:
-        return BASE_URL + "auth?" + urllib.parse.urlencode(params)
+    def __base_params(self) -> dict[str, str]:
+        return {"client_id": self.client_id, "client_secret": self.client_secret}
+
+    def __build_uri(self, params: dict[str, str]) -> str:
+        base = BASE_URL.rstrip("/")
+        query = urllib.parse.urlencode(params, doseq=True)
+        return f"{base}/auth?{query}"

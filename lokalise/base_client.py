@@ -3,20 +3,25 @@ lokalise.base_client
 ~~~~~~~~~~~~~~~~~~~~
 This module contains base API client definition.
 """
+
 from typing import Optional, Union
+from .types import FullClientProto
 
 
-class BaseClient:
-    """Base client used to send API requests.
-    """
+Number = Union[int, float]
 
-    # pylint: disable=too-many-arguments,too-many-positional-arguments
-    def __init__(self,
-                 token: str,
-                 connect_timeout: Optional[Union[int, float]] = None,
-                 read_timeout: Optional[Union[int, float]] = None,
-                 enable_compression: Optional[bool] = False,
-                 api_host: Optional[str] = None) -> None:
+
+class BaseClient(FullClientProto):
+    """Base client used to send API requests."""
+
+    def __init__(
+        self,
+        token: str,
+        connect_timeout: Optional[Union[int, float]] = None,
+        read_timeout: Optional[Union[int, float]] = None,
+        enable_compression: Optional[bool] = False,
+        api_host: Optional[str] = None,
+    ) -> None:
         """Instantiate a new Lokalise API client.
 
         :param str token: Your Lokalise API token.
@@ -31,10 +36,63 @@ class BaseClient:
         By default it's off.
         :type enable_compression: bool
         """
-        self.token = token
-        self.connect_timeout = connect_timeout
-        self.read_timeout = read_timeout
-        self.enable_compression = enable_compression
-        self.api_host = api_host
-        self.token_header = 'X-Api-Token'
-    # pylint: enable=too-many-arguments,too-many-positional-arguments
+        self._token = token
+        self._connect_timeout = connect_timeout
+        self._read_timeout = read_timeout
+        self._enable_compression = enable_compression
+        self._api_host = api_host
+        self._token_header = "X-Api-Token"
+
+    @property
+    def token(self) -> str:
+        return self._token
+
+    @token.setter
+    def token(self, value: str) -> None:
+        if not value:
+            raise ValueError("token must be a non-empty string")
+        self._token = value
+
+    @property
+    def connect_timeout(self) -> Number | None:
+        return self._connect_timeout
+
+    @connect_timeout.setter
+    def connect_timeout(self, value: Optional[Number]) -> None:
+        if value is not None and value < 0:
+            raise ValueError("connect_timeout must be a non-negative number or None")
+        self._connect_timeout = value
+
+    @property
+    def read_timeout(self) -> Number | None:
+        return self._read_timeout
+
+    @read_timeout.setter
+    def read_timeout(self, value: Optional[Number]) -> None:
+        if value is not None and value < 0:
+            raise ValueError("read_timeout must be a non-negative number or None")
+        self._read_timeout = value
+
+    @property
+    def enable_compression(self) -> bool | None:
+        return self._enable_compression
+
+    @enable_compression.setter
+    def enable_compression(self, value: Optional[bool]) -> None:
+        self._enable_compression = bool(value) if value is not None else False
+
+    @property
+    def api_host(self) -> str | None:
+        return self._api_host
+
+    @api_host.setter
+    def api_host(self, value: Optional[str]) -> None:
+        if value is not None:
+            v = value.strip()
+            if not v:
+                value = None
+        self._api_host = value
+
+    @property
+    def token_header(self) -> str:
+        return self._token_header

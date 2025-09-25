@@ -3,19 +3,21 @@ lokalise.client_methods.translation_providers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This module contains API client definition for translation providers.
 """
-from typing import Optional, Union, Dict
-from lokalise.models.translation_provider import TranslationProviderModel
+
+from typing import Optional, Union
+
 from lokalise.collections.translation_providers import TranslationProvidersCollection
+from lokalise.models.translation_provider import TranslationProviderModel
+
 from .endpoint_provider import EndpointProviderMixin
 
 
 class TranslationProviderMethods(EndpointProviderMixin):
-    """Translation provider client methods.
-    """
+    """Translation provider client methods."""
 
-    def translation_providers(self, team_id: Union[str, int],
-                              params: Optional[Dict] = None
-                              ) -> TranslationProvidersCollection:
+    def translation_providers(
+        self, team_id: Union[str, int], params: Optional[dict[str, str | int]] = None
+    ) -> TranslationProvidersCollection:
         """Fetches all translation providers.
 
         :param team_id: ID of the team
@@ -23,13 +25,14 @@ class TranslationProviderMethods(EndpointProviderMixin):
         :param dict params: (optional) Pagination parameters
         :return: Collection of translation providers
         """
-        raw_providers = self.get_endpoint("translation_providers"). \
-            all(params=params, parent_id=team_id)
+        raw_providers = self.get_endpoint("translation_providers").all(
+            params=params, parent_id=team_id
+        )
         return TranslationProvidersCollection(raw_providers)
 
-    def translation_provider(self, team_id: Union[str, int],
-                             translation_provider_id: Union[str, int]
-                             ) -> TranslationProviderModel:
+    def translation_provider(
+        self, team_id: Union[str, int], translation_provider_id: Union[str, int]
+    ) -> TranslationProviderModel:
         """Fetches a translation provider.
 
         :param team_id: ID of the team
@@ -38,6 +41,7 @@ class TranslationProviderMethods(EndpointProviderMixin):
         :type translation_provider_id: str or int
         :return: Translation provider model
         """
-        raw_provider = self.get_endpoint("translation_providers"). \
-            find(parent_id=team_id, resource_id=translation_provider_id)
+        raw_provider = self.get_endpoint("translation_providers").find(
+            parent_id=team_id, resource_id=translation_provider_id
+        )
         return TranslationProviderModel(raw_provider)

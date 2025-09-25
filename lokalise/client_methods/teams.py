@@ -3,17 +3,19 @@ lokalise.client_methods.teams
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This module contains API client definition for teams.
 """
-from typing import Optional, Dict, Union
+
+from typing import Optional, Union
+
 from lokalise.collections.teams import TeamsCollection
 from lokalise.models.team import TeamModel
+
 from .endpoint_provider import EndpointProviderMixin
 
 
 class TeamMethods(EndpointProviderMixin):
-    """Team client methods.
-    """
+    """Team client methods."""
 
-    def teams(self, params: Optional[Dict] = None) -> TeamsCollection:
+    def teams(self, params: Optional[dict[str, str | int]] = None) -> TeamsCollection:
         """Fetches all teams available to the currently authorized user
         (identified by the API token).
 
@@ -30,6 +32,5 @@ class TeamMethods(EndpointProviderMixin):
         :type team_id: int or str
         :return: Team model
         """
-        raw_project = self.get_endpoint("teams"). \
-            find(parent_id=team_id)
+        raw_project = self.get_endpoint("teams").find(parent_id=team_id)
         return TeamModel(raw_project)

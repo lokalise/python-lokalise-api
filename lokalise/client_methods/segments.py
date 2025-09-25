@@ -3,18 +3,25 @@ lokalise.client_methods.segments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This module contains API client definition for segments.
 """
-from typing import Optional, Union, Dict
-from lokalise.models.segment import SegmentModel
+
+from typing import Any, Optional, Union
+
 from lokalise.collections.segments import SegmentsCollection
+from lokalise.models.segment import SegmentModel
+
 from .endpoint_provider import EndpointProviderMixin
 
 
 class SegmentMethods(EndpointProviderMixin):
-    """Segment client methods.
-    """
+    """Segment client methods."""
 
-    def segments(self, project_id: str, key_id: Union[str, int], lang_iso: str,
-                 params: Optional[Dict] = None) -> SegmentsCollection:
+    def segments(
+        self,
+        project_id: str,
+        key_id: Union[str, int],
+        lang_iso: str,
+        params: Optional[dict[str, Any]] = None,
+    ) -> SegmentsCollection:
         """Fetches all segments for the given key and language inside a project.
 
         :param str project_id: ID of the project
@@ -25,19 +32,18 @@ class SegmentMethods(EndpointProviderMixin):
         :return: Collection of segments
         """
         raw_segments = self.get_endpoint("segments").all(
-            params=params,
-            parent_id=project_id,
-            resource_id=key_id,
-            subresource_id=lang_iso)
+            params=params, parent_id=project_id, resource_id=key_id, subresource_id=lang_iso
+        )
         return SegmentsCollection(raw_segments)
 
-    # pylint: disable=too-many-arguments,too-many-positional-arguments
-    def segment(self,
-                project_id: str,
-                key_id: Union[str, int],
-                lang_iso: str,
-                segment_number: Union[str, int],
-                params: Optional[Dict] = None) -> SegmentModel:
+    def segment(
+        self,
+        project_id: str,
+        key_id: Union[str, int],
+        lang_iso: str,
+        segment_number: Union[str, int],
+        params: Optional[dict[str, Any]] = None,
+    ) -> SegmentModel:
         """Fetches a segment for the given key and language inside a project.
 
         :param str project_id: ID of the project
@@ -53,15 +59,18 @@ class SegmentMethods(EndpointProviderMixin):
             params=params,
             parent_id=project_id,
             resource_id=key_id,
-            subresource_id=f"{lang_iso}/{segment_number}")
+            subresource_id=f"{lang_iso}/{segment_number}",
+        )
         return SegmentModel(raw_segment)
 
-    def update_segment(self,
-                       project_id: str,
-                       key_id: Union[str, int],
-                       lang_iso: str,
-                       segment_number: Union[str, int],
-                       params: Dict) -> SegmentModel:
+    def update_segment(
+        self,
+        project_id: str,
+        key_id: Union[str, int],
+        lang_iso: str,
+        segment_number: Union[str, int],
+        params: dict[str, Any],
+    ) -> SegmentModel:
         """Updates a segment.
 
         :param str project_id: ID of the project
@@ -77,6 +86,6 @@ class SegmentMethods(EndpointProviderMixin):
             params=params,
             parent_id=project_id,
             resource_id=key_id,
-            subresource_id=f"{lang_iso}/{segment_number}")
+            subresource_id=f"{lang_iso}/{segment_number}",
+        )
         return SegmentModel(raw_segment)
-    # pylint: enable=too-many-arguments,too-many-positional-arguments

@@ -8,9 +8,9 @@ from .base_model import BaseModel
 
 
 class SegmentModel(BaseModel):
-    """Describes segment.
-    """
-    DATA_KEY = 'segment'
+    """Describes segment."""
+
+    DATA_KEY = "segment"
 
     ATTRS = [
         "segment_number",
@@ -24,5 +24,5 @@ class SegmentModel(BaseModel):
         "is_reviewed",
         "reviewed_by",
         "words",
-        "custom_translation_statuses"
+        "custom_translation_statuses",
     ]

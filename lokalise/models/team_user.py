@@ -8,15 +8,8 @@ from .base_model import BaseModel
 
 
 class TeamUserModel(BaseModel):
-    """Describes team user model.
-    """
-    DATA_KEY = 'team_user'
+    """Describes team user model."""
 
-    ATTRS = [
-        'user_id',
-        'email',
-        'fullname',
-        'created_at',
-        'created_at_timestamp',
-        'role'
-    ]
+    DATA_KEY = "team_user"
+
+    ATTRS = ["user_id", "email", "fullname", "created_at", "created_at_timestamp", "role", "uuid"]

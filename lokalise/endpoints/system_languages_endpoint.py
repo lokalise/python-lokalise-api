@@ -8,6 +8,6 @@ from .base_endpoint import BaseEndpoint
 
 
 class SystemLanguagesEndpoint(BaseEndpoint):
-    """Describes system languages endpoint.
-    """
+    """Describes system languages endpoint."""
+
     PATH = "system/languages"

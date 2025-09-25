@@ -3,16 +3,15 @@ Tests for the Snapshots endpoint.
 """
 
 import pytest
-
+from lokalise.client import Client
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 SNAPSHOT_ID = 164513
 
 
 @pytest.mark.vcr
-def test_snapshots(client):
-    """Tests fetching of all snapshots
-    """
+def test_snapshots(client: Client) -> None:
+    """Tests fetching of all snapshots"""
     snapshots = client.snapshots(PROJECT_ID)
     assert snapshots.project_id == PROJECT_ID
     snapshot = snapshots.items[0]
@@ -25,9 +24,8 @@ def test_snapshots(client):
 
 
 @pytest.mark.vcr
-def test_snapshots_pagination(client):
-    """Tests fetching of all snapshots with pagination
-    """
+def test_snapshots_pagination(client: Client) -> None:
+    """Tests fetching of all snapshots with pagination"""
     snapshots = client.snapshots(PROJECT_ID, {"page": 2, "limit": 1})
     assert snapshots.project_id == PROJECT_ID
     assert snapshots.items[0].snapshot_id == 164514
@@ -43,27 +41,24 @@ def test_snapshots_pagination(client):
 
 
 @pytest.mark.vcr
-def test_create_snapshot(client):
-    """Tests creation of a snapshot
-    """
+def test_create_snapshot(client: Client) -> None:
+    """Tests creation of a snapshot"""
     snapshot = client.create_snapshot(PROJECT_ID, {"title": "Python snapshot"})
     assert snapshot.project_id == PROJECT_ID
     assert snapshot.title == "Python snapshot"
 
 
 @pytest.mark.vcr
-def test_restore_snapshot(client):
-    """Tests restoration of a snapshot
-    """
+def test_restore_snapshot(client: Client) -> None:
+    """Tests restoration of a snapshot"""
     project = client.restore_snapshot(PROJECT_ID, SNAPSHOT_ID)
     assert project.project_id != PROJECT_ID
     assert project.name == "OnBoarding copy"
 
 
 @pytest.mark.vcr
-def test_delete_snapshot(client):
-    """Tests deletion of a snapshot
-    """
+def test_delete_snapshot(client: Client) -> None:
+    """Tests deletion of a snapshot"""
     resp = client.delete_snapshot(PROJECT_ID, SNAPSHOT_ID)
-    assert resp['project_id'] == PROJECT_ID
-    assert resp['snapshot_deleted']
+    assert resp["project_id"] == PROJECT_ID
+    assert resp["snapshot_deleted"]

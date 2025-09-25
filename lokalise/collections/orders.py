@@ -4,12 +4,12 @@ lokalise.collections.orders
 Module containing orders collection.
 """
 
-from .base_collection import BaseCollection
 from ..models.order import OrderModel
+from .base_collection import BaseCollection
 
 
-class OrdersCollection(BaseCollection):
-    """Describes orders.
-    """
+class OrdersCollection(BaseCollection[OrderModel]):
+    """Describes orders."""
+
     DATA_KEY = "orders"
     MODEL_KLASS = OrderModel

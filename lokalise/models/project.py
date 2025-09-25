@@ -8,8 +8,8 @@ from .base_model import BaseModel
 
 
 class ProjectModel(BaseModel):
-    """Describes project model.
-    """
+    """Describes project model."""
+
     ATTRS = [
         "project_id",
         "project_type",
@@ -23,5 +23,7 @@ class ProjectModel(BaseModel):
         "base_language_id",
         "base_language_iso",
         "settings",
-        "statistics"
+        "statistics",
+        "uuid",
+        "team_uuid",
     ]

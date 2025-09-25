@@ -8,14 +8,8 @@ from .base_model import BaseModel
 
 
 class LanguageModel(BaseModel):
-    """Describes project or system language.
-    """
-    DATA_KEY = 'language'
+    """Describes project or system language."""
 
-    ATTRS = [
-        "lang_id",
-        "lang_iso",
-        "lang_name",
-        "is_rtl",
-        "plural_forms"
-    ]
+    DATA_KEY = "language"
+
+    ATTRS = ["lang_id", "lang_iso", "lang_name", "is_rtl", "plural_forms", "project_language_uuid"]

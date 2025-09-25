@@ -8,12 +8,16 @@ Attributes:
     :attribute str BASE_URL: path to the Lokalise APIv2.
     :attribute list PAGINATION_HEADERS: list of response headers that contain pagination data.
 """
-from typing import Optional, Dict, Any
-import requests
-from lokalise.request_utils import raise_on_error, path_to_endpoint, __format_params
-import lokalise.client
-from ._version import __version__
 
+from typing import Any, Optional
+
+from .types import FullClientProto
+
+import requests
+
+from .request_utils import format_params, path_to_endpoint, raise_on_error
+
+from ._version import __version__
 
 BASE_URL = "https://api.lokalise.com/api2/"
 PAGINATION_HEADERS = [
@@ -21,12 +25,13 @@ PAGINATION_HEADERS = [
     "x-pagination-page-count",
     "x-pagination-limit",
     "x-pagination-page",
-    "x-pagination-next-cursor"
+    "x-pagination-next-cursor",
 ]
 
 
-def get(client: lokalise.client.Client, path: str,
-        params: Optional[Dict] = None) -> Dict:
+def get(
+    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+) -> dict[str, Any]:
     """Performs GET requests
 
     :param client: Lokalise API client
@@ -35,13 +40,14 @@ def get(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.get(path_to_endpoint(client, BASE_URL, path),
-                                     params=params,
-                                     **options(client)))
+    return respond_with(
+        requests.get(path_to_endpoint(client, BASE_URL, path), params=params, **options(client))
+    )
 
 
-def post(client: lokalise.client.Client, path: str,
-         params: Optional[Dict] = None) -> Dict:
+def post(
+    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+) -> dict[str, Any]:
     """Performs POST requests
 
     :param client: Lokalise API client
@@ -50,13 +56,18 @@ def post(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.post(path_to_endpoint(client, BASE_URL, path),
-                                      data=__format_params(params),
-                                      **options(client)))
+    return respond_with(
+        requests.post(
+            path_to_endpoint(client, BASE_URL, path),
+            data=format_params(params),
+            **options(client),
+        )
+    )
 
 
-def put(client: lokalise.client.Client, path: str,
-        params: Optional[Dict] = None) -> Dict:
+def put(
+    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+) -> dict[str, Any]:
     """Performs PUT requests
 
     :param client: Lokalise API client
@@ -65,13 +76,18 @@ def put(client: lokalise.client.Client, path: str,
     :param params: Other request params
     :rtype dict:
     """
-    return respond_with(requests.put(path_to_endpoint(client, BASE_URL, path),
-                                     data=__format_params(params),
-                                     **options(client)))
+    return respond_with(
+        requests.put(
+            path_to_endpoint(client, BASE_URL, path),
+            data=format_params(params),
+            **options(client),
+        )
+    )
 
 
-def patch(client: lokalise.client.Client, path: str,
-          params: Optional[Dict] = None) -> Dict:
+def patch(
+    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+) -> dict[str, Any]:
     """Performs PATCH requests
 
     :param client: Lokalise API client
@@ -82,16 +98,16 @@ def patch(client: lokalise.client.Client, path: str,
     """
     return respond_with(
         requests.patch(
-            path_to_endpoint(
-                client,
-                BASE_URL,
-                path),
-            data=__format_params(params),
-            **options(client)))
+            path_to_endpoint(client, BASE_URL, path),
+            data=format_params(params),
+            **options(client),
+        )
+    )
 
 
-def delete(client: lokalise.client.Client, path: str,
-           params: Optional[Dict] = None) -> Dict:
+def delete(
+    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+) -> dict[str, Any]:
     """Performs DELETE requests
 
     :param client: Lokalise API client
@@ -102,15 +118,14 @@ def delete(client: lokalise.client.Client, path: str,
     """
     return respond_with(
         requests.delete(
-            path_to_endpoint(
-                client,
-                BASE_URL,
-                path),
-            data=__format_params(params),
-            ** options(client)))
+            path_to_endpoint(client, BASE_URL, path),
+            data=format_params(params),
+            **options(client),
+        )
+    )
 
 
-def respond_with(response: requests.models.Response) -> Dict:
+def respond_with(response: requests.models.Response) -> dict[str, Any]:
     """Converts the response data to JSON and attaches pagination-related data.
     An exception will be raised if the response status code is 4xx or 5xx,
     or contains an "error" key
@@ -124,7 +139,7 @@ def respond_with(response: requests.models.Response) -> Dict:
     return {**data, **extract_headers_from(response)}
 
 
-def extract_headers_from(response: requests.models.Response) -> Dict[str, Any]:
+def extract_headers_from(response: requests.models.Response) -> dict[str, Any]:
     """
     Pull pagination metadata (and the oversized flag) out of an HTTP response.
 
@@ -137,11 +152,9 @@ def extract_headers_from(response: requests.models.Response) -> Dict[str, Any]:
 
     headers_lower = {k.lower(): v for k, v in response.headers.items()}
 
-    pagination = {
-        k: v for k,
-        v in headers_lower.items() if k in PAGINATION_HEADERS}
+    pagination = {k: v for k, v in headers_lower.items() if k in PAGINATION_HEADERS}
 
-    result: Dict[str, Any] = {"_pagination": pagination}
+    result: dict[str, Any] = {"_pagination": pagination}
 
     if "x-response-too-big" in headers_lower:
         result["_response_too_big"] = True
@@ -149,7 +162,7 @@ def extract_headers_from(response: requests.models.Response) -> Dict[str, Any]:
     return result
 
 
-def options(client: lokalise.client.Client) -> Dict:
+def options(client: FullClientProto) -> dict[str, Any]:
     """Prepares proper request options, including Accept headers, API token,
     and timeouts.
 
@@ -157,18 +170,18 @@ def options(client: lokalise.client.Client) -> Dict:
     :type client: lokalise.Client
     :rtype dict:
     """
-    headers = {
+    headers: dict[str, Any] = {
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
-        "Accept-Encoding": None
+        "Accept-Encoding": None,
     }
-
     headers[client.token_header] = client.token
-
     if client.enable_compression:
         headers["Accept-Encoding"] = "gzip,deflate,br"
 
-    return {
-        "timeout": (client.connect_timeout, client.read_timeout),
-        "headers": headers
-    }
+    timeout_tuple: tuple[float | int | None, float | int | None] = (
+        client.connect_timeout,
+        client.read_timeout,
+    )
+
+    return {"timeout": timeout_tuple, "headers": headers}

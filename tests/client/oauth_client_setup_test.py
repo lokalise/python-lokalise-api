@@ -4,8 +4,7 @@ Tests for the OAuthClient class
 
 
 def test_client_arguments(oauth_client):
-    """Checks that client can receive token, timeout values, and enable_compression
-    """
+    """Checks that client can receive token, timeout values, and enable_compression"""
     assert "Bearer" in oauth_client.token
     assert oauth_client.connect_timeout == 4
     assert oauth_client.read_timeout == 2
@@ -14,10 +13,9 @@ def test_client_arguments(oauth_client):
 
 
 def test_reset_client(oauth_client):
-    """Checks that the client can be reset
-    """
+    """Checks that the client can be reset"""
     assert oauth_client.connect_timeout == 4
 
     oauth_client.reset_client()
 
-    assert oauth_client.token == ''
+    assert oauth_client.token == ""

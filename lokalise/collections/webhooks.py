@@ -4,12 +4,12 @@ lokalise.collections.webhooks
 Module containing webhooks collection.
 """
 
-from .base_collection import BaseCollection
 from ..models.webhook import WebhookModel
+from .base_collection import BaseCollection
 
 
-class WebhooksCollection(BaseCollection):
-    """Describes webhooks.
-    """
+class WebhooksCollection(BaseCollection[WebhookModel]):
+    """Describes webhooks."""
+
     DATA_KEY = "webhooks"
     MODEL_KLASS = WebhookModel

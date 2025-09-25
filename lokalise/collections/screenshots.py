@@ -4,12 +4,12 @@ lokalise.collections.screenshots
 Module containing screenshots collection.
 """
 
-from .base_collection import BaseCollection
 from ..models.screenshot import ScreenshotModel
+from .base_collection import BaseCollection
 
 
-class ScreenshotsCollection(BaseCollection):
-    """Describes screenshots.
-    """
+class ScreenshotsCollection(BaseCollection[ScreenshotModel]):
+    """Describes screenshots."""
+
     DATA_KEY = "screenshots"
     MODEL_KLASS = ScreenshotModel

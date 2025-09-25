@@ -3,7 +3,9 @@ lokalise.oauth_client
 ~~~~~~~~~~~~~~~~~~~~~
 This module contains API client that can be used with OAuth 2 tokens.
 """
+
 from typing import Optional, Union
+
 from .client import Client
 
 
@@ -17,13 +19,14 @@ class OAuthClient(Client):
         client.projects()
     """
 
-    # pylint: disable=too-many-arguments,too-many-positional-arguments
-    def __init__(self,
-                 token: str,
-                 connect_timeout: Optional[Union[int, float]] = None,
-                 read_timeout: Optional[Union[int, float]] = None,
-                 enable_compression: Optional[bool] = False,
-                 api_host: Optional[str] = None) -> None:
+    def __init__(
+        self,
+        token: str,
+        connect_timeout: Optional[Union[int, float]] = None,
+        read_timeout: Optional[Union[int, float]] = None,
+        enable_compression: Optional[bool] = False,
+        api_host: Optional[str] = None,
+    ) -> None:
         """Instantiate a new Lokalise API client with OAuth 2 token.
 
         :param str token: Your Lokalise API token obtained via OAuth 2 flow.
@@ -38,13 +41,7 @@ class OAuthClient(Client):
         By default it's off.
         :type enable_compression: bool
         """
-        super().__init__(
-            token,
-            connect_timeout,
-            read_timeout,
-            enable_compression,
-            api_host)
+        super().__init__(token, connect_timeout, read_timeout, enable_compression, api_host)
 
-        self.token = f"Bearer {token}"
-        self.token_header = 'Authorization'
-    # pylint: enable=too-many-arguments,too-many-positional-arguments
+        self._token = f"Bearer {token}"
+        self._token_header = "Authorization"
