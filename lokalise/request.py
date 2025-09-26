@@ -119,7 +119,7 @@ def delete(
     )
 
 
-def respond_with(response: requests.models.Response) -> dict[str, Any]:
+def respond_with(response: requests.Response) -> dict[str, Any]:
     """Converts the response data to JSON and attaches pagination-related data.
     An exception will be raised if the response status code is 4xx or 5xx,
     or contains an "error" key
@@ -127,13 +127,17 @@ def respond_with(response: requests.models.Response) -> dict[str, Any]:
     :param response: Response from the API
     :rtype dict:
     """
-    data = response.json()
+    try:
+        data: dict[str, Any] = response.json()
+    except ValueError:
+        data = {}
+
     raise_on_error(response, data)
 
     return {**data, **extract_headers_from(response)}
 
 
-def extract_headers_from(response: requests.models.Response) -> dict[str, Any]:
+def extract_headers_from(response: requests.Response) -> dict[str, Any]:
     """
     Pull pagination metadata (and the oversized flag) out of an HTTP response.
 
@@ -164,18 +168,25 @@ def options(client: FullClientProto) -> dict[str, Any]:
     :type client: lokalise.Client
     :rtype dict:
     """
-    headers: dict[str, Any] = {
+    headers: dict[str, str] = {
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
-        "Accept-Encoding": None,
     }
     headers[client.token_header] = client.token
+
     if client.enable_compression:
         headers["Accept-Encoding"] = "gzip,deflate,br"
 
-    timeout_tuple: tuple[float | int | None, float | int | None] = (
-        client.connect_timeout,
-        client.read_timeout,
-    )
+    timeout: tuple[float | int, float | int] | None
+    if client.connect_timeout is None and client.read_timeout is None:
+        timeout = None
+    else:
+        ct = (
+            client.connect_timeout
+            if client.connect_timeout is not None
+            else client.read_timeout or 0
+        )
+        rt = client.read_timeout if client.read_timeout is not None else client.connect_timeout or 0
+        timeout = (ct, rt)
 
-    return {"timeout": timeout_tuple, "headers": headers}
+    return {"timeout": timeout, "headers": headers}

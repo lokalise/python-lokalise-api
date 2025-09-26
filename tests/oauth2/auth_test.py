@@ -1,37 +1,36 @@
-"""
-Tests for the Auth class.
-"""
-
 import os
+from typing import Any
+from urllib.parse import parse_qs, urlparse
 
 import pytest
 from lokalise import Auth
 from lokalise.errors import BadRequest
 
 
-@pytest.mark.vcr
-def test_auth(auth_client: Auth) -> None:
-    """Tests auth method"""
+def _query(url: str) -> dict[str, list[str]]:
+    return parse_qs(urlparse(url).query, keep_blank_values=True)
+
+
+def test_auth_builds_url_with_sequence_scope(auth_client: Auth) -> None:
     url = auth_client.auth(["read_projects", "write_team_groups"], "http://example.com", "123abc")
+    q = _query(url)
+    assert q["scope"] == ["read_projects write_team_groups"]
+    assert q["state"] == ["123abc"]
+    assert q["redirect_uri"] == ["http://example.com"]
 
-    assert r"read_projects+write_team_groups" in url
-    assert r"&state=123abc" in url
-    assert r"c&redirect_uri=http%3A%2F%2Fexample.com" in url
 
-
-@pytest.mark.vcr
-def test_auth_single_scope(auth_client: Auth) -> None:
-    """Tests auth method with a single scope"""
+def test_auth_builds_url_with_single_scope(auth_client: Auth) -> None:
     url = auth_client.auth("read_projects")
-
-    assert r"read_projects" in url
+    q = _query(url)
+    assert q["scope"] == ["read_projects"]
+    assert "state" not in q
+    assert "redirect_uri" not in q
 
 
 @pytest.mark.vcr
 def test_token(auth_client: Auth) -> None:
-    """Tests token method"""
     code = os.getenv("OAUTH2_CODE") or "DUMMY_CODE"
-    token = auth_client.token(code)
+    token: dict[str, Any] = auth_client.token(code)
     assert token["access_token"] == "stubbed token"
     assert token["refresh_token"] == "stubbed refresh"
     assert token["expires_in"] == 3600
@@ -40,7 +39,6 @@ def test_token(auth_client: Auth) -> None:
 
 @pytest.mark.vcr
 def test_token_error(auth_client: Auth) -> None:
-    """Tests token method exception handling"""
     with pytest.raises(BadRequest) as excinfo:
         auth_client.token("fake")
     exc = excinfo.value
@@ -51,9 +49,8 @@ def test_token_error(auth_client: Auth) -> None:
 
 @pytest.mark.vcr
 def test_refresh(auth_client: Auth) -> None:
-    """Tests refresh method"""
     refresh_token = os.getenv("OAUTH2_REFRESH_TOKEN") or "DUMMY_OAUTH2_REFRESH_TOKEN"
-    token = auth_client.refresh(refresh_token)
+    token: dict[str, Any] = auth_client.refresh(refresh_token)
     assert token["access_token"] == "refreshed token"
     assert token["scope"] == "write_team_groups read_projects"
     assert token["expires_in"] == 3600

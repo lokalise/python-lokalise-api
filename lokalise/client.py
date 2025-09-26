@@ -38,7 +38,7 @@ from .client_methods.translations import TranslationMethods
 from .client_methods.webhooks import WebhookMethods
 from .endpoints.base_endpoint import BaseEndpoint
 
-T = TypeVar("T")
+T = TypeVar("T", bound=BaseEndpoint)
 
 
 class Client(
@@ -105,17 +105,20 @@ class Client(
         return self.__fetch_attr(f"__{endpoint_name}", lambda: endpoint_klass(self))
 
     def __fetch_attr(self, attr_name: str, populator: Callable[[], T]) -> T:
-        """Searches for the given attribute. Uses populator
-        to set the attribute if it cannot be found. Used to lazy-load
-        endpoints.
+        """Searches for the given attribute.
+        Uses populator to set the attribute if it cannot be found.
+        Used to lazy-load endpoints.
         """
         if not hasattr(self, attr_name):
             setattr(self, attr_name, populator())
-
+        else:
+            val = getattr(self, attr_name)
+            if val is None:
+                val = populator()
+                setattr(self, attr_name, val)
         return cast(T, getattr(self, attr_name))
 
     def __clear_endpoint_attrs(self) -> None:
         """Clears all lazily-loaded endpoint attributes"""
-        endpoint_attrs = [a for a in vars(self) if a.endswith("_endpoint")]
-        for attr in endpoint_attrs:
-            setattr(self, attr, None)
+        for attr in [a for a in vars(self) if a.endswith("_endpoint")]:
+            delattr(self, attr)

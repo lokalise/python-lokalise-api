@@ -170,3 +170,20 @@ def test_api_host_assignment_rules(inp: str | None, expected: str | None) -> Non
     client = make_client()
     client.api_host = inp
     assert client.api_host == expected
+
+
+def test_reset_client_allows_reloading_endpoints(client: lokalise.Client) -> None:
+    ep1 = client.get_endpoint("projects")
+    assert ep1 is not None
+
+    client.reset_client()
+
+    ep2 = client.get_endpoint("projects")
+    assert ep2 is not None
+    assert ep2 is not ep1
+
+
+def test_get_endpoint_populates_when_attr_is_none(client: lokalise.Client) -> None:
+    setattr(client, "__projects_endpoint", None)
+    ep = client.get_endpoint("projects")
+    assert ep is not None
