@@ -1,3 +1,5 @@
+from typing import Any
+
 from lokalise.models.base_model import BaseModel
 
 class GlossaryTermModel(BaseModel):
@@ -8,15 +10,7 @@ class GlossaryTermModel(BaseModel):
     caseSensitive: bool
     translatable: bool
     forbidden: bool
-
-    class Translation(BaseModel):
-        langId: int
-        langName: str
-        langIso: str
-        translation: str
-        description: str
-
-    translations: list[Translation]
+    translations: list[dict[str, Any]]
     tags: list[str]
     createdAt: str
     updatedAt: str | None

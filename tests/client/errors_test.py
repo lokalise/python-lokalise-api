@@ -2,9 +2,8 @@
 Tests for custom exceptions
 """
 
-import pytest
-
 import lokalise
+import pytest
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 

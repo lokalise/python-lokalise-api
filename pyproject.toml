@@ -29,13 +29,13 @@ Documentation = "https://python-lokalise-api.readthedocs.io/"
 
 [dependency-groups]
 dev = [
+    "black>=25.9.0",
     "pyright>=1.1.405",
     "pytest>=8.4.2",
     "pytest-cov>=7.0.0",
     "pytest-vcr>=1.0.2",
     "python-dotenv>=1.1.1",
     "ruff>=0.13.1",
-    "types-requests>=2.31.0.6",
     "vcrpy>=7.0.0",
 ]
 
@@ -50,20 +50,21 @@ force-include = { "typings/lokalise" = "lokalise", "lokalise/py.typed" = "lokali
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 norecursedirs = ".git .github tmp* .eggs bin build include lib share src lokalise docs"
-addopts = "-s --cov=lokalise --cov-report html --cov-report=term"
+addopts = "-s --cov=lokalise --cov-report=term --cov-report=html"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py310"
 line-length = 100
+src = ["lokalise", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 ignore = []
 fixable = ["ALL"]
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
 
 [tool.pyright]
 include = ["lokalise", "tests"]

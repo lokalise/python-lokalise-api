@@ -4,7 +4,7 @@ class ClientHTTPError(ClientError):
     status_code: int
     headers: dict[str, str]
     raw_text: str | None
-    parsed: "APIError | None"
+    parsed: APIError | None
 
 class BadRequest(ClientHTTPError): ...
 class Unauthorized(ClientHTTPError): ...

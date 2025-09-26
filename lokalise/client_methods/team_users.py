@@ -4,7 +4,7 @@ lokalise.client_methods.team_users
 This module contains API client definition for team users.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.team_users import TeamUsersCollection
 from lokalise.models.team_user import TeamUserModel
@@ -16,7 +16,7 @@ class TeamUserMethods(EndpointProviderMixin):
     """Team user client methods."""
 
     def team_users(
-        self, team_id: Union[str, int], params: Optional[dict[str, str | int]] = None
+        self, team_id: str | int, params: dict[str, str | int] | None = None
     ) -> TeamUsersCollection:
         """Fetches all team users.
 
@@ -28,7 +28,7 @@ class TeamUserMethods(EndpointProviderMixin):
         raw_team_users = self.get_endpoint("team_users").all(params=params, parent_id=team_id)
         return TeamUsersCollection(raw_team_users)
 
-    def team_user(self, team_id: Union[str, int], team_user_id: Union[str, int]) -> TeamUserModel:
+    def team_user(self, team_id: str | int, team_user_id: str | int) -> TeamUserModel:
         """Fetches a team user.
 
         :param team_id: ID of the team
@@ -44,9 +44,9 @@ class TeamUserMethods(EndpointProviderMixin):
 
     def update_team_user(
         self,
-        team_id: Union[str, int],
-        team_user_id: Union[str, int],
-        params: Optional[dict[str, Any]] = None,
+        team_id: str | int,
+        team_user_id: str | int,
+        params: dict[str, Any] | None = None,
     ) -> TeamUserModel:
         """Updates a team user.
 
@@ -62,9 +62,7 @@ class TeamUserMethods(EndpointProviderMixin):
         )
         return TeamUserModel(raw_team_user)
 
-    def delete_team_user(
-        self, team_id: Union[str, int], team_user_id: Union[str, int]
-    ) -> dict[str, Any]:
+    def delete_team_user(self, team_id: str | int, team_user_id: str | int) -> dict[str, Any]:
         """Deletes a team user.
 
         :param team_id: ID of the team

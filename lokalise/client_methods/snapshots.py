@@ -4,7 +4,7 @@ lokalise.client_methods.snapshots
 This module contains API client definition for snapshots.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.snapshots import SnapshotsCollection
 from lokalise.models.project import ProjectModel
@@ -17,7 +17,7 @@ class SnapshotMethods(EndpointProviderMixin):
     """Snapshot client methods."""
 
     def snapshots(
-        self, project_id: str, params: Optional[dict[str, str | int]] = None
+        self, project_id: str, params: dict[str, str | int] | None = None
     ) -> SnapshotsCollection:
         """Fetches all snapshots for the given project.
 
@@ -29,7 +29,7 @@ class SnapshotMethods(EndpointProviderMixin):
         return SnapshotsCollection(raw_snapshots)
 
     def create_snapshot(
-        self, project_id: str, params: Optional[dict[str, str]] = None
+        self, project_id: str, params: dict[str, str] | None = None
     ) -> SnapshotModel:
         """Creates a snapshot of the given project.
 
@@ -40,7 +40,7 @@ class SnapshotMethods(EndpointProviderMixin):
         raw_snapshot = self.get_endpoint("snapshots").create(params=params, parent_id=project_id)
         return SnapshotModel(raw_snapshot)
 
-    def restore_snapshot(self, project_id: str, snapshot_id: Union[str, int]) -> ProjectModel:
+    def restore_snapshot(self, project_id: str, snapshot_id: str | int) -> ProjectModel:
         """Restores a snapshot of the given project by producing a new project.
 
         :param str project_id: ID of the project
@@ -53,7 +53,7 @@ class SnapshotMethods(EndpointProviderMixin):
         )
         return ProjectModel(new_project)
 
-    def delete_snapshot(self, project_id: str, snapshot_id: Union[str, int]) -> dict[str, Any]:
+    def delete_snapshot(self, project_id: str, snapshot_id: str | int) -> dict[str, Any]:
         """Deletes a project snapshot.
 
         :param str project_id: ID of the project

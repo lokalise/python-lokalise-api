@@ -4,7 +4,7 @@ lokalise.endpoints.team_user_groups_endpoint
 Module containing team user groups endpoint.
 """
 
-from typing import Union
+from typing import Any
 
 from lokalise.utils import to_list
 
@@ -17,7 +17,7 @@ class TeamUserGroupsEndpoint(BaseEndpoint):
 
     PATH = "teams/$parent_id/groups/$resource_id"
 
-    def add_projects(self, params: Union[str, list[str]], **ids: Union[str, int]) -> dict:
+    def add_projects(self, params: str | list[str], **ids: str | int) -> dict[str, Any]:
         """Adds projects represented by IDs to the specified team user group.
 
         :param params: Projects to add to the group
@@ -28,7 +28,7 @@ class TeamUserGroupsEndpoint(BaseEndpoint):
         path = self.path_with_params(**ids)
         return request.put(self.client, path + "/projects/add", {"projects": to_list(params)})
 
-    def remove_projects(self, params: Union[str, list[str]], **ids: Union[str, int]) -> dict:
+    def remove_projects(self, params: str | list[str], **ids: str | int) -> dict[str, Any]:
         """Removes projects represented by IDs from the specified team user group.
 
         :param params: Projects to remove from the group
@@ -39,7 +39,7 @@ class TeamUserGroupsEndpoint(BaseEndpoint):
         path = self.path_with_params(**ids)
         return request.put(self.client, path + "/projects/remove", {"projects": to_list(params)})
 
-    def add_members(self, params: Union[str, list[str]], **ids: Union[str, int]) -> dict:
+    def add_members(self, params: str | list[str], **ids: str | int) -> dict[str, Any]:
         """Adds members represented by IDs to the specified team user group.
 
         :param params: Members (users) to add to the group
@@ -50,7 +50,7 @@ class TeamUserGroupsEndpoint(BaseEndpoint):
         path = self.path_with_params(**ids)
         return request.put(self.client, path + "/members/add", {"users": to_list(params)})
 
-    def remove_members(self, params: Union[str, list[str]], **ids: Union[str, int]) -> dict:
+    def remove_members(self, params: str | list[str], **ids: str | int) -> dict[str, Any]:
         """Removes members represented by IDs from the specified team user group.
 
         :param params: Members (users) to remove from the group

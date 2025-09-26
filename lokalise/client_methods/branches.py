@@ -4,7 +4,7 @@ lokalise.client_methods.branches
 This module contains API client definition for branches.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.branches import BranchesCollection
 from lokalise.models.branch import BranchModel
@@ -16,7 +16,7 @@ class BranchMethods(EndpointProviderMixin):
     """Branch client methods."""
 
     def branches(
-        self, project_id: str, params: Optional[dict[str, Union[int, str]]] = None
+        self, project_id: str, params: dict[str, int | str] | None = None
     ) -> BranchesCollection:
         """Fetches all branches for the given project.
 
@@ -27,7 +27,7 @@ class BranchMethods(EndpointProviderMixin):
         raw_branches = self.get_endpoint("branches").all(parent_id=project_id, params=params)
         return BranchesCollection(raw_branches)
 
-    def branch(self, project_id: str, branch_id: Union[str, int]) -> BranchModel:
+    def branch(self, project_id: str, branch_id: str | int) -> BranchModel:
         """Fetches a single branch.
 
         :param str project_id: ID of the project
@@ -50,7 +50,7 @@ class BranchMethods(EndpointProviderMixin):
         return BranchModel(raw_branch)
 
     def update_branch(
-        self, project_id: str, branch_id: Union[str, int], params: dict[str, str]
+        self, project_id: str, branch_id: str | int, params: dict[str, str]
     ) -> BranchModel:
         """Updates a branch.
 
@@ -65,7 +65,7 @@ class BranchMethods(EndpointProviderMixin):
         )
         return BranchModel(raw_branch)
 
-    def delete_branch(self, project_id: str, branch_id: Union[str, int]) -> dict[str, Any]:
+    def delete_branch(self, project_id: str, branch_id: str | int) -> dict[str, Any]:
         """Deletes a branch.
 
         :param str project_id: ID of the project
@@ -80,8 +80,8 @@ class BranchMethods(EndpointProviderMixin):
     def merge_branch(
         self,
         project_id: str,
-        branch_id: Union[str, int],
-        params: Optional[dict[str, Union[str, int]]] = None,
+        branch_id: str | int,
+        params: dict[str, str | int] | None = None,
     ) -> dict[str, Any]:
         """Merges a branch.
 

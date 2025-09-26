@@ -4,7 +4,7 @@ lokalise.client_methods.keys
 This module contains API client definition for keys.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.keys import KeysCollection
 from lokalise.models.key import KeyModel
@@ -15,7 +15,7 @@ from .endpoint_provider import EndpointProviderMixin
 class KeyMethods(EndpointProviderMixin):
     """Key client methods."""
 
-    def keys(self, project_id: str, params: Optional[dict[str, Any]] = None) -> KeysCollection:
+    def keys(self, project_id: str, params: dict[str, Any] | None = None) -> KeysCollection:
         """Fetches all keys for the given project.
 
         :param str project_id: ID of the project
@@ -26,7 +26,7 @@ class KeyMethods(EndpointProviderMixin):
         return KeysCollection(raw_keys)
 
     def create_keys(
-        self, project_id: str, params: Union[dict[str, Any], list[dict[str, Any]]]
+        self, project_id: str, params: dict[str, Any] | list[dict[str, Any]]
     ) -> KeysCollection:
         """Creates one or more keys inside the project
 
@@ -42,7 +42,7 @@ class KeyMethods(EndpointProviderMixin):
         return KeysCollection(raw_keys)
 
     def key(
-        self, project_id: str, key_id: Union[str, int], params: Optional[dict[str, Any]] = None
+        self, project_id: str, key_id: str | int, params: dict[str, Any] | None = None
     ) -> KeyModel:
         """Fetches a translation key.
 
@@ -57,7 +57,7 @@ class KeyMethods(EndpointProviderMixin):
         return KeyModel(raw_key)
 
     def update_key(
-        self, project_id: str, key_id: Union[str, int], params: Optional[dict[str, Any]] = None
+        self, project_id: str, key_id: str | int, params: dict[str, Any] | None = None
     ) -> KeyModel:
         """Updates a translation key.
 
@@ -71,7 +71,9 @@ class KeyMethods(EndpointProviderMixin):
         )
         return KeyModel(raw_key)
 
-    def update_keys(self, project_id: str, params: dict[str, Any]) -> KeysCollection:
+    def update_keys(
+        self, project_id: str, params: list[dict[str, Any]] | dict[str, Any]
+    ) -> KeysCollection:
         """Updates translation keys in bulk.
 
         :param str project_id: ID of the project
@@ -83,7 +85,7 @@ class KeyMethods(EndpointProviderMixin):
         )
         return KeysCollection(raw_keys)
 
-    def delete_key(self, project_id: str, key_id: Union[str, int]) -> dict[str, Any]:
+    def delete_key(self, project_id: str, key_id: str | int) -> dict[str, Any]:
         """Deletes a key.
 
         :param str project_id: ID of the project
@@ -95,7 +97,7 @@ class KeyMethods(EndpointProviderMixin):
         response = self.get_endpoint("keys").delete(parent_id=project_id, resource_id=key_id)
         return response
 
-    def delete_keys(self, project_id: str, key_ids: list[Union[str, int]]) -> dict[str, Any]:
+    def delete_keys(self, project_id: str, key_ids: list[str | int]) -> dict[str, Any]:
         """Deletes keys in bulk.
 
         :param str project_id: ID of the project

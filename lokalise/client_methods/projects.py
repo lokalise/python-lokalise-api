@@ -4,7 +4,7 @@ lokalise.client_methods.projects
 This module contains API client definition for projects.
 """
 
-from typing import Any, Optional
+from typing import Any
 
 from lokalise.collections.projects import ProjectsCollection
 from lokalise.models.project import ProjectModel
@@ -15,7 +15,7 @@ from .endpoint_provider import EndpointProviderMixin
 class ProjectMethods(EndpointProviderMixin):
     """Project client methods."""
 
-    def projects(self, params: Optional[dict[str, str | int]] = None) -> ProjectsCollection:
+    def projects(self, params: dict[str, str | int] | None = None) -> ProjectsCollection:
         """Fetches all projects available to the currently authorized user
         (identified by the API token).
 

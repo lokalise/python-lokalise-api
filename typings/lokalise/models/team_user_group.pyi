@@ -1,23 +1,11 @@
-from typing import TypedDict
+from typing import Any
 
 from lokalise.models.base_model import BaseModel
-
-class PermissionLanguage(TypedDict):
-    lang_id: int
-    lang_iso: str
-    lang_name: str
-    is_writable: bool
-
-class GroupPermissions(TypedDict):
-    is_admin: bool  # deprecated
-    is_reviewer: bool  # deprecated
-    admin_rights: list[str]
-    languages: list[PermissionLanguage]
 
 class TeamUserGroupModel(BaseModel):
     group_id: int
     name: str
-    permissions: GroupPermissions
+    permissions: dict[str, Any]
     created_at: str
     created_at_timestamp: int
     team_id: int

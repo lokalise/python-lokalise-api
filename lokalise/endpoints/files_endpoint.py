@@ -5,12 +5,23 @@ Module containing files endpoint.
 """
 
 import warnings
-from typing import Any, Optional, Union
+from typing import Any
 
 from .. import request
 from .base_endpoint import BaseEndpoint
 
-warnings.formatwarning = lambda msg, *args, **kwargs: f"{msg}\n"
+
+def _formatwarning(
+    msg: str,
+    category: type[Warning],
+    filename: str,
+    lineno: int,
+    line: str | None = None,
+) -> str:
+    return f"{msg}\n"  # pragma: no cover
+
+
+warnings.formatwarning = _formatwarning
 
 
 class FilesEndpoint(BaseEndpoint):
@@ -18,7 +29,7 @@ class FilesEndpoint(BaseEndpoint):
 
     PATH = "projects/$parent_id/files/$resource_id"
 
-    def upload(self, params: dict[str, Any], **ids: Optional[Union[str, int]]) -> dict:
+    def upload(self, params: dict[str, Any], **ids: str | int | None) -> dict[str, Any]:
         """Uploads a file to the project.
 
         :param dict params: Upload parameters
@@ -28,7 +39,7 @@ class FilesEndpoint(BaseEndpoint):
         path = self.path_with_params(**ids)
         return request.post(self.client, path + "upload", params)
 
-    def download(self, params: dict[str, Any], **ids: Optional[Union[str, int]]) -> dict:
+    def download(self, params: dict[str, Any], **ids: str | int | None) -> dict[str, Any]:
         """Downloads files from the project.
 
         :param dict params: Download parameters
@@ -49,7 +60,7 @@ class FilesEndpoint(BaseEndpoint):
 
         return response
 
-    def download_async(self, params: dict[str, Any], **ids: Optional[Union[str, int]]) -> dict:
+    def download_async(self, params: dict[str, Any], **ids: str | int | None) -> dict[str, Any]:
         """Downloads files from the project asynchronously.
 
         :param dict params: Download parameters

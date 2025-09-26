@@ -4,7 +4,7 @@ lokalise.endpoints.branches_endpoint
 Module containing branches endpoint.
 """
 
-from typing import Optional, Union, Any
+from typing import Any
 
 from .. import request
 from .base_endpoint import BaseEndpoint
@@ -16,7 +16,7 @@ class BranchesEndpoint(BaseEndpoint):
     PATH = "projects/$parent_id/branches/$resource_id"
 
     def merge(
-        self, params: Optional[dict[str, Union[str, int]]] = None, **ids: Optional[Union[str, int]]
+        self, params: dict[str, str | int] | None = None, **ids: str | int | None
     ) -> dict[str, Any]:
         """Merges the specified branch into the target branch.
 

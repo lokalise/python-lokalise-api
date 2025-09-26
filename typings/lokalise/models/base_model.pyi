@@ -1,4 +1,4 @@
-from typing import Any, ClassVar, Optional
+from typing import Any, ClassVar
 
 class BaseModel:
     # class-level meta

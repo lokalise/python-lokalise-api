@@ -4,7 +4,7 @@ lokalise.client_methods.comments
 This module contains API client definition for comments.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.comments import CommentsCollection
 from lokalise.models.comment import CommentModel
@@ -16,7 +16,7 @@ class CommentMethods(EndpointProviderMixin):
     """Comment client methods."""
 
     def project_comments(
-        self, project_id: str, params: Optional[dict[str, Union[int, str]]] = None
+        self, project_id: str, params: dict[str, int | str] | None = None
     ) -> CommentsCollection:
         """Fetches all comments for the given project.
 
@@ -32,8 +32,8 @@ class CommentMethods(EndpointProviderMixin):
     def key_comments(
         self,
         project_id: str,
-        key_id: Union[str, int],
-        params: Optional[dict[str, Union[int, str]]] = None,
+        key_id: str | int,
+        params: dict[str, int | str] | None = None,
     ) -> CommentsCollection:
         """Fetches all comments for the given key inside a project.
 
@@ -49,7 +49,7 @@ class CommentMethods(EndpointProviderMixin):
         return CommentsCollection(raw_comments)
 
     def key_comment(
-        self, project_id: str, key_id: Union[str, int], comment_id: Union[str, int]
+        self, project_id: str, key_id: str | int, comment_id: str | int
     ) -> CommentModel:
         """Fetches a single comment for a given key.
 
@@ -68,8 +68,8 @@ class CommentMethods(EndpointProviderMixin):
     def create_key_comments(
         self,
         project_id: str,
-        key_id: Union[str, int],
-        params: Union[list[dict[str, str]], dict[str, str]],
+        key_id: str | int,
+        params: list[dict[str, str]] | dict[str, str],
     ) -> CommentsCollection:
         """Creates one or more comments for the given key.
 
@@ -86,7 +86,7 @@ class CommentMethods(EndpointProviderMixin):
         return CommentsCollection(raw_comments)
 
     def delete_key_comment(
-        self, project_id: str, key_id: Union[str, int], comment_id: Union[str, int]
+        self, project_id: str, key_id: str | int, comment_id: str | int
     ) -> dict[str, Any]:
         """Deletes a given key comment.
 

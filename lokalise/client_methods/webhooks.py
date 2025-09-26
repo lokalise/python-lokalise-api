@@ -4,7 +4,7 @@ lokalise.client_methods.webhooks
 This module contains API client definition for webhooks.
 """
 
-from typing import Any, Optional
+from typing import Any
 
 from lokalise.collections.webhooks import WebhooksCollection
 from lokalise.models.webhook import WebhookModel
@@ -16,7 +16,7 @@ class WebhookMethods(EndpointProviderMixin):
     """Webhook client methods."""
 
     def webhooks(
-        self, project_id: str, params: Optional[dict[str, str]] = None
+        self, project_id: str, params: dict[str, str | int] | None = None
     ) -> WebhooksCollection:
         """Lists all webhooks set for a project.
 
@@ -50,7 +50,7 @@ class WebhookMethods(EndpointProviderMixin):
         return WebhookModel(raw_webhook)
 
     def update_webhook(
-        self, project_id: str, webhook_id: str, params: Optional[dict[str, Any]] = None
+        self, project_id: str, webhook_id: str, params: dict[str, Any] | None = None
     ) -> WebhookModel:
         """Updates a webhook.
 

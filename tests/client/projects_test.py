@@ -2,9 +2,8 @@
 Tests for the Project endpoint.
 """
 
-import pytest
-
 import lokalise
+import pytest
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 NEW_PROJECT_ID = "752354175ee755409bb393.87183877"

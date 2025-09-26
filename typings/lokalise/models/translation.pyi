@@ -1,11 +1,6 @@
-from typing import TypedDict
+from typing import Any
 
 from lokalise.models.base_model import BaseModel
-
-class TranslationStatus(TypedDict):
-    status_id: int
-    title: str
-    color: str
 
 class TranslationModel(BaseModel):
     translation_id: int
@@ -21,6 +16,6 @@ class TranslationModel(BaseModel):
     is_fuzzy: bool
     reviewed_by: int
     words: int
-    custom_translation_statuses: list[TranslationStatus]
+    custom_translation_statuses: list[dict[str, Any]]
     task_id: int
     segment_number: int

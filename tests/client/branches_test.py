@@ -3,7 +3,6 @@ Tests for the Branches endpoint.
 """
 
 import pytest
-
 from lokalise.client import Client
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"

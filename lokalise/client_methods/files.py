@@ -4,7 +4,7 @@ lokalise.client_methods.files
 This module contains API client definition for files.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.files import FilesCollection
 from lokalise.models.queued_process import QueuedProcessModel
@@ -15,9 +15,7 @@ from .endpoint_provider import EndpointProviderMixin
 class FileMethods(EndpointProviderMixin):
     """File client methods."""
 
-    def files(
-        self, project_id: str, params: Optional[dict[str, Union[int, str]]] = None
-    ) -> FilesCollection:
+    def files(self, project_id: str, params: dict[str, int | str] | None = None) -> FilesCollection:
         """Fetches all files for the given project.
 
         :param str project_id: ID of the project to fetch files for.
@@ -57,7 +55,7 @@ class FileMethods(EndpointProviderMixin):
         raw_process = self.get_endpoint("files").download_async(params=params, parent_id=project_id)
         return QueuedProcessModel(raw_process)
 
-    def delete_file(self, project_id: str, file_id: Union[str, int]) -> dict[str, Any]:
+    def delete_file(self, project_id: str, file_id: str | int) -> dict[str, Any]:
         """Deletes a file and it's associated keys from the project.
         File __unassigned__ cannot be deleted.
         This endpoint does not support "software localization" projects.

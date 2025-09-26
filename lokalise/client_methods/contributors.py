@@ -4,7 +4,7 @@ lokalise.client_methods.contributors
 This module contains API client definition for contributors.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.contributors import ContributorsCollection
 from lokalise.models.contributor import ContributorModel
@@ -16,7 +16,7 @@ class ContributorMethods(EndpointProviderMixin):
     """Contributor client methods."""
 
     def contributors(
-        self, project_id: str, params: Optional[dict[str, Union[int, str]]] = None
+        self, project_id: str, params: dict[str, int | str] | None = None
     ) -> ContributorsCollection:
         """Fetches all contributors for the given project.
 
@@ -29,7 +29,7 @@ class ContributorMethods(EndpointProviderMixin):
         )
         return ContributorsCollection(raw_contributors)
 
-    def contributor(self, project_id: str, contributor_id: Union[str, int]) -> ContributorModel:
+    def contributor(self, project_id: str, contributor_id: str | int) -> ContributorModel:
         """Fetches a single contributor.
 
         :param str project_id: ID of the project
@@ -54,7 +54,7 @@ class ContributorMethods(EndpointProviderMixin):
         return ContributorModel(raw_contributor)
 
     def create_contributors(
-        self, project_id: str, params: Union[dict[str, Any], list[dict[str, Any]]]
+        self, project_id: str, params: dict[str, Any] | list[dict[str, Any]]
     ) -> ContributorsCollection:
         """Creates one or more contributors inside the project
 
@@ -70,7 +70,7 @@ class ContributorMethods(EndpointProviderMixin):
         return ContributorsCollection(raw_contributors)
 
     def update_contributor(
-        self, project_id: str, contributor_id: Union[str, int], params: dict[str, Any]
+        self, project_id: str, contributor_id: str | int, params: dict[str, Any]
     ) -> ContributorModel:
         """Updates a single contributor.
 
@@ -85,9 +85,7 @@ class ContributorMethods(EndpointProviderMixin):
         )
         return ContributorModel(raw_contributor)
 
-    def delete_contributor(
-        self, project_id: str, contributor_id: Union[str, int]
-    ) -> dict[str, Any]:
+    def delete_contributor(self, project_id: str, contributor_id: str | int) -> dict[str, Any]:
         """Deletes a contributor.
 
         :param str project_id: ID of the project

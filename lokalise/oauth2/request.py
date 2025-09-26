@@ -4,16 +4,17 @@ lokalise.oauth2.request
 HTTP helpers specifically for OAuth 2.0 flow.
 """
 
-from typing import Any, Optional
+from typing import Any
+
 import requests
 
 from lokalise._version import __version__
-from lokalise.request_utils import raise_on_error, format_params
+from lokalise.request_utils import format_params, raise_on_error
 
 BASE_URL = "https://app.lokalise.com/oauth2/"
 
 
-def post(path: str, params: Optional[dict[str, Any]] = None) -> dict[str, Any]:
+def post(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
     """
     Perform an OAuth2 POST request (token exchange/revoke/etc).
     Returns parsed JSON or raises a structured error.

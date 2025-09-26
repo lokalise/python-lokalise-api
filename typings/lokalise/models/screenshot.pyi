@@ -1,21 +1,11 @@
-from typing import TypedDict
+from typing import Any
 
 from lokalise.models.base_model import BaseModel
-
-class ScreenshotKeyCoordinates(TypedDict):
-    left: int
-    top: int
-    width: int
-    height: int
-
-class ScreenshotKey(TypedDict):
-    key_id: int
-    coordinates: ScreenshotKeyCoordinates
 
 class ScreenshotModel(BaseModel):
     screenshot_id: int
     key_ids: list[int]
-    keys: list[ScreenshotKey]
+    keys: list[dict[str, Any]]
     url: str
     title: str
     description: str

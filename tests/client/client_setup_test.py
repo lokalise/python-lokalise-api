@@ -2,8 +2,10 @@
 Tests for the Client class
 """
 
-import pytest
+from typing import Any, cast
+
 import lokalise
+import pytest
 
 
 def test_client_arguments():
@@ -66,3 +68,105 @@ def test_reset_client():
     endpoint_attrs = [a for a in vars(client) if a.endswith("_endpoint")]
     for attr in endpoint_attrs:
         assert getattr(client, attr) is None
+
+
+def make_client() -> lokalise.Client:
+    return lokalise.Client("valid-token")
+
+
+def test_token_setter_rejects_empty() -> None:
+    client = make_client()
+    with pytest.raises(ValueError, match="token must be a non-empty string"):
+        client.token = ""
+
+
+def test_token_setter_accepts_non_empty() -> None:
+    client = make_client()
+    client.token = "123abc"
+    assert client.token == "123abc"
+
+
+# ---------- connect_timeout ----------
+
+
+@pytest.mark.parametrize("value", [-1, -0.1])
+def test_connect_timeout_rejects_negative(value: int | float) -> None:
+    client = make_client()
+    with pytest.raises(ValueError, match="connect_timeout must be a non-negative number or None"):
+        client.connect_timeout = value
+
+
+@pytest.mark.parametrize("value", [None, 0, 0.0, 3, 2.5])
+def test_connect_timeout_allows_non_negative_or_none(value: int | float) -> None:
+    client = make_client()
+    client.connect_timeout = value
+    assert client.connect_timeout == value
+
+
+# ---------- read_timeout ----------
+
+
+@pytest.mark.parametrize("value", [-1, -0.1])
+def test_read_timeout_rejects_negative(value: int | float) -> None:
+    client = make_client()
+    with pytest.raises(ValueError, match="read_timeout must be a non-negative number or None"):
+        client.read_timeout = value  # type: ignore[assignment]
+
+
+@pytest.mark.parametrize("value", [None, 0, 0.0, 3, 2.5])
+def test_read_timeout_allows_non_negative_or_none(value: int | float | None) -> None:
+    client = make_client()
+    client.read_timeout = value
+    assert client.read_timeout == value
+
+
+# ---------- enable_compression ----------
+
+
+@pytest.mark.parametrize(
+    "inp, expected",
+    [
+        (None, False),
+        (False, False),
+        (True, True),
+    ],
+)
+def test_enable_compression_bool_inputs(inp: bool | None, expected: bool) -> None:
+    client = make_client()
+    client.enable_compression = inp
+    assert client.enable_compression is expected
+
+
+@pytest.mark.parametrize(
+    "inp, expected",
+    [
+        (0, False),
+        (1, True),
+        ("yes", True),
+        ("", False),
+    ],
+)
+def test_enable_compression_coerces_truthy_falsy(inp: object, expected: bool) -> None:
+    client = make_client()
+    client.enable_compression = cast(Any, inp)
+    assert client.enable_compression is expected
+
+
+# ---------- api_host ----------
+
+
+@pytest.mark.parametrize(
+    ("inp", "expected"),
+    [
+        (None, None),
+        ("", None),
+        ("   ", None),
+        ("\n\t", None),
+        ("api.example.com", "api.example.com"),
+        ("  api.example.com  ", "  api.example.com  "),
+    ],
+)
+def test_api_host_assignment_rules(inp: str | None, expected: str | None) -> None:
+    client = make_client()
+    client.api_host = inp
+    assert client.api_host == expected

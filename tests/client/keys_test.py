@@ -5,7 +5,6 @@ Tests for the Keys endpoint.
 import pytest
 from lokalise.client import Client
 
-
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 PROJECT_ID2 = "2273827860c1e2473eb195.11207948"
 KEY_ID = 34089721

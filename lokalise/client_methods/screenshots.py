@@ -4,7 +4,7 @@ lokalise.client_methods.screenshots
 This module contains API client definition for screenshots.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.screenshots import ScreenshotsCollection
 from lokalise.models.screenshot import ScreenshotModel
@@ -16,7 +16,7 @@ class ScreenshotMethods(EndpointProviderMixin):
     """Screenshot client methods."""
 
     def screenshots(
-        self, project_id: str, params: Optional[dict[str, str | int]] = None
+        self, project_id: str, params: dict[str, str | int] | None = None
     ) -> ScreenshotsCollection:
         """Fetches all screenshots for the given project.
 
@@ -27,7 +27,7 @@ class ScreenshotMethods(EndpointProviderMixin):
         raw_screenshots = self.get_endpoint("screenshots").all(params=params, parent_id=project_id)
         return ScreenshotsCollection(raw_screenshots)
 
-    def screenshot(self, project_id: str, screenshot_id: Union[str, int]) -> ScreenshotModel:
+    def screenshot(self, project_id: str, screenshot_id: str | int) -> ScreenshotModel:
         """Fetches a screenshot.
 
         :param str project_id: ID of the project
@@ -41,7 +41,7 @@ class ScreenshotMethods(EndpointProviderMixin):
         return ScreenshotModel(screenshot)
 
     def create_screenshots(
-        self, project_id: str, params: Union[list[dict[str, Any]], dict[str, Any]]
+        self, project_id: str, params: list[dict[str, Any]] | dict[str, Any]
     ) -> ScreenshotsCollection:
         """Creates one or more screenshots in the given project.
 
@@ -58,8 +58,8 @@ class ScreenshotMethods(EndpointProviderMixin):
     def update_screenshot(
         self,
         project_id: str,
-        screenshot_id: Union[str, int],
-        params: Optional[dict[str, Any]] = None,
+        screenshot_id: str | int,
+        params: dict[str, Any] | None = None,
     ) -> ScreenshotModel:
         """Updates a screenshot.
 
@@ -74,7 +74,7 @@ class ScreenshotMethods(EndpointProviderMixin):
         )
         return ScreenshotModel(screenshot)
 
-    def delete_screenshot(self, project_id: str, screenshot_id: Union[str, int]) -> dict[str, Any]:
+    def delete_screenshot(self, project_id: str, screenshot_id: str | int) -> dict[str, Any]:
         """Deletes a screenshot.
 
         :param str project_id: ID of the project

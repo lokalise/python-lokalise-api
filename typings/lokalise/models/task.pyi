@@ -1,58 +1,6 @@
-from typing import TypedDict
+from typing import Any
 
 from lokalise.models.base_model import BaseModel
-
-class LanguageAssigneeUser(TypedDict):
-    user_id: str | int
-    email: str
-    fullname: str
-
-class LanguageAssigneeGroup(TypedDict):
-    id: str | int
-    name: str
-
-InitialTMLeverage = TypedDict(
-    "InitialTMLeverage",
-    {
-        "0%+": int,
-        "60%+": int,
-        "75%+": int,
-        "95%+": int,
-        "100%": int,
-    },
-)
-
-TMLeverageValue = TypedDict(
-    "TMLeverageValue",
-    {
-        "0%+": int,
-        "50%+": int,
-        "75%+": int,
-        "85%+": int,
-        "95%+": int,
-        "100%": int,
-    },
-)
-
-class TMLeverage(TypedDict):
-    status: str
-    value: TMLeverageValue
-
-class LanguageEntry(TypedDict):
-    language_iso: str
-    users: list[LanguageAssigneeUser]
-    groups: list[LanguageAssigneeGroup]
-    keys: list[str] | list[int]
-    status: str
-    progress: int
-    initial_tm_leverage: InitialTMLeverage
-    tm_leverage: TMLeverage
-    keys_count: int
-    words_count: int
-    completed_at: str
-    completed_at_timestamp: int
-    completed_by: int
-    completed_by_email: str
 
 class TaskModel(BaseModel):
     task_id: int
@@ -73,7 +21,7 @@ class TaskModel(BaseModel):
     parent_task_id: int
     closing_tags: list[str]
     do_lock_translations: bool
-    languages: list[LanguageEntry]
+    languages: list[dict[str, Any]]
     source_language_iso: str
     auto_close_languages: bool
     auto_close_task: bool

@@ -5,9 +5,8 @@ Tests for the Auth class.
 import os
 
 import pytest
-
-from lokalise.errors import BadRequest
 from lokalise import Auth
+from lokalise.errors import BadRequest
 
 
 @pytest.mark.vcr

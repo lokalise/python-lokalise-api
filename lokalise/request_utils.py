@@ -5,11 +5,13 @@ This module provides helpers to send HTTP requests.
 """
 
 import json
-from typing import Any, NoReturn, Optional, Mapping
+from collections.abc import Mapping
+from typing import Any, NoReturn
 
 from requests import Response
-from .types import HasApiHost
+
 from . import errors
+from .types import HasApiHost
 
 
 def raise_on_error(response: Response, data: dict[str, Any]) -> None:
@@ -25,8 +27,8 @@ def raise_on_error(response: Response, data: dict[str, Any]) -> None:
             url = getattr(response.request, "url", None)
             if method and url:
                 hint = f"{method} {url} failed"
-        except Exception:
-            pass
+        except Exception:  # pragma: no cover
+            pass  # pragma: no cover
 
         respond_with_error(
             data,
@@ -64,7 +66,7 @@ def path_to_endpoint(client: HasApiHost, default_base_uri: str, path: str) -> st
     return __join_url(base_uri, path)
 
 
-def format_params(params: Optional[dict[str, Any]] = None) -> Optional[str]:
+def format_params(params: dict[str, Any] | None = None) -> str | None:
     """Converts request params to JSON"""
     return json.dumps(params) if params else None
 

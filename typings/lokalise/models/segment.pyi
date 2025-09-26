@@ -1,11 +1,6 @@
-from typing import TypedDict
+from typing import Any
 
 from lokalise.models.base_model import BaseModel
-
-class TranslationStatus(TypedDict):
-    status_id: int
-    title: str
-    color: str
 
 class SegmentModel(BaseModel):
     segment_number: int
@@ -19,4 +14,4 @@ class SegmentModel(BaseModel):
     is_reviewed: bool
     reviewed_by: int
     words: int
-    custom_translation_statuses: list[TranslationStatus]
+    custom_translation_statuses: list[dict[str, Any]]

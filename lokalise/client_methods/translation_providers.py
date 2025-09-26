@@ -4,8 +4,6 @@ lokalise.client_methods.translation_providers
 This module contains API client definition for translation providers.
 """
 
-from typing import Optional, Union
-
 from lokalise.collections.translation_providers import TranslationProvidersCollection
 from lokalise.models.translation_provider import TranslationProviderModel
 
@@ -16,7 +14,7 @@ class TranslationProviderMethods(EndpointProviderMixin):
     """Translation provider client methods."""
 
     def translation_providers(
-        self, team_id: Union[str, int], params: Optional[dict[str, str | int]] = None
+        self, team_id: str | int, params: dict[str, str | int] | None = None
     ) -> TranslationProvidersCollection:
         """Fetches all translation providers.
 
@@ -31,7 +29,7 @@ class TranslationProviderMethods(EndpointProviderMixin):
         return TranslationProvidersCollection(raw_providers)
 
     def translation_provider(
-        self, team_id: Union[str, int], translation_provider_id: Union[str, int]
+        self, team_id: str | int, translation_provider_id: str | int
     ) -> TranslationProviderModel:
         """Fetches a translation provider.
 

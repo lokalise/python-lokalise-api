@@ -4,11 +4,9 @@ lokalise.base_client
 This module contains base API client definition.
 """
 
-from typing import Optional, Union
 from .types import FullClientProto
 
-
-Number = Union[int, float]
+Number = int | float
 
 
 class BaseClient(FullClientProto):
@@ -17,10 +15,10 @@ class BaseClient(FullClientProto):
     def __init__(
         self,
         token: str,
-        connect_timeout: Optional[Union[int, float]] = None,
-        read_timeout: Optional[Union[int, float]] = None,
-        enable_compression: Optional[bool] = False,
-        api_host: Optional[str] = None,
+        connect_timeout: int | float | None = None,
+        read_timeout: int | float | None = None,
+        enable_compression: bool | None = False,
+        api_host: str | None = None,
     ) -> None:
         """Instantiate a new Lokalise API client.
 
@@ -58,7 +56,7 @@ class BaseClient(FullClientProto):
         return self._connect_timeout
 
     @connect_timeout.setter
-    def connect_timeout(self, value: Optional[Number]) -> None:
+    def connect_timeout(self, value: Number | None) -> None:
         if value is not None and value < 0:
             raise ValueError("connect_timeout must be a non-negative number or None")
         self._connect_timeout = value
@@ -68,7 +66,7 @@ class BaseClient(FullClientProto):
         return self._read_timeout
 
     @read_timeout.setter
-    def read_timeout(self, value: Optional[Number]) -> None:
+    def read_timeout(self, value: Number | None) -> None:
         if value is not None and value < 0:
             raise ValueError("read_timeout must be a non-negative number or None")
         self._read_timeout = value
@@ -78,7 +76,7 @@ class BaseClient(FullClientProto):
         return self._enable_compression
 
     @enable_compression.setter
-    def enable_compression(self, value: Optional[bool]) -> None:
+    def enable_compression(self, value: bool | None) -> None:
         self._enable_compression = bool(value) if value is not None else False
 
     @property
@@ -86,7 +84,7 @@ class BaseClient(FullClientProto):
         return self._api_host
 
     @api_host.setter
-    def api_host(self, value: Optional[str]) -> None:
+    def api_host(self, value: str | None) -> None:
         if value is not None:
             v = value.strip()
             if not v:

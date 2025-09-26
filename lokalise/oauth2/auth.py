@@ -5,7 +5,8 @@ OAuth 2.0 client for generating auth URLs and exchanging/refreshing tokens.
 """
 
 import urllib.parse
-from typing import Any, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 from .request import BASE_URL, post
 
@@ -17,7 +18,11 @@ class Auth:
 
         import lokalise
         client = lokalise.Auth("client id", "client secret")
-        url = client.auth(scope=["read_projects", "write_keys"], redirect_uri="https://app.example.com/callback", state="csrf123")
+        url = client.auth(
+            scope=["read_projects", "write_keys"],
+            redirect_uri="https://app.example.com/callback",
+            state="csrf123"
+        )
         token = client.token("auth_code_from_callback")
         refreshed = client.refresh(token["refresh_token"])
     """
@@ -39,7 +44,7 @@ class Auth:
     ) -> str:
         """Generate the authorization URL users should visit to approve access.
 
-        :param scope: Requested scopes (either a sequence of scope strings or a single space-delimited string)
+        :param scope: Requested scopes (sequence of scope strings or single space-delimited string)
         :param redirect_uri: Optional redirect URI registered with your OAuth client
         :param state: Optional state to protect from CSRF (will be returned back)
         :return: Absolute URL to redirect the user to

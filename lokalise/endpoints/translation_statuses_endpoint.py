@@ -4,7 +4,7 @@ lokalise.endpoints.translation_statuses_endpoint
 Module containing translation statuses endpoint.
 """
 
-from typing import Union
+from typing import Any
 
 from .. import request
 from .base_endpoint import BaseEndpoint
@@ -15,7 +15,7 @@ class TranslationStatusesEndpoint(BaseEndpoint):
 
     PATH = "projects/$parent_id/custom_translation_statuses/$resource_id"
 
-    def colors(self, **ids: Union[str, int]) -> dict:
+    def colors(self, **ids: str | int) -> dict[str, Any]:
         """Fetches available RGB colors that can be assigned to
         translation statuses.
 

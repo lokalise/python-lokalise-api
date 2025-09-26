@@ -4,7 +4,7 @@ lokalise.client_methods.translation_statuses
 This module contains API client definition for translation statuses.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.translation_statuses import TranslationStatusesCollection
 from lokalise.models.translation_status import TranslationStatusModel
@@ -16,7 +16,7 @@ class TranslationStatusMethods(EndpointProviderMixin):
     """Translation status client methods."""
 
     def translation_statuses(
-        self, project_id: str, params: Optional[dict[str, str | int]] = None
+        self, project_id: str, params: dict[str, str | int] | None = None
     ) -> TranslationStatusesCollection:
         """Fetches all translation statuses.
 
@@ -32,7 +32,7 @@ class TranslationStatusMethods(EndpointProviderMixin):
     def translation_status(
         self,
         project_id: str,
-        translation_status_id: Union[str, int],
+        translation_status_id: str | int,
     ) -> TranslationStatusModel:
         """Fetches a translation status.
 
@@ -63,8 +63,8 @@ class TranslationStatusMethods(EndpointProviderMixin):
     def update_translation_status(
         self,
         project_id: str,
-        translation_status_id: Union[str, int],
-        params: Optional[dict[str, str]] = None,
+        translation_status_id: str | int,
+        params: dict[str, str] | None = None,
     ) -> TranslationStatusModel:
         """Updates a translation status.
 
@@ -82,7 +82,7 @@ class TranslationStatusMethods(EndpointProviderMixin):
     def delete_translation_status(
         self,
         project_id: str,
-        translation_status_id: Union[str, int],
+        translation_status_id: str | int,
     ) -> dict[str, Any]:
         """Deletes a translation status.
 

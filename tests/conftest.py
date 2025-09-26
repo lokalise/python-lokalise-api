@@ -3,13 +3,18 @@ Contains fixture functions for the tests.
 """
 
 import os
+from types import ModuleType
+from typing import Protocol
 
+import lokalise
 import pytest
 from dotenv import find_dotenv, load_dotenv
 
-import lokalise
-
 load_dotenv(find_dotenv())
+
+
+class _ReqWithModule(Protocol):
+    module: ModuleType | None
 
 
 @pytest.fixture(scope="module")
@@ -23,13 +28,16 @@ def vcr_config():
 
 
 @pytest.fixture(scope="module")
-def vcr_cassette_dir(request):
+def vcr_cassette_dir(request: _ReqWithModule) -> str:
     """Sets the path to save cassettes to."""
-    return os.path.join(f"tests/cassettes/{request.module.__name__}")
+    module = request.module
+    mod_name = module.__name__ if module is not None else "unknown"
+    mod_path = mod_name.replace(".", os.sep)
+    return os.path.join("tests", "cassettes", mod_path)
 
 
 @pytest.fixture(scope="module")
-def screenshot_data():
+def screenshot_data() -> str:
     """Loads base64-encoded screenshot data."""
     try:
         path = "tests/fixtures/screenshot_base64.txt"

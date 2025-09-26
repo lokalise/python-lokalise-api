@@ -4,7 +4,7 @@ lokalise.client_methods.tasks
 This module contains API client definition for tasks.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.tasks import TasksCollection
 from lokalise.models.task import TaskModel
@@ -15,9 +15,7 @@ from .endpoint_provider import EndpointProviderMixin
 class TaskMethods(EndpointProviderMixin):
     """Task client methods."""
 
-    def tasks(
-        self, project_id: str, params: Optional[dict[str, str | int]] = None
-    ) -> TasksCollection:
+    def tasks(self, project_id: str, params: dict[str, str | int] | None = None) -> TasksCollection:
         """Fetches all tasks for the given project.
 
         :param str project_id: ID of the project
@@ -27,7 +25,7 @@ class TaskMethods(EndpointProviderMixin):
         raw_tasks = self.get_endpoint("tasks").all(params=params, parent_id=project_id)
         return TasksCollection(raw_tasks)
 
-    def task(self, project_id: str, task_id: Union[str, int]) -> TaskModel:
+    def task(self, project_id: str, task_id: str | int) -> TaskModel:
         """Fetches a task.
 
         :param str project_id: ID of the project
@@ -49,7 +47,7 @@ class TaskMethods(EndpointProviderMixin):
         return TaskModel(raw_task)
 
     def update_task(
-        self, project_id: str, task_id: Union[str, int], params: Optional[dict[str, Any]] = None
+        self, project_id: str, task_id: str | int, params: dict[str, Any] | None = None
     ) -> TaskModel:
         """Updates a task.
 
@@ -64,7 +62,7 @@ class TaskMethods(EndpointProviderMixin):
         )
         return TaskModel(raw_task)
 
-    def delete_task(self, project_id: str, task_id: Union[str, int]) -> dict[str, Any]:
+    def delete_task(self, project_id: str, task_id: str | int) -> dict[str, Any]:
         """Deletes a task.
 
         :param str project_id: ID of the project

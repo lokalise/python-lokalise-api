@@ -1,5 +1,6 @@
-from lokalise.models.base_model import BaseModel
 from typing import Any
+
+from lokalise.models.base_model import BaseModel
 
 class ProjectModel(BaseModel):
     project_id: str

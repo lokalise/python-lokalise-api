@@ -4,7 +4,7 @@ lokalise.client_methods.languages
 This module contains API client definition for languages.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.languages import LanguagesCollection
 from lokalise.models.language import LanguageModel
@@ -15,9 +15,7 @@ from .endpoint_provider import EndpointProviderMixin
 class LanguageMethods(EndpointProviderMixin):
     """Language client methods."""
 
-    def system_languages(
-        self, params: Optional[dict[str, Union[str, int]]] = None
-    ) -> LanguagesCollection:
+    def system_languages(self, params: dict[str, str | int] | None = None) -> LanguagesCollection:
         """Fetches all languages that Lokalise supports.
 
         :param dict params: (optional) Pagination params
@@ -27,7 +25,7 @@ class LanguageMethods(EndpointProviderMixin):
         return LanguagesCollection(raw_languages)
 
     def project_languages(
-        self, project_id: str, params: Optional[dict[str, Union[str, int]]] = None
+        self, project_id: str, params: dict[str, str | int] | None = None
     ) -> LanguagesCollection:
         """Fetches all languages for the given project.
 
@@ -38,7 +36,9 @@ class LanguageMethods(EndpointProviderMixin):
         raw_languages = self.get_endpoint("languages").all(parent_id=project_id, params=params)
         return LanguagesCollection(raw_languages)
 
-    def create_languages(self, project_id: str, params: dict[str, Any]) -> LanguagesCollection:
+    def create_languages(
+        self, project_id: str, params: list[dict[str, Any]] | dict[str, Any]
+    ) -> LanguagesCollection:
         """Create one or more languages for the given project.
 
         :param str project_id: ID of the project
@@ -51,7 +51,7 @@ class LanguageMethods(EndpointProviderMixin):
         )
         return LanguagesCollection(raw_languages)
 
-    def language(self, project_id: str, language_id: Union[str, int]) -> LanguageModel:
+    def language(self, project_id: str, language_id: str | int) -> LanguageModel:
         """Fetches a project language.
 
         :param str project_id: ID of the project
@@ -64,7 +64,7 @@ class LanguageMethods(EndpointProviderMixin):
         return LanguageModel(raw_language)
 
     def update_language(
-        self, project_id: str, language_id: Union[str, int], params: dict[str, Any]
+        self, project_id: str, language_id: str | int, params: dict[str, Any]
     ) -> LanguageModel:
         """Updates a project language.
 
@@ -78,7 +78,7 @@ class LanguageMethods(EndpointProviderMixin):
         )
         return LanguageModel(raw_language)
 
-    def delete_language(self, project_id: str, language_id: Union[str, int]) -> dict[str, Any]:
+    def delete_language(self, project_id: str, language_id: str | int) -> dict[str, Any]:
         """Deletes a project language.
 
         :param str project_id: ID of the project

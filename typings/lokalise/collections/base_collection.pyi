@@ -1,4 +1,5 @@
 from typing import Any, ClassVar, Generic, TypeVar
+
 from lokalise.models.base_model import BaseModel
 
 TModel = TypeVar("TModel", bound=BaseModel)

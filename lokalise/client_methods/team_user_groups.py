@@ -4,7 +4,7 @@ lokalise.client_methods.team_user_groups
 This module contains API client definition for team user groups.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.team_user_groups import TeamUserGroupsCollection
 from lokalise.models.team_user_group import TeamUserGroupModel
@@ -16,7 +16,7 @@ class TeamUserGroupMethods(EndpointProviderMixin):
     """Team user group client methods."""
 
     def team_user_groups(
-        self, team_id: Union[str, int], params: Optional[dict[str, str | int]] = None
+        self, team_id: str | int, params: dict[str, str | int] | None = None
     ) -> TeamUserGroupsCollection:
         """Fetches all team user groups.
 
@@ -29,7 +29,7 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         return TeamUserGroupsCollection(raw_groups)
 
     def team_user_group(
-        self, team_id: Union[str, int], team_user_group_id: Union[str, int]
+        self, team_id: str | int, team_user_group_id: str | int
     ) -> TeamUserGroupModel:
         """Fetches a team user group.
 
@@ -45,7 +45,7 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         return TeamUserGroupModel(raw_group)
 
     def create_team_user_group(
-        self, team_id: Union[str, int], params: dict[str, Any]
+        self, team_id: str | int, params: dict[str, Any]
     ) -> TeamUserGroupModel:
         """Fetches a team user group.
 
@@ -58,7 +58,7 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         return TeamUserGroupModel(raw_group)
 
     def update_team_user_group(
-        self, team_id: Union[str, int], team_user_group_id: Union[str, int], params: dict[str, Any]
+        self, team_id: str | int, team_user_group_id: str | int, params: dict[str, Any]
     ) -> TeamUserGroupModel:
         """Updates a team user group.
 
@@ -75,7 +75,7 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         return TeamUserGroupModel(raw_group)
 
     def delete_team_user_group(
-        self, team_id: Union[str, int], team_user_group_id: Union[str, int]
+        self, team_id: str | int, team_user_group_id: str | int
     ) -> dict[str, Any]:
         """Deletes a team user group.
 
@@ -92,9 +92,9 @@ class TeamUserGroupMethods(EndpointProviderMixin):
 
     def add_projects_to_group(
         self,
-        team_id: Union[str, int],
-        team_user_group_id: Union[str, int],
-        params: Union[str, list[str]],
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | list[str],
     ) -> TeamUserGroupModel:
         """Adds projects to a team user group.
 
@@ -113,9 +113,9 @@ class TeamUserGroupMethods(EndpointProviderMixin):
 
     def remove_projects_from_group(
         self,
-        team_id: Union[str, int],
-        team_user_group_id: Union[str, int],
-        params: Union[str, list[str]],
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | list[str],
     ) -> TeamUserGroupModel:
         """Removes projects from a team user group.
 
@@ -134,9 +134,9 @@ class TeamUserGroupMethods(EndpointProviderMixin):
 
     def add_members_to_group(
         self,
-        team_id: Union[str, int],
-        team_user_group_id: Union[str, int],
-        params: Union[str, list[str]],
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | int | list[str | int],
     ) -> TeamUserGroupModel:
         """Adds members to a team user group.
 
@@ -155,9 +155,9 @@ class TeamUserGroupMethods(EndpointProviderMixin):
 
     def remove_members_from_group(
         self,
-        team_id: Union[str, int],
-        team_user_group_id: Union[str, int],
-        params: Union[str, list[str]],
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | int | list[str | int],
     ) -> TeamUserGroupModel:
         """Removes members from a team user group.
 

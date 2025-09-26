@@ -4,7 +4,7 @@ lokalise.client_methods.segments
 This module contains API client definition for segments.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.segments import SegmentsCollection
 from lokalise.models.segment import SegmentModel
@@ -18,9 +18,9 @@ class SegmentMethods(EndpointProviderMixin):
     def segments(
         self,
         project_id: str,
-        key_id: Union[str, int],
+        key_id: str | int,
         lang_iso: str,
-        params: Optional[dict[str, Any]] = None,
+        params: dict[str, Any] | None = None,
     ) -> SegmentsCollection:
         """Fetches all segments for the given key and language inside a project.
 
@@ -39,10 +39,10 @@ class SegmentMethods(EndpointProviderMixin):
     def segment(
         self,
         project_id: str,
-        key_id: Union[str, int],
+        key_id: str | int,
         lang_iso: str,
-        segment_number: Union[str, int],
-        params: Optional[dict[str, Any]] = None,
+        segment_number: str | int,
+        params: dict[str, Any] | None = None,
     ) -> SegmentModel:
         """Fetches a segment for the given key and language inside a project.
 
@@ -66,9 +66,9 @@ class SegmentMethods(EndpointProviderMixin):
     def update_segment(
         self,
         project_id: str,
-        key_id: Union[str, int],
+        key_id: str | int,
         lang_iso: str,
-        segment_number: Union[str, int],
+        segment_number: str | int,
         params: dict[str, Any],
     ) -> SegmentModel:
         """Updates a segment.

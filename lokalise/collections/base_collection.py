@@ -4,10 +4,9 @@ lokalise.collections.base_collection
 Collection parent class inherited by specific collections.
 """
 
-from typing import Any, Generic, TypeVar, cast, ClassVar
+from typing import Any, ClassVar, Generic, TypeVar, cast
 
 from ..models.base_model import BaseModel
-
 
 TModel = TypeVar("TModel", bound=BaseModel)
 
@@ -59,7 +58,7 @@ class BaseCollection(Generic[TModel]):
 
         raw_items_any = raw_data.get(self.DATA_KEY, [])
         if not isinstance(raw_items_any, list):
-            raw_items_any = []
+            raw_items_any = []  # pragma: no cover
         raw_items = cast(list[dict[str, Any]], raw_items_any)
 
         model_klass = cast(type[TModel], self.MODEL_KLASS)

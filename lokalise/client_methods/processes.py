@@ -4,8 +4,6 @@ lokalise.client_methods.processes
 This module contains API client definition for processes.
 """
 
-from typing import Union
-
 from lokalise.collections.queued_processes import QueuedProcessesCollection
 from lokalise.models.queued_process import QueuedProcessModel
 
@@ -24,9 +22,7 @@ class ProcessMethods(EndpointProviderMixin):
         raw_processes = self.get_endpoint("queued_processes").all(parent_id=project_id)
         return QueuedProcessesCollection(raw_processes)
 
-    def queued_process(
-        self, project_id: str, queued_process_id: Union[str, int]
-    ) -> QueuedProcessModel:
+    def queued_process(self, project_id: str, queued_process_id: str | int) -> QueuedProcessModel:
         """Fetches a queued process.
 
         :param str project_id: ID of the project

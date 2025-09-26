@@ -5,9 +5,9 @@ Defines custom exception classes.
 """
 
 import json
+from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import Any, Mapping, Optional, Type, Dict, cast, Union
-
+from typing import Any, Optional, Union, cast
 
 JSONValue = Union[str, int, float, bool, None, "JSONObject", "JSONList"]
 JSONList = list[JSONValue]
@@ -28,14 +28,14 @@ class ClientHTTPError(ClientError):
         message: str,
         status_code: int,
         *,
-        headers: Optional[Mapping[str, str]] = None,
-        raw_text: Optional[str] = None,
+        headers: Mapping[str, str] | None = None,
+        raw_text: str | None = None,
         parsed: Optional["APIError"] = None,
     ) -> None:
         super().__init__(message, status_code)
         self.status_code = status_code
         self.message = message
-        self.headers: Dict[str, str] = dict(headers or {})
+        self.headers: dict[str, str] = dict(headers or {})
         self.raw_text = raw_text
         self.parsed = parsed
 
@@ -48,18 +48,7 @@ class ClientHTTPError(ClientError):
                 base += f" | code={self.parsed.code!r}"
         return base
 
-    @property
-    def retry_after_seconds(self) -> Optional[int]:
-        v = self.headers.get("Retry-After")
-        if not v:
-            return None
-        try:
-            return int(v.strip())
-        except Exception:
-            return None
 
-
-# Тонкие классы под коды
 class BadRequest(ClientHTTPError): ...
 
 
@@ -99,7 +88,7 @@ class ServiceUnavailable(ClientHTTPError): ...
 class GatewayTimeout(ClientHTTPError): ...
 
 
-ERROR_CODES: Dict[int, Type[ClientHTTPError]] = {
+ERROR_CODES: dict[int, type[ClientHTTPError]] = {
     400: BadRequest,
     401: Unauthorized,
     403: Forbidden,
@@ -126,7 +115,7 @@ class APIError:
     details: dict[str, Any] | None
 
 
-def _coalesce(*ss: Optional[str]) -> str:
+def _coalesce(*ss: str | None) -> str:
     for s in ss:
         if s:
             return s
@@ -286,9 +275,9 @@ def parse_api_error(slurp: bytes | str, status: int) -> APIError:
 def error_from_http(
     status_code: int,
     *,
-    message: Optional[str] = None,  # можно пробросить своё (например "GET /url failed")
-    headers: Optional[Mapping[str, str]] = None,
-    body_text: Optional[str] = None,
+    message: str | None = None,  # можно пробросить своё (например "GET /url failed")
+    headers: Mapping[str, str] | None = None,
+    body_text: str | None = None,
 ) -> ClientHTTPError:
     parsed = parse_api_error(body_text or "", status_code)
     final_message = message or parsed.message or f"HTTP {status_code} error"

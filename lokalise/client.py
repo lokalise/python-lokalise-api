@@ -5,7 +5,8 @@ This module contains API client definition.
 """
 
 import importlib
-from typing import Callable, TypeVar, cast
+from collections.abc import Callable
+from typing import TypeVar, cast
 
 from lokalise.utils import snake_to_camel
 

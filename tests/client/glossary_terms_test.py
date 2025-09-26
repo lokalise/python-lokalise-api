@@ -2,9 +2,8 @@
 Tests for the GlossaryTerms endpoint.
 """
 
-import pytest
-
 import lokalise
+import pytest
 from lokalise.client import Client
 
 PROJECT_ID = "6504960967ab53d45e0ed7.15877499"

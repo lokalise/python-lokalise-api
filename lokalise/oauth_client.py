@@ -4,8 +4,6 @@ lokalise.oauth_client
 This module contains API client that can be used with OAuth 2 tokens.
 """
 
-from typing import Optional, Union
-
 from .client import Client
 
 
@@ -22,10 +20,10 @@ class OAuthClient(Client):
     def __init__(
         self,
         token: str,
-        connect_timeout: Optional[Union[int, float]] = None,
-        read_timeout: Optional[Union[int, float]] = None,
-        enable_compression: Optional[bool] = False,
-        api_host: Optional[str] = None,
+        connect_timeout: int | float | None = None,
+        read_timeout: int | float | None = None,
+        enable_compression: bool | None = False,
+        api_host: str | None = None,
     ) -> None:
         """Instantiate a new Lokalise API client with OAuth 2 token.
 

@@ -4,7 +4,7 @@ lokalise.client_methods.translations
 This module contains API client definition for translations.
 """
 
-from typing import Any, Optional, Union
+from typing import Any
 
 from lokalise.collections.translations import TranslationsCollection
 from lokalise.models.translation import TranslationModel
@@ -16,7 +16,7 @@ class TranslationMethods(EndpointProviderMixin):
     """Translation client methods."""
 
     def translations(
-        self, project_id: str, params: Optional[dict[str, str | int]] = None
+        self, project_id: str, params: dict[str, str | int] | None = None
     ) -> TranslationsCollection:
         """Fetches all translations for the given project.
 
@@ -32,8 +32,8 @@ class TranslationMethods(EndpointProviderMixin):
     def translation(
         self,
         project_id: str,
-        translation_id: Union[str, int],
-        params: Optional[dict[str, Any]] = None,
+        translation_id: str | int,
+        params: dict[str, Any] | None = None,
     ) -> TranslationModel:
         """Fetches a translation.
 
@@ -49,7 +49,7 @@ class TranslationMethods(EndpointProviderMixin):
         return TranslationModel(raw_translation)
 
     def update_translation(
-        self, project_id: str, translation_id: Union[str, int], params: dict[str, Any]
+        self, project_id: str, translation_id: str | int, params: dict[str, Any]
     ) -> TranslationModel:
         """Updates a translation.
 

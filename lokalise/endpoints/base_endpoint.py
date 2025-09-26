@@ -5,7 +5,7 @@ Endpoint parent class inherited by specific endpoints.
 """
 
 from string import Template
-from typing import Any, Optional, Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from ..utils import to_list
 
@@ -40,9 +40,7 @@ class BaseEndpoint:
         """
         self.client = client
 
-    def all(
-        self, params: Optional[dict[str, Any]] = None, **ids: Optional[Union[str, int]]
-    ) -> dict[str, Any]:
+    def all(self, params: dict[str, Any] | None = None, **ids: str | int | None) -> dict[str, Any]:
         """Loads all items for the given endpoint
         (all projects, all contributors etc).
 
@@ -53,9 +51,7 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.get(self.client, path, params)
 
-    def find(
-        self, params: Optional[dict[str, Any]] = None, **ids: Optional[Union[str, int]]
-    ) -> dict[str, Any]:
+    def find(self, params: dict[str, Any] | None = None, **ids: str | int | None) -> dict[str, Any]:
         """Loads an item for the given endpoint
         (one project, one contributor etc).
 
@@ -68,9 +64,9 @@ class BaseEndpoint:
 
     def create(
         self,
-        params: Optional[dict[str, Any]] = None,
-        wrapper_attr: Optional[str] = None,
-        **ids: Optional[Union[str, int]],
+        params: dict[str, Any] | None = None,
+        wrapper_attr: str | None = None,
+        **ids: str | int | None,
     ) -> dict[str, Any]:
         """Creates a new resource for the given endpoint.
 
@@ -92,8 +88,8 @@ class BaseEndpoint:
     def update(
         self,
         params: dict[str, Any],
-        wrapper_attr: Optional[str] = None,
-        **ids: Optional[Union[str, int]],
+        wrapper_attr: str | None = None,
+        **ids: str | int | None,
     ) -> dict[str, Any]:
         """Updates a resource for the given endpoint.
 
@@ -109,9 +105,9 @@ class BaseEndpoint:
 
     def delete(
         self,
-        params: Optional[dict[str, Any]] = None,
-        wrapper_attr: Optional[str] = None,
-        **ids: Optional[Union[str, int]],
+        params: dict[str, Any] | None = None,
+        wrapper_attr: str | None = None,
+        **ids: str | int | None,
     ) -> dict[str, Any]:
         """Deletes a resource for the given endpoint.
 
@@ -125,7 +121,7 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.delete(self.client, path, params)
 
-    def path_with_params(self, **ids: Optional[Union[str, int]]) -> str:
+    def path_with_params(self, **ids: str | int | None) -> str:
         """Generates relative path to the endpoint using the template stored
         in PATH and the provided ids. Some or all ids may be omitted depending
         on the actual endpoint.

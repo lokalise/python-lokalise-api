@@ -9,15 +9,13 @@ Attributes:
     :attribute list PAGINATION_HEADERS: list of response headers that contain pagination data.
 """
 
-from typing import Any, Optional
-
-from .types import FullClientProto
+from typing import Any
 
 import requests
 
-from .request_utils import format_params, path_to_endpoint, raise_on_error
-
 from ._version import __version__
+from .request_utils import format_params, path_to_endpoint, raise_on_error
+from .types import FullClientProto
 
 BASE_URL = "https://api.lokalise.com/api2/"
 PAGINATION_HEADERS = [
@@ -29,9 +27,7 @@ PAGINATION_HEADERS = [
 ]
 
 
-def get(
-    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
-) -> dict[str, Any]:
+def get(client: FullClientProto, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
     """Performs GET requests
 
     :param client: Lokalise API client
@@ -46,7 +42,7 @@ def get(
 
 
 def post(
-    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+    client: FullClientProto, path: str, params: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     """Performs POST requests
 
@@ -65,9 +61,7 @@ def post(
     )
 
 
-def put(
-    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
-) -> dict[str, Any]:
+def put(client: FullClientProto, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
     """Performs PUT requests
 
     :param client: Lokalise API client
@@ -86,7 +80,7 @@ def put(
 
 
 def patch(
-    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+    client: FullClientProto, path: str, params: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     """Performs PATCH requests
 
@@ -106,7 +100,7 @@ def patch(
 
 
 def delete(
-    client: FullClientProto, path: str, params: Optional[dict[str, Any]] = None
+    client: FullClientProto, path: str, params: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     """Performs DELETE requests
 

@@ -12,7 +12,7 @@ from .endpoint_provider import EndpointProviderMixin
 class TeamUserBillingDetailsMethods(EndpointProviderMixin):
     """Team user billing details client methods."""
 
-    def team_user_billing_details(self, team_id: str) -> TeamUsersBillingDetailsModel:
+    def team_user_billing_details(self, team_id: str | int) -> TeamUsersBillingDetailsModel:
         """Fetches team user billing details.
 
         :param str team_id: ID of the team
@@ -22,7 +22,7 @@ class TeamUserBillingDetailsMethods(EndpointProviderMixin):
         return TeamUsersBillingDetailsModel(raw_details)
 
     def create_team_user_billing_details(
-        self, team_id: str, params: dict[str, str]
+        self, team_id: str | int, params: dict[str, str]
     ) -> TeamUsersBillingDetailsModel:
         """Creates team user billing details.
 
@@ -36,7 +36,7 @@ class TeamUserBillingDetailsMethods(EndpointProviderMixin):
         return TeamUsersBillingDetailsModel(raw_details)
 
     def update_team_user_billing_details(
-        self, team_id: str, params: dict[str, str]
+        self, team_id: str | int, params: dict[str, str]
     ) -> TeamUsersBillingDetailsModel:
         """Updates team user billing details.
 
