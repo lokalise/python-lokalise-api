@@ -82,7 +82,6 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
             self.current_page = 0
             self.next_cursor = None
 
-
     def __iter__(self):
         return iter(self.items)
 

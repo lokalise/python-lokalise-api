@@ -59,7 +59,7 @@ def test_reset_client():
 
     client.reset_client()
 
-    assert client.token == None
+    assert client.token is None
     assert client.connect_timeout is None
     assert client.read_timeout is None
     assert not client.enable_compression
@@ -184,7 +184,7 @@ def test_reset_client_allows_reloading_endpoints(client: lokalise.Client) -> Non
 
 
 def test_get_endpoint_populates_when_attr_is_none(client: lokalise.Client) -> None:
-    setattr(client, "_projects_endpoint", None)
+    client._projects_endpoint = None
     ep = client.get_endpoint("projects")
     assert ep is not None
 
@@ -195,7 +195,7 @@ def test_reset_client_requires_new_token() -> None:
     assert client.token == "valid-token"
 
     client.reset_client()
-    assert client.token == None
+    assert client.token is None
 
     with pytest.raises(ValueError, match="token must be a non-empty string"):
         client.token = ""

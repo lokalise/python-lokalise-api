@@ -10,7 +10,7 @@ def test_client_arguments(oauth_client: OAuthClient) -> None:
     token = oauth_client.token
     assert token is not None, "OAuthClient.token must not be None"
     assert "Bearer" in token
-    
+
     assert oauth_client.connect_timeout == 4
     assert oauth_client.read_timeout == 2
     assert oauth_client.enable_compression
@@ -23,4 +23,4 @@ def test_reset_client(oauth_client: OAuthClient) -> None:
 
     oauth_client.reset_client()
 
-    assert oauth_client.token == None
+    assert oauth_client.token is None

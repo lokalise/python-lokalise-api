@@ -174,9 +174,11 @@ def options(
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
     }
-    
+
     if client.token is None:
-        raise RuntimeError("Cannot build headers: API token is not set. Did you call reset_client()?")
+        raise RuntimeError(
+            "Cannot build headers: API token is not set. Did you call reset_client()?"
+        )
 
     headers[client.token_header] = client.token
 

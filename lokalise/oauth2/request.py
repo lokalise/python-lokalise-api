@@ -9,7 +9,7 @@ from typing import Any
 import requests
 
 from lokalise._version import __version__
-from lokalise.request_utils import format_params, raise_on_error, join_url
+from lokalise.request_utils import format_params, join_url, raise_on_error
 
 BASE_URL = "https://app.lokalise.com/oauth2/"
 

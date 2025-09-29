@@ -95,7 +95,7 @@ class Client(
         is "projects", then it will load .endpoints.projects_endpoint module
         and then set attribute like this:
             self._projects_endpoint = ProjectsEndpoint(self)
-        
+
         This is internal; prefer calling mixin methods like client.projects().
 
         :param str name: Endpoint name to load
@@ -109,7 +109,7 @@ class Client(
             endpoint_klass = getattr(module, camelized_name)
         except (ModuleNotFoundError, AttributeError) as e:
             raise ValueError(f"Unknown endpoint: {name}") from e
-        
+
         # Find endpoint class in the module
         endpoint_klass: type[BaseEndpoint] = getattr(module, camelized_name)
         return self._fetch_attr(f"_{endpoint_name}", lambda: endpoint_klass(self))
