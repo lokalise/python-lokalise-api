@@ -17,7 +17,18 @@ def test_not_found(client: lokalise.Client) -> None:
         client.project("123/invalid/")
 
     exc = excinfo.value
+    assert isinstance(exc, lokalise.errors.ClientHTTPError)
     assert exc.status_code == 404
+    assert isinstance(exc.message, str)
+    assert isinstance(exc.headers, dict)
+    assert isinstance(exc.raw_text, str) or exc.raw_text is None
+    assert exc.parsed is not None
+    assert isinstance(exc.parsed, lokalise.errors.APIError)
+    assert exc.parsed.status == 404
+    assert isinstance(exc.parsed.message, str)
+    assert isinstance(exc.parsed.reason, str)
+    assert exc.parsed.code is None or isinstance(exc.parsed.code, (int, str))
+    assert exc.parsed.details is None or isinstance(exc.parsed.details, dict)
 
 
 @pytest.mark.vcr
@@ -49,7 +60,14 @@ def test_invalid_client():
     with pytest.raises(lokalise.errors.BadRequest) as excinfo:
         invalid_client.projects()
 
-    assert excinfo.value.status_code == 400
+    exc = excinfo.value
+    assert exc.status_code == 400
+    assert isinstance(exc.message, str)
+    assert isinstance(exc.headers, dict)
+    assert isinstance(exc.raw_text, str)
+    assert exc.parsed is not None
+    assert exc.parsed.status == 400
+    assert isinstance(exc.parsed.details, (dict, type(None)))
 
 
 @pytest.mark.vcr

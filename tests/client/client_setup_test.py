@@ -184,7 +184,7 @@ def test_reset_client_allows_reloading_endpoints(client: lokalise.Client) -> Non
 
 
 def test_get_endpoint_populates_when_attr_is_none(client: lokalise.Client) -> None:
-    client._projects_endpoint = None
+    client._projects_endpoint = None  # type: ignore[attr-defined]
     ep = client.get_endpoint("projects")
     assert ep is not None
 

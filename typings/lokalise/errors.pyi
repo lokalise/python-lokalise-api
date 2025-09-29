@@ -1,3 +1,5 @@
+from typing import Any
+
 class ClientError(Exception): ...
 
 class ClientHTTPError(ClientError):
@@ -5,6 +7,7 @@ class ClientHTTPError(ClientError):
     headers: dict[str, str]
     raw_text: str | None
     parsed: APIError | None
+    message: str
 
 class BadRequest(ClientHTTPError): ...
 class Unauthorized(ClientHTTPError): ...
@@ -26,7 +29,7 @@ class APIError:
     reason: str
     raw: str
     code: int | str | None
-    details: dict[str, object] | None
+    details: dict[str, Any] | None
 
 __all__ = [
     "ClientError",

@@ -36,8 +36,8 @@ class ClientHTTPError(ClientError):
         self.status_code = status_code
         self.message = message
         self.headers: dict[str, str] = dict(headers or {})
-        self.raw_text = raw_text
-        self.parsed = parsed
+        self.raw_text: str | None = raw_text
+        self.parsed: APIError | None = parsed
 
     def __str__(self) -> str:
         base = f"{self.status_code} {self.message}"
