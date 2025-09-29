@@ -1,9 +1,9 @@
 [project]
 name = "python-lokalise-api"
-version = "3.5.1"
+version = "4.0.0"
 description = "Official Python interface for the Lokalise API v2"
 authors = [
-    {name = "Ilya Krukowski", email = "golosizpru@gmail.com"}
+    {name = "Ilya Krukowski", email = "elskruk@proton.me"}
 ]
 readme = "README.md"
 requires-python = ">=3.10"
