@@ -26,11 +26,23 @@ To handle an exception you would do the following:
 
 .. code-block:: python
 
-  try:
-      client.project('invalid_id')
-  except lokalise.errors.NotFound as err:
-      print(err.message)
-      print(err.status_code)
+    try:
+        project = client.project("invalid")
+    except errors.BadRequest as e:
+        print("=== Lokalise API Error ===")
+        print("Type:", type(e).__name__)
+        print("Status code:", e.status_code)
+        print("Message:", e.message)
+        print("Headers:", e.headers)
+        print("Raw text:", e.raw_text)
+
+        if e.parsed:
+            print("--- Parsed error ---")
+            print("Parsed status:", e.parsed.status)
+            print("Parsed message:", e.parsed.message)
+            print("Parsed reason:", e.parsed.reason)
+            print("Parsed code:", e.parsed.code)
+            print("Parsed details:", e.parsed.details)
 
 Rate limits
 -----------
