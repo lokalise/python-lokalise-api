@@ -6,7 +6,7 @@ Getting started
 Installation and requirements
 -----------------------------
 
-This plugin requires `Python 3.9 <http://www.python.org/>`_ or above and `PIP <https://pypi.org/project/pip/>`_.
+This plugin requires `Python 3.10 <http://www.python.org/>`_ or above and `PIP <https://pypi.org/project/pip/>`_.
 
 Install it by running:
 

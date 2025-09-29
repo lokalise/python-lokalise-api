@@ -3,7 +3,7 @@ Tests for the Orders endpoint.
 """
 
 import pytest
-
+from lokalise.client import Client
 
 TEAM_ID = 176692
 ORDER_ID = "20200122FTR"
@@ -12,17 +12,15 @@ SECOND_PROJECT_ID = "803826145ba90b42d5d860.46800099"
 
 
 @pytest.mark.vcr
-def test_orders(client):
-    """Tests fetching of all orders
-    """
+def test_orders(client: Client) -> None:
+    """Tests fetching of all orders"""
     orders = client.orders(TEAM_ID)
     assert orders.items[0].order_id == "201903198B2"
 
 
 @pytest.mark.vcr
-def test_orders_pagination(client):
-    """Tests fetching of all orders with pagination
-    """
+def test_orders_pagination(client: Client) -> None:
+    """Tests fetching of all orders with pagination"""
     orders = client.orders(TEAM_ID, {"page": 3, "limit": 2})
     assert orders.items[0].order_id == ORDER_ID
     assert orders.current_page == 3
@@ -37,9 +35,8 @@ def test_orders_pagination(client):
 
 
 @pytest.mark.vcr
-def test_order(client):
-    """Tests fetching of an order
-    """
+def test_order(client: Client) -> None:
+    """Tests fetching of an order"""
     order = client.order(TEAM_ID, ORDER_ID)
     assert order.order_id == ORDER_ID
     assert order.project_id == "124505395e2074d880f724.35422706"
@@ -53,7 +50,7 @@ def test_order(client):
     assert order.source_language_iso == "en"
     assert order.target_language_isos == ["ru_RU"]
     assert 35400063 in order.keys
-    assert order.source_words['ru_RU'] == 3
+    assert order.source_words["ru_RU"] == 3
     assert order.provider_slug == "gengo"
     assert order.translation_style == "friendly"
     assert order.translation_tier == 1
@@ -64,19 +61,21 @@ def test_order(client):
 
 
 @pytest.mark.vcr
-def test_create_order(client):
-    """Tests creation of an order
-    """
-    order = client.create_order(TEAM_ID, {
-        "project_id": PROJECT_ID,
-        "card_id": 2185,
-        "briefing": "nothing special",
-        "source_language_iso": "en",
-        "target_language_isos": ["ru_RU"],
-        "keys": [34089721],
-        "provider_slug": "gengo",
-        "translation_tier": 1
-    })
+def test_create_order(client: Client) -> None:
+    """Tests creation of an order"""
+    order = client.create_order(
+        TEAM_ID,
+        {
+            "project_id": PROJECT_ID,
+            "card_id": 2185,
+            "briefing": "nothing special",
+            "source_language_iso": "en",
+            "target_language_isos": ["ru_RU"],
+            "keys": [34089721],
+            "provider_slug": "gengo",
+            "translation_tier": 1,
+        },
+    )
     assert order.project_id == PROJECT_ID
     assert order.card_id == 2185
     assert order.status == "in progress"
@@ -86,22 +85,24 @@ def test_create_order(client):
 
 
 @pytest.mark.vcr
-def test_create_order_dry_run(client):
-    """Tests creation of an order with a dry run option
-    """
-    order = client.create_order(TEAM_ID, {
-        "project_id": SECOND_PROJECT_ID,
-        "card_id": 2185,
-        "briefing": "DRY RUN",
-        "source_language_iso": "en",
-        "target_language_isos": ["ru_RU"],
-        "keys": [74189435],
-        "provider_slug": "gengo",
-        "translation_tier": 1,
-        "dry_run": True
-    })
+def test_create_order_dry_run(client: Client) -> None:
+    """Tests creation of an order with a dry run option"""
+    order = client.create_order(
+        TEAM_ID,
+        {
+            "project_id": SECOND_PROJECT_ID,
+            "card_id": 2185,
+            "briefing": "DRY RUN",
+            "source_language_iso": "en",
+            "target_language_isos": ["ru_RU"],
+            "keys": [74189435],
+            "provider_slug": "gengo",
+            "translation_tier": 1,
+            "dry_run": True,
+        },
+    )
     assert not order.order_id
     assert order.project_id == SECOND_PROJECT_ID
-    assert order.branch == 'master'
+    assert order.branch == "master"
     assert order.status == "draft"
     assert order.dry_run

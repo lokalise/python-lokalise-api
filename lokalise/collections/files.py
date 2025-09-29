@@ -4,12 +4,12 @@ lokalise.collections.files
 Module containing files collection.
 """
 
-from .base_collection import BaseCollection
 from ..models.file import FileModel
+from .base_collection import BaseCollection
 
 
-class FilesCollection(BaseCollection):
-    """Describes files.
-    """
+class FilesCollection(BaseCollection[FileModel]):
+    """Describes files."""
+
     DATA_KEY = "files"
     MODEL_KLASS = FileModel

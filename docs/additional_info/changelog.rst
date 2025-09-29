@@ -3,6 +3,14 @@
 Changelog
 =========
 
+4.0.0 (28-Sep-2025)
+-------------------
+
+* Require Python 3.10+
+* Fully rework typing system
+* Make code more solid, enhance error handling
+* Switch to uv, black, ruff
+
 3.5.1 (14-May-2025)
 -------------------
 

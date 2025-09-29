@@ -3,7 +3,8 @@ lokalise.models.base_model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 Model parent class inherited by specific models.
 """
-from typing import List, Dict
+
+from typing import Any
 
 
 class BaseModel:
@@ -19,16 +20,12 @@ class BaseModel:
     {"project_id": "abc", contributor: {"user_id": 1}}
     In this case, the DATA_KEY would be "contributor"
     """
-    ATTRS: List[str] = []
-    COMMON_ATTRS: List[str] = [
-        'project_id',
-        'user_id',
-        'branch',
-        'team_id'
-    ]
-    DATA_KEY: str = ''
 
-    def __init__(self, raw_data: Dict) -> None:
+    ATTRS: list[str] = []
+    COMMON_ATTRS: list[str] = ["project_id", "user_id", "branch", "team_id"]
+    DATA_KEY: str = ""
+
+    def __init__(self, raw_data: dict[str, Any]) -> None:
         """Creates a new model.
         A model describes a single resource, for example a project or a contributor.
         To read raw data returned by the API, use the `raw_data` attribute.
@@ -51,8 +48,7 @@ class BaseModel:
         #     "comment": "This is a test."}
         # This is an edge case happening only twice, so to overcome it
         # just check the value type under the given key.
-        if self.DATA_KEY in raw_data and \
-                (isinstance(raw_data[self.DATA_KEY], dict)):
+        if self.DATA_KEY in raw_data and (isinstance(raw_data[self.DATA_KEY], dict)):
             data = raw_data[self.DATA_KEY]
         else:
             data = raw_data
@@ -61,12 +57,10 @@ class BaseModel:
             setattr(self, attr, data.get(attr, None))
 
     def __str__(self) -> str:
-        """Converts a model to string
-        """
-        return "\n".join(
-            f"{attr}: {getattr(self, attr)}" for attr in self.ATTRS)
+        """Converts a model to string"""
+        return "\n".join(f"{attr}: {getattr(self, attr)}" for attr in self.ATTRS)
 
-    def __extract_common_attrs(self, raw_data: Dict) -> None:
+    def __extract_common_attrs(self, raw_data: dict[str, Any]) -> None:
         """Fetches common data from the response and sets the
         corresponding attributes. If the same attribute is present in model-specific
         attribute list, it has higher priority.

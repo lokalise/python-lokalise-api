@@ -8,14 +8,8 @@ from .base_model import BaseModel
 
 
 class PaymentCardModel(BaseModel):
-    """Describes payment card.
-    """
-    DATA_KEY = 'payment_card'
+    """Describes payment card."""
 
-    ATTRS = [
-        'card_id',
-        'last4',
-        'brand',
-        'created_at',
-        'created_at_timestamp'
-    ]
+    DATA_KEY = "payment_card"
+
+    ATTRS = ["card_id", "last4", "brand", "created_at", "created_at_timestamp"]

@@ -8,8 +8,6 @@ from .base_model import BaseModel
 
 
 class JwtModel(BaseModel):
-    """Describes JWT.
-    """
-    ATTRS = [
-        'jwt'
-    ]
+    """Describes JWT."""
+
+    ATTRS = ["jwt"]

@@ -22,3 +22,4 @@ docs/_build
 .mypy_cache
 coverage.lcov
 .idea/
+.ruff_cache/

@@ -4,12 +4,12 @@ lokalise.collections.comments
 Module containing comments collection.
 """
 
-from .base_collection import BaseCollection
 from ..models.comment import CommentModel
+from .base_collection import BaseCollection
 
 
-class CommentsCollection(BaseCollection):
-    """Describes comments.
-    """
+class CommentsCollection(BaseCollection[CommentModel]):
+    """Describes comments."""
+
     DATA_KEY = "comments"
     MODEL_KLASS = CommentModel

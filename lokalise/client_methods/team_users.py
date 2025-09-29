@@ -3,18 +3,21 @@ lokalise.client_methods.team_users
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This module contains API client definition for team users.
 """
-from typing import Optional, Union, Dict
-from lokalise.models.team_user import TeamUserModel
+
+from typing import Any
+
 from lokalise.collections.team_users import TeamUsersCollection
+from lokalise.models.team_user import TeamUserModel
+
 from .endpoint_provider import EndpointProviderMixin
 
 
 class TeamUserMethods(EndpointProviderMixin):
-    """Team user client methods.
-    """
+    """Team user client methods."""
 
-    def team_users(self, team_id: Union[str, int],
-                   params: Optional[Dict] = None) -> TeamUsersCollection:
+    def team_users(
+        self, team_id: str | int, params: dict[str, str | int] | None = None
+    ) -> TeamUsersCollection:
         """Fetches all team users.
 
         :param team_id: ID of the team
@@ -22,12 +25,10 @@ class TeamUserMethods(EndpointProviderMixin):
         :param dict params: (optional) Pagination parameters
         :return: Collection of team users
         """
-        raw_team_users = self.get_endpoint("team_users"). \
-            all(params=params, parent_id=team_id)
+        raw_team_users = self.get_endpoint("team_users").all(params=params, parent_id=team_id)
         return TeamUsersCollection(raw_team_users)
 
-    def team_user(self, team_id: Union[str, int],
-                  team_user_id: Union[str, int]) -> TeamUserModel:
+    def team_user(self, team_id: str | int, team_user_id: str | int) -> TeamUserModel:
         """Fetches a team user.
 
         :param team_id: ID of the team
@@ -36,13 +37,17 @@ class TeamUserMethods(EndpointProviderMixin):
         :type team_user_id: str or int
         :return: Team user model
         """
-        raw_team_user = self.get_endpoint("team_users"). \
-            find(parent_id=team_id, resource_id=team_user_id)
+        raw_team_user = self.get_endpoint("team_users").find(
+            parent_id=team_id, resource_id=team_user_id
+        )
         return TeamUserModel(raw_team_user)
 
-    def update_team_user(self, team_id: Union[str, int],
-                         team_user_id: Union[str, int],
-                         params: Optional[Dict] = None) -> TeamUserModel:
+    def update_team_user(
+        self,
+        team_id: str | int,
+        team_user_id: str | int,
+        params: dict[str, Any] | None = None,
+    ) -> TeamUserModel:
         """Updates a team user.
 
         :param team_id: ID of the team
@@ -52,12 +57,12 @@ class TeamUserMethods(EndpointProviderMixin):
         :param dict params: (optional) Team user parameters
         :return: Team user model
         """
-        raw_team_user = self.get_endpoint("team_users"). \
-            update(params=params, parent_id=team_id, resource_id=team_user_id)
+        raw_team_user = self.get_endpoint("team_users").update(
+            params=params, parent_id=team_id, resource_id=team_user_id
+        )
         return TeamUserModel(raw_team_user)
 
-    def delete_team_user(self, team_id: Union[str, int],
-                         team_user_id: Union[str, int]) -> Dict:
+    def delete_team_user(self, team_id: str | int, team_user_id: str | int) -> dict[str, Any]:
         """Deletes a team user.
 
         :param team_id: ID of the team
@@ -66,6 +71,7 @@ class TeamUserMethods(EndpointProviderMixin):
         :type team_user_id: str or int
         :return: Dict with the team ID and `team_user_deleted` set to True
         """
-        response = self.get_endpoint("team_users"). \
-            delete(parent_id=team_id, resource_id=team_user_id)
+        response = self.get_endpoint("team_users").delete(
+            parent_id=team_id, resource_id=team_user_id
+        )
         return response

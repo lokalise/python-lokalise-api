@@ -3,16 +3,15 @@ Tests for the PaymentCards endpoint.
 """
 
 import pytest
-
+from lokalise.client import Client
 
 CARD_ID = 2185
 NEW_CARD_ID = 3514
 
 
 @pytest.mark.vcr
-def test_payment_cards(client):
-    """Tests fetching of all payment cards
-    """
+def test_payment_cards(client: Client) -> None:
+    """Tests fetching of all payment cards"""
     cards = client.payment_cards({"page": 2, "limit": 1})
     assert cards.user_id == 20181
     assert cards.items[0].card_id == CARD_ID
@@ -28,9 +27,8 @@ def test_payment_cards(client):
 
 
 @pytest.mark.vcr
-def test_payment_card(client):
-    """Tests fetching of a payment card
-    """
+def test_payment_card(client: Client) -> None:
+    """Tests fetching of a payment card"""
     card = client.payment_card(CARD_ID)
     assert card.user_id == 20181
     assert card.card_id == CARD_ID
@@ -41,23 +39,18 @@ def test_payment_card(client):
 
 
 @pytest.mark.vcr
-def test_create_payment_card(client):
-    """Tests creation of a payment card
-    """
-    card = client.create_payment_card({
-        "number": "4242424242420391",
-        "cvc": 123,
-        "exp_month": 9,
-        "exp_year": 2025
-    })
+def test_create_payment_card(client: Client) -> None:
+    """Tests creation of a payment card"""
+    card = client.create_payment_card(
+        {"number": "4242424242420391", "cvc": 123, "exp_month": 9, "exp_year": 2025}
+    )
     assert card.last4 == "0391"
     assert card.brand == "Visa"
 
 
 @pytest.mark.vcr
-def test_delete_payment_card(client):
-    """Tests deletion of a payment card
-    """
+def test_delete_payment_card(client: Client) -> None:
+    """Tests deletion of a payment card"""
     resp = client.delete_payment_card(NEW_CARD_ID)
-    assert resp['card_id'] == NEW_CARD_ID
-    assert resp['card_deleted']
+    assert resp["card_id"] == NEW_CARD_ID
+    assert resp["card_deleted"]

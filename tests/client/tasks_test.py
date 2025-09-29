@@ -3,7 +3,7 @@ Tests for the Tasks endpoint.
 """
 
 import pytest
-
+from lokalise.client import Client
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 ANOTHER_PROJECT_ID = "803826145ba90b42d5d860.46800099"
@@ -12,23 +12,19 @@ ANOTHER_TASK_ID = 10001
 
 
 @pytest.mark.vcr
-def test_tasks(client):
-    """Tests fetching of all tasks
-    """
+def test_tasks(client: Client) -> None:
+    """Tests fetching of all tasks"""
     tasks = client.tasks(PROJECT_ID)
     assert tasks.project_id == PROJECT_ID
     assert tasks.items[0].task_id == 133225
 
 
 @pytest.mark.vcr
-def test_tasks_pagination(client):
-    """Tests fetching of all tasks with pagination
-    """
-    tasks = client.tasks(ANOTHER_PROJECT_ID, {
-        "page": 2,
-        "limit": 3,
-        "filter_statuses": "completed"
-    })
+def test_tasks_pagination(client: Client) -> None:
+    """Tests fetching of all tasks with pagination"""
+    tasks = client.tasks(
+        ANOTHER_PROJECT_ID, {"page": 2, "limit": 3, "filter_statuses": "completed"}
+    )
     assert tasks.project_id == ANOTHER_PROJECT_ID
     assert tasks.items[0].task_id == ANOTHER_TASK_ID
     assert tasks.current_page == 2
@@ -43,9 +39,8 @@ def test_tasks_pagination(client):
 
 
 @pytest.mark.vcr
-def test_task(client):
-    """Tests fetching of a task
-    """
+def test_task(client: Client) -> None:
+    """Tests fetching of a task"""
     task = client.task(ANOTHER_PROJECT_ID, ANOTHER_TASK_ID)
     assert task.project_id == ANOTHER_PROJECT_ID
     assert task.task_id == ANOTHER_TASK_ID
@@ -65,7 +60,7 @@ def test_task(client):
     assert task.created_at_timestamp == 1555508640
     assert task.created_by == 20181
     assert task.created_by_email == "bodrovis@protonmail.com"
-    assert task.languages[0]['language_iso'] == "es"
+    assert task.languages[0]["language_iso"] == "es"
     assert task.auto_close_languages
     assert task.auto_close_task
     assert task.auto_close_items
@@ -75,37 +70,34 @@ def test_task(client):
     assert task.completed_by_email == "bodrovis@protonmail.com"
     assert not task.do_lock_translations
     assert task.custom_translation_status_ids == []
-    assert task.source_language_iso == 'en'
+    assert task.source_language_iso == "en"
 
 
 @pytest.mark.vcr
-def test_create_task(client):
-    """Tests creation of a task
-    """
-    task = client.create_task(PROJECT_ID, {
-        "title": "Python task",
-        "languages": [{
-            "language_iso": "en",
-            "users": [20181]
-        }],
-        "keys": [34089721],
-        "auto_close_task": True
-    })
+def test_create_task(client: Client) -> None:
+    """Tests creation of a task"""
+    task = client.create_task(
+        PROJECT_ID,
+        {
+            "title": "Python task",
+            "languages": [{"language_iso": "en", "users": [20181]}],
+            "keys": [34089721],
+            "auto_close_task": True,
+        },
+    )
     assert task.project_id == PROJECT_ID
     assert task.task_id == NEW_TASK_ID
     assert task.title == "Python task"
-    assert task.languages[0]['language_iso'] == "en"
+    assert task.languages[0]["language_iso"] == "en"
     assert task.auto_close_task
 
 
 @pytest.mark.vcr
-def test_update_task(client):
-    """Tests updating of a task
-    """
-    task = client.update_task(PROJECT_ID, NEW_TASK_ID, {
-        "title": "Python updated task",
-        "due_date": "2020-08-24 23:59:59"
-    })
+def test_update_task(client: Client) -> None:
+    """Tests updating of a task"""
+    task = client.update_task(
+        PROJECT_ID, NEW_TASK_ID, {"title": "Python updated task", "due_date": "2020-08-24 23:59:59"}
+    )
     assert task.project_id == PROJECT_ID
     assert task.task_id == NEW_TASK_ID
     assert task.title == "Python updated task"
@@ -113,9 +105,8 @@ def test_update_task(client):
 
 
 @pytest.mark.vcr
-def test_delete_task(client):
-    """Tests deletion of a task
-    """
+def test_delete_task(client: Client) -> None:
+    """Tests deletion of a task"""
     resp = client.delete_task(PROJECT_ID, NEW_TASK_ID)
-    assert resp['project_id'] == PROJECT_ID
-    assert resp['task_deleted']
+    assert resp["project_id"] == PROJECT_ID
+    assert resp["task_deleted"]

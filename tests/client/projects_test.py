@@ -2,6 +2,7 @@
 Tests for the Project endpoint.
 """
 
+import lokalise
 import pytest
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
@@ -9,9 +10,8 @@ NEW_PROJECT_ID = "752354175ee755409bb393.87183877"
 
 
 @pytest.mark.vcr
-def test_all_projects(client):
-    """Tests fetching of all projects
-    """
+def test_all_projects(client: lokalise.Client) -> None:
+    """Tests fetching of all projects"""
     projects = client.projects()
     assert projects.is_last_page()
     assert projects.is_first_page()
@@ -20,9 +20,8 @@ def test_all_projects(client):
 
 
 @pytest.mark.vcr
-def test_all_projects_pagination(client):
-    """Tests fetching of projects pagination
-    """
+def test_all_projects_pagination(client: lokalise.Client) -> None:
+    """Tests fetching of projects pagination"""
     projects = client.projects({"limit": 2, "page": 3})
     assert projects.items[0].project_id == "531138705d0ba0c18f5b43.63503311"
     assert projects.current_page == 3
@@ -37,9 +36,8 @@ def test_all_projects_pagination(client):
 
 
 @pytest.mark.vcr
-def test_project(client):
-    """Tests fetching of a single project
-    """
+def test_project(client: lokalise.Client) -> None:
+    """Tests fetching of a single project"""
     project = client.project(PROJECT_ID)
 
     assert project.project_id == PROJECT_ID
@@ -53,57 +51,47 @@ def test_project(client):
     assert project.team_id == 176692
     assert project.base_language_id == 640
     assert project.base_language_iso == "en"
-    assert isinstance(project.settings, dict)
     assert project.settings["per_platform_key_names"]
-    assert isinstance(project.statistics, dict)
     assert project.statistics["progress_total"] == 53
 
 
 @pytest.mark.vcr
-def test_project_oauth2(oauth_client):
-    """Tests fetching of a single project with OAuth 2 token
-    """
-    project_id = '41927157619e6abd190863.11993227'
+def test_project_oauth2(oauth_client: lokalise.OAuthClient) -> None:
+    """Tests fetching of a single project with OAuth 2 token"""
+    project_id = "41927157619e6abd190863.11993227"
     project = oauth_client.project(project_id)
     assert project.project_id == project_id
     assert project.name == "My Web App"
 
 
 @pytest.mark.vcr
-def test_create_project(client):
-    """Tests project creation
-    """
-    project = client.create_project({
-        "name": "Python sample proj",
-        "description": "Project created by Python client",
-        "languages": [
-            {
-                "lang_iso": "en",
-                "custom_iso": "en-us"
-            },
-            {
-                "lang_iso": "en_GB",
-                "custom_iso": "en-gb"
-            }
-        ],
-        "base_lang_iso": "en-us"
-    })
+def test_create_project(client: lokalise.Client) -> None:
+    """Tests project creation"""
+    project = client.create_project(
+        {
+            "name": "Python sample proj",
+            "description": "Project created by Python client",
+            "languages": [
+                {"lang_iso": "en", "custom_iso": "en-us"},
+                {"lang_iso": "en_GB", "custom_iso": "en-gb"},
+            ],
+            "base_lang_iso": "en-us",
+        }
+    )
 
     assert project.project_id == NEW_PROJECT_ID
     assert project.name == "Python sample proj"
     assert project.description == "Project created by Python client"
     assert project.base_language_iso == "en-us"
-    assert project.statistics['languages'][1]['language_iso'] == "en-gb"
+    assert project.statistics["languages"][1]["language_iso"] == "en-gb"
 
 
 @pytest.mark.vcr
-def test_update_project(client):
-    """Tests project update
-    """
-    project = client.update_project(NEW_PROJECT_ID, {
-        "name": "Updated Python proj",
-        "description": "Proj updated by Python"
-    })
+def test_update_project(client: lokalise.Client) -> None:
+    """Tests project update"""
+    project = client.update_project(
+        NEW_PROJECT_ID, {"name": "Updated Python proj", "description": "Proj updated by Python"}
+    )
 
     assert project.project_id == NEW_PROJECT_ID
     assert project.name == "Updated Python proj"
@@ -111,9 +99,8 @@ def test_update_project(client):
 
 
 @pytest.mark.vcr
-def test_empty_project(client):
-    """Tests empty project request
-    """
+def test_empty_project(client: lokalise.Client) -> None:
+    """Tests empty project request"""
     response = client.empty_project(NEW_PROJECT_ID)
 
     assert response["keys_deleted"]
@@ -121,9 +108,8 @@ def test_empty_project(client):
 
 
 @pytest.mark.vcr
-def test_delete_project(client):
-    """Tests project deletion
-    """
+def test_delete_project(client: lokalise.Client) -> None:
+    """Tests project deletion"""
     response = client.delete_project(NEW_PROJECT_ID)
 
     assert response["project_deleted"]
@@ -131,8 +117,7 @@ def test_delete_project(client):
 
 
 @pytest.mark.vcr
-def test_project_to_string(client):
-    """Tests converting the project to string
-    """
+def test_project_to_string(client: lokalise.Client) -> None:
+    """Tests converting the project to string"""
     project = client.project(PROJECT_ID)
     assert PROJECT_ID in str(project)

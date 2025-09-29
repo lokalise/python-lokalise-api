@@ -8,9 +8,9 @@ from .base_model import BaseModel
 
 
 class ContributorModel(BaseModel):
-    """Describes project contributors model.
-    """
-    DATA_KEY = 'contributor'
+    """Describes project contributors model."""
+
+    DATA_KEY = "contributor"
 
     ATTRS = [
         "user_id",
@@ -23,4 +23,5 @@ class ContributorModel(BaseModel):
         "languages",
         "admin_rights",
         "role_id",
+        "uuid",
     ]

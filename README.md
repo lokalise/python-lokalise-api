@@ -10,7 +10,7 @@ Official Python 3 interface for the [Lokalise APIv2](https://developers.lokalise
 
 ## Quick start
 
-This plugin requires Python 3.9 and above. Install it:
+This plugin requires Python 3.10 and above. Install it:
 
 ```
 pip install python-lokalise-api
@@ -20,7 +20,9 @@ Obtain a Lokalise API token (in your *Personal profile*) and use it:
 
 ```python
 import lokalise
+
 client = lokalise.Client('YOUR_API_TOKEN')
+
 project = client.project('123.abc')
 print(project.name)
 

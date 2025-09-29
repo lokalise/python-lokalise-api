@@ -3,17 +3,12 @@ Tests for the request methods
 """
 
 import lokalise
-from lokalise.request import options, path_to_endpoint, BASE_URL
+from lokalise.request import BASE_URL, options, path_to_endpoint
 
 
 def test_options_with_api_client():
-    """Checks that client can receive token, timeout values, and enable_compression
-    """
-    client = lokalise.Client(
-        "123abc",
-        connect_timeout=5,
-        read_timeout=3,
-        enable_compression=True)
+    """Checks that client can receive token, timeout values, and enable_compression"""
+    client = lokalise.Client("123abc", connect_timeout=5, read_timeout=3, enable_compression=True)
 
     opts = options(client)
 
@@ -24,13 +19,8 @@ def test_options_with_api_client():
 
 
 def test_path_to_endpoint_with_api_client():
-    """Checks that the API host can be overridden
-    """
-    client = lokalise.Client(
-        "123abc",
-        connect_timeout=5,
-        read_timeout=3,
-        enable_compression=True)
+    """Checks that the API host can be overridden"""
+    client = lokalise.Client("123abc", connect_timeout=5, read_timeout=3, enable_compression=True)
 
     full_path = path_to_endpoint(client, BASE_URL, "projects")
 
@@ -42,7 +32,8 @@ def test_path_to_endpoint_with_api_client():
         connect_timeout=5,
         read_timeout=3,
         enable_compression=True,
-        api_host=custom_api_host)
+        api_host=custom_api_host,
+    )
 
     full_path = path_to_endpoint(customized_client, BASE_URL, "projects")
 
@@ -50,13 +41,10 @@ def test_path_to_endpoint_with_api_client():
 
 
 def test_path_to_endpoint_with_oauth_api_client():
-    """Checks that the API host can be overridden for OAuth2 client
-    """
+    """Checks that the API host can be overridden for OAuth2 client"""
     client = lokalise.OAuthClient(
-        "345xyz",
-        connect_timeout=5,
-        read_timeout=3,
-        enable_compression=True)
+        "345xyz", connect_timeout=5, read_timeout=3, enable_compression=True
+    )
 
     full_path = path_to_endpoint(client, BASE_URL, "projects")
 
@@ -68,7 +56,8 @@ def test_path_to_endpoint_with_oauth_api_client():
         connect_timeout=5,
         read_timeout=3,
         enable_compression=True,
-        api_host=custom_api_host)
+        api_host=custom_api_host,
+    )
 
     full_path = path_to_endpoint(customized_client, BASE_URL, "projects")
 
@@ -76,13 +65,10 @@ def test_path_to_endpoint_with_oauth_api_client():
 
 
 def test_options_with_oauth_api_client():
-    """Checks that client can receive token, timeout values, and enable_compression
-    """
+    """Checks that client can receive token, timeout values, and enable_compression"""
     client = lokalise.OAuthClient(
-        "345xyz",
-        connect_timeout=5,
-        read_timeout=3,
-        enable_compression=True)
+        "345xyz", connect_timeout=5, read_timeout=3, enable_compression=True
+    )
 
     opts = options(client)
 

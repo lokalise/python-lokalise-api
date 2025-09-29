@@ -3,7 +3,7 @@ Tests for the Translations endpoint.
 """
 
 import pytest
-
+from lokalise.client import Client
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 ANOTHER_PROJECT_ID = "803826145ba90b42d5d860.46800099"
@@ -12,24 +12,19 @@ TRANSLATION_ID = 220681425
 
 
 @pytest.mark.vcr
-def test_translations(client):
-    """Tests fetching of all translations
-    """
+def test_translations(client: Client) -> None:
+    """Tests fetching of all translations"""
     translations = client.translations(PROJECT_ID)
     assert translations.project_id == PROJECT_ID
     assert translations.items[0].translation_id == TRANSLATION_ID
 
 
 @pytest.mark.vcr
-def test_translations_pagination(client):
-    """Tests fetching of all translations with pagination
-    """
-    translations = client.translations(PROJECT_ID, {
-        "page": 2,
-        "limit": 5,
-        "disable_references": "1",
-        "filter_untranslated": 1
-    })
+def test_translations_pagination(client: Client) -> None:
+    """Tests fetching of all translations with pagination"""
+    translations = client.translations(
+        PROJECT_ID, {"page": 2, "limit": 5, "disable_references": "1", "filter_untranslated": 1}
+    )
     assert translations.project_id == PROJECT_ID
     assert translations.items[0].translation_id == 220681461
     assert translations.current_page == 2
@@ -46,16 +41,18 @@ def test_translations_pagination(client):
 
 
 @pytest.mark.vcr
-def test_translations_pagination_cursor(client):
-    """Tests fetching of all translations with pagination and cursor
-    """
-    translations = client.translations(ANOTHER_PROJECT_ID, {
-        "limit": 2,
-        "disable_references": "1",
-        "filter_untranslated": 1,
-        "pagination": "cursor",
-        "cursor": "eyIxIjozMDQ1ODEyMTJ9"
-    })
+def test_translations_pagination_cursor(client: Client) -> None:
+    """Tests fetching of all translations with pagination and cursor"""
+    translations = client.translations(
+        ANOTHER_PROJECT_ID,
+        {
+            "limit": 2,
+            "disable_references": "1",
+            "filter_untranslated": 1,
+            "pagination": "cursor",
+            "cursor": "eyIxIjozMDQ1ODEyMTJ9",
+        },
+    )
     assert translations.project_id == ANOTHER_PROJECT_ID
     assert translations.items[0].translation_id == 304581213
     assert translations.current_page == 0
@@ -68,12 +65,11 @@ def test_translations_pagination_cursor(client):
 
 
 @pytest.mark.vcr
-def test_translation(client):
-    """Tests fetching of a translation
-    """
+def test_translation(client: Client) -> None:
+    """Tests fetching of a translation"""
     translation = client.translation(
-        ANOTHER_PROJECT_ID, ANOTHER_TRANSLATION_ID, {
-            "disable_references": 1})
+        ANOTHER_PROJECT_ID, ANOTHER_TRANSLATION_ID, {"disable_references": 1}
+    )
     assert translation.project_id == ANOTHER_PROJECT_ID
     assert translation.translation_id == ANOTHER_TRANSLATION_ID
     assert translation.key_id == 44596059
@@ -92,14 +88,17 @@ def test_translation(client):
 
 
 @pytest.mark.vcr
-def test_update_translation(client):
-    """Tests updating of a translation
-    """
-    translation = client.update_translation(PROJECT_ID, TRANSLATION_ID, {
-        "translation": "Приветствуем в Sample App, [%s:name]!",
-        "custom_translation_status_ids": [429]
-    })
+def test_update_translation(client: Client) -> None:
+    """Tests updating of a translation"""
+    translation = client.update_translation(
+        PROJECT_ID,
+        TRANSLATION_ID,
+        {
+            "translation": "Приветствуем в Sample App, [%s:name]!",
+            "custom_translation_status_ids": [429],
+        },
+    )
     assert translation.project_id == PROJECT_ID
     assert translation.translation_id == TRANSLATION_ID
     assert translation.translation == "Приветствуем в Sample App, [%s:name]!"
-    assert translation.custom_translation_statuses[0]['status_id'] == 429
+    assert translation.custom_translation_statuses[0]["status_id"] == 429

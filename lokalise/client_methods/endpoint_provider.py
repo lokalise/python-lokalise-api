@@ -4,7 +4,7 @@ lokalise.client_methods.endpoint_provider
 A simple mixin with a shared protocol.
 """
 
-from typing import Protocol, Any
+from typing import Any, Protocol
 
 
 class EndpointProviderMixin(Protocol):

@@ -4,12 +4,12 @@ lokalise.collections.teams
 Module containing teams collection.
 """
 
-from .base_collection import BaseCollection
 from ..models.team import TeamModel
+from .base_collection import BaseCollection
 
 
-class TeamsCollection(BaseCollection):
-    """Describes teams.
-    """
+class TeamsCollection(BaseCollection[TeamModel]):
+    """Describes teams."""
+
     DATA_KEY = "teams"
     MODEL_KLASS = TeamModel

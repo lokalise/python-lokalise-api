@@ -3,19 +3,21 @@ lokalise.client_methods.team_user_groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 This module contains API client definition for team user groups.
 """
-from typing import Optional, Union, Dict, List, Any
-from lokalise.models.team_user_group import TeamUserGroupModel
+
+from typing import Any
+
 from lokalise.collections.team_user_groups import TeamUserGroupsCollection
+from lokalise.models.team_user_group import TeamUserGroupModel
+
 from .endpoint_provider import EndpointProviderMixin
 
 
 class TeamUserGroupMethods(EndpointProviderMixin):
-    """Team user group client methods.
-    """
+    """Team user group client methods."""
 
-    def team_user_groups(self, team_id: Union[str, int],
-                         params: Optional[Dict] = None
-                         ) -> TeamUserGroupsCollection:
+    def team_user_groups(
+        self, team_id: str | int, params: dict[str, str | int] | None = None
+    ) -> TeamUserGroupsCollection:
         """Fetches all team user groups.
 
         :param team_id: ID of the team
@@ -23,13 +25,12 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :param dict params: (optional) Pagination parameters
         :return: Collection of team user groups
         """
-        raw_groups = self.get_endpoint("team_user_groups"). \
-            all(params=params, parent_id=team_id)
+        raw_groups = self.get_endpoint("team_user_groups").all(params=params, parent_id=team_id)
         return TeamUserGroupsCollection(raw_groups)
 
-    def team_user_group(self, team_id: Union[str, int],
-                        team_user_group_id: Union[str, int]
-                        ) -> TeamUserGroupModel:
+    def team_user_group(
+        self, team_id: str | int, team_user_group_id: str | int
+    ) -> TeamUserGroupModel:
         """Fetches a team user group.
 
         :param team_id: ID of the team
@@ -38,13 +39,14 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :type team_user_group_id: str or int
         :return: Team user group model
         """
-        raw_group = self.get_endpoint("team_user_groups"). \
-            find(parent_id=team_id, resource_id=team_user_group_id)
+        raw_group = self.get_endpoint("team_user_groups").find(
+            parent_id=team_id, resource_id=team_user_group_id
+        )
         return TeamUserGroupModel(raw_group)
 
-    def create_team_user_group(self, team_id: Union[str, int],
-                               params: Dict[str, Any]
-                               ) -> TeamUserGroupModel:
+    def create_team_user_group(
+        self, team_id: str | int, params: dict[str, Any]
+    ) -> TeamUserGroupModel:
         """Fetches a team user group.
 
         :param team_id: ID of the team
@@ -52,14 +54,12 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :param dict params: Team user group parameters
         :return: Team user group model
         """
-        raw_group = self.get_endpoint("team_user_groups"). \
-            create(params=params, parent_id=team_id)
+        raw_group = self.get_endpoint("team_user_groups").create(params=params, parent_id=team_id)
         return TeamUserGroupModel(raw_group)
 
-    def update_team_user_group(self, team_id: Union[str, int],
-                               team_user_group_id: Union[str, int],
-                               params: Dict[str, Any]
-                               ) -> TeamUserGroupModel:
+    def update_team_user_group(
+        self, team_id: str | int, team_user_group_id: str | int, params: dict[str, Any]
+    ) -> TeamUserGroupModel:
         """Updates a team user group.
 
         :param team_id: ID of the team
@@ -70,15 +70,13 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").update(
-            params=params,
-            parent_id=team_id,
-            resource_id=team_user_group_id
+            params=params, parent_id=team_id, resource_id=team_user_group_id
         )
         return TeamUserGroupModel(raw_group)
 
-    def delete_team_user_group(self, team_id: Union[str, int],
-                               team_user_group_id: Union[str, int]
-                               ) -> Dict:
+    def delete_team_user_group(
+        self, team_id: str | int, team_user_group_id: str | int
+    ) -> dict[str, Any]:
         """Deletes a team user group.
 
         :param team_id: ID of the team
@@ -87,14 +85,17 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :type team_user_group_id: str or int
         :return: Dict with team ID and `group_deleted` set to True
         """
-        response = self.get_endpoint("team_user_groups"). \
-            delete(parent_id=team_id, resource_id=team_user_group_id)
+        response = self.get_endpoint("team_user_groups").delete(
+            parent_id=team_id, resource_id=team_user_group_id
+        )
         return response
 
-    def add_projects_to_group(self, team_id: Union[str, int],
-                              team_user_group_id: Union[str, int],
-                              params: Union[str, List[str]]
-                              ) -> TeamUserGroupModel:
+    def add_projects_to_group(
+        self,
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | list[str],
+    ) -> TeamUserGroupModel:
         """Adds projects to a team user group.
 
         :param team_id: ID of the team
@@ -106,16 +107,16 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").add_projects(
-            params=params,
-            parent_id=team_id,
-            resource_id=team_user_group_id
+            params=params, parent_id=team_id, resource_id=team_user_group_id
         )
         return TeamUserGroupModel(raw_group)
 
-    def remove_projects_from_group(self, team_id: Union[str, int],
-                                   team_user_group_id: Union[str, int],
-                                   params: Union[str, List[str]]
-                                   ) -> TeamUserGroupModel:
+    def remove_projects_from_group(
+        self,
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | list[str],
+    ) -> TeamUserGroupModel:
         """Removes projects from a team user group.
 
         :param team_id: ID of the team
@@ -127,16 +128,16 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").remove_projects(
-            params=params,
-            parent_id=team_id,
-            resource_id=team_user_group_id
+            params=params, parent_id=team_id, resource_id=team_user_group_id
         )
         return TeamUserGroupModel(raw_group)
 
-    def add_members_to_group(self, team_id: Union[str, int],
-                             team_user_group_id: Union[str, int],
-                             params: Union[str, List[str]]
-                             ) -> TeamUserGroupModel:
+    def add_members_to_group(
+        self,
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | int | list[str | int],
+    ) -> TeamUserGroupModel:
         """Adds members to a team user group.
 
         :param team_id: ID of the team
@@ -148,16 +149,16 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").add_members(
-            params=params,
-            parent_id=team_id,
-            resource_id=team_user_group_id
+            params=params, parent_id=team_id, resource_id=team_user_group_id
         )
         return TeamUserGroupModel(raw_group)
 
-    def remove_members_from_group(self, team_id: Union[str, int],
-                                  team_user_group_id: Union[str, int],
-                                  params: Union[str, List[str]]
-                                  ) -> TeamUserGroupModel:
+    def remove_members_from_group(
+        self,
+        team_id: str | int,
+        team_user_group_id: str | int,
+        params: str | int | list[str | int],
+    ) -> TeamUserGroupModel:
         """Removes members from a team user group.
 
         :param team_id: ID of the team
@@ -169,8 +170,6 @@ class TeamUserGroupMethods(EndpointProviderMixin):
         :return: Team user group model
         """
         raw_group = self.get_endpoint("team_user_groups").remove_members(
-            params=params,
-            parent_id=team_id,
-            resource_id=team_user_group_id
+            params=params, parent_id=team_id, resource_id=team_user_group_id
         )
         return TeamUserGroupModel(raw_group)

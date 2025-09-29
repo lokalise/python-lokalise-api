@@ -3,10 +3,15 @@ lokalise.endpoints.base_endpoint
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Endpoint parent class inherited by specific endpoints.
 """
-from typing import Dict, Optional, Any, Union
+
 from string import Template
-import lokalise.client
-from lokalise.utils import to_list
+from typing import TYPE_CHECKING, Any
+
+from ..utils import to_list
+
+if TYPE_CHECKING:
+    from ..client import Client
+
 from .. import request
 
 
@@ -24,9 +29,10 @@ class BaseEndpoint:
 
     The actual path is generated using the provided ids.
     """
-    PATH: str = ''
 
-    def __init__(self, client: lokalise.client.Client) -> None:
+    PATH: str = ""
+
+    def __init__(self, client: "Client") -> None:
         """Creates a new endpoint.
 
         :param client: Lokalise API client
@@ -34,8 +40,7 @@ class BaseEndpoint:
         """
         self.client = client
 
-    def all(self, params: Optional[Dict[str, Any]] = None,
-            **ids: Optional[Union[str, int]]) -> Dict:
+    def all(self, params: dict[str, Any] | None = None, **ids: str | int | None) -> dict[str, Any]:
         """Loads all items for the given endpoint
         (all projects, all contributors etc).
 
@@ -46,8 +51,7 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.get(self.client, path, params)
 
-    def find(self, params: Optional[Dict[str, Any]] = None,
-             **ids: Optional[Union[str, int]]) -> Dict:
+    def find(self, params: dict[str, Any] | None = None, **ids: str | int | None) -> dict[str, Any]:
         """Loads an item for the given endpoint
         (one project, one contributor etc).
 
@@ -58,9 +62,12 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.get(self.client, path, params)
 
-    def create(self, params: Optional[Dict] = None,
-               wrapper_attr: Optional[str] = None,
-               **ids: Optional[Union[str, int]]) -> Dict:
+    def create(
+        self,
+        params: dict[str, Any] | None = None,
+        wrapper_attr: str | None = None,
+        **ids: str | int | None,
+    ) -> dict[str, Any]:
         """Creates a new resource for the given endpoint.
 
         :param dict params: Resource parameters
@@ -78,9 +85,12 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.post(self.client, path, params)
 
-    def update(self, params: Dict,
-               wrapper_attr: Optional[str] = None,
-               **ids: Optional[Union[str, int]]) -> Dict:
+    def update(
+        self,
+        params: dict[str, Any],
+        wrapper_attr: str | None = None,
+        **ids: str | int | None,
+    ) -> dict[str, Any]:
         """Updates a resource for the given endpoint.
 
         :param dict params: Resource parameters
@@ -93,9 +103,12 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.put(self.client, path, params)
 
-    def delete(self, params: Optional[Dict] = None,
-               wrapper_attr: Optional[str] = None,
-               **ids: Optional[Union[str, int]]) -> Dict:
+    def delete(
+        self,
+        params: dict[str, Any] | None = None,
+        wrapper_attr: str | None = None,
+        **ids: str | int | None,
+    ) -> dict[str, Any]:
         """Deletes a resource for the given endpoint.
 
         :param dict params: Request parameters
@@ -108,10 +121,13 @@ class BaseEndpoint:
         path = self.path_with_params(**ids)
         return request.delete(self.client, path, params)
 
-    def path_with_params(self, **ids: Optional[Union[str, int]]) -> str:
+    def path_with_params(self, **ids: str | int | None) -> str:
         """Generates relative path to the endpoint using the template stored
         in PATH and the provided ids. Some or all ids may be omitted depending
         on the actual endpoint.
         """
-        defaults = {"parent_id": '', "resource_id": '', "subresource_id": ''}
-        return Template(self.PATH).substitute(defaults, **ids)
+        defaults = {"parent_id": "", "resource_id": "", "subresource_id": ""}
+        try:
+            return Template(self.PATH).substitute(defaults, **ids)
+        except KeyError as e:
+            raise ValueError(f"Missing required path parameter: {e}") from None

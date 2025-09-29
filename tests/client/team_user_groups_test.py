@@ -3,7 +3,7 @@ Tests for the TeamUserGroups endpoint.
 """
 
 import pytest
-
+from lokalise.client import Client
 
 TEAM_ID = 176692
 GROUP_ID = 515
@@ -11,22 +11,17 @@ NEW_GROUP_ID = 2494
 
 
 @pytest.mark.vcr
-def test_team_user_groups(client):
-    """Tests fetching of all team user groups
-    """
+def test_team_user_groups(client: Client) -> None:
+    """Tests fetching of all team user groups"""
     groups = client.team_user_groups(TEAM_ID)
     assert groups.team_id == TEAM_ID
     assert groups.items[0].group_id == GROUP_ID
 
 
 @pytest.mark.vcr
-def test_team_user_groups_pagination(client):
-    """Tests fetching of all team user groups with pagination
-    """
-    groups = client.team_user_groups(TEAM_ID, {
-        "page": 2,
-        "limit": 1
-    })
+def test_team_user_groups_pagination(client: Client) -> None:
+    """Tests fetching of all team user groups with pagination"""
+    groups = client.team_user_groups(TEAM_ID, {"page": 2, "limit": 1})
     assert groups.team_id == TEAM_ID
     assert groups.items[0].group_id == 1266
     assert groups.current_page == 2
@@ -41,14 +36,13 @@ def test_team_user_groups_pagination(client):
 
 
 @pytest.mark.vcr
-def test_team_user_group(client):
-    """Tests fetching of a team user group
-    """
+def test_team_user_group(client: Client) -> None:
+    """Tests fetching of a team user group"""
     group = client.team_user_group(TEAM_ID, GROUP_ID)
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
     assert group.name == "Demo"
-    assert group.permissions['is_admin']
+    assert group.permissions["is_admin"]
     assert group.created_at == "2019-03-19 19:53:04 (Etc/UTC)"
     assert group.created_at_timestamp == 1553025184
     assert group.team_id == 176692
@@ -58,56 +52,54 @@ def test_team_user_group(client):
 
 
 @pytest.mark.vcr
-def test_create_team_user_group(client):
-    """Tests creation of a team user group
-    """
-    group = client.create_team_user_group(TEAM_ID, {
-        "name": "Python group",
-        "is_reviewer": True,
-        "is_admin": True,
-        "admin_rights": ["upload"]
-    })
+def test_create_team_user_group(client: Client) -> None:
+    """Tests creation of a team user group"""
+    group = client.create_team_user_group(
+        TEAM_ID,
+        {"name": "Python group", "is_reviewer": True, "is_admin": True, "admin_rights": ["upload"]},
+    )
     assert group.team_id == TEAM_ID
     assert group.group_id == NEW_GROUP_ID
     assert group.name == "Python group"
-    assert group.permissions['is_admin']
-    assert group.permissions['is_reviewer']
-    assert group.permissions['admin_rights'] == ["upload"]
+    assert group.permissions["is_admin"]
+    assert group.permissions["is_reviewer"]
+    assert group.permissions["admin_rights"] == ["upload"]
 
 
 @pytest.mark.vcr
-def test_update_team_user_group(client):
-    """Tests updating of a team user group
-    """
-    group = client.update_team_user_group(TEAM_ID, GROUP_ID, {
-        "name": "Updated Python group",
-        "is_reviewer": False,
-        "is_admin": True,
-        "admin_rights": ["upload"]
-    })
+def test_update_team_user_group(client: Client) -> None:
+    """Tests updating of a team user group"""
+    group = client.update_team_user_group(
+        TEAM_ID,
+        GROUP_ID,
+        {
+            "name": "Updated Python group",
+            "is_reviewer": False,
+            "is_admin": True,
+            "admin_rights": ["upload"],
+        },
+    )
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
     assert group.name == "Updated Python group"
-    assert group.permissions['is_admin']
-    assert not group.permissions['is_reviewer']
+    assert group.permissions["is_admin"]
+    assert not group.permissions["is_reviewer"]
 
 
 @pytest.mark.vcr
-def test_delete_team_user_group(client):
-    """Tests deletion of a team user group
-    """
+def test_delete_team_user_group(client: Client) -> None:
+    """Tests deletion of a team user group"""
     resp = client.delete_team_user_group(TEAM_ID, NEW_GROUP_ID)
-    assert resp['team_id'] == TEAM_ID
-    assert resp['group_deleted']
+    assert resp["team_id"] == TEAM_ID
+    assert resp["group_deleted"]
 
 
 @pytest.mark.vcr
-def test_add_projects_to_group(client):
-    """Tests adding projects to a team user group
-    """
-    group = client.add_projects_to_group(TEAM_ID, GROUP_ID,
-                                         ["638597985c913f818559f3.17106287",
-                                          "404021655ce68d0f36ad23.02802891"])
+def test_add_projects_to_group(client: Client) -> None:
+    """Tests adding projects to a team user group"""
+    group = client.add_projects_to_group(
+        TEAM_ID, GROUP_ID, ["638597985c913f818559f3.17106287", "404021655ce68d0f36ad23.02802891"]
+    )
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
     assert "638597985c913f818559f3.17106287" in group.projects
@@ -115,14 +107,10 @@ def test_add_projects_to_group(client):
 
 
 @pytest.mark.vcr
-def test_remove_projects_from_group(client):
-    """Tests removing projects from a team user group
-    """
+def test_remove_projects_from_group(client: Client) -> None:
+    """Tests removing projects from a team user group"""
     group = client.remove_projects_from_group(
-        TEAM_ID,
-        GROUP_ID,
-        ["638597985c913f818559f3.17106287",
-         "404021655ce68d0f36ad23.02802891"]
+        TEAM_ID, GROUP_ID, ["638597985c913f818559f3.17106287", "404021655ce68d0f36ad23.02802891"]
     )
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
@@ -131,9 +119,8 @@ def test_remove_projects_from_group(client):
 
 
 @pytest.mark.vcr
-def test_add_members_to_group(client):
-    """Tests adding members to a team user group
-    """
+def test_add_members_to_group(client: Client) -> None:
+    """Tests adding members to a team user group"""
     group = client.add_members_to_group(TEAM_ID, GROUP_ID, [52911, 35555])
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
@@ -142,9 +129,8 @@ def test_add_members_to_group(client):
 
 
 @pytest.mark.vcr
-def test_add_member_to_group(client):
-    """Tests adding a member to a team user group
-    """
+def test_add_member_to_group(client: Client) -> None:
+    """Tests adding a member to a team user group"""
     group = client.add_members_to_group(TEAM_ID, GROUP_ID, 35555)
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
@@ -152,9 +138,8 @@ def test_add_member_to_group(client):
 
 
 @pytest.mark.vcr
-def test_remove_member_from_group(client):
-    """Tests removing a member from a team user group
-    """
+def test_remove_member_from_group(client: Client) -> None:
+    """Tests removing a member from a team user group"""
     group = client.remove_members_from_group(TEAM_ID, GROUP_ID, 35555)
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID
@@ -162,9 +147,8 @@ def test_remove_member_from_group(client):
 
 
 @pytest.mark.vcr
-def test_remove_members_from_group(client):
-    """Tests removing members from a team user group
-    """
+def test_remove_members_from_group(client: Client) -> None:
+    """Tests removing members from a team user group"""
     group = client.remove_members_from_group(TEAM_ID, GROUP_ID, [52911, 35555])
     assert group.team_id == TEAM_ID
     assert group.group_id == GROUP_ID

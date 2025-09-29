@@ -3,99 +3,97 @@ lokalise.errors
 ~~~~~~~~~~~~~~~
 Defines custom exception classes.
 """
-from typing import Union
+
+import json
+from collections.abc import Mapping
+from dataclasses import dataclass
+from typing import Any, Optional, Union, cast
+
+JSONValue = Union[str, int, float, bool, None, "JSONObject", "JSONList"]
+JSONList = list[JSONValue]
+JSONObject = dict[str, JSONValue]
 
 
 class ClientError(Exception):
-    """General exception class.
+    """Base SDK error."""
+
+
+class ClientHTTPError(ClientError):
+    """
+    HTTP error with structured payload info (if we could parse it).
     """
 
-    def __init__(self, msg: str, code: Union[str, int]) -> None:
-        """Initializes a new exception.
+    def __init__(
+        self,
+        message: str,
+        status_code: int,
+        *,
+        headers: Mapping[str, str] | None = None,
+        raw_text: str | None = None,
+        parsed: Optional["APIError"] = None,
+    ) -> None:
+        super().__init__(message, status_code)
+        self.status_code = status_code
+        self.message = message
+        self.headers: dict[str, str] = dict(headers or {})
+        self.raw_text = raw_text
+        self.parsed = parsed
 
-        :param msg: Exception message
-        :param code: Exception code (derived from HTTP status code)
-        """
-        super().__init__(msg, code)
-        self.message = msg
-        self.code = code
-
-
-class BadRequest(ClientError):
-    """The provided request is incorrect,
-    often due to missing a required parameter. HTTP status code 400.
-    """
-
-
-class Unauthorized(ClientError):
-    """API token is incorrect. HTTP status code 401.
-    """
-
-
-class Forbidden(ClientError):
-    """The authenticated user does not have sufficient rights to perform the
-    desired action. HTTP status code 403.
-    """
+    def __str__(self) -> str:
+        base = f"{self.status_code} {self.message}"
+        if self.parsed:
+            if self.parsed.reason:
+                base += f" | reason={self.parsed.reason}"
+            if self.parsed.code is not None:
+                base += f" | code={self.parsed.code!r}"
+        return base
 
 
-class NotFound(ClientError):
-    """The provided endpoint (resource) cannot be found. HTTP status code 404.
-    """
+class BadRequest(ClientHTTPError): ...
 
 
-class MethodNowAllowed(ClientError):
-    """HTTP request with the provided verb is not supported by the endpoint.
-    HTTP status code 405.
-    """
+class Unauthorized(ClientHTTPError): ...
 
 
-class NotAcceptable(ClientError):
-    """Posted resource is malformed. HTTP status code 406.
-    """
+class Forbidden(ClientHTTPError): ...
 
 
-class Conflict(ClientError):
-    """Request conflicts with another request. HTTP status code 409.
-    """
+class NotFound(ClientHTTPError): ...
 
 
-class Locked(ClientError):
-    """Your token is used simultaneously in multiple requests.
-    HTTP status code 423.
-    """
+class MethodNotAllowed(ClientHTTPError): ...
 
 
-class TooManyRequests(ClientError):
-    """Too many requests hit the API too quickly. HTTP status code 429.
-    """
+class NotAcceptable(ClientHTTPError): ...
 
 
-class ServerError(ClientError):
-    """Server-side error. HTTP status code 500.
-    """
+class Conflict(ClientHTTPError): ...
 
 
-class BadGateway(ClientError):
-    """Server-side error. HTTP status code 502.
-    """
+class Locked(ClientHTTPError): ...
 
 
-class ServiceUnavailable(ClientError):
-    """Server is not available at the moment. HTTP status code 503.
-    """
+class TooManyRequests(ClientHTTPError): ...
 
 
-class GatewayTimeout(ClientError):
-    """Server has not responded in a timely fashion. HTTP status code 504.
-    """
+class ServerError(ClientHTTPError): ...
 
 
-ERROR_CODES = {
+class BadGateway(ClientHTTPError): ...
+
+
+class ServiceUnavailable(ClientHTTPError): ...
+
+
+class GatewayTimeout(ClientHTTPError): ...
+
+
+ERROR_CODES: dict[int, type[ClientHTTPError]] = {
     400: BadRequest,
     401: Unauthorized,
     403: Forbidden,
     404: NotFound,
-    405: MethodNowAllowed,
+    405: MethodNotAllowed,
     406: NotAcceptable,
     409: Conflict,
     423: Locked,
@@ -103,5 +101,212 @@ ERROR_CODES = {
     500: ServerError,
     502: BadGateway,
     503: ServiceUnavailable,
-    504: GatewayTimeout
+    504: GatewayTimeout,
 }
+
+
+@dataclass
+class APIError:
+    status: int
+    message: str
+    reason: str
+    raw: str
+    code: int | str | None
+    details: dict[str, Any] | None
+
+
+def _coalesce(*ss: str | None) -> str:
+    for s in ss:
+        if s:
+            return s
+    return ""
+
+
+def _is_probably_json(trimmed: str) -> bool:
+    return bool(trimmed) and trimmed[0] in "{["
+
+
+def _json_loads_obj_or_none(trimmed: str) -> JSONObject | None:
+    try:
+        obj = json.loads(trimmed)
+        if isinstance(obj, dict):
+            return cast(JSONObject, obj)
+    except Exception:
+        return None
+
+
+def _get_str(m: Mapping[str, JSONValue], key: str) -> tuple[str, bool]:
+    v = m.get(key)
+    if isinstance(v, str):
+        return v, True
+    return "", False
+
+
+def _get_str_or(m: Mapping[str, JSONValue], key: str, default: str) -> str:
+    s, ok = _get_str(m, key)
+    return s if ok else default
+
+
+def _as_int_maybe(v: Any) -> tuple[int, bool]:
+    if isinstance(v, bool):
+        return 0, False
+    if isinstance(v, int):
+        return v, True
+    if isinstance(v, float):
+        return int(v), True
+    if isinstance(v, str):
+        s = v.strip()
+        if s.isdigit() or (s.startswith(("+", "-")) and s[1:].isdigit()):
+            try:
+                return int(s), True
+            except Exception:
+                return 0, False
+        return 0, False
+    return 0, False
+
+
+def _get_number_as_int(m: Mapping[str, JSONValue], key: str) -> tuple[int, bool]:
+    return _as_int_maybe(m.get(key))
+
+
+def _pick_details(obj: Mapping[str, JSONValue]) -> JSONObject:
+    det = obj.get("details")
+    if isinstance(det, dict):
+        return det
+    if det is not None:
+        return {"details": det}
+    return {"reason": "server error without details"}
+
+
+def parse_api_error(slurp: bytes | str, status: int) -> APIError:
+    trimmed = (
+        slurp.decode("utf-8", "replace") if isinstance(slurp, (bytes, bytearray)) else slurp
+    ).strip()
+
+    # Non-JSON fallback (empty or not starting with {/[)
+    if not _is_probably_json(trimmed):
+        message = _http_status_text(status)
+        return APIError(
+            status=status,
+            message=message,
+            reason="non-json error body" if trimmed else "empty body",
+            raw=trimmed,
+            code=None,
+            details=None,
+        )
+
+    data = _json_loads_obj_or_none(trimmed)
+    if data is None:
+        return APIError(
+            status=status,
+            message=_http_status_text(status),
+            reason="invalid json in error body",
+            raw=trimmed,
+            code=None,
+            details={"unmarshal_error": "json decode failed"},
+        )
+
+    # 1) Top-level: {message, statusCode, error:string}
+    msg1, ok_msg1 = _get_str(data, "message")
+    sc1, ok_sc1 = _get_number_as_int(data, "statusCode")
+    err1, ok_err1 = _get_str(data, "error")
+    if ok_msg1 and ok_sc1 and ok_err1:
+        return APIError(
+            status=status,
+            code=sc1,
+            message=msg1,
+            reason=err1,
+            raw=trimmed,
+            details=data,
+        )
+
+    # 2) Nested: {error: {message, code, details}}
+    err_any = data.get("error")
+    if isinstance(err_any, dict):
+        msg2, _ = _get_str(err_any, "message")
+        code2, ok_code2 = _get_number_as_int(err_any, "code")
+        if not ok_code2:
+            code2 = status
+        details2 = _pick_details(err_any)
+        return APIError(
+            status=status,
+            code=code2,
+            message=_coalesce(msg2, _http_status_text(status)),
+            reason="nested error",
+            raw=trimmed,
+            details=details2,
+        )
+
+    # 3) Alt top-level: {message, code|string|number OR errorCode, details:any}
+    if ok_msg1:
+        code3, ok_code3 = _get_number_as_int(data, "code")
+        if ok_code3:
+            return APIError(
+                status=status,
+                code=code3,
+                message=msg1,
+                reason="top-level",
+                raw=trimmed,
+                details=_pick_details(data),
+            )
+        code4, ok_code4 = _get_number_as_int(data, "errorCode")
+        if ok_code4:
+            return APIError(
+                status=status,
+                code=code4,
+                message=msg1,
+                reason="top-level",
+                raw=trimmed,
+                details=_pick_details(data),
+            )
+
+    # 4) Fallback
+    reason4, _ = _get_str(data, "error")
+    return APIError(
+        status=status,
+        code=None,
+        message=_coalesce(_get_str_or(data, "message", ""), _http_status_text(status)),
+        reason=_coalesce(reason4, "unhandled error format"),
+        raw=trimmed,
+        details=data,
+    )
+
+
+def error_from_http(
+    status_code: int,
+    *,
+    message: str | None = None,  # можно пробросить своё (например "GET /url failed")
+    headers: Mapping[str, str] | None = None,
+    body_text: str | None = None,
+) -> ClientHTTPError:
+    parsed = parse_api_error(body_text or "", status_code)
+    final_message = message or parsed.message or f"HTTP {status_code} error"
+    cls = ERROR_CODES.get(status_code, ClientHTTPError)
+    return cls(
+        final_message,
+        status_code,
+        headers=headers,
+        raw_text=body_text,
+        parsed=parsed,
+    )
+
+
+_HTTP_TEXTS = {
+    400: "Bad Request",
+    401: "Unauthorized",
+    403: "Forbidden",
+    404: "Not Found",
+    405: "Method Not Allowed",
+    406: "Not Acceptable",
+    409: "Conflict",
+    423: "Locked",
+    429: "Too Many Requests",
+    500: "Internal Server Error",
+    502: "Bad Gateway",
+    503: "Service Unavailable",
+    504: "Gateway Timeout",
+}
+
+
+def _http_status_text(status: int) -> str:
+    return _HTTP_TEXTS.get(status, f"HTTP {status} Error")
