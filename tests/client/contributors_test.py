@@ -33,6 +33,9 @@ def test_all_contributors_pagination(client: Client) -> None:
     assert not contributors.has_next_page()
     assert contributors.has_prev_page()
 
+    ids = [c.user_id for c in contributors]
+    assert ids == [34051, 35554, 35555]
+
 
 @pytest.mark.vcr
 def test_contributor(client: Client) -> None:

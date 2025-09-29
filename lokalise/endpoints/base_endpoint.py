@@ -127,4 +127,7 @@ class BaseEndpoint:
         on the actual endpoint.
         """
         defaults = {"parent_id": "", "resource_id": "", "subresource_id": ""}
-        return Template(self.PATH).substitute(defaults, **ids)
+        try:
+            return Template(self.PATH).substitute(defaults, **ids)
+        except KeyError as e:
+            raise ValueError(f"Missing required path parameter: {e}") from None

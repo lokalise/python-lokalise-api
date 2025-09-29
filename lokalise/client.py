@@ -79,12 +79,14 @@ class Client(
     """
 
     def reset_client(self) -> None:
-        """Resets the API client by clearing all attributes."""
-        self._token = ""
+        """Resets the API client by clearing all attributes.
+        After reset, token is None and client is unusable until you set a new token.
+        """
+        self._token = None
         self._connect_timeout = None
         self._read_timeout = None
         self._enable_compression = False
-        self.__clear_endpoint_attrs()
+        self._clear_endpoint_attrs()
 
     # === Endpoint helpers
     def get_endpoint(self, name: str) -> BaseEndpoint:
@@ -92,33 +94,38 @@ class Client(
         under a specific instance attribute. For example, if the `name`
         is "projects", then it will load .endpoints.projects_endpoint module
         and then set attribute like this:
-            self.__projects_endpoint = ProjectsEndpoint(self)
+            self._projects_endpoint = ProjectsEndpoint(self)
+        
+        This is internal; prefer calling mixin methods like client.projects().
 
         :param str name: Endpoint name to load
         """
         endpoint_name = name + "_endpoint"
         camelized_name = snake_to_camel(endpoint_name)
-        # Dynamically load the necessary endpoint module
-        module = importlib.import_module(f".endpoints.{endpoint_name}", package="lokalise")
-        # Find endpoint class in the module
-        endpoint_klass = cast("type[BaseEndpoint]", getattr(module, camelized_name))
-        return self.__fetch_attr(f"__{endpoint_name}", lambda: endpoint_klass(self))
 
-    def __fetch_attr(self, attr_name: str, populator: Callable[[], T]) -> T:
+        # Dynamically load the necessary endpoint module
+        try:
+            module = importlib.import_module(f".endpoints.{endpoint_name}", package="lokalise")
+            endpoint_klass = getattr(module, camelized_name)
+        except (ModuleNotFoundError, AttributeError) as e:
+            raise ValueError(f"Unknown endpoint: {name}") from e
+        
+        # Find endpoint class in the module
+        endpoint_klass: type[BaseEndpoint] = getattr(module, camelized_name)
+        return self._fetch_attr(f"_{endpoint_name}", lambda: endpoint_klass(self))
+
+    def _fetch_attr(self, attr_name: str, populator: Callable[[], T]) -> T:
         """Searches for the given attribute.
         Uses populator to set the attribute if it cannot be found.
         Used to lazy-load endpoints.
         """
-        if not hasattr(self, attr_name):
-            setattr(self, attr_name, populator())
-        else:
-            val = getattr(self, attr_name)
-            if val is None:
-                val = populator()
-                setattr(self, attr_name, val)
-        return cast(T, getattr(self, attr_name))
+        val = getattr(self, attr_name, None)
+        if val is None:
+            val = populator()
+            setattr(self, attr_name, val)
+        return cast(T, val)
 
-    def __clear_endpoint_attrs(self) -> None:
+    def _clear_endpoint_attrs(self) -> None:
         """Clears all lazily-loaded endpoint attributes"""
         for attr in [a for a in vars(self) if a.endswith("_endpoint")]:
             delattr(self, attr)

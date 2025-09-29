@@ -56,7 +56,7 @@ def post(
         requests.post(
             path_to_endpoint(client, BASE_URL, path),
             data=format_params(params),
-            **options(client),
+            **options(client, method="POST", has_body=params is not None),
         )
     )
 
@@ -74,7 +74,7 @@ def put(client: FullClientProto, path: str, params: dict[str, Any] | None = None
         requests.put(
             path_to_endpoint(client, BASE_URL, path),
             data=format_params(params),
-            **options(client),
+            **options(client, method="PUT", has_body=params is not None),
         )
     )
 
@@ -94,7 +94,7 @@ def patch(
         requests.patch(
             path_to_endpoint(client, BASE_URL, path),
             data=format_params(params),
-            **options(client),
+            **options(client, method="PATCH", has_body=params is not None),
         )
     )
 
@@ -114,7 +114,7 @@ def delete(
         requests.delete(
             path_to_endpoint(client, BASE_URL, path),
             data=format_params(params),
-            **options(client),
+            **options(client, method="DELETE", has_body=params is not None),
         )
     )
 
@@ -130,7 +130,7 @@ def respond_with(response: requests.Response) -> dict[str, Any]:
     try:
         data: dict[str, Any] = response.json()
     except ValueError:
-        data = {}
+        data = {"_raw_body": response.text}
 
     raise_on_error(response, data)
 
@@ -160,9 +160,11 @@ def extract_headers_from(response: requests.Response) -> dict[str, Any]:
     return result
 
 
-def options(client: FullClientProto) -> dict[str, Any]:
+def options(
+    client: FullClientProto, *, method: str = "GET", has_body: bool = False
+) -> dict[str, Any]:
     """Prepares proper request options, including Accept headers, API token,
-    and timeouts.
+    and timeouts. Raises RuntimeError if client.token is None.
 
     :param client: Lokalise API client
     :type client: lokalise.Client
@@ -172,21 +174,37 @@ def options(client: FullClientProto) -> dict[str, Any]:
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
     }
+    
+    if client.token is None:
+        raise RuntimeError("Cannot build headers: API token is not set. Did you call reset_client()?")
+
     headers[client.token_header] = client.token
 
     if client.enable_compression:
         headers["Accept-Encoding"] = "gzip,deflate,br"
 
-    timeout: tuple[float | int, float | int] | None
-    if client.connect_timeout is None and client.read_timeout is None:
-        timeout = None
-    else:
-        ct = (
-            client.connect_timeout
-            if client.connect_timeout is not None
-            else client.read_timeout or 0
-        )
-        rt = client.read_timeout if client.read_timeout is not None else client.connect_timeout or 0
-        timeout = (ct, rt)
+    if method != "GET" and has_body:
+        headers["Content-Type"] = "application/json"
 
-    return {"timeout": timeout, "headers": headers}
+    return {
+        "timeout": _build_timeout(client),
+        "headers": headers,
+    }
+
+
+def _build_timeout(client: FullClientProto) -> float | tuple[float, float] | None:
+    """Return proper timeout value for requests.
+
+    - None - wait indefinitely
+    - float - apply to both connect and read
+    - (connect, read) tuple - set individually
+    """
+    ct = client.connect_timeout
+    rt = client.read_timeout
+
+    if ct is None and rt is None:
+        return None
+    if ct is not None and rt is not None:
+        return (ct, rt)
+
+    return ct if ct is not None else rt

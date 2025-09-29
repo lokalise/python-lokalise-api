@@ -4,19 +4,20 @@ lokalise.collections.base_collection
 Collection parent class inherited by specific collections.
 """
 
-from typing import Any, ClassVar, Generic, TypeVar, cast
+from collections.abc import Sequence
+from typing import Any, ClassVar, Generic, TypeVar, cast, overload
 
 from ..models.base_model import BaseModel
 
 TModel = TypeVar("TModel", bound=BaseModel)
 
 
-class BaseCollection(Generic[TModel]):
+class BaseCollection(Sequence[TModel], Generic[TModel]):
     """Abstract base class for resources collections.
 
     :attribute DATA_KEY: contains the key name that should be used to fetch
     collection data. Response usually arrives in the following format:
-    {"project_id": "abc", contributors: [{"user_id": 1}, {"user_id": 2}]}
+    {"project_id": "abc", "contributors": [{"user_id": 1}, {"user_id": 2}]}
     In this case, the DATA_KEY would be "contributors"
 
     :attribute MODEL_KLASS: tells which class to use to produce models for each
@@ -74,6 +75,27 @@ class BaseCollection(Generic[TModel]):
             self.limit = int(pagination.get("x-pagination-limit", 0) or 0)
             self.current_page = int(pagination.get("x-pagination-page", 0) or 0)
             self.next_cursor = cast(str | None, pagination.get("x-pagination-next-cursor", None))
+        else:
+            self.total_count = 0
+            self.page_count = 0
+            self.limit = 0
+            self.current_page = 0
+            self.next_cursor = None
+
+
+    def __iter__(self):
+        return iter(self.items)
+
+    def __len__(self) -> int:
+        return len(self.items)
+
+    @overload
+    def __getitem__(self, index: int) -> TModel: ...
+    @overload
+    def __getitem__(self, index: slice) -> list[TModel]: ...
+
+    def __getitem__(self, index: int | slice) -> TModel | list[TModel]:
+        return self.items[index]
 
     def is_last_page(self) -> bool:
         """Checks whether the current collection set is the last page.

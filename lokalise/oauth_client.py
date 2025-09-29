@@ -22,7 +22,7 @@ class OAuthClient(Client):
         token: str,
         connect_timeout: int | float | None = None,
         read_timeout: int | float | None = None,
-        enable_compression: bool | None = False,
+        enable_compression: bool = False,
         api_host: str | None = None,
     ) -> None:
         """Instantiate a new Lokalise API client with OAuth 2 token.
@@ -39,7 +39,10 @@ class OAuthClient(Client):
         By default it's off.
         :type enable_compression: bool
         """
+        if not token:
+            raise ValueError("token must be a non-empty string")
         super().__init__(token, connect_timeout, read_timeout, enable_compression, api_host)
 
+        # Override token representation for OAuth
         self._token = f"Bearer {token}"
         self._token_header = "Authorization"

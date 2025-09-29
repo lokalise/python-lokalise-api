@@ -30,7 +30,7 @@ To handle an exception you would do the following:
       client.project('invalid_id')
   except lokalise.errors.NotFound as err:
       print(err.message)
-      print(err.code)
+      print(err.status_code)
 
 Rate limits
 -----------

@@ -22,6 +22,7 @@ def test_project_comments(client: Client) -> None:
 def test_project_comments_pagination(client: Client) -> None:
     """Tests fetching of all project comments with pagination"""
     comments = client.project_comments(PROJECT_ID, {"page": 2, "limit": 1})
+
     assert comments.project_id == PROJECT_ID
     assert comments.items[0].comment_id == 6892379
     assert comments.current_page == 2
@@ -33,6 +34,15 @@ def test_project_comments_pagination(client: Client) -> None:
     assert not comments.is_first_page()
     assert not comments.has_next_page()
     assert comments.has_prev_page()
+
+    assert len(comments) == 1
+    first = comments[0]
+    assert isinstance(first, type(comments.items[0]))
+    assert first.comment_id == 6892379
+
+    subset = comments[0:1]
+    assert isinstance(subset, list)
+    assert subset[0].comment_id == 6892379
 
 
 @pytest.mark.vcr
