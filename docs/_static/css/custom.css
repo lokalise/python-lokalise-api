@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'FactorA-Variable';
+  src:
+    url('../fonts/FactorA-Variable.woff2') format('woff2'),
+    url('../fonts/FactorA-Variable.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'FactorA-Variable', system-ui, "Lato", "proxima-nova", "Helvetica Neue", "Arial", sans-serif;
+}
