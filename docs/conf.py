@@ -77,7 +77,7 @@ html_sidebars = {
 }
 
 html_theme_options = {
-    "logo": "lok_logo.png",
+    "logo": "lok_logo_black.png",
     "github_user": "lokalise",
     "github_repo": "python-lokalise-api",
     "github_button": "true",
