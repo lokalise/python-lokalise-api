@@ -2,6 +2,8 @@
 Tests for the Files endpoint.
 """
 
+from urllib.parse import urlparse
+
 import pytest
 from lokalise.client import Client
 
@@ -62,7 +64,8 @@ def test_download_files(client: Client) -> None:
         PROJECT_ID, {"format": "json", "original_filenames": True, "replace_breaks": False}
     )
     assert response["project_id"] == PROJECT_ID
-    assert r"amazonaws.com" in response["bundle_url"]
+    hostname = urlparse(response["bundle_url"]).hostname
+    assert hostname == "amazonaws.com" or (hostname and hostname.endswith(".amazonaws.com"))
     assert "_response_too_big" not in response
 
 
@@ -75,7 +78,8 @@ def test_download_files_too_big(client: Client) -> None:
         )
 
     assert response["project_id"] == PROJECT_ID
-    assert r"amazonaws.com" in response["bundle_url"]
+    hostname = urlparse(response["bundle_url"]).hostname
+    assert hostname == "amazonaws.com" or (hostname and hostname.endswith(".amazonaws.com"))
     assert "_response_too_big" in response
 
 

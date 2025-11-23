@@ -2,6 +2,8 @@
 Tests for the Screenshots endpoint.
 """
 
+from urllib.parse import urlparse
+
 import pytest
 from lokalise.client import Client
 
@@ -41,7 +43,8 @@ def test_screenshot(client: Client) -> None:
     assert screenshot.screenshot_id == SCREENSHOT_ID
     assert screenshot.project_id == PROJECT_ID
     assert 34089721 in screenshot.key_ids
-    assert "amazonaws.com" in screenshot.url
+    hostname = urlparse(screenshot.url).hostname
+    assert hostname == "amazonaws.com" or (hostname and hostname.endswith(".amazonaws.com"))
     assert screenshot.title == "screenshot"
     assert screenshot.description == ""
     assert "test" in screenshot.screenshot_tags
@@ -60,7 +63,8 @@ def test_create_screenshots(client: Client, screenshot_data: str) -> None:
     assert screenshots.project_id == PROJECT_ID
     screenshot = screenshots.items[0]
     assert screenshot.title == "Python screenshot"
-    assert "amazonaws.com" in screenshot.url
+    hostname = urlparse(screenshot.url).hostname
+    assert hostname == "amazonaws.com" or (hostname and hostname.endswith(".amazonaws.com"))
 
 
 @pytest.mark.vcr
