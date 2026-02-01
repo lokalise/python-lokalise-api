@@ -1,6 +1,6 @@
 [project]
 name = "python-lokalise-api"
-version = "4.0.1"
+version = "4.0.2"
 description = "Official Python interface for the Lokalise API v2"
 authors = [
     {name = "Ilya Krukowski", email = "elskruk@proton.me"}
