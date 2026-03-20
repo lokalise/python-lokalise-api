@@ -3,6 +3,13 @@
 Changelog
 =========
 
+4.0.3 (20-Mar-2026)
+-------------------
+
+* Update typings
+* Increase test coverage
+* Update dependencies
+
 4.0.2 (01-Feb-2026)
 -------------------
 

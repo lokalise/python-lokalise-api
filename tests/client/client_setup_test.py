@@ -6,6 +6,7 @@ from typing import Any, cast
 
 import lokalise
 import pytest
+from lokalise.endpoints.base_endpoint import BaseEndpoint
 
 
 def test_client_arguments():
@@ -16,6 +17,12 @@ def test_client_arguments():
     assert client.read_timeout == 3
     assert client.enable_compression
     assert client.token_header == "X-Api-Token"
+
+
+def test_client_requires_non_empty_token():
+    """Checks that client raises an error when token is empty"""
+    with pytest.raises(ValueError, match="token must be a non-empty string"):
+        lokalise.Client("")
 
 
 @pytest.mark.vcr
@@ -205,3 +212,23 @@ def test_reset_client_requires_new_token() -> None:
 
     ep = client.get_endpoint("projects")
     assert ep is not None
+
+
+def test_get_endpoint_raises_for_unknown_endpoint():
+    """Checks that unknown endpoint name raises ValueError"""
+    client = lokalise.Client("123abc")
+
+    with pytest.raises(ValueError, match=r"Unknown endpoint: unknown_endpoint"):
+        client.get_endpoint("unknown_endpoint")
+
+
+def test_path_with_params_missing_required_param():
+    """Checks that missing path param raises ValueError"""
+
+    class TestEndpoint(BaseEndpoint):
+        PATH = "projects/$missing_id"
+
+    endpoint = TestEndpoint(client=lokalise.Client("123abc"))
+
+    with pytest.raises(ValueError, match=r"Missing required path parameter"):
+        endpoint.path_with_params()

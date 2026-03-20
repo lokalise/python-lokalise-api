@@ -2,6 +2,7 @@
 Tests for the OAuthClient class
 """
 
+import pytest
 from lokalise import OAuthClient
 
 
@@ -24,3 +25,9 @@ def test_reset_client(oauth_client: OAuthClient) -> None:
     oauth_client.reset_client()
 
     assert oauth_client.token is None
+
+
+def test_client_requires_non_empty_token():
+    """Checks that client raises an error when token is empty"""
+    with pytest.raises(ValueError, match="token must be a non-empty string"):
+        OAuthClient("")
