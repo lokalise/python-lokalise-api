@@ -4,4 +4,4 @@ lokalise.version
 This module contains plugin metadata.
 """
 
-__version__: str = "4.0.4"
+__version__: str = "4.0.5"
