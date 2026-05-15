@@ -70,6 +70,9 @@ class NotAcceptable(ClientHTTPError): ...
 class Conflict(ClientHTTPError): ...
 
 
+class ContentTooLarge(ClientHTTPError): ...
+
+
 class Locked(ClientHTTPError): ...
 
 
@@ -96,6 +99,7 @@ ERROR_CODES: dict[int, type[ClientHTTPError]] = {
     405: MethodNotAllowed,
     406: NotAcceptable,
     409: Conflict,
+    413: ContentTooLarge,
     423: Locked,
     429: TooManyRequests,
     500: ServerError,
@@ -275,7 +279,7 @@ def parse_api_error(slurp: bytes | str, status: int) -> APIError:
 def error_from_http(
     status_code: int,
     *,
-    message: str | None = None,  # можно пробросить своё (например "GET /url failed")
+    message: str | None = None,
     headers: Mapping[str, str] | None = None,
     body_text: str | None = None,
 ) -> ClientHTTPError:
@@ -299,6 +303,7 @@ _HTTP_TEXTS = {
     405: "Method Not Allowed",
     406: "Not Acceptable",
     409: "Conflict",
+    413: "Content Too Large",
     423: "Locked",
     429: "Too Many Requests",
     500: "Internal Server Error",

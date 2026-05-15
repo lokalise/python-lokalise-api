@@ -15,6 +15,7 @@ The plugin may raise the following exceptions:
 * ``lokalise.errors.MethodNowAllowed`` (405) - HTTP request with the provided verb is not supported by the endpoint.
 * ``lokalise.errors.NotAcceptable`` (406) - posted resource is malformed.
 * ``lokalise.errors.Conflict`` (409) - request conflicts with another request.
+* ``lokalise.errors.ContentTooLarge`` (413)
 * ``lokalise.errors.Locked`` (423) - your token is used simultaneously in multiple requests.
 * ``lokalise.errors.TooManyRequests`` (429) - too many requests hit the API too quickly (check the section below to learn more).
 * ``lokalise.errors.ServerError`` (500).

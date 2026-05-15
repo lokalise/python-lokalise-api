@@ -3,6 +3,11 @@
 Changelog
 =========
 
+4.0.6 (15-May-2026)
+-------------------
+
+* Add class for error 413 (``ContentTooLarge``)
+
 4.0.5 (13-May-2026)
 -------------------
 
