@@ -57,6 +57,13 @@ def client() -> lokalise.Client:
 
 
 @pytest.fixture(scope="module")
+def clientv1() -> lokalise.ClientV1:
+    """Creates a sample client v1 object using the token from the ENV."""
+    token = os.getenv("LOKALISE_API_TOKEN") or "DUMMY_API_TOKEN"
+    return lokalise.ClientV1(token)
+
+
+@pytest.fixture(scope="module")
 def oauth_client() -> lokalise.OAuthClient:
     """Creates a sample client object using the OAuth token from the ENV."""
     token = os.getenv("OAUTH2_TOKEN") or "DUMMY_OAUTH2_TOKEN"

@@ -1,0 +1,66 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/4.0.6
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/v1/audit-logs?cursor=invalid-cursor
+  response:
+    body:
+      string: '{"error":{"code":400,"message":"Unexpected response status: 400"}}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 22 Jul 2026 13:30:19 GMT
+      Transfer-Encoding:
+      - chunked
+      cache-control:
+      - no-store, no-cache, must-revalidate,max-age=0, must-revalidate, private
+      content-encoding:
+      - zstd
+      expires:
+      - Wed, 22 Jul 2026 13:30:19 GMT
+      pragma:
+      - no-cache
+      referrer-policy:
+      - origin
+      server:
+      - nginx
+      set-cookie:
+      - csrf_token=KdyBW5FrAPC3Wyo7u9039qfhArZGCx5y_XeaG2KhaLQ; path=/; secure
+      - PHPSESSID=85tlmc8sujhi89jvdlqbn2mufk8qesvt; expires=Sun, 20-Sep-2026 13:30:19
+        GMT; Max-Age=5184000; path=/; secure; httponly
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-lokalise-process-id:
+      - 6e9f4197-7d03-49a3-9fa3-2d40377cba15
+      x-ratelimit-limit:
+      - 10, 10;w=1, 10;w=1
+      x-ratelimit-remaining:
+      - '9'
+      x-ratelimit-reset:
+      - '1'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 400
+      message: Bad Request
+version: 1
