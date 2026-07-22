@@ -8,7 +8,11 @@ from typing import Any, Protocol
 
 
 class EndpointProviderMixin(Protocol):
-    """Protocol to indicate the class provides `get_endpoint`."""
+    """Protocol for classes that provide endpoint loading."""
 
-    def get_endpoint(self, name: str) -> Any:
-        """This method should be defined in the parent class that collects all client methods."""
+    def get_endpoint(
+        self,
+        name: str,
+        namespace: str | None = None,
+    ) -> Any:
+        """Load an endpoint from the root or an optional nested namespace."""

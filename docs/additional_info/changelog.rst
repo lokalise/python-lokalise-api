@@ -3,6 +3,27 @@
 Changelog
 =========
 
+4.1.0 (22-Jul-2026)
+-------------------
+
+* Added support for `Audit logs <https://developers.lokalise.com/reference/list-audit-logs>`_ endpoint
+
+.. code-block:: python
+
+  import lokalise
+
+  # You MUST use ClientV1 as this endpoint follows the new structure
+  client = lokalise.ClientV1("YOUR_API_TOKEN")
+
+  audit_logs = client.audit_logs({
+    "limit": 100,
+    "event_type": "project.deleted",
+  })
+
+  audit_logs.items[0].metadata["event_code"]  # => "project.deleted"
+  audit_logs.has_more
+  audit_logs.next_cursor
+
 4.0.6 (15-May-2026)
 -------------------
 

@@ -8,7 +8,8 @@ Lokalise API v2 official Python interface
 
 from . import errors as errors
 from .client import Client
+from .client_v1 import ClientV1
 from .oauth2.auth import Auth
 from .oauth_client import OAuthClient
 
-__all__ = ["Client", "Auth", "OAuthClient", "errors"]
+__all__ = ["Auth", "Client", "ClientV1", "OAuthClient", "errors"]

@@ -36,9 +36,6 @@ interactions:
       - origin
       Server:
       - nginx
-      Set-Cookie:
-      - PHPSESSID=deleted; expires=Tue, 27-Jul-2021 14:54:30 GMT; Max-Age=0; path=/;
-        httponly
       Strict-Transport-Security:
       - max-age=31536000
       Transfer-Encoding:

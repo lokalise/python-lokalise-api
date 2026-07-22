@@ -4,9 +4,18 @@ lokalise.base_client
 This module contains the base Lokalise API client definition.
 """
 
+import importlib
+from collections.abc import Callable
+from typing import TypeVar, cast
+
+from lokalise.utils import snake_to_camel
+
+from .endpoints.base_endpoint import BaseEndpoint
 from .types import FullClientProto
 
 Number = int | float
+
+T = TypeVar("T", bound=BaseEndpoint)
 
 
 class BaseClient(FullClientProto):
@@ -100,3 +109,69 @@ class BaseClient(FullClientProto):
     def token_header(self) -> str:
         """HTTP header key used for the API token."""
         return self._token_header
+
+    def reset_client(self) -> None:
+        """Resets the API client by clearing all attributes.
+        After reset, token is None and client is unusable until you set a new token.
+        """
+        self._token = None
+        self._connect_timeout = None
+        self._read_timeout = None
+        self._enable_compression = False
+        self._clear_endpoint_attrs()
+
+    # === Endpoint helpers
+    def get_endpoint(
+        self,
+        name: str,
+        namespace: str | None = None,
+    ) -> BaseEndpoint:
+        """Lazily load and cache an endpoint.
+
+        Args:
+            name: Endpoint name, such as ``projects`` or ``audit_logs``.
+            namespace: Optional nested endpoint package, such as ``v1``.
+        """
+        endpoint_name = f"{name}_endpoint"
+        class_name = snake_to_camel(endpoint_name)
+
+        module_parts = [".endpoints"]
+
+        if namespace:
+            module_parts.append(namespace)
+
+        module_parts.append(endpoint_name)
+        module_path = ".".join(module_parts)
+
+        attr_name = f"_{namespace}_{endpoint_name}" if namespace else f"_{endpoint_name}"
+
+        try:
+            module = importlib.import_module(module_path, package="lokalise")
+            endpoint_class = cast(
+                type[BaseEndpoint],
+                getattr(module, class_name),
+            )
+        except (ModuleNotFoundError, AttributeError) as exc:
+            qualified_name = f"{namespace}.{name}" if namespace else name
+            raise ValueError(f"Unknown endpoint: {qualified_name}") from exc
+
+        return self._fetch_attr(
+            attr_name,
+            lambda: endpoint_class(self),
+        )
+
+    def _fetch_attr(self, attr_name: str, populator: Callable[[], T]) -> T:
+        """Searches for the given attribute.
+        Uses populator to set the attribute if it cannot be found.
+        Used to lazy-load endpoints.
+        """
+        val = getattr(self, attr_name, None)
+        if val is None:
+            val = populator()
+            setattr(self, attr_name, val)
+        return cast(T, val)
+
+    def _clear_endpoint_attrs(self) -> None:
+        """Clears all lazily-loaded endpoint attributes"""
+        for attr in [a for a in vars(self) if a.endswith("_endpoint")]:
+            delattr(self, attr)

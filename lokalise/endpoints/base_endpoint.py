@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Any
 from ..utils import to_list
 
 if TYPE_CHECKING:
-    from ..client import Client
+    from ..client import BaseClient
 
 from .. import request
 
@@ -32,7 +32,7 @@ class BaseEndpoint:
 
     PATH: str = ""
 
-    def __init__(self, client: "Client") -> None:
+    def __init__(self, client: "BaseClient") -> None:
         """Creates a new endpoint.
 
         :param client: Lokalise API client
