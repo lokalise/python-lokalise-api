@@ -50,10 +50,6 @@ interactions:
       - origin
       server:
       - nginx
-      set-cookie:
-      - csrf_token=FDhNPPWaBr-w2LoSaNEK6iEYHVMMkdQFL_0sqmQR9iM; path=/; secure
-      - PHPSESSID=2gka6ovh0m0ujijc1rsfb9t9t27vb3o1; expires=Sun, 20-Sep-2026 13:18:45
-        GMT; Max-Age=5184000; path=/; secure; httponly
       strict-transport-security:
       - max-age=31536000
       vary:

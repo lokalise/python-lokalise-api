@@ -13,7 +13,7 @@ Changelog
   import lokalise
 
   # You MUST use ClientV1 as this endpoint follows the new structure
-  client = lokalise.ClientV1(token)
+  client = lokalise.ClientV1("YOUR_API_TOKEN")
 
   audit_logs = client.audit_logs({
     "limit": 100,

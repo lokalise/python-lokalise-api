@@ -4,7 +4,7 @@ lokalise.models.base_model
 Model parent class inherited by specific models.
 """
 
-from typing import Any
+from typing import Any, ClassVar
 
 
 class BaseModel:
@@ -21,7 +21,7 @@ class BaseModel:
     In this case, the DATA_KEY would be "contributor"
     """
 
-    ATTRS: list[str] = []
+    ATTRS: ClassVar[list[str]] = []
     COMMON_ATTRS: list[str] = ["project_id", "user_id", "branch", "team_id"]
     DATA_KEY: str = ""
 

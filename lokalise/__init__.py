@@ -12,4 +12,4 @@ from .client_v1 import ClientV1
 from .oauth2.auth import Auth
 from .oauth_client import OAuthClient
 
-__all__ = ["Client", "ClientV1", "Auth", "OAuthClient", "errors"]
+__all__ = ["Auth", "Client", "ClientV1", "OAuthClient", "errors"]

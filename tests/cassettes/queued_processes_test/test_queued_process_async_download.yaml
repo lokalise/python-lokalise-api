@@ -31,9 +31,6 @@ interactions:
       - no-cache
       Referrer-Policy:
       - origin
-      Set-Cookie:
-      - PHPSESSID=deleted; expires=Sun, 18-Feb-2024 16:46:08 GMT; Max-Age=0; path=/;
-        httponly
       Strict-Transport-Security:
       - max-age=31536000
       Transfer-Encoding:

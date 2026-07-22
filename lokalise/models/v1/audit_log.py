@@ -4,13 +4,15 @@ lokalise.models.audit_log
 Module containing audit log.
 """
 
+from typing import ClassVar
+
 from ..base_model import BaseModel
 
 
 class AuditLogModel(BaseModel):
     """Describes audit log model."""
 
-    ATTRS = [
+    ATTRS: ClassVar[list[str]] = [
         "class_uid",
         "class_name",
         "category_uid",

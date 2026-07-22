@@ -14,7 +14,7 @@ Initialize the client as follows:
 
   import lokalise
 
-  client = lokalise.ClientV1(token)
+  client = lokalise.ClientV1("YOUR_API_TOKEN")
 
 Fetch audit logs
 ----------------

@@ -32,9 +32,6 @@ interactions:
       - Tue, 22 Apr 2025 14:16:31 GMT
       Referrer-Policy:
       - origin
-      Set-Cookie:
-      - PHPSESSID=deleted; expires=Mon, 22-Apr-2024 14:16:30 GMT; Max-Age=0; path=/;
-        secure; httponly
       Strict-Transport-Security:
       - max-age=31536000
       Transfer-Encoding:

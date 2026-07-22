@@ -9,7 +9,7 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-lokalise-api plugin/4.0.6
+      - python-lokalise-api plugin/4.1.0
       x-api-token:
       - FILTERED
     method: GET
@@ -28,26 +28,18 @@ interactions:
       - keep-alive
       Content-Type:
       - application/json
-      Date:
-      - Wed, 22 Jul 2026 13:29:39 GMT
       Transfer-Encoding:
       - chunked
       cache-control:
       - no-store, no-cache, must-revalidate,max-age=0, must-revalidate, private
       content-encoding:
       - zstd
-      expires:
-      - Wed, 22 Jul 2026 13:29:39 GMT
       pragma:
       - no-cache
       referrer-policy:
       - origin
       server:
       - nginx
-      set-cookie:
-      - csrf_token=3OlXa3Odl6Fr0i1RYeZepgtQBy_OfdYCrbVrnhIuazc; path=/; secure
-      - PHPSESSID=j3o166fq42mfkm5n2vdovj392h9ehdm5; expires=Sun, 20-Sep-2026 13:29:39
-        GMT; Max-Age=5184000; path=/; secure; httponly
       strict-transport-security:
       - max-age=31536000
       vary:
@@ -56,14 +48,8 @@ interactions:
       - nosniff
       x-frame-options:
       - deny
-      x-lokalise-process-id:
-      - 8a97e773-6a94-41e2-b040-fc66381c0eab
       x-ratelimit-limit:
       - 10, 10;w=1, 10;w=1
-      x-ratelimit-remaining:
-      - '9'
-      x-ratelimit-reset:
-      - '1'
       x-xss-protection:
       - 1; mode=block
     status:
