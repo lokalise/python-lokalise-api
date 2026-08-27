@@ -12,7 +12,13 @@ permissions:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+
+    env:
+      UV_PYTHON: python
+      UV_PYTHON_DOWNLOADS: never
+
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         python-version: ['3.10', '3.11', '3.12', '3.13', '3.14', '3.15']
@@ -25,16 +31,15 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d
       - name: Sync dependencies
-        run: uv sync --group dev --frozen --python python
+        run: uv sync --group dev --frozen
       - name: Show Python version
         run: |
           python --version
           uv run python --version
-      - name: Install package (editable)
-        run: uv pip install -e .
       - name: Test
         run: uv run --group dev pytest --cov=lokalise --cov-report=lcov:coverage.lcov
       - name: Coveralls
+        if: matrix.python-version == '3.14'
         uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329
         with:
           path-to-lcov: ./coverage.lcov
