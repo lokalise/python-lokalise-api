@@ -3,6 +3,11 @@
 Changelog
 =========
 
+4.2.0 (17-Sep-2026)
+-------------------
+
+* Added support for AI scoring (keys and translations)
+
 4.1.0 (22-Jul-2026)
 -------------------
 

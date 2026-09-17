@@ -19,3 +19,4 @@ class TranslationModel(BaseModel):
     custom_translation_statuses: list[dict[str, Any]]
     task_id: int
     segment_number: int
+    ai_scoring: dict[str, Any] | None

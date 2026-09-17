@@ -28,3 +28,4 @@ class KeyModel(BaseModel):
     modified_at_timestamp: int
     translations_modified_at: str
     translations_modified_at_timestamp: int
+    ai_scoring: dict[str, Any] | None
