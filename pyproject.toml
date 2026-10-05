@@ -12,7 +12,6 @@ classifiers=[
     'Development Status :: 5 - Production/Stable',
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
@@ -41,7 +40,7 @@ dev = [
     "pyright>=1.1.405",
     "pytest>=8.4.2",
     "pytest-cov>=7.0.0",
-    "pytest-vcr>=1.0.2",
+    "pytest-recording>=0.14,<1",
     "python-dotenv>=1.1.1",
     "ruff>=0.13.1",
     "vcrpy>=7.0.0",
@@ -86,13 +85,6 @@ exclude = [
   "**/docs/_build/**",
   "tmp*"
 ]
-ignore = ["**/dist/**"]
 stubPath = "typings"
 typeCheckingMode = "strict"
 pythonVersion = "3.10"
-reportMissingImports = true
-reportMissingTypeStubs = "warning"
-reportUnknownVariableType = "warning"
-reportUnknownArgumentType = "warning"
-reportUnknownMemberType = "warning"
-reportUnusedImport = "warning"
