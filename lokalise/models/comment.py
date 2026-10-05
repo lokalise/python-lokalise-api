@@ -12,7 +12,7 @@ class CommentModel(BaseModel):
 
     DATA_KEY = "comment"
 
-    ATTRS = [
+    ATTRS = (
         "comment_id",
         "key_id",
         "comment",
@@ -20,4 +20,4 @@ class CommentModel(BaseModel):
         "added_by_email",
         "added_at",
         "added_at_timestamp",
-    ]
+    )

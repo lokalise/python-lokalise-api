@@ -12,7 +12,7 @@ class ContributorModel(BaseModel):
 
     DATA_KEY = "contributor"
 
-    ATTRS = [
+    ATTRS = (
         "user_id",
         "email",
         "fullname",
@@ -24,4 +24,4 @@ class ContributorModel(BaseModel):
         "admin_rights",
         "role_id",
         "uuid",
-    ]
+    )

@@ -12,4 +12,4 @@ class TeamUserModel(BaseModel):
 
     DATA_KEY = "team_user"
 
-    ATTRS = ["user_id", "email", "fullname", "created_at", "created_at_timestamp", "role", "uuid"]
+    ATTRS = ("user_id", "email", "fullname", "created_at", "created_at_timestamp", "role", "uuid")

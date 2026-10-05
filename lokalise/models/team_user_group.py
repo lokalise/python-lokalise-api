@@ -12,7 +12,7 @@ class TeamUserGroupModel(BaseModel):
 
     DATA_KEY = "group"
 
-    ATTRS = [
+    ATTRS = (
         "group_id",
         "name",
         "permissions",
@@ -22,4 +22,4 @@ class TeamUserGroupModel(BaseModel):
         "projects",
         "members",
         "role_id",
-    ]
+    )

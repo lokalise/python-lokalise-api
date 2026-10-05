@@ -3,6 +3,13 @@
 Changelog
 =========
 
+4.3.0 (05-Oct-2026)
+-------------------
+
+* Added support for translation memories endpoint
+* Various code enhancements
+* Note: this is the last version to support Python 3.10. Next major version will require Python 3.11+
+
 4.2.0 (17-Sep-2026)
 -------------------
 

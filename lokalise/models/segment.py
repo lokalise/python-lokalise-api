@@ -12,7 +12,7 @@ class SegmentModel(BaseModel):
 
     DATA_KEY = "segment"
 
-    ATTRS = [
+    ATTRS = (
         "segment_number",
         "language_iso",
         "modified_at",
@@ -25,4 +25,4 @@ class SegmentModel(BaseModel):
         "reviewed_by",
         "words",
         "custom_translation_statuses",
-    ]
+    )

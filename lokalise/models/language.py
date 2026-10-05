@@ -12,4 +12,4 @@ class LanguageModel(BaseModel):
 
     DATA_KEY = "language"
 
-    ATTRS = ["lang_id", "lang_iso", "lang_name", "is_rtl", "plural_forms", "project_language_uuid"]
+    ATTRS = ("lang_id", "lang_iso", "lang_name", "is_rtl", "plural_forms", "project_language_uuid")

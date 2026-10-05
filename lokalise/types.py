@@ -1,17 +1,23 @@
-from typing import Protocol
+from typing import Protocol, TypeAlias
+
+Number: TypeAlias = int | float
 
 
 class RequestClientProto(Protocol):
     @property
     def token_header(self) -> str: ...
+
     @property
     def token(self) -> str | None: ...
+
     @property
-    def enable_compression(self) -> bool | None: ...
+    def enable_compression(self) -> bool: ...
+
     @property
-    def connect_timeout(self) -> float | int | None: ...
+    def connect_timeout(self) -> Number | None: ...
+
     @property
-    def read_timeout(self) -> float | int | None: ...
+    def read_timeout(self) -> Number | None: ...
 
 
 class HasApiHost(Protocol):

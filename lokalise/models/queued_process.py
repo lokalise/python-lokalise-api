@@ -12,7 +12,7 @@ class QueuedProcessModel(BaseModel):
 
     DATA_KEY = "process"
 
-    ATTRS = [
+    ATTRS = (
         "process_id",
         "type",
         "status",
@@ -22,4 +22,4 @@ class QueuedProcessModel(BaseModel):
         "created_at",
         "created_at_timestamp",
         "details",
-    ]
+    )

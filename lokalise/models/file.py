@@ -10,4 +10,4 @@ from .base_model import BaseModel
 class FileModel(BaseModel):
     """Describes file."""
 
-    ATTRS = ["file_id", "filename", "key_count"]
+    ATTRS = ("file_id", "filename", "key_count")

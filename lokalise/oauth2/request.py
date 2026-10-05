@@ -4,7 +4,7 @@ lokalise.oauth2.request
 HTTP helpers specifically for OAuth 2.0 flow.
 """
 
-from typing import Any
+from typing import Any, cast
 
 import requests
 
@@ -25,13 +25,17 @@ def post(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
 
 
 def respond_with(response: requests.Response) -> dict[str, Any]:
-    """
-    Parse JSON body and raise on HTTP error or on payload containing 'error'.
-    """
+    """Parse an OAuth response and raise on errors."""
     try:
-        data: dict[str, Any] = response.json()
+        parsed = response.json()
     except ValueError:
-        data = {"_raw_body": response.text}
+        data: dict[str, Any] = {"_raw_body": response.text}
+    else:
+        if isinstance(parsed, dict):
+            data = cast(dict[str, Any], parsed)
+        else:
+            data = {"_raw_body": response.text}
+
     raise_on_error(response, data)
     return data
 
@@ -40,7 +44,7 @@ def options() -> dict[str, Any]:
     """
     Minimal headers for OAuth endpoints. No auth header here.
     """
-    headers: dict[str, Any] = {
+    headers: dict[str, str] = {
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
         "Content-Type": "application/json",

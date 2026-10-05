@@ -27,12 +27,20 @@ class Auth:
         refreshed = client.refresh(token["refresh_token"])
     """
 
+    client_id: str
+    client_secret: str
+
     def __init__(self, client_id: str, client_secret: str) -> None:
         """Instantiate a new OAuth 2 client.
 
         :param client_id: Lokalise OAuth client ID
         :param client_secret: Lokalise OAuth client secret
         """
+        if not client_id:
+            raise ValueError("client_id must be a non-empty string")
+        if not client_secret:
+            raise ValueError("client_secret must be a non-empty string")
+
         self.client_id = client_id
         self.client_secret = client_secret
 
@@ -51,6 +59,9 @@ class Auth:
         """
         scope_str = " ".join(scope) if not isinstance(scope, str) else scope
 
+        if not scope_str.strip():
+            raise ValueError("scope must not be empty")
+
         params: dict[str, str] = {
             "client_id": self.client_id,
             "scope": scope_str,
@@ -68,7 +79,10 @@ class Auth:
         :param code: Authorization code received from the `auth()` redirect
         :return: Parsed JSON payload with tokens and metadata
         """
-        params: dict[str, str] = {
+        if not code:
+            raise ValueError("code must be a non-empty string")
+
+        params = {
             "grant_type": "authorization_code",
             "code": code,
             **self.__base_params(),
@@ -81,7 +95,10 @@ class Auth:
         :param refresh_token: Refresh token obtained from a previous `token()` call
         :return: Parsed JSON payload with new tokens and metadata
         """
-        params: dict[str, str] = {
+        if not refresh_token:
+            raise ValueError("refresh_token must be a non-empty string")
+
+        params = {
             "grant_type": "refresh_token",
             "refresh_token": refresh_token,
             **self.__base_params(),
@@ -95,5 +112,5 @@ class Auth:
 
     def __build_uri(self, params: dict[str, str]) -> str:
         base = BASE_URL.rstrip("/")
-        query = urllib.parse.urlencode(params, doseq=True)
+        query = urllib.parse.urlencode(params)
         return f"{base}/auth?{query}"

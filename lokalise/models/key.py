@@ -12,7 +12,7 @@ class KeyModel(BaseModel):
 
     DATA_KEY = "key"
 
-    ATTRS = [
+    ATTRS = (
         "key_id",
         "created_at",
         "created_at_timestamp",
@@ -36,4 +36,4 @@ class KeyModel(BaseModel):
         "modified_at_timestamp",
         "translations_modified_at",
         "translations_modified_at_timestamp",
-    ]
+    )

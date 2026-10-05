@@ -12,11 +12,11 @@ class BranchModel(BaseModel):
 
     DATA_KEY = "branch"
 
-    ATTRS = [
+    ATTRS = (
         "branch_id",
         "name",
         "created_at",
         "created_at_timestamp",
         "created_by",
         "created_by_email",
-    ]
+    )

@@ -1,14 +1,13 @@
 from collections.abc import Sequence
-from typing import Any, ClassVar, Generic, TypeVar, overload
+from typing import Any, ClassVar, TypeVar, overload
 
 from lokalise.models.base_model import BaseModel
 
 TModel = TypeVar("TModel", bound=BaseModel)
 
-class BaseCollection(Sequence[TModel], Generic[TModel]):
+class BaseCollection(Sequence[TModel]):
     DATA_KEY: ClassVar[str]
-    COMMON_ATTRS: ClassVar[list[str]]
-
+    COMMON_ATTRS: ClassVar[tuple[str, ...]]
     MODEL_KLASS: ClassVar[type[BaseModel]]
 
     items: list[TModel]
@@ -22,7 +21,7 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
     project_id: str | None
     user_id: int | None
     branch: str | None
-    errors: Any | None
+    errors: Any
     team_id: int | None
 
     def __init__(self, raw_data: dict[str, Any]) -> None: ...

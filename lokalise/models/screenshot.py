@@ -12,7 +12,7 @@ class ScreenshotModel(BaseModel):
 
     DATA_KEY = "screenshot"
 
-    ATTRS = [
+    ATTRS = (
         "screenshot_id",
         "key_ids",
         "keys",
@@ -24,4 +24,4 @@ class ScreenshotModel(BaseModel):
         "height",
         "created_at",
         "created_at_timestamp",
-    ]
+    )

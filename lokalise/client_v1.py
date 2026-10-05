@@ -38,5 +38,5 @@ class ClientV1(BaseClient, AuditLogsMethods):
 
         super().__init__(token, connect_timeout, read_timeout, enable_compression, api_host)
 
-        if self._api_host is None:
-            self._api_host = BASE_URL_V1
+        if self.api_host is None:
+            self.api_host = BASE_URL_V1

@@ -65,6 +65,7 @@ Usage
   api/team_user_groups
   api/team_user_billing_details
   api/translations
+  api/translation_memories
   api/translation_providers
   api/translation_statuses
   api/webhooks

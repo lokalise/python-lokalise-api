@@ -26,6 +26,7 @@ from .client_methods.team_user_billing_details import TeamUserBillingDetailsMeth
 from .client_methods.team_user_groups import TeamUserGroupMethods
 from .client_methods.team_users import TeamUserMethods
 from .client_methods.teams import TeamMethods
+from .client_methods.translation_memories import TranslationMemoriesMethods
 from .client_methods.translation_providers import TranslationProviderMethods
 from .client_methods.translation_statuses import TranslationStatusMethods
 from .client_methods.translations import TranslationMethods
@@ -56,6 +57,7 @@ class Client(
     TeamUserGroupMethods,
     TeamUserBillingDetailsMethods,
     TranslationMethods,
+    TranslationMemoriesMethods,
     TranslationProviderMethods,
     TranslationStatusMethods,
     WebhookMethods,

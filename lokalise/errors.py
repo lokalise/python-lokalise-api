@@ -7,7 +7,7 @@ Defines custom exception classes.
 import json
 from collections.abc import Mapping
 from dataclasses import dataclass
-from typing import Any, Optional, Union, cast
+from typing import Any, Union, cast
 
 JSONValue = Union[str, int, float, bool, None, "JSONObject", "JSONList"]
 JSONList = list[JSONValue]
@@ -30,7 +30,7 @@ class ClientHTTPError(ClientError):
         *,
         headers: Mapping[str, str] | None = None,
         raw_text: str | None = None,
-        parsed: Optional["APIError"] = None,
+        parsed: "APIError | None" = None,
     ) -> None:
         super().__init__(message, status_code)
         self.status_code = status_code
@@ -115,7 +115,7 @@ class APIError:
     message: str
     reason: str
     raw: str
-    code: int | str | None
+    code: int | None
     details: dict[str, Any] | None
 
 
@@ -135,7 +135,7 @@ def _json_loads_obj_or_none(trimmed: str) -> JSONObject | None:
         obj = json.loads(trimmed)
         if isinstance(obj, dict):
             return cast(JSONObject, obj)
-    except Exception:
+    except json.JSONDecodeError:
         return None
 
 
@@ -157,7 +157,9 @@ def _as_int_maybe(v: Any) -> tuple[int, bool]:
     if isinstance(v, int):
         return v, True
     if isinstance(v, float):
-        return int(v), True
+        if v.is_integer():
+            return int(v), True
+        return 0, False
     if isinstance(v, str):
         s = v.strip()
         if s.isdigit() or (s.startswith(("+", "-")) and s[1:].isdigit()):
@@ -182,96 +184,175 @@ def _pick_details(obj: Mapping[str, JSONValue]) -> JSONObject:
     return {"reason": "server error without details"}
 
 
-def parse_api_error(slurp: bytes | str, status: int) -> APIError:
-    trimmed = (
-        slurp.decode("utf-8", "replace") if isinstance(slurp, (bytes, bytearray)) else slurp
-    ).strip()
+def parse_api_error(
+    slurp: bytes | bytearray | str,
+    status: int,
+) -> APIError:
+    trimmed = _decode_error_body(slurp)
 
-    # Non-JSON fallback (empty or not starting with {/[)
     if not _is_probably_json(trimmed):
-        message = _http_status_text(status)
-        return APIError(
-            status=status,
-            message=message,
-            reason="non-json error body" if trimmed else "empty body",
-            raw=trimmed,
-            code=None,
-            details=None,
-        )
+        return _non_json_error(trimmed, status)
 
     data = _json_loads_obj_or_none(trimmed)
+
     if data is None:
-        return APIError(
-            status=status,
-            message=_http_status_text(status),
-            reason="invalid json in error body",
-            raw=trimmed,
-            code=None,
-            details={"unmarshal_error": "json decode failed"},
-        )
+        return _invalid_json_error(trimmed, status)
 
-    # 1) Top-level: {message, statusCode, error:string}
-    msg1, ok_msg1 = _get_str(data, "message")
-    sc1, ok_sc1 = _get_number_as_int(data, "statusCode")
-    err1, ok_err1 = _get_str(data, "error")
-    if ok_msg1 and ok_sc1 and ok_err1:
-        return APIError(
-            status=status,
-            code=sc1,
-            message=msg1,
-            reason=err1,
-            raw=trimmed,
-            details=data,
-        )
+    parsers = (
+        _parse_standard_error,
+        _parse_nested_error,
+        _parse_top_level_error,
+        _parse_oauth_error,
+    )
 
-    # 2) Nested: {error: {message, code, details}}
-    err_any = data.get("error")
-    if isinstance(err_any, dict):
-        msg2, _ = _get_str(err_any, "message")
-        code2, ok_code2 = _get_number_as_int(err_any, "code")
-        if not ok_code2:
-            code2 = status
-        details2 = _pick_details(err_any)
-        return APIError(
-            status=status,
-            code=code2,
-            message=_coalesce(msg2, _http_status_text(status)),
-            reason="nested error",
-            raw=trimmed,
-            details=details2,
-        )
+    for parser in parsers:
+        parsed = parser(data, status, trimmed)
+        if parsed is not None:
+            return parsed
 
-    # 3) Alt top-level: {message, code|string|number OR errorCode, details:any}
-    if ok_msg1:
-        code3, ok_code3 = _get_number_as_int(data, "code")
-        if ok_code3:
+    return _parse_fallback_error(data, status, trimmed)
+
+
+def _decode_error_body(slurp: bytes | bytearray | str) -> str:
+    if isinstance(slurp, (bytes, bytearray)):
+        return slurp.decode("utf-8", "replace").strip()
+
+    return slurp.strip()
+
+
+def _non_json_error(raw: str, status: int) -> APIError:
+    return APIError(
+        status=status,
+        message=_http_status_text(status),
+        reason="non-json error body" if raw else "empty body",
+        raw=raw,
+        code=None,
+        details=None,
+    )
+
+
+def _invalid_json_error(raw: str, status: int) -> APIError:
+    return APIError(
+        status=status,
+        message=_http_status_text(status),
+        reason="invalid json in error body",
+        raw=raw,
+        code=None,
+        details={"unmarshal_error": "json decode failed"},
+    )
+
+
+def _parse_standard_error(
+    data: JSONObject,
+    status: int,
+    raw: str,
+) -> APIError | None:
+    message, has_message = _get_str(data, "message")
+    status_code, has_status_code = _get_number_as_int(data, "statusCode")
+    error, has_error = _get_str(data, "error")
+
+    if not (has_message and has_status_code and has_error):
+        return None
+
+    return APIError(
+        status=status,
+        code=status_code,
+        message=message,
+        reason=error,
+        raw=raw,
+        details=data,
+    )
+
+
+def _parse_nested_error(
+    data: JSONObject,
+    status: int,
+    raw: str,
+) -> APIError | None:
+    error = data.get("error")
+
+    if not isinstance(error, dict):
+        return None
+
+    message, _ = _get_str(error, "message")
+    code, has_code = _get_number_as_int(error, "code")
+
+    return APIError(
+        status=status,
+        code=code if has_code else status,
+        message=_coalesce(message, _http_status_text(status)),
+        reason="nested error",
+        raw=raw,
+        details=_pick_details(error),
+    )
+
+
+def _parse_top_level_error(
+    data: JSONObject,
+    status: int,
+    raw: str,
+) -> APIError | None:
+    message, has_message = _get_str(data, "message")
+
+    if not has_message:
+        return None
+
+    for key in ("code", "errorCode"):
+        code, has_code = _get_number_as_int(data, key)
+
+        if has_code:
             return APIError(
                 status=status,
-                code=code3,
-                message=msg1,
+                code=code,
+                message=message,
                 reason="top-level",
-                raw=trimmed,
-                details=_pick_details(data),
-            )
-        code4, ok_code4 = _get_number_as_int(data, "errorCode")
-        if ok_code4:
-            return APIError(
-                status=status,
-                code=code4,
-                message=msg1,
-                reason="top-level",
-                raw=trimmed,
+                raw=raw,
                 details=_pick_details(data),
             )
 
-    # 4) Fallback
-    reason4, _ = _get_str(data, "error")
+    return None
+
+
+def _parse_oauth_error(
+    data: JSONObject,
+    status: int,
+    raw: str,
+) -> APIError | None:
+    error, has_error = _get_str(data, "error")
+    description, has_description = _get_str(
+        data,
+        "error_description",
+    )
+
+    if not (has_error and has_description):
+        return None
+
     return APIError(
         status=status,
         code=None,
-        message=_coalesce(_get_str_or(data, "message", ""), _http_status_text(status)),
-        reason=_coalesce(reason4, "unhandled error format"),
-        raw=trimmed,
+        message=description,
+        reason=error,
+        raw=raw,
+        details=data,
+    )
+
+
+def _parse_fallback_error(
+    data: JSONObject,
+    status: int,
+    raw: str,
+) -> APIError:
+    reason, _ = _get_str(data, "error")
+
+    return APIError(
+        status=status,
+        code=None,
+        message=_coalesce(
+            _get_str_or(data, "message", ""),
+            _http_status_text(status),
+        ),
+        reason=_coalesce(reason, "unhandled error format"),
+        raw=raw,
         details=data,
     )
 
@@ -284,7 +365,12 @@ def error_from_http(
     body_text: str | None = None,
 ) -> ClientHTTPError:
     parsed = parse_api_error(body_text or "", status_code)
-    final_message = message or parsed.message or f"HTTP {status_code} error"
+
+    final_message = parsed.message or f"HTTP {status_code} error"
+
+    if message:
+        final_message = f"{final_message} ({message})"
+
     cls = ERROR_CODES.get(status_code, ClientHTTPError)
     return cls(
         final_message,

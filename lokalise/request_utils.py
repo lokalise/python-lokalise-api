@@ -23,14 +23,11 @@ def raise_on_error(response: Response, data: Mapping[str, Any] | None) -> None:
 
     status = response.status_code if is_error_status else 400
 
-    hint = None
-    try:
-        method = getattr(response.request, "method", None)
-        url = getattr(response.request, "url", None)
-        if method and url:
-            hint = f"{method} {url} failed"
-    except Exception:  # pragma: no cover
-        pass  # pragma: no cover
+    request = response.request
+    method = getattr(request, "method", None)
+    url = getattr(request, "url", None)
+
+    hint = f"{method} {url} failed" if method and url else None
 
     respond_with_error(
         data if isinstance(data, Mapping) else None,
@@ -51,7 +48,7 @@ def respond_with_error(
     If the status code is unknown, raises a generic ClientError
 
     :param data: Response body from the API that usually contains error message
-    :param code: Response status code
+    :param status_code: Response status code
     """
     if data and "_raw_body" in data:
         body_text = data["_raw_body"]

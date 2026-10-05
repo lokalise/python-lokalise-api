@@ -12,7 +12,7 @@ class TaskModel(BaseModel):
 
     DATA_KEY = "task"
 
-    ATTRS = [
+    ATTRS = (
         "task_id",
         "title",
         "description",
@@ -41,4 +41,4 @@ class TaskModel(BaseModel):
         "completed_by_email",
         "custom_translation_status_ids",
         "source_language_iso",
-    ]
+    )

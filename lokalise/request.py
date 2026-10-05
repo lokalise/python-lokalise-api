@@ -17,14 +17,16 @@ from ._version import __version__
 from .request_utils import format_params, path_to_endpoint, raise_on_error
 from .types import FullClientProto
 
+Number = int | float
+
 BASE_URL = "https://api.lokalise.com/api2/"
-PAGINATION_HEADERS = [
+PAGINATION_HEADERS = {
     "x-pagination-total-count",
     "x-pagination-page-count",
     "x-pagination-limit",
     "x-pagination-page",
     "x-pagination-next-cursor",
-]
+}
 
 
 def get(client: FullClientProto, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -194,7 +196,9 @@ def options(
     }
 
 
-def _build_timeout(client: FullClientProto) -> float | tuple[float, float] | None:
+def _build_timeout(
+    client: FullClientProto,
+) -> tuple[Number | None, Number | None] | None:
     """Return proper timeout value for requests.
 
     - None - wait indefinitely
@@ -206,7 +210,5 @@ def _build_timeout(client: FullClientProto) -> float | tuple[float, float] | Non
 
     if ct is None and rt is None:
         return None
-    if ct is not None and rt is not None:
-        return (ct, rt)
 
-    return ct if ct is not None else rt
+    return (ct, rt)

@@ -1,11 +1,11 @@
 from collections.abc import Iterator, Sequence
-from typing import Any, ClassVar, Generic, TypeVar, overload
+from typing import Any, ClassVar, TypeVar, overload
 
 from lokalise.models.base_model import BaseModel
 
 TModel = TypeVar("TModel", bound=BaseModel)
 
-class BaseCollectionV1(Sequence[TModel], Generic[TModel]):
+class BaseCollectionV1(Sequence[TModel]):
     DATA_KEY: ClassVar[str]
     MODEL_KLASS: ClassVar[type[BaseModel]]
 

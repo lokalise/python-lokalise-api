@@ -12,11 +12,11 @@ class SnapshotModel(BaseModel):
 
     DATA_KEY = "snapshot"
 
-    ATTRS = [
+    ATTRS = (
         "snapshot_id",
         "title",
         "created_at",
         "created_at_timestamp",
         "created_by",
         "created_by_email",
-    ]
+    )

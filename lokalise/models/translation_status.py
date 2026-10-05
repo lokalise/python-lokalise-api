@@ -12,4 +12,4 @@ class TranslationStatusModel(BaseModel):
 
     DATA_KEY = "custom_translation_status"
 
-    ATTRS = ["status_id", "title", "color"]
+    ATTRS = ("status_id", "title", "color")

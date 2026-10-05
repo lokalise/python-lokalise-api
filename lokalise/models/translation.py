@@ -12,7 +12,7 @@ class TranslationModel(BaseModel):
 
     DATA_KEY = "translation"
 
-    ATTRS = [
+    ATTRS = (
         "translation_id",
         "key_id",
         "language_iso",
@@ -29,4 +29,4 @@ class TranslationModel(BaseModel):
         "custom_translation_statuses",
         "task_id",
         "segment_number",
-    ]
+    )

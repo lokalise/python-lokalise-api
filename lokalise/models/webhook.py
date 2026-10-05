@@ -12,4 +12,4 @@ class WebhookModel(BaseModel):
 
     DATA_KEY = "webhook"
 
-    ATTRS = ["webhook_id", "url", "secret", "events", "event_lang_map"]
+    ATTRS = ("webhook_id", "url", "secret", "events", "event_lang_map")

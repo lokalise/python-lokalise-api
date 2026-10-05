@@ -2,7 +2,8 @@
 Tests for the Client class
 """
 
-from typing import Any, cast
+import importlib
+from types import ModuleType
 
 import lokalise
 import pytest
@@ -96,67 +97,63 @@ def test_token_setter_accepts_non_empty() -> None:
 # ---------- connect_timeout ----------
 
 
-@pytest.mark.parametrize("value", [-1, -0.1])
-def test_connect_timeout_rejects_negative(value: int | float) -> None:
+@pytest.mark.parametrize("value", [-1, -0.1, 0, 0.0])
+def test_connect_timeout_rejects_non_positive(value: int | float) -> None:
     client = make_client()
-    with pytest.raises(ValueError, match="connect_timeout must be non-negative or None"):
+
+    with pytest.raises(
+        ValueError,
+        match="connect_timeout must be positive or None",
+    ):
         client.connect_timeout = value
 
 
-@pytest.mark.parametrize("value", [None, 0, 0.0, 3, 2.5])
-def test_connect_timeout_allows_non_negative_or_none(value: int | float) -> None:
+@pytest.mark.parametrize("value", [None, 3, 2.5])
+def test_connect_timeout_allows_positive_or_none(
+    value: int | float | None,
+) -> None:
     client = make_client()
+
     client.connect_timeout = value
+
     assert client.connect_timeout == value
 
 
 # ---------- read_timeout ----------
 
 
-@pytest.mark.parametrize("value", [-1, -0.1])
-def test_read_timeout_rejects_negative(value: int | float) -> None:
+@pytest.mark.parametrize("value", [-1, -0.1, 0, 0.0])
+def test_read_timeout_rejects_non_positive(value: int | float) -> None:
     client = make_client()
-    with pytest.raises(ValueError, match="read_timeout must be non-negative or None"):
+
+    with pytest.raises(
+        ValueError,
+        match="read_timeout must be positive or None",
+    ):
         client.read_timeout = value
 
 
-@pytest.mark.parametrize("value", [None, 0, 0.0, 3, 2.5])
-def test_read_timeout_allows_non_negative_or_none(value: int | float | None) -> None:
+@pytest.mark.parametrize("value", [None, 3, 2.5])
+def test_read_timeout_allows_positive_or_none(
+    value: int | float | None,
+) -> None:
     client = make_client()
+
     client.read_timeout = value
+
     assert client.read_timeout == value
 
 
 # ---------- enable_compression ----------
 
 
-@pytest.mark.parametrize(
-    "inp, expected",
-    [
-        (None, False),
-        (False, False),
-        (True, True),
-    ],
-)
-def test_enable_compression_bool_inputs(inp: bool | None, expected: bool) -> None:
+@pytest.mark.parametrize("value", [False, True])
+def test_enable_compression(value: bool) -> None:
     client = make_client()
-    client.enable_compression = inp
-    assert client.enable_compression is expected
 
+    client.enable_compression = value
 
-@pytest.mark.parametrize(
-    "inp, expected",
-    [
-        (0, False),
-        (1, True),
-        ("yes", True),
-        ("", False),
-    ],
-)
-def test_enable_compression_coerces_truthy_falsy(inp: object, expected: bool) -> None:
-    client = make_client()
-    client.enable_compression = cast(Any, inp)
-    assert client.enable_compression is expected
+    assert client.enable_compression is value
 
 
 # ---------- api_host ----------
@@ -190,12 +187,6 @@ def test_reset_client_allows_reloading_endpoints(client: lokalise.Client) -> Non
     assert ep2 is not ep1
 
 
-def test_get_endpoint_populates_when_attr_is_none(client: lokalise.Client) -> None:
-    client._projects_endpoint = None  # type: ignore[attr-defined]
-    ep = client.get_endpoint("projects")
-    assert ep is not None
-
-
 def test_reset_client_requires_new_token() -> None:
     """After reset, the token is empty and API calls should fail until re-set."""
     client = make_client()
@@ -214,12 +205,91 @@ def test_reset_client_requires_new_token() -> None:
     assert ep is not None
 
 
+def test_get_endpoint_populates_when_attr_is_none(client: lokalise.Client) -> None:
+    client._projects_endpoint = None  # type: ignore[attr-defined]
+    ep = client.get_endpoint("projects")
+    assert ep is not None
+
+
+def test_get_endpoint_returns_cached_endpoint(
+    client: lokalise.Client,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    first = client.get_endpoint("projects")
+
+    def fail_import(*args: object, **kwargs: object) -> None:
+        del args, kwargs
+        pytest.fail("import_module should not be called for cached endpoint")
+
+    monkeypatch.setattr(importlib, "import_module", fail_import)
+
+    second = client.get_endpoint("projects")
+
+    assert second is first
+
+
 def test_get_endpoint_raises_for_unknown_endpoint():
     """Checks that unknown endpoint name raises ValueError"""
     client = lokalise.Client("123abc")
 
     with pytest.raises(ValueError, match=r"Unknown endpoint: unknown_endpoint"):
         client.get_endpoint("unknown_endpoint")
+
+
+def test_get_endpoint_reraises_internal_module_not_found(
+    client: lokalise.Client,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    client._projects_endpoint = None  # type: ignore[attr-defined]
+
+    error = ModuleNotFoundError(
+        "No module named 'missing_dependency'",
+        name="missing_dependency",
+    )
+
+    def mock_import_module(
+        name: str,
+        package: str | None = None,
+    ) -> ModuleType:
+        del name, package
+        raise error
+
+    monkeypatch.setattr(
+        importlib,
+        "import_module",
+        mock_import_module,
+    )
+
+    with pytest.raises(ModuleNotFoundError) as exc_info:
+        client.get_endpoint("projects")
+
+    assert exc_info.value is error
+
+
+def test_get_endpoint_raises_when_endpoint_class_is_missing(
+    client: lokalise.Client,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Checks that a missing endpoint class raises ValueError."""
+    client._projects_endpoint = None  # type: ignore[attr-defined]
+
+    module = ModuleType("lokalise.endpoints.projects_endpoint")
+
+    def mock_import_module(
+        name: str,
+        package: str | None = None,
+    ) -> ModuleType:
+        del name, package
+        return module
+
+    monkeypatch.setattr(
+        importlib,
+        "import_module",
+        mock_import_module,
+    )
+
+    with pytest.raises(ValueError, match=r"Unknown endpoint: projects"):
+        client.get_endpoint("projects")
 
 
 def test_path_with_params_missing_required_param():

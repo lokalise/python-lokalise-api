@@ -1,6 +1,6 @@
 """
 lokalise.endpoints.screenshots_endpoint
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Module containing screenshots endpoint.
 """
 

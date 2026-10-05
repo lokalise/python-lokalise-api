@@ -5,7 +5,6 @@ This module contains the base Lokalise API client definition.
 """
 
 import importlib
-from collections.abc import Callable
 from typing import TypeVar, cast
 
 from lokalise.utils import snake_to_camel
@@ -20,6 +19,8 @@ T = TypeVar("T", bound=BaseEndpoint)
 
 class BaseClient(FullClientProto):
     """Base client used to configure and send Lokalise API requests."""
+
+    TOKEN_HEADER = "X-Api-Token"
 
     def __init__(
         self,
@@ -40,15 +41,18 @@ class BaseClient(FullClientProto):
             enable_compression: Whether to enable gzip compression (default: False).
             api_host: Optional custom API host. Defaults to the official Lokalise API.
         """
-        if not token:
-            raise ValueError("token must be a non-empty string")
+        self._token: str | None = None
+        self._connect_timeout: Number | None = None
+        self._read_timeout: Number | None = None
+        self._enable_compression = False
+        self._api_host: str | None = None
+        self._token_header = self.TOKEN_HEADER
 
-        self._token: str | None = token
-        self._connect_timeout: Number | None = connect_timeout
-        self._read_timeout: Number | None = read_timeout
-        self._enable_compression: bool = bool(enable_compression)
-        self._api_host: str | None = api_host.strip() if api_host and api_host.strip() else None
-        self._token_header: str = "X-Api-Token"
+        self.token = token
+        self.connect_timeout = connect_timeout
+        self.read_timeout = read_timeout
+        self.enable_compression = enable_compression
+        self.api_host = api_host
 
     # ---------------------------------------------------------------------
     # Properties
@@ -63,7 +67,8 @@ class BaseClient(FullClientProto):
     def token(self, value: str | None) -> None:
         if not value:
             raise ValueError("token must be a non-empty string")
-        self._token = value
+
+        self._token = self._prepare_token(value)
 
     @property
     def connect_timeout(self) -> Number | None:
@@ -72,8 +77,8 @@ class BaseClient(FullClientProto):
 
     @connect_timeout.setter
     def connect_timeout(self, value: Number | None) -> None:
-        if value is not None and value < 0:
-            raise ValueError("connect_timeout must be non-negative or None")
+        if value is not None and value <= 0:
+            raise ValueError("connect_timeout must be positive or None")
         self._connect_timeout = value
 
     @property
@@ -83,8 +88,8 @@ class BaseClient(FullClientProto):
 
     @read_timeout.setter
     def read_timeout(self, value: Number | None) -> None:
-        if value is not None and value < 0:
-            raise ValueError("read_timeout must be non-negative or None")
+        if value is not None and value <= 0:
+            raise ValueError("read_timeout must be positive or None")
         self._read_timeout = value
 
     @property
@@ -93,8 +98,8 @@ class BaseClient(FullClientProto):
         return self._enable_compression
 
     @enable_compression.setter
-    def enable_compression(self, value: bool | None) -> None:
-        self._enable_compression = bool(value)
+    def enable_compression(self, value: bool) -> None:
+        self._enable_compression = value
 
     @property
     def api_host(self) -> str | None:
@@ -118,7 +123,11 @@ class BaseClient(FullClientProto):
         self._connect_timeout = None
         self._read_timeout = None
         self._enable_compression = False
+        self._api_host = None
         self._clear_endpoint_attrs()
+
+    def _prepare_token(self, token: str) -> str:
+        return token
 
     # === Endpoint helpers
     def get_endpoint(
@@ -133,43 +142,59 @@ class BaseClient(FullClientProto):
             namespace: Optional nested endpoint package, such as ``v1``.
         """
         endpoint_name = f"{name}_endpoint"
+        attr_name = f"_{namespace}_{endpoint_name}" if namespace else f"_{endpoint_name}"
+
+        cached = getattr(self, attr_name, None)
+        if cached is not None:
+            return cast(BaseEndpoint, cached)
+
+        endpoint_class = self._load_endpoint_class(
+            name,
+            endpoint_name,
+            namespace,
+        )
+
+        endpoint = endpoint_class(self)
+        setattr(self, attr_name, endpoint)
+
+        return endpoint
+
+    def _load_endpoint_class(
+        self,
+        name: str,
+        endpoint_name: str,
+        namespace: str | None,
+    ) -> type[BaseEndpoint]:
         class_name = snake_to_camel(endpoint_name)
 
         module_parts = [".endpoints"]
-
         if namespace:
             module_parts.append(namespace)
-
         module_parts.append(endpoint_name)
-        module_path = ".".join(module_parts)
 
-        attr_name = f"_{namespace}_{endpoint_name}" if namespace else f"_{endpoint_name}"
+        module_path = ".".join(module_parts)
+        qualified_name = f"{namespace}.{name}" if namespace else name
 
         try:
-            module = importlib.import_module(module_path, package="lokalise")
-            endpoint_class = cast(
+            module = importlib.import_module(
+                module_path,
+                package="lokalise",
+            )
+        except ModuleNotFoundError as exc:
+            expected_module = f"lokalise{module_path}"
+
+            if exc.name != expected_module:
+                raise
+
+            raise ValueError(f"Unknown endpoint: {qualified_name}") from exc
+
+        try:
+            return cast(
                 type[BaseEndpoint],
                 getattr(module, class_name),
             )
-        except (ModuleNotFoundError, AttributeError) as exc:
-            qualified_name = f"{namespace}.{name}" if namespace else name
+        except AttributeError as exc:
             raise ValueError(f"Unknown endpoint: {qualified_name}") from exc
-
-        return self._fetch_attr(
-            attr_name,
-            lambda: endpoint_class(self),
-        )
-
-    def _fetch_attr(self, attr_name: str, populator: Callable[[], T]) -> T:
-        """Searches for the given attribute.
-        Uses populator to set the attribute if it cannot be found.
-        Used to lazy-load endpoints.
-        """
-        val = getattr(self, attr_name, None)
-        if val is None:
-            val = populator()
-            setattr(self, attr_name, val)
-        return cast(T, val)
 
     def _clear_endpoint_attrs(self) -> None:
         """Clears all lazily-loaded endpoint attributes"""

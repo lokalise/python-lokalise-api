@@ -12,7 +12,7 @@ class TeamUsersBillingDetailsModel(BaseModel):
 
     DATA_KEY = ""
 
-    ATTRS = [
+    ATTRS = (
         "billing_email",
         "country_code",
         "zip",
@@ -23,4 +23,4 @@ class TeamUsersBillingDetailsModel(BaseModel):
         "phone",
         "company",
         "vatnumber",
-    ]
+    )

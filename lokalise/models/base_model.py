@@ -4,7 +4,7 @@ lokalise.models.base_model
 Model parent class inherited by specific models.
 """
 
-from typing import Any, ClassVar
+from typing import Any, ClassVar, cast
 
 
 class BaseModel:
@@ -21,9 +21,21 @@ class BaseModel:
     In this case, the DATA_KEY would be "contributor"
     """
 
-    ATTRS: ClassVar[list[str]] = []
-    COMMON_ATTRS: list[str] = ["project_id", "user_id", "branch", "team_id"]
-    DATA_KEY: str = ""
+    ATTRS: ClassVar[tuple[str, ...]] = ()
+    COMMON_ATTRS: ClassVar[tuple[str, ...]] = (
+        "project_id",
+        "user_id",
+        "branch",
+        "team_id",
+    )
+    DATA_KEY: ClassVar[str] = ""
+
+    raw_data: dict[str, Any]
+
+    project_id: str | None = None
+    user_id: int | None = None
+    branch: str | None = None
+    team_id: int | None = None
 
     def __init__(self, raw_data: dict[str, Any]) -> None:
         """Creates a new model.
@@ -48,13 +60,15 @@ class BaseModel:
         #     "comment": "This is a test."}
         # This is an edge case happening only twice, so to overcome it
         # just check the value type under the given key.
-        if self.DATA_KEY in raw_data and (isinstance(raw_data[self.DATA_KEY], dict)):
-            data = raw_data[self.DATA_KEY]
+        nested_data = raw_data.get(self.DATA_KEY)
+
+        if isinstance(nested_data, dict):
+            data = cast(dict[str, Any], nested_data)
         else:
             data = raw_data
 
         for attr in self.ATTRS:
-            setattr(self, attr, data.get(attr, None))
+            setattr(self, attr, data.get(attr))
 
     def __str__(self) -> str:
         """Converts a model to string"""

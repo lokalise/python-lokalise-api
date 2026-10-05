@@ -10,7 +10,7 @@ from .base_model import BaseModel
 class PermissionTemplateModel(BaseModel):
     """Describes permission template."""
 
-    ATTRS = [
+    ATTRS = (
         "id",
         "role",
         "permissions",
@@ -19,4 +19,4 @@ class PermissionTemplateModel(BaseModel):
         "tagColor",
         "tagInfo",
         "doesEnableAllReadOnlyLanguages",
-    ]
+    )

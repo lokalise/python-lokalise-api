@@ -12,7 +12,7 @@ class GlossaryTermModel(BaseModel):
 
     DATA_KEY = "data"
 
-    ATTRS = [
+    ATTRS = (
         "id",
         "projectId",
         "term",
@@ -24,4 +24,4 @@ class GlossaryTermModel(BaseModel):
         "tags",
         "createdAt",
         "updatedAt",
-    ]
+    )

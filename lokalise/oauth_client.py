@@ -17,32 +17,7 @@ class OAuthClient(Client):
         client.projects()
     """
 
-    def __init__(
-        self,
-        token: str,
-        connect_timeout: int | float | None = None,
-        read_timeout: int | float | None = None,
-        enable_compression: bool = False,
-        api_host: str | None = None,
-    ) -> None:
-        """Instantiate a new Lokalise API client with OAuth 2 token.
+    TOKEN_HEADER = "Authorization"
 
-        :param str token: Your Lokalise API token obtained via OAuth 2 flow.
-        :param connect_timeout: (optional) Server connection timeout
-        (the value is in seconds). By default, the client will wait indefinitely.
-        :type connect_timeout: int or float
-        :param read_timeout: (optional) Server read timeout
-        (the value is in seconds). By default, the client will wait indefinitely.
-        :type read_timeout: int or float
-        :param enable_compression: (optional) Whether to enable gzip compression.
-        :param api_host: (optional) Custom API host to send requests to.
-        By default it's off.
-        :type enable_compression: bool
-        """
-        if not token:
-            raise ValueError("token must be a non-empty string")
-        super().__init__(token, connect_timeout, read_timeout, enable_compression, api_host)
-
-        # Override token representation for OAuth
-        self._token = f"Bearer {token}"
-        self._token_header = "Authorization"
+    def _prepare_token(self, token: str) -> str:
+        return f"Bearer {token}"

@@ -12,7 +12,7 @@ class TeamModel(BaseModel):
 
     DATA_KEY = "team"
 
-    ATTRS = [
+    ATTRS = (
         "team_id",
         "name",
         "created_at",
@@ -20,4 +20,4 @@ class TeamModel(BaseModel):
         "plan",
         "quota_usage",
         "quota_allowed",
-    ]
+    )

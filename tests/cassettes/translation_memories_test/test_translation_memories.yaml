@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-lokalise-api plugin/4.3.0
+      x-api-token:
+      - FILTERED
+    method: GET
+    uri: https://api.lokalise.com/api2/projects/7565202469c53c30428ce0.33693563/translation-memories
+  response:
+    body:
+      string: '{"project_id":"7565202469c53c30428ce0.33693563","project_uuid":"019d2a73-1c90-7490-abba-277f2756a8a9","translation_memories":[{"id":0,"name":"Lokalise
+        Translation Memory"},{"id":2592,"name":"My Very Own TM"},{"id":2593,"name":"General
+        TM"}]}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      cache-control:
+      - max-age=0, must-revalidate, private
+      content-encoding:
+      - zstd
+      referrer-policy:
+      - origin
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000
+      vary:
+      - Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - deny
+      x-ratelimit-limit:
+      - 10, 10;w=1, 10;w=1, 10;w=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

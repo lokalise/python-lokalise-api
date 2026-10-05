@@ -10,7 +10,7 @@ from .base_model import BaseModel
 class ProjectModel(BaseModel):
     """Describes project model."""
 
-    ATTRS = [
+    ATTRS = (
         "project_id",
         "project_type",
         "name",
@@ -26,4 +26,4 @@ class ProjectModel(BaseModel):
         "statistics",
         "uuid",
         "team_uuid",
-    ]
+    )

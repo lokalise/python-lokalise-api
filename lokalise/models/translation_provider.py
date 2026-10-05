@@ -10,7 +10,7 @@ from .base_model import BaseModel
 class TranslationProviderModel(BaseModel):
     """Describes translation provider model."""
 
-    ATTRS = [
+    ATTRS = (
         "provider_id",
         "name",
         "slug",
@@ -19,4 +19,4 @@ class TranslationProviderModel(BaseModel):
         "description",
         "tiers",
         "pairs",
-    ]
+    )

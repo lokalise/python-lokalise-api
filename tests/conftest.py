@@ -3,6 +3,7 @@ Contains fixture functions for the tests.
 """
 
 import os
+from pathlib import Path
 from types import ModuleType
 from typing import Any, Protocol, cast
 
@@ -55,6 +56,7 @@ def vcr_config() -> dict[str, Any]:
             "client_secret",
             "client_id",
             "refresh_token",
+            "code",
         ],
         "before_record_response": scrub_response_headers,
         "decode_compressed_response": True,
@@ -72,41 +74,40 @@ def vcr_cassette_dir(request: _ReqWithModule) -> str:
 
 @pytest.fixture(scope="module")
 def screenshot_data() -> str:
-    """Loads base64-encoded screenshot data."""
+    path = Path("tests/fixtures/screenshot_base64.txt")
+
     try:
-        path = "tests/fixtures/screenshot_base64.txt"
-        with open(os.path.join(path), encoding="utf-8") as file:
-            data = file.read()
+        return path.read_text(encoding="utf-8")
     except FileNotFoundError:
         return ""
-    file.close()
-    return data
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture
 def client() -> lokalise.Client:
-    """Creates a sample client object using the token from the ENV."""
     token = os.getenv("LOKALISE_API_TOKEN") or "DUMMY_API_TOKEN"
     return lokalise.Client(token)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture
 def clientv1() -> lokalise.ClientV1:
-    """Creates a sample client v1 object using the token from the ENV."""
     token = os.getenv("LOKALISE_API_TOKEN") or "DUMMY_API_TOKEN"
     return lokalise.ClientV1(token)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture
 def oauth_client() -> lokalise.OAuthClient:
-    """Creates a sample client object using the OAuth token from the ENV."""
     token = os.getenv("OAUTH2_TOKEN") or "DUMMY_OAUTH2_TOKEN"
-    return lokalise.OAuthClient(token, connect_timeout=4, read_timeout=2, enable_compression=True)
+    return lokalise.OAuthClient(
+        token,
+        connect_timeout=4,
+        read_timeout=2,
+        enable_compression=True,
+    )
 
 
-@pytest.fixture(scope="module")
-def auth_client():
-    """Create a sample client object to manage OAuth 2 tokens."""
+@pytest.fixture
+def auth_client() -> lokalise.Auth:
     client_id = os.getenv("OAUTH2_CLIENT_ID") or "DUMMY_OAUTH2_CLIENT_ID"
     client_secret = os.getenv("OAUTH2_CLIENT_SECRET") or "DUMMY_OAUTH2_CLIENT_SECRET"
+
     return lokalise.Auth(client_id, client_secret)

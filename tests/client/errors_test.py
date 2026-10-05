@@ -147,6 +147,39 @@ def test_parse_api_error_top_level_format():
     }
 
 
+def test_parse_api_error_oauth_format():
+    """Checks OAuth API error format."""
+    err = parse_api_error(
+        '{"error":"invalid_grant","error_description":"Authorization code has expired"}',
+        400,
+    )
+
+    assert err.status == 400
+    assert err.message == "Authorization code has expired"
+    assert err.reason == "invalid_grant"
+    assert err.code is None
+    assert err.details == {
+        "error": "invalid_grant",
+        "error_description": "Authorization code has expired",
+    }
+
+
+def test_parse_api_error_oauth_format_requires_description():
+    """Checks that incomplete OAuth errors fall back to generic parsing."""
+    err = parse_api_error(
+        '{"error":"invalid_grant"}',
+        400,
+    )
+
+    assert err.status == 400
+    assert err.message == "Bad Request"
+    assert err.reason == "invalid_grant"
+    assert err.code is None
+    assert err.details == {
+        "error": "invalid_grant",
+    }
+
+
 def test_parse_api_error_nested_error_without_numeric_code():
     """Checks nested error format with fallback code and wrapped details"""
     err = parse_api_error(
@@ -234,6 +267,41 @@ def test_client_http_error_str_includes_reason_and_code():
     assert str(exc) == "400 Nope | reason=validation failed | code='E123'"
 
 
+def test_parse_api_error_falls_back_when_top_level_has_no_code() -> None:
+    """Checks fallback when a top-level error has no recognized code."""
+    err = parse_api_error(
+        '{"message":"Something went wrong"}',
+        400,
+    )
+
+    assert err.status == 400
+    assert err.message == "Something went wrong"
+    assert err.reason == "unhandled error format"
+    assert err.code is None
+    assert err.details == {
+        "message": "Something went wrong",
+    }
+
+
+@pytest.mark.parametrize(
+    "body",
+    [
+        b'{"message":"Nope","statusCode":401,"error":"Unauthorized"}',
+        bytearray(b'{"message":"Nope","statusCode":401,"error":"Unauthorized"}'),
+    ],
+)
+def test_parse_api_error_accepts_binary_body(
+    body: bytes | bytearray,
+) -> None:
+    """Checks parsing error bodies provided as bytes or bytearray."""
+    err = parse_api_error(body, 401)
+
+    assert err.status == 401
+    assert err.message == "Nope"
+    assert err.reason == "Unauthorized"
+    assert err.code == 401
+
+
 def test_coalesce_returns_empty_string_when_all_values_are_empty():
     """Checks that _coalesce returns empty string when no truthy values are provided"""
     assert _coalesce(None, "", None) == ""
@@ -244,9 +312,14 @@ def test_as_int_maybe_returns_false_for_bool():
     assert _as_int_maybe(True) == (0, False)
 
 
-def test_as_int_maybe_converts_float_to_int():
-    """Checks that float is converted to int"""
-    assert _as_int_maybe(12.8) == (12, True)
+def test_as_int_maybe_converts_integral_float_to_int():
+    """Checks that an integral float is converted to int."""
+    assert _as_int_maybe(12.0) == (12, True)
+
+
+def test_as_int_maybe_rejects_non_integral_float():
+    """Checks that a non-integral float is rejected."""
+    assert _as_int_maybe(12.8) == (0, False)
 
 
 def test_as_int_maybe_returns_false_when_int_conversion_fails():

@@ -4,7 +4,7 @@ lokalise.collections.base_collection
 Collection parent class inherited by specific collections.
 """
 
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
 from typing import Any, ClassVar, Generic, TypeVar, cast, overload
 
 from ..models.base_model import BaseModel
@@ -26,9 +26,15 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
     :attribute COMMON_ATTRS: list of common attributes that the collections may have.
     """
 
-    DATA_KEY: str = ""
+    DATA_KEY: ClassVar[str] = ""
     MODEL_KLASS: ClassVar[type[BaseModel]] = BaseModel
-    COMMON_ATTRS: ClassVar[list[str]] = ["project_id", "user_id", "branch", "errors", "team_id"]
+    COMMON_ATTRS: ClassVar[tuple[str, ...]] = (
+        "project_id",
+        "user_id",
+        "branch",
+        "errors",
+        "team_id",
+    )
 
     items: list[TModel]
     total_count: int
@@ -40,7 +46,7 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
     project_id: str | None = None
     user_id: int | None = None
     branch: str | None = None
-    errors: Any | None = None
+    errors: Any = None
     team_id: int | None = None
 
     def __init__(self, raw_data: dict[str, Any]) -> None:
@@ -56,33 +62,10 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
         :param raw_data: Data returned by the API
         """
         self.__extract_common_attrs(raw_data)
+        self.items = self.__build_items(raw_data)
+        self.__extract_pagination(raw_data)
 
-        raw_items_any = raw_data.get(self.DATA_KEY, [])
-        if not isinstance(raw_items_any, list):
-            raw_items_any = []  # pragma: no cover
-        raw_items = cast(list[dict[str, Any]], raw_items_any)
-
-        model_klass = cast(type[TModel], self.MODEL_KLASS)
-
-        self.items = []
-        for item in raw_items:
-            self.items.append(model_klass(item))
-
-        pagination = cast(dict[str, Any], raw_data.get("_pagination", {}))
-        if pagination:
-            self.total_count = int(pagination.get("x-pagination-total-count", 0) or 0)
-            self.page_count = int(pagination.get("x-pagination-page-count", 0) or 0)
-            self.limit = int(pagination.get("x-pagination-limit", 0) or 0)
-            self.current_page = int(pagination.get("x-pagination-page", 0) or 0)
-            self.next_cursor = cast(str | None, pagination.get("x-pagination-next-cursor", None))
-        else:
-            self.total_count = 0
-            self.page_count = 0
-            self.limit = 0
-            self.current_page = 0
-            self.next_cursor = None
-
-    def __iter__(self):
+    def __iter__(self) -> Iterator[TModel]:
         return iter(self.items)
 
     def __len__(self) -> int:
@@ -138,3 +121,38 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
         for attr in self.COMMON_ATTRS:
             if attr in raw_data:
                 setattr(self, attr, raw_data[attr])
+
+    def __build_items(self, raw_data: dict[str, Any]) -> list[TModel]:
+        raw_items_any = raw_data.get(self.DATA_KEY, [])
+
+        if not isinstance(raw_items_any, list):
+            raise TypeError(
+                f"Expected '{self.DATA_KEY}' to be a list, " f"got {type(raw_items_any).__name__}"
+            )
+
+        raw_items_objects = cast(list[object], raw_items_any)
+
+        if not all(isinstance(item, dict) for item in raw_items_objects):
+            raise TypeError(f"Expected '{self.DATA_KEY}' items to be dictionaries")
+
+        raw_items = cast(list[dict[str, Any]], raw_items_objects)
+        model_klass = cast(type[TModel], self.MODEL_KLASS)
+
+        return [model_klass(item) for item in raw_items]
+
+    def __extract_pagination(self, raw_data: dict[str, Any]) -> None:
+        pagination_data = raw_data.get("_pagination", {})
+
+        if not isinstance(pagination_data, dict):
+            raise TypeError("Expected '_pagination' to be a dictionary")
+
+        pagination = cast(dict[str, Any], pagination_data)
+
+        self.total_count = int(pagination.get("x-pagination-total-count", 0) or 0)
+        self.page_count = int(pagination.get("x-pagination-page-count", 0) or 0)
+        self.limit = int(pagination.get("x-pagination-limit", 0) or 0)
+        self.current_page = int(pagination.get("x-pagination-page", 0) or 0)
+        self.next_cursor = cast(
+            str | None,
+            pagination.get("x-pagination-next-cursor"),
+        )

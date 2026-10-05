@@ -79,7 +79,7 @@ class BaseEndpoint:
         :param ids: Identifiers for path generation
         :rtype dict:
         """
-        if wrapper_attr and params:
+        if wrapper_attr and params is not None:
             params = {wrapper_attr: to_list(params)}
 
         path = self.path_with_params(**ids)
@@ -122,12 +122,15 @@ class BaseEndpoint:
         return request.delete(self.client, path, params)
 
     def path_with_params(self, **ids: str | int | None) -> str:
-        """Generates relative path to the endpoint using the template stored
-        in PATH and the provided ids. Some or all ids may be omitted depending
-        on the actual endpoint.
-        """
-        defaults = {"parent_id": "", "resource_id": "", "subresource_id": ""}
+        """Generate a relative endpoint path using PATH and the provided IDs."""
+        values: dict[str, str | int] = {
+            "parent_id": "",
+            "resource_id": "",
+            "subresource_id": "",
+        }
+        values.update({key: value for key, value in ids.items() if value is not None})
+
         try:
-            return Template(self.PATH).substitute(defaults, **ids)
-        except KeyError as e:
-            raise ValueError(f"Missing required path parameter: {e}") from None
+            return Template(self.PATH).substitute(values)
+        except KeyError as exc:
+            raise ValueError(f"Missing required path parameter: {exc}") from None

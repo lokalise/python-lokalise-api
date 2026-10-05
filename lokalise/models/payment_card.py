@@ -12,4 +12,4 @@ class PaymentCardModel(BaseModel):
 
     DATA_KEY = "payment_card"
 
-    ATTRS = ["card_id", "last4", "brand", "created_at", "created_at_timestamp"]
+    ATTRS = ("card_id", "last4", "brand", "created_at", "created_at_timestamp")

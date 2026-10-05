@@ -10,7 +10,7 @@ from .base_model import BaseModel
 class OrderModel(BaseModel):
     """Describes order."""
 
-    ATTRS = [
+    ATTRS = (
         "order_id",
         "project_id",
         "branch",
@@ -33,4 +33,4 @@ class OrderModel(BaseModel):
         "dry_run",
         "payment_method",
         "is_saved_to_translation_memory",
-    ]
+    )
