@@ -1,12 +1,12 @@
 [project]
 name = "python-lokalise-api"
-version = "4.3.0"
+version = "5.0.0"
 description = "Official Python interface for the Lokalise API v2"
 authors = [
     {name = "Ilya Krukowski", email = "elskruk@proton.me"}
 ]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 keywords = ["lokalise", "api", "client"]
 classifiers=[
     'Development Status :: 5 - Production/Stable',
@@ -15,7 +15,6 @@ classifiers=[
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -24,7 +23,6 @@ classifiers=[
 license = "BSD-3-Clause"
 license-files = ["LICENSE"]
 dependencies = [
-    "exceptiongroup>=1.0,<2.0 ; python_version < '3.11'",
     "requests>=2.32.5,<3",
 ]
 
@@ -61,10 +59,10 @@ addopts = "-s --cov=lokalise --cov-report=term --cov-report=html"
 
 [tool.black]
 line-length = 100
-target-version = ["py310"]
+target-version = ["py311"]
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py311"
 line-length = 100
 src = ["lokalise", "tests"]
 
@@ -87,4 +85,4 @@ exclude = [
 ]
 stubPath = "typings"
 typeCheckingMode = "strict"
-pythonVersion = "3.10"
+pythonVersion = "3.11"

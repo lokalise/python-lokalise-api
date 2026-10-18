@@ -5,7 +5,7 @@ interactions:
       Accept:
       - application/json
       Accept-Encoding:
-      - gzip,deflate,br
+      - gzip,deflate
       Authorization:
       - FILTERED
       Connection:

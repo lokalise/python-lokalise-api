@@ -3,6 +3,12 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+* Require Python 3.11+
+* Remove `br` from requested encodings (Lokalise never sends it)
+
 4.3.0 (05-Oct-2026)
 -------------------
 

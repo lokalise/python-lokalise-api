@@ -185,7 +185,7 @@ def options(
     headers[client.token_header] = client.token
 
     if client.enable_compression:
-        headers["Accept-Encoding"] = "gzip,deflate,br"
+        headers["Accept-Encoding"] = "gzip,deflate"
 
     if method != "GET" and has_body:
         headers["Content-Type"] = "application/json"

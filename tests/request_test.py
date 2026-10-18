@@ -18,7 +18,7 @@ def test_options_with_api_client():
 
     assert opts["headers"]["X-Api-Token"] == "123abc"
     assert "Authorization" not in opts["headers"]
-    assert opts["headers"]["Accept-Encoding"] == "gzip,deflate,br"
+    assert opts["headers"]["Accept-Encoding"] == "gzip,deflate"
     assert opts["timeout"] == (5, 3)
 
 
@@ -78,7 +78,7 @@ def test_options_with_oauth_api_client():
 
     assert opts["headers"]["Authorization"] == "Bearer 345xyz"
     assert "X-Api-Token" not in opts["headers"]
-    assert opts["headers"]["Accept-Encoding"] == "gzip,deflate,br"
+    assert opts["headers"]["Accept-Encoding"] == "gzip,deflate"
     assert opts["timeout"] == (5, 3)
 
 
