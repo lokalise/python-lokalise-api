@@ -38,11 +38,12 @@ jobs:
           uv run python --version
       - name: Test
         run: uv run --group dev pytest --cov=lokalise --cov-report=lcov:coverage.lcov
-      - name: Coveralls
+      - name: Upload coverage to Qlty
         if: matrix.python-version == '3.15'
-        uses: coverallsapp/github-action@8d6379e14d29928660c4ba802d8e85393440b329
+        uses: qltysh/qlty-action/coverage@c9b09987143d1e4ac955f4803c7bea742102feb5
         with:
-          path-to-lcov: ./coverage.lcov
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage.lcov
 
   quality:
     runs-on: ubuntu-latest
