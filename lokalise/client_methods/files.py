@@ -8,6 +8,7 @@ from typing import Any
 
 from lokalise.collections.files import FilesCollection
 from lokalise.models.queued_process import QueuedProcessModel
+from lokalise.response import ApiResponse
 
 from .endpoint_provider import EndpointProviderMixin
 
@@ -35,15 +36,14 @@ class FileMethods(EndpointProviderMixin):
         raw_process = self.get_endpoint("files").upload(params=params, parent_id=project_id)
         return QueuedProcessModel(raw_process)
 
-    def download_files(self, project_id: str, params: dict[str, Any]) -> dict[str, str]:
+    def download_files(self, project_id: str, params: dict[str, Any]) -> ApiResponse:
         """Downloads files from the given project.
 
         :param str project_id: ID of the project to download from
         :param dict params: Download params
         :return: Dictionary with project ID and a bundle URL
         """
-        response = self.get_endpoint("files").download(params=params, parent_id=project_id)
-        return response
+        return self.get_endpoint("files").download(params=params, parent_id=project_id)
 
     def download_files_async(self, project_id: str, params: dict[str, Any]) -> QueuedProcessModel:
         """Downloads files from the given project asynchronously.
@@ -55,7 +55,7 @@ class FileMethods(EndpointProviderMixin):
         raw_process = self.get_endpoint("files").download_async(params=params, parent_id=project_id)
         return QueuedProcessModel(raw_process)
 
-    def delete_file(self, project_id: str, file_id: str | int) -> dict[str, Any]:
+    def delete_file(self, project_id: str, file_id: str | int) -> ApiResponse:
         """Deletes a file and it's associated keys from the project.
         File __unassigned__ cannot be deleted.
         This endpoint does not support "software localization" projects.
@@ -65,5 +65,4 @@ class FileMethods(EndpointProviderMixin):
         :return: Dictionary with project ID and "file_deleted" set to True
         :rtype dict:
         """
-        response = self.get_endpoint("files").delete(parent_id=project_id, resource_id=file_id)
-        return response
+        return self.get_endpoint("files").delete(parent_id=project_id, resource_id=file_id)

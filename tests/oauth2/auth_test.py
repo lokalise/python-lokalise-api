@@ -1,15 +1,32 @@
+
+"""
+Tests for OAuth 2.0 authorization and token operations.
+"""
+
 import os
-from typing import Any
-from unittest.mock import patch
+from typing import cast
 from urllib.parse import parse_qs, urlparse
+from unittest.mock import patch, Mock
 
 import pytest
 from lokalise import Auth
 from lokalise.errors import BadRequest
+from lokalise.response import ApiResponse
+from requests import Response
 
 
 def _query(url: str) -> dict[str, list[str]]:
     return parse_qs(urlparse(url).query, keep_blank_values=True)
+
+
+def _response(data: dict[str, object]) -> Response:
+    """Create a mocked successful HTTP response."""
+    response = Mock(spec=Response)
+    response.status_code = 200
+    response.headers = {}
+    response.json.return_value = data
+
+    return cast(Response, response)
 
 
 def test_auth_builds_url_with_sequence_scope(auth_client: Auth) -> None:
@@ -20,7 +37,7 @@ def test_auth_builds_url_with_sequence_scope(auth_client: Auth) -> None:
     )
 
     parsed = urlparse(url)
-    q = parse_qs(parsed.query, keep_blank_values=True)
+    q = _query(url)
 
     assert parsed.scheme == "https"
     assert parsed.netloc == "app.lokalise.com"
@@ -34,6 +51,7 @@ def test_auth_builds_url_with_sequence_scope(auth_client: Auth) -> None:
 def test_auth_builds_url_with_single_scope(auth_client: Auth) -> None:
     url = auth_client.auth("read_projects")
     q = _query(url)
+
     assert q["scope"] == ["read_projects"]
     assert "state" not in q
     assert "redirect_uri" not in q
@@ -42,7 +60,10 @@ def test_auth_builds_url_with_single_scope(auth_client: Auth) -> None:
 @pytest.mark.vcr
 def test_token(auth_client: Auth) -> None:
     code = os.getenv("OAUTH2_CODE") or "DUMMY_CODE"
-    token: dict[str, Any] = auth_client.token(code)
+    token = auth_client.token(code)
+
+    assert isinstance(token, ApiResponse)
+    assert token.status_code == 200
     assert token["access_token"] == "stubbed token"
     assert token["refresh_token"] == "stubbed refresh"
     assert token["expires_in"] == 3600
@@ -66,7 +87,10 @@ def test_token_error(auth_client: Auth) -> None:
 @pytest.mark.vcr
 def test_refresh(auth_client: Auth) -> None:
     refresh_token = os.getenv("OAUTH2_REFRESH_TOKEN") or "DUMMY_OAUTH2_REFRESH_TOKEN"
-    token: dict[str, Any] = auth_client.refresh(refresh_token)
+    token = auth_client.refresh(refresh_token)
+
+    assert isinstance(token, ApiResponse)
+    assert token.status_code == 200
     assert token["access_token"] == "refreshed token"
     assert token["scope"] == "write_team_groups read_projects"
     assert token["expires_in"] == 3600
@@ -113,10 +137,18 @@ def test_refresh_rejects_empty_token(auth_client: Auth) -> None:
         auth_client.refresh("")
 
 
+def test_token_rejects_empty_code(auth_client: Auth) -> None:
+    with pytest.raises(
+        ValueError,
+        match="code must be a non-empty string",
+    ):
+        auth_client.token("")
+
+
 def test_token_sends_authorization_code_params(
     auth_client: Auth,
 ) -> None:
-    response = {"access_token": "token"}
+    response = _response({"access_token": "token"})
 
     with patch(
         "lokalise.oauth2.auth.post",
@@ -124,7 +156,10 @@ def test_token_sends_authorization_code_params(
     ) as post_mock:
         result = auth_client.token("auth-code")
 
-    assert result == response
+    assert isinstance(result, ApiResponse)
+    assert result["access_token"] == "token"
+    assert result.status_code == 200
+
     post_mock.assert_called_once_with(
         "token",
         {
@@ -136,18 +171,10 @@ def test_token_sends_authorization_code_params(
     )
 
 
-def test_token_rejects_empty_code(auth_client: Auth) -> None:
-    with pytest.raises(
-        ValueError,
-        match="code must be a non-empty string",
-    ):
-        auth_client.token("")
-
-
 def test_refresh_sends_refresh_token_params(
     auth_client: Auth,
 ) -> None:
-    response = {"access_token": "token"}
+    response = _response({"access_token": "token"})
 
     with patch(
         "lokalise.oauth2.auth.post",
@@ -155,7 +182,10 @@ def test_refresh_sends_refresh_token_params(
     ) as post_mock:
         result = auth_client.refresh("refresh-token")
 
-    assert result == response
+    assert isinstance(result, ApiResponse)
+    assert result["access_token"] == "token"
+    assert result.status_code == 200
+
     post_mock.assert_called_once_with(
         "token",
         {

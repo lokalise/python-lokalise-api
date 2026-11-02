@@ -5,10 +5,10 @@ Module containing translation memories collection.
 """
 
 from ..models.translation_memory import TranslationMemoryModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class TranslationMemoriesCollection(BaseCollection[TranslationMemoryModel]):
+class TranslationMemoriesCollection(ExpertCollection[TranslationMemoryModel]):
     """Describes translation memories."""
 
     DATA_KEY = "translation_memories"

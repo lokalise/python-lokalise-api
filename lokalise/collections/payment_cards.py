@@ -5,10 +5,10 @@ Module containing payment cards collection.
 """
 
 from ..models.payment_card import PaymentCardModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class PaymentCardsCollection(BaseCollection[PaymentCardModel]):
+class PaymentCardsCollection(ExpertCollection[PaymentCardModel]):
     """Describes payment cards."""
 
     DATA_KEY = "payment_cards"

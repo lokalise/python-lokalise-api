@@ -4,7 +4,7 @@ lokalise.models.audit_log
 Module containing audit log.
 """
 
-from ..base_model import BaseModel
+from lokalise.models.base_model import BaseModel
 
 
 class AuditLogModel(BaseModel):

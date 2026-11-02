@@ -1,24 +1,13 @@
-from collections.abc import Iterator, Sequence
-from typing import Any, ClassVar, TypeVar, overload
+from typing import Any, ClassVar, TypeVar
 
+from lokalise.collections.base_collection import BaseCollection
+from lokalise.mixins.cursor_pagination import CursorPaginationMixin
 from lokalise.models.base_model import BaseModel
 
 TModel = TypeVar("TModel", bound=BaseModel)
 
-class BaseCollectionV1(Sequence[TModel]):
-    DATA_KEY: ClassVar[str]
-    MODEL_KLASS: ClassVar[type[BaseModel]]
 
-    items: list[TModel]
-    has_more: bool
-    next_cursor: str | None
+class BaseCollectionV1(CursorPaginationMixin, BaseCollection[TModel]):
+    DATA_KEY: ClassVar[str]
 
     def __init__(self, raw_data: dict[str, Any]) -> None: ...
-    def __iter__(self) -> Iterator[TModel]: ...
-    @overload
-    def __getitem__(self, index: int) -> TModel: ...
-    @overload
-    def __getitem__(self, index: slice) -> list[TModel]: ...
-    def __len__(self) -> int: ...
-    def has_next_cursor(self) -> bool: ...
-    def is_last_page(self) -> bool: ...

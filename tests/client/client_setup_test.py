@@ -54,30 +54,6 @@ def test_client_no_compression(client: lokalise.Client) -> None:
     assert keys.project_id == "803826145ba90b42d5d860.46800099"
 
 
-@pytest.mark.vcr
-def test_reset_client():
-    """Checks that the client can be reset"""
-    client = lokalise.Client("123abc", connect_timeout=5, read_timeout=3, enable_compression=True)
-    assert client.connect_timeout == 5
-    assert client.enable_compression
-
-    # Run an API request so that an endpoint is lazily-loaded
-    with pytest.raises(lokalise.errors.BadRequest):
-        client.projects()
-
-    client.reset_client()
-
-    assert client.token is None
-    assert client.connect_timeout is None
-    assert client.read_timeout is None
-    assert not client.enable_compression
-
-    # Now make sure that lazily-loaded endpoint was reset as well
-    endpoint_attrs = [a for a in vars(client) if a.endswith("_endpoint")]
-    for attr in endpoint_attrs:
-        assert getattr(client, attr) is None
-
-
 def make_client() -> lokalise.Client:
     return lokalise.Client("valid-token")
 
@@ -174,35 +150,6 @@ def test_api_host_assignment_rules(inp: str | None, expected: str | None) -> Non
     client = make_client()
     client.api_host = inp
     assert client.api_host == expected
-
-
-def test_reset_client_allows_reloading_endpoints(client: lokalise.Client) -> None:
-    ep1 = client.get_endpoint("projects")
-    assert ep1 is not None
-
-    client.reset_client()
-
-    ep2 = client.get_endpoint("projects")
-    assert ep2 is not None
-    assert ep2 is not ep1
-
-
-def test_reset_client_requires_new_token() -> None:
-    """After reset, the token is empty and API calls should fail until re-set."""
-    client = make_client()
-    assert client.token == "valid-token"
-
-    client.reset_client()
-    assert client.token is None
-
-    with pytest.raises(ValueError, match="token must be a non-empty string"):
-        client.token = ""
-
-    client.token = "new-token"
-    assert client.token == "new-token"
-
-    ep = client.get_endpoint("projects")
-    assert ep is not None
 
 
 def test_get_endpoint_populates_when_attr_is_none(client: lokalise.Client) -> None:

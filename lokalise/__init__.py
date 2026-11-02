@@ -11,5 +11,13 @@ from .client import Client
 from .client_v1 import ClientV1
 from .oauth2.auth import Auth
 from .oauth_client import OAuthClient
+from .client_vantage import ClientVantage
 
-__all__ = ["Auth", "Client", "ClientV1", "OAuthClient", "errors"]
+__all__ = [
+    "Auth",
+    "Client",
+    "ClientV1",
+    "ClientVantage",
+    "OAuthClient",
+    "errors",
+]

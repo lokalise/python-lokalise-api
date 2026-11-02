@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 
 import pytest
 from lokalise.client import Client
+from lokalise.response import ApiResponse
 
 PROJECT_ID = "454087345e09f3e7e7eae3.57891254"
 
@@ -59,28 +60,57 @@ def test_upload_file(client: Client) -> None:
 
 @pytest.mark.vcr
 def test_download_files(client: Client) -> None:
-    """Tests files downloading"""
+    """Test successful file downloading."""
     response = client.download_files(
-        PROJECT_ID, {"format": "json", "original_filenames": True, "replace_breaks": False}
+        PROJECT_ID,
+        {
+            "format": "json",
+            "original_filenames": True,
+            "replace_breaks": False,
+        },
     )
+
+    assert isinstance(response, ApiResponse)
     assert response["project_id"] == PROJECT_ID
-    hostname = urlparse(response["bundle_url"]).hostname
-    assert hostname == "amazonaws.com" or (hostname and hostname.endswith(".amazonaws.com"))
+
+    bundle_url: object = response["bundle_url"]
+    assert isinstance(bundle_url, str)
+
+    hostname = urlparse(bundle_url).hostname
+    assert hostname is not None
+    assert hostname == "amazonaws.com" or hostname.endswith(".amazonaws.com")
+
+    assert not response.response_too_big
     assert "_response_too_big" not in response
 
 
 @pytest.mark.vcr
 def test_download_files_too_big(client: Client) -> None:
-    """Tests files downloading with X-Response-Too-Big header"""
+    """Test file downloading with X-Response-Too-Big header."""
     with pytest.warns(UserWarning, match="Project is too big for sync export"):
         response = client.download_files(
-            PROJECT_ID, {"format": "json", "original_filenames": True, "replace_breaks": False}
+            PROJECT_ID,
+            {
+                "format": "json",
+                "original_filenames": True,
+                "replace_breaks": False,
+            },
         )
 
+    assert isinstance(response, ApiResponse)
     assert response["project_id"] == PROJECT_ID
-    hostname = urlparse(response["bundle_url"]).hostname
-    assert hostname == "amazonaws.com" or (hostname and hostname.endswith(".amazonaws.com"))
-    assert "_response_too_big" in response
+
+    bundle_url: object = response["bundle_url"]
+
+    assert isinstance(bundle_url, str)
+
+    hostname = urlparse(bundle_url).hostname
+
+    assert hostname is not None
+    assert hostname == "amazonaws.com" or hostname.endswith(".amazonaws.com")
+
+    assert response.response_too_big
+    assert "_response_too_big" not in response
 
 
 @pytest.mark.vcr

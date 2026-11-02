@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.permission_template import PermissionTemplateModel
 
-class PermissionTemplatesCollection(BaseCollection[PermissionTemplateModel]):
+class PermissionTemplatesCollection(ExpertCollection[PermissionTemplateModel]):
     items: list[PermissionTemplateModel]

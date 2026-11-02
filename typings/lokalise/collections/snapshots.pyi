@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.snapshot import SnapshotModel
 
-class SnapshotsCollection(BaseCollection[SnapshotModel]):
+class SnapshotsCollection(ExpertCollection[SnapshotModel]):
     items: list[SnapshotModel]

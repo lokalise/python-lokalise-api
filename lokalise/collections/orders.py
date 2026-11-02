@@ -5,10 +5,10 @@ Module containing orders collection.
 """
 
 from ..models.order import OrderModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class OrdersCollection(BaseCollection[OrderModel]):
+class OrdersCollection(ExpertCollection[OrderModel]):
     """Describes orders."""
 
     DATA_KEY = "orders"

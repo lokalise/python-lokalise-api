@@ -8,6 +8,7 @@ from typing import Any
 
 from .. import request
 from .base_endpoint import BaseEndpoint
+from ..response import ApiResponse
 
 
 class TranslationStatusesEndpoint(BaseEndpoint):
@@ -23,4 +24,6 @@ class TranslationStatusesEndpoint(BaseEndpoint):
         :rtype dict:
         """
         path = self.path_with_params(**ids).strip("/")
-        return request.get(self.client, path + "/colors")
+        return ApiResponse(
+            request.get(self.client, path + "/colors")
+        )

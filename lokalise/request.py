@@ -1,210 +1,158 @@
+
 """
 lokalise.request
 ~~~~~~~~~~~~~~~~
-This module sends HTTP requests, parses responses, and returns formatted data.
-
-Attributes:
-
-    :attribute str BASE_URL: path to the Lokalise APIv2.
-    :attribute list PAGINATION_HEADERS: list of response headers that contain pagination data.
+HTTP transport for Lokalise API requests.
 """
 
-from typing import Any
+from typing import Any, Literal, TypedDict
 
 import requests
 
 from ._version import __version__
-from .request_utils import format_params, path_to_endpoint, raise_on_error
+from .request_utils import format_params, path_to_endpoint
 from .types import FullClientProto
 
 Number = int | float
+HttpMethod = Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
+Timeout = tuple[Number | None, Number | None] | None
 
 BASE_URL = "https://api.lokalise.com/api2/"
-PAGINATION_HEADERS = {
-    "x-pagination-total-count",
-    "x-pagination-page-count",
-    "x-pagination-limit",
-    "x-pagination-page",
-    "x-pagination-next-cursor",
-}
 
 
-def get(client: FullClientProto, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-    """Performs GET requests
+class RequestOptions(TypedDict):
+    headers: dict[str, str]
+    timeout: Timeout
 
-    :param client: Lokalise API client
-    :type client: lokalise.Client
-    :param path: Relative path to the API endpoint
-    :param params: Other request params
-    :rtype dict:
-    """
-    return respond_with(
-        requests.get(path_to_endpoint(client, BASE_URL, path), params=params, **options(client))
-    )
+
+def send(
+    method: HttpMethod,
+    url: str,
+    *,
+    params: dict[str, Any] | None = None,
+    headers: dict[str, str],
+    timeout: Timeout = None,
+) -> requests.Response:
+    """Send an HTTP request and return the raw response."""
+    kwargs: dict[str, Any] = {
+        "headers": headers,
+        "timeout": timeout,
+    }
+
+    if method == "GET":
+        kwargs["params"] = params
+    else:
+        kwargs["data"] = format_params(params)
+
+    return requests.request(method, url, **kwargs)
+
+
+def get(
+    client: FullClientProto,
+    path: str,
+    params: dict[str, Any] | None = None,
+) -> requests.Response:
+    """Send a GET request."""
+    return _send_api_request("GET", client, path, params)
 
 
 def post(
-    client: FullClientProto, path: str, params: dict[str, Any] | None = None
-) -> dict[str, Any]:
-    """Performs POST requests
-
-    :param client: Lokalise API client
-    :type client: lokalise.Client
-    :param path: Relative path to the API endpoint
-    :param params: Other request params
-    :rtype dict:
-    """
-    return respond_with(
-        requests.post(
-            path_to_endpoint(client, BASE_URL, path),
-            data=format_params(params),
-            **options(client, method="POST", has_body=params is not None),
-        )
-    )
+    client: FullClientProto,
+    path: str,
+    params: dict[str, Any] | None = None,
+) -> requests.Response:
+    """Send a POST request."""
+    return _send_api_request("POST", client, path, params)
 
 
-def put(client: FullClientProto, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-    """Performs PUT requests
-
-    :param client: Lokalise API client
-    :type client: lokalise.Client
-    :param path: Relative path to the API endpoint
-    :param params: Other request params
-    :rtype dict:
-    """
-    return respond_with(
-        requests.put(
-            path_to_endpoint(client, BASE_URL, path),
-            data=format_params(params),
-            **options(client, method="PUT", has_body=params is not None),
-        )
-    )
+def put(
+    client: FullClientProto,
+    path: str,
+    params: dict[str, Any] | None = None,
+) -> requests.Response:
+    """Send a PUT request."""
+    return _send_api_request("PUT", client, path, params)
 
 
 def patch(
-    client: FullClientProto, path: str, params: dict[str, Any] | None = None
-) -> dict[str, Any]:
-    """Performs PATCH requests
-
-    :param client: Lokalise API client
-    :type client: lokalise.Client
-    :param path: Relative path to the API endpoint
-    :param params: Other request params
-    :rtype dict:
-    """
-    return respond_with(
-        requests.patch(
-            path_to_endpoint(client, BASE_URL, path),
-            data=format_params(params),
-            **options(client, method="PATCH", has_body=params is not None),
-        )
-    )
+    client: FullClientProto,
+    path: str,
+    params: dict[str, Any] | None = None,
+) -> requests.Response:
+    """Send a PATCH request."""
+    return _send_api_request("PATCH", client, path, params)
 
 
 def delete(
-    client: FullClientProto, path: str, params: dict[str, Any] | None = None
-) -> dict[str, Any]:
-    """Performs DELETE requests
+    client: FullClientProto,
+    path: str,
+    params: dict[str, Any] | None = None,
+) -> requests.Response:
+    """Send a DELETE request."""
+    return _send_api_request("DELETE", client, path, params)
 
-    :param client: Lokalise API client
-    :type client: lokalise.Client
-    :param path: Relative path to the API endpoint
-    :param params: Other request params
-    :rtype dict:
-    """
-    return respond_with(
-        requests.delete(
-            path_to_endpoint(client, BASE_URL, path),
-            data=format_params(params),
-            **options(client, method="DELETE", has_body=params is not None),
-        )
+
+def _send_api_request(
+    method: HttpMethod,
+    client: FullClientProto,
+    path: str,
+    params: dict[str, Any] | None,
+) -> requests.Response:
+    """Send an authenticated Lokalise API request."""
+    return send(
+        method,
+        path_to_endpoint(client, BASE_URL, path),
+        params=params,
+        **options(
+            client,
+            method=method,
+            has_body=params is not None,
+        ),
     )
 
 
-def respond_with(response: requests.Response) -> dict[str, Any]:
-    """Converts the response data to JSON and attaches pagination-related data.
-    An exception will be raised if the response status code is 4xx or 5xx,
-    or contains an "error" key
-
-    :param response: Response from the API
-    :rtype dict:
-    """
-    try:
-        data: dict[str, Any] = response.json()
-    except ValueError:
-        data = {"_raw_body": response.text}
-
-    raise_on_error(response, data)
-
-    return {**data, **extract_headers_from(response)}
-
-
-def extract_headers_from(response: requests.Response) -> dict[str, Any]:
-    """
-    Pull pagination metadata (and the oversized flag) out of an HTTP response.
-
-    Returns a dict like:
-    {
-        "_pagination": { "x-pagination-page": "3", ... },
-        "_response_too_big": True   # only when x-response-too-big header is present
-    }
-    """
-
-    headers_lower = {k.lower(): v for k, v in response.headers.items()}
-
-    pagination = {k: v for k, v in headers_lower.items() if k in PAGINATION_HEADERS}
-
-    result: dict[str, Any] = {"_pagination": pagination}
-
-    if "x-response-too-big" in headers_lower:
-        result["_response_too_big"] = True
-
-    return result
-
-
-def options(
-    client: FullClientProto, *, method: str = "GET", has_body: bool = False
-) -> dict[str, Any]:
-    """Prepares proper request options, including Accept headers, API token,
-    and timeouts. Raises RuntimeError if client.token is None.
-
-    :param client: Lokalise API client
-    :type client: lokalise.Client
-    :rtype dict:
-    """
-    headers: dict[str, str] = {
+def base_headers(*, json_body: bool = False) -> dict[str, str]:
+    """Build headers shared by all Lokalise HTTP requests."""
+    headers = {
         "Accept": "application/json",
         "User-Agent": f"python-lokalise-api plugin/{__version__}",
     }
 
-    if client.token is None:
-        raise RuntimeError(
-            "Cannot build headers: API token is not set. Did you call reset_client()?"
-        )
+    if json_body:
+        headers["Content-Type"] = "application/json"
 
-    headers[client.token_header] = client.token
+    return headers
+
+
+def options(
+    client: FullClientProto,
+    *,
+    method: HttpMethod = "GET",
+    has_body: bool = False,
+) -> RequestOptions:
+    """Build authentication headers and timeout options."""
+    headers = base_headers(
+        json_body=method != "GET" and has_body
+    )
+
+    token = client.token
+
+    if token is None:
+        raise RuntimeError("Cannot build headers: API token is not set.")
+
+    headers[client.token_header] = token
 
     if client.enable_compression:
         headers["Accept-Encoding"] = "gzip,deflate"
 
-    if method != "GET" and has_body:
-        headers["Content-Type"] = "application/json"
-
     return {
-        "timeout": _build_timeout(client),
         "headers": headers,
+        "timeout": _build_timeout(client),
     }
 
 
-def _build_timeout(
-    client: FullClientProto,
-) -> tuple[Number | None, Number | None] | None:
-    """Return proper timeout value for requests.
-
-    - None - wait indefinitely
-    - float - apply to both connect and read
-    - (connect, read) tuple - set individually
-    """
+def _build_timeout(client: FullClientProto) -> Timeout:
+    """Build connection and read timeout settings."""
     ct = client.connect_timeout
     rt = client.read_timeout
 

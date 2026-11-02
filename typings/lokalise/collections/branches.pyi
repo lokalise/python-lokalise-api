@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.branch import BranchModel
 
-class BranchesCollection(BaseCollection[BranchModel]):
+class BranchesCollection(ExpertCollection[BranchModel]):
     items: list[BranchModel]

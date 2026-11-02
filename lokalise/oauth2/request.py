@@ -1,52 +1,27 @@
 """
 lokalise.oauth2.request
 ~~~~~~~~~~~~~~~~~~~~~~~
-HTTP helpers specifically for OAuth 2.0 flow.
+HTTP helpers for OAuth 2.0 token operations.
 """
 
-from typing import Any, cast
+from typing import Any
 
 import requests
 
-from lokalise._version import __version__
-from lokalise.request_utils import format_params, join_url, raise_on_error
+from lokalise.request import base_headers, send
+from lokalise.request_utils import join_url
 
 BASE_URL = "https://app.lokalise.com/oauth2/"
 
 
-def post(path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
-    """
-    Perform an OAuth2 POST request (token exchange/revoke/etc).
-    Returns parsed JSON or raises a structured error.
-    """
-    url = join_url(BASE_URL, path)
-    resp = requests.post(url, data=format_params(params), **options())
-    return respond_with(resp)
-
-
-def respond_with(response: requests.Response) -> dict[str, Any]:
-    """Parse an OAuth response and raise on errors."""
-    try:
-        parsed = response.json()
-    except ValueError:
-        data: dict[str, Any] = {"_raw_body": response.text}
-    else:
-        if isinstance(parsed, dict):
-            data = cast(dict[str, Any], parsed)
-        else:
-            data = {"_raw_body": response.text}
-
-    raise_on_error(response, data)
-    return data
-
-
-def options() -> dict[str, Any]:
-    """
-    Minimal headers for OAuth endpoints. No auth header here.
-    """
-    headers: dict[str, str] = {
-        "Accept": "application/json",
-        "User-Agent": f"python-lokalise-api plugin/{__version__}",
-        "Content-Type": "application/json",
-    }
-    return {"headers": headers}
+def post(
+    path: str,
+    params: dict[str, Any] | None = None,
+) -> requests.Response:
+    """Send an OAuth2 POST request."""
+    return send(
+        "POST",
+        join_url(BASE_URL, path),
+        params=params,
+        headers=base_headers(json_body=True),
+    )

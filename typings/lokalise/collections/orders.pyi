@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.order import OrderModel
 
-class OrdersCollection(BaseCollection[OrderModel]):
+class OrdersCollection(ExpertCollection[OrderModel]):
     items: list[OrderModel]

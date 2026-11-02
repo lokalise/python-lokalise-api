@@ -5,10 +5,10 @@ Module containing branches collection.
 """
 
 from ..models.branch import BranchModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class BranchesCollection(BaseCollection[BranchModel]):
+class BranchesCollection(ExpertCollection[BranchModel]):
     """Describes project branches."""
 
     DATA_KEY = "branches"

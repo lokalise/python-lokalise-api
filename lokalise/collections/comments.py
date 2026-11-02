@@ -5,10 +5,10 @@ Module containing comments collection.
 """
 
 from ..models.comment import CommentModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class CommentsCollection(BaseCollection[CommentModel]):
+class CommentsCollection(ExpertCollection[CommentModel]):
     """Describes comments."""
 
     DATA_KEY = "comments"

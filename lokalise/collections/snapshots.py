@@ -5,10 +5,10 @@ Module containing snapshots collection.
 """
 
 from ..models.snapshot import SnapshotModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class SnapshotsCollection(BaseCollection[SnapshotModel]):
+class SnapshotsCollection(ExpertCollection[SnapshotModel]):
     """Describes snapshots."""
 
     DATA_KEY = "snapshots"

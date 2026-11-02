@@ -115,17 +115,6 @@ class BaseClient(FullClientProto):
         """HTTP header key used for the API token."""
         return self._token_header
 
-    def reset_client(self) -> None:
-        """Resets the API client by clearing all attributes.
-        After reset, token is None and client is unusable until you set a new token.
-        """
-        self._token = None
-        self._connect_timeout = None
-        self._read_timeout = None
-        self._enable_compression = False
-        self._api_host = None
-        self._clear_endpoint_attrs()
-
     def _prepare_token(self, token: str) -> str:
         return token
 
@@ -195,8 +184,3 @@ class BaseClient(FullClientProto):
             )
         except AttributeError as exc:
             raise ValueError(f"Unknown endpoint: {qualified_name}") from exc
-
-    def _clear_endpoint_attrs(self) -> None:
-        """Clears all lazily-loaded endpoint attributes"""
-        for attr in [a for a in vars(self) if a.endswith("_endpoint")]:
-            delattr(self, attr)

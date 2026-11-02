@@ -5,10 +5,10 @@ Module containing tasks collection.
 """
 
 from ..models.task import TaskModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class TasksCollection(BaseCollection[TaskModel]):
+class TasksCollection(ExpertCollection[TaskModel]):
     """Describes tasks."""
 
     DATA_KEY = "tasks"

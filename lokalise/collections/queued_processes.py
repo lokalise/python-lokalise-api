@@ -5,10 +5,10 @@ Module containing queued processes collection.
 """
 
 from ..models.queued_process import QueuedProcessModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class QueuedProcessesCollection(BaseCollection[QueuedProcessModel]):
+class QueuedProcessesCollection(ExpertCollection[QueuedProcessModel]):
     """Describes queued processes."""
 
     DATA_KEY = "processes"

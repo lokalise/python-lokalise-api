@@ -5,10 +5,10 @@ Module containing segments collection.
 """
 
 from ..models.segment import SegmentModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class SegmentsCollection(BaseCollection[SegmentModel]):
+class SegmentsCollection(ExpertCollection[SegmentModel]):
     """Describes segments."""
 
     DATA_KEY = "segments"

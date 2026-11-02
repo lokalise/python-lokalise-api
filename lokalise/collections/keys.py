@@ -5,10 +5,10 @@ Module containing keys collection.
 """
 
 from ..models.key import KeyModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class KeysCollection(BaseCollection[KeyModel]):
+class KeysCollection(ExpertCollection[KeyModel]):
     """Describes keys."""
 
     DATA_KEY = "keys"

@@ -8,6 +8,7 @@ from typing import Any
 
 from .. import request
 from .base_endpoint import BaseEndpoint
+from ..response import ApiResponse
 
 
 class WebhooksEndpoint(BaseEndpoint):
@@ -22,4 +23,6 @@ class WebhooksEndpoint(BaseEndpoint):
         :rtype dict:
         """
         path = self.path_with_params(**ids)
-        return request.patch(self.client, path + "/secret/regenerate")
+        return ApiResponse(
+            request.patch(self.client, path + "/secret/regenerate")
+        )

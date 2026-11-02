@@ -1,61 +1,76 @@
+
 """
-Tests for the request methods
+Tests for OAuth2 HTTP requests.
 """
 
+import json
 from unittest.mock import Mock, patch
 
-from lokalise.oauth2.request import respond_with
+from requests import Response
+
+from lokalise.oauth2 import request as oauth_request
 
 
-def test_respond_with_uses_raw_body_when_json_is_invalid() -> None:
-    response = Mock()
-    response.json.side_effect = ValueError
-    response.text = "not json"
-    response.headers = {}
+def test_post_uses_shared_transport() -> None:
+    """Check that OAuth2 POST uses the shared HTTP transport."""
+    raw_response = Mock(spec=Response)
 
-    with patch("lokalise.oauth2.request.raise_on_error") as raise_mock:
-        result = respond_with(response)
+    params = {
+        "grant_type": "refresh_token",
+        "refresh_token": "abc123",
+    }
 
-    assert result == {"_raw_body": "not json"}
-    raise_mock.assert_called_once_with(
-        response,
-        {"_raw_body": "not json"},
+    with patch(
+        "lokalise.request.requests.request",
+        return_value=raw_response,
+    ) as request_mock:
+        result = oauth_request.post("token", params)
+
+    assert result is raw_response
+    raw_response.json.assert_not_called()
+
+    request_mock.assert_called_once()
+
+    args, kwargs = request_mock.call_args
+
+    assert args == (
+        "POST",
+        "https://app.lokalise.com/oauth2/token",
     )
 
+    assert json.loads(kwargs["data"]) == params
 
-def test_respond_with_returns_json_object() -> None:
-    response = Mock()
-    response.json.return_value = {
-        "access_token": "token",
-        "token_type": "Bearer",
-    }
-    response.text = ""
-    response.headers = {}
+    headers = kwargs["headers"]
 
-    with patch("lokalise.oauth2.request.raise_on_error") as raise_mock:
-        result = respond_with(response)
+    assert headers["Accept"] == "application/json"
+    assert headers["Content-Type"] == "application/json"
+    assert "User-Agent" in headers
 
-    expected = {
-        "access_token": "token",
-        "token_type": "Bearer",
-    }
+    assert "Authorization" not in headers
+    assert "X-Api-Token" not in headers
 
-    assert result == expected
-    raise_mock.assert_called_once_with(response, expected)
+    assert kwargs["timeout"] is None
 
 
-def test_respond_with_uses_raw_body_when_json_is_not_object() -> None:
-    response = Mock()
-    response.json.return_value = ["unexpected", "payload"]
-    response.text = '["unexpected", "payload"]'
-    response.headers = {}
+def test_post_without_params() -> None:
+    """Check that OAuth2 POST accepts requests without parameters."""
+    raw_response = Mock(spec=Response)
 
-    with patch("lokalise.oauth2.request.raise_on_error") as raise_mock:
-        result = respond_with(response)
+    with patch(
+        "lokalise.oauth2.request.send",
+        return_value=raw_response,
+    ) as send_mock:
+        result = oauth_request.post("revoke")
 
-    expected = {
-        "_raw_body": '["unexpected", "payload"]',
-    }
+    assert result is raw_response
 
-    assert result == expected
-    raise_mock.assert_called_once_with(response, expected)
+    send_mock.assert_called_once_with(
+        "POST",
+        "https://app.lokalise.com/oauth2/revoke",
+        params=None,
+        headers={
+            "Accept": "application/json",
+            "User-Agent": oauth_request.base_headers()["User-Agent"],
+            "Content-Type": "application/json",
+        },
+    )

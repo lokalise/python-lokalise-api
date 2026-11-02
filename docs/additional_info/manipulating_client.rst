@@ -36,18 +36,3 @@ It's also possible to use a different API host:
       read_timeout=3,
       enable_compression=True,
       api_host=custom_api_host)
-
-Resetting client
-----------------
-
-To reset your client, simply use the `reset_client()` method:
-
-.. code-block:: python
-
-  client = lokalise.Client('token', connect_timeout=5, read_timeout=7, enable_compression=True)
-  # do something with the client
-  client.reset_client()
-  client.token # => None
-  client.connect_timeout # => None
-  client.read_timeout # => None
-  client.enable_compression # => False

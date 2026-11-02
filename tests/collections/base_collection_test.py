@@ -1,4 +1,10 @@
+
+"""
+Tests for the base collection.
+"""
+
 import pytest
+
 from lokalise.collections.base_collection import BaseCollection
 from lokalise.models.base_model import BaseModel
 
@@ -34,150 +40,46 @@ def test_rejects_non_dictionary_collection_items(
         DummyCollection({"items": items})
 
 
-def test_rejects_non_dictionary_pagination() -> None:
-    with pytest.raises(
-        TypeError,
-        match=r"Expected '_pagination' to be a dictionary",
-    ):
-        DummyCollection(
-            {
-                "items": [],
-                "_pagination": "invalid",
-            }
-        )
-
-
 def test_defaults_to_empty_collection() -> None:
     collection = DummyCollection({})
 
     assert collection.items == []
+    assert len(collection) == 0
+    assert list(collection) == []
 
 
-def test_defaults_pagination_values_when_missing() -> None:
-    collection = DummyCollection({"items": []})
+def test_builds_models() -> None:
+    collection = DummyCollection({
+        "items": [
+            {"id": 1},
+            {"id": 2},
+        ],
+    })
 
-    assert collection.total_count == 0
-    assert collection.page_count == 0
-    assert collection.limit == 0
-    assert collection.current_page == 0
-    assert collection.next_cursor is None
-
-
-def test_extracts_pagination_values() -> None:
-    collection = DummyCollection(
-        {
-            "items": [],
-            "_pagination": {
-                "x-pagination-total-count": "42",
-                "x-pagination-page-count": "5",
-                "x-pagination-limit": "10",
-                "x-pagination-page": "2",
-                "x-pagination-next-cursor": "next-page",
-            },
-        }
-    )
-
-    assert collection.total_count == 42
-    assert collection.page_count == 5
-    assert collection.limit == 10
-    assert collection.current_page == 2
-    assert collection.next_cursor == "next-page"
+    assert len(collection) == 2
+    assert all(isinstance(item, BaseModel) for item in collection)
 
 
-def test_extracts_common_attributes() -> None:
-    collection = DummyCollection(
-        {
-            "items": [],
-            "project_id": "project-id",
-            "user_id": 123,
-            "branch": "main",
-            "errors": ["something"],
-            "team_id": 456,
-        }
-    )
+def test_supports_indexing_and_slicing() -> None:
+    collection = DummyCollection({
+        "items": [
+            {"id": 1},
+            {"id": 2},
+            {"id": 3},
+        ],
+    })
 
-    assert collection.project_id == "project-id"
-    assert collection.user_id == 123
-    assert collection.branch == "main"
-    assert collection.errors == ["something"]
-    assert collection.team_id == 456
+    assert collection[0] is collection.items[0]
+    assert collection[-1] is collection.items[-1]
+    assert collection[1:] == collection.items[1:]
+    assert list(collection) == collection.items
 
 
-def test_common_attributes_default_to_none() -> None:
-    collection = DummyCollection({"items": []})
+def test_ignores_unrelated_response_fields() -> None:
+    collection = DummyCollection({
+        "items": [],
+        "meta": {"count": 10},
+        "_pagination": "invalid",
+    })
 
-    assert collection.project_id is None
-    assert collection.user_id is None
-    assert collection.branch is None
-    assert collection.errors is None
-    assert collection.team_id is None
-
-
-def test_page_helpers() -> None:
-    collection = DummyCollection(
-        {
-            "items": [],
-            "_pagination": {
-                "x-pagination-page-count": "3",
-                "x-pagination-page": "2",
-            },
-        }
-    )
-
-    assert collection.has_next_page()
-    assert collection.has_prev_page()
-    assert not collection.is_first_page()
-    assert not collection.is_last_page()
-
-
-def test_first_page_helpers() -> None:
-    collection = DummyCollection(
-        {
-            "items": [],
-            "_pagination": {
-                "x-pagination-page-count": "3",
-                "x-pagination-page": "1",
-            },
-        }
-    )
-
-    assert collection.has_next_page()
-    assert not collection.has_prev_page()
-    assert collection.is_first_page()
-    assert not collection.is_last_page()
-
-
-def test_last_page_helpers() -> None:
-    collection = DummyCollection(
-        {
-            "items": [],
-            "_pagination": {
-                "x-pagination-page-count": "3",
-                "x-pagination-page": "3",
-            },
-        }
-    )
-
-    assert not collection.has_next_page()
-    assert collection.has_prev_page()
-    assert not collection.is_first_page()
-    assert collection.is_last_page()
-
-
-def test_has_next_cursor() -> None:
-    collection = DummyCollection(
-        {
-            "items": [],
-            "_pagination": {
-                "x-pagination-next-cursor": "cursor",
-            },
-        }
-    )
-
-    assert collection.has_next_cursor()
-
-
-def test_has_no_next_cursor_by_default() -> None:
-    collection = DummyCollection({"items": []})
-
-    assert not collection.has_next_cursor()
+    assert collection.items == []

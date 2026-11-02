@@ -8,6 +8,7 @@ from typing import Any
 
 from .. import request
 from .base_endpoint import BaseEndpoint
+from ..response import ApiResponse
 
 
 class ProjectsEndpoint(BaseEndpoint):
@@ -22,4 +23,6 @@ class ProjectsEndpoint(BaseEndpoint):
         :rtype dict:
         """
         path = self.path_with_params(**ids)
-        return request.put(self.client, path + "/empty")
+        return ApiResponse(
+            request.put(self.client, path + "/empty")
+        )

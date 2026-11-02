@@ -5,10 +5,10 @@ Module containing permission templates collection.
 """
 
 from ..models.permission_template import PermissionTemplateModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class PermissionTemplatesCollection(BaseCollection[PermissionTemplateModel]):
+class PermissionTemplatesCollection(ExpertCollection[PermissionTemplateModel]):
     """Describes permission templates."""
 
     DATA_KEY = "roles"

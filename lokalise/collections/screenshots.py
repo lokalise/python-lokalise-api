@@ -5,10 +5,10 @@ Module containing screenshots collection.
 """
 
 from ..models.screenshot import ScreenshotModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class ScreenshotsCollection(BaseCollection[ScreenshotModel]):
+class ScreenshotsCollection(ExpertCollection[ScreenshotModel]):
     """Describes screenshots."""
 
     DATA_KEY = "screenshots"

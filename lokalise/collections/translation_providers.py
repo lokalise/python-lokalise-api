@@ -5,10 +5,10 @@ Module containing translation providers collection.
 """
 
 from ..models.translation_provider import TranslationProviderModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class TranslationProvidersCollection(BaseCollection[TranslationProviderModel]):
+class TranslationProvidersCollection(ExpertCollection[TranslationProviderModel]):
     """Describes translation providers."""
 
     DATA_KEY = "translation_providers"

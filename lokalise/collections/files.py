@@ -5,10 +5,10 @@ Module containing files collection.
 """
 
 from ..models.file import FileModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class FilesCollection(BaseCollection[FileModel]):
+class FilesCollection(ExpertCollection[FileModel]):
     """Describes files."""
 
     DATA_KEY = "files"

@@ -5,10 +5,10 @@ Module containing projects collection.
 """
 
 from ..models.project import ProjectModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class ProjectsCollection(BaseCollection[ProjectModel]):
+class ProjectsCollection(ExpertCollection[ProjectModel]):
     """Describes projects."""
 
     DATA_KEY = "projects"

@@ -5,10 +5,10 @@ Module containing languages collection.
 """
 
 from ..models.language import LanguageModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class LanguagesCollection(BaseCollection[LanguageModel]):
+class LanguagesCollection(ExpertCollection[LanguageModel]):
     """Describes system and project languages."""
 
     DATA_KEY = "languages"

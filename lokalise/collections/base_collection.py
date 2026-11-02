@@ -28,26 +28,9 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
 
     DATA_KEY: ClassVar[str] = ""
     MODEL_KLASS: ClassVar[type[BaseModel]] = BaseModel
-    COMMON_ATTRS: ClassVar[tuple[str, ...]] = (
-        "project_id",
-        "user_id",
-        "branch",
-        "errors",
-        "team_id",
-    )
+    COMMON_ATTRS: ClassVar[tuple[str, ...]] = ()    
 
     items: list[TModel]
-    total_count: int
-    page_count: int
-    limit: int
-    current_page: int
-    next_cursor: str | None
-
-    project_id: str | None = None
-    user_id: int | None = None
-    branch: str | None = None
-    errors: Any = None
-    team_id: int | None = None
 
     def __init__(self, raw_data: dict[str, Any]) -> None:
         """Creates a new collection.
@@ -63,7 +46,6 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
         """
         self.__extract_common_attrs(raw_data)
         self.items = self.__build_items(raw_data)
-        self.__extract_pagination(raw_data)
 
     def __iter__(self) -> Iterator[TModel]:
         return iter(self.items)
@@ -79,40 +61,6 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
     def __getitem__(self, index: int | slice) -> TModel | list[TModel]:
         return self.items[index]
 
-    def is_last_page(self) -> bool:
-        """Checks whether the current collection set is the last page.
-
-        :rtype: bool
-        """
-        return not self.has_next_page()
-
-    def is_first_page(self) -> bool:
-        """Checks whether the current collection set is the first page.
-
-        :rtype: bool
-        """
-        return not self.has_prev_page()
-
-    def has_next_page(self) -> bool:
-        """Checks whether the current collection set has the next page.
-
-        :rtype: bool
-        """
-        return self.current_page > 0 and self.current_page < self.page_count
-
-    def has_prev_page(self) -> bool:
-        """Checks whether the current collection set has the previous page.
-
-        :rtype: bool
-        """
-        return self.current_page > 1
-
-    def has_next_cursor(self) -> bool:
-        """Checks whether the current collection set has the next cursor.
-
-        :rtype: bool
-        """
-        return self.next_cursor is not None
 
     def __extract_common_attrs(self, raw_data: dict[str, Any]) -> None:
         """Fetches common data from the response and sets the
@@ -139,20 +87,3 @@ class BaseCollection(Sequence[TModel], Generic[TModel]):
         model_klass = cast(type[TModel], self.MODEL_KLASS)
 
         return [model_klass(item) for item in raw_items]
-
-    def __extract_pagination(self, raw_data: dict[str, Any]) -> None:
-        pagination_data = raw_data.get("_pagination", {})
-
-        if not isinstance(pagination_data, dict):
-            raise TypeError("Expected '_pagination' to be a dictionary")
-
-        pagination = cast(dict[str, Any], pagination_data)
-
-        self.total_count = int(pagination.get("x-pagination-total-count", 0) or 0)
-        self.page_count = int(pagination.get("x-pagination-page-count", 0) or 0)
-        self.limit = int(pagination.get("x-pagination-limit", 0) or 0)
-        self.current_page = int(pagination.get("x-pagination-page", 0) or 0)
-        self.next_cursor = cast(
-            str | None,
-            pagination.get("x-pagination-next-cursor"),
-        )

@@ -18,15 +18,6 @@ def test_client_arguments(oauth_client: OAuthClient) -> None:
     assert oauth_client.token_header == "Authorization"
 
 
-def test_reset_client(oauth_client: OAuthClient) -> None:
-    """Checks that the client can be reset"""
-    assert oauth_client.connect_timeout == 4
-
-    oauth_client.reset_client()
-
-    assert oauth_client.token is None
-
-
 def test_client_requires_non_empty_token():
     """Checks that client raises an error when token is empty"""
     with pytest.raises(ValueError, match="token must be a non-empty string"):

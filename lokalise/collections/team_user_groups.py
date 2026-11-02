@@ -5,10 +5,10 @@ Module containing team user groups collection.
 """
 
 from ..models.team_user_group import TeamUserGroupModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class TeamUserGroupsCollection(BaseCollection[TeamUserGroupModel]):
+class TeamUserGroupsCollection(ExpertCollection[TeamUserGroupModel]):
     """Describes team user groups."""
 
     DATA_KEY = "user_groups"

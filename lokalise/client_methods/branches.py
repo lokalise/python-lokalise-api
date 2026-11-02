@@ -8,6 +8,7 @@ from typing import Any
 
 from lokalise.collections.branches import BranchesCollection
 from lokalise.models.branch import BranchModel
+from lokalise.response import ApiResponse
 
 from .endpoint_provider import EndpointProviderMixin
 
@@ -77,24 +78,21 @@ class BranchMethods(EndpointProviderMixin):
         response = self.get_endpoint("branches").delete(parent_id=project_id, resource_id=branch_id)
         return response
 
+
     def merge_branch(
         self,
         project_id: str,
         branch_id: str | int,
         params: dict[str, str | int] | None = None,
-    ) -> dict[str, Any]:
-        """Merges a branch.
-
-        :param str project_id: ID of the project
-        :param branch_id: ID of the source branch
-        :type branch_id: int or str
-        :param dict params: Merge parameters
-        :return: Dictionary with project ID, "branch_merged" set to True, and branches info
-        :rtype dict:
-        """
+    ) -> ApiResponse:
+        """Merge the specified branch into the target branch."""
         response = self.get_endpoint("branches").merge(
-            params=params, parent_id=project_id, resource_id=branch_id
+            params=params,
+            parent_id=project_id,
+            resource_id=branch_id,
         )
+
         response["branch"] = BranchModel(response["branch"])
         response["target_branch"] = BranchModel(response["target_branch"])
+
         return response

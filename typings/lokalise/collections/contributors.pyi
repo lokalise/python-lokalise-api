@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.contributor import ContributorModel
 
-class ContributorsCollection(BaseCollection[ContributorModel]):
+class ContributorsCollection(ExpertCollection[ContributorModel]):
     items: list[ContributorModel]

@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.translation import TranslationModel
 
-class TranslationsCollection(BaseCollection[TranslationModel]):
+class TranslationsCollection(ExpertCollection[TranslationModel]):
     items: list[TranslationModel]

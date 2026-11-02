@@ -3,6 +3,11 @@
 Changelog
 =========
 
+Unreleased
+----------
+
+* Remove `reset_client()`. If you need a fresh client, create a new instance instead
+
 5.0.0 (26-Oct-2026)
 -------------------
 

@@ -5,10 +5,10 @@ Module containing contributors collection.
 """
 
 from ..models.contributor import ContributorModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class ContributorsCollection(BaseCollection[ContributorModel]):
+class ContributorsCollection(ExpertCollection[ContributorModel]):
     """Describes project contributors."""
 
     DATA_KEY = "contributors"

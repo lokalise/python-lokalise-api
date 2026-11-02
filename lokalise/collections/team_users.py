@@ -5,10 +5,10 @@ Module containing team users collection.
 """
 
 from ..models.team_user import TeamUserModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class TeamUsersCollection(BaseCollection[TeamUserModel]):
+class TeamUsersCollection(ExpertCollection[TeamUserModel]):
     """Describes team users."""
 
     DATA_KEY = "team_users"

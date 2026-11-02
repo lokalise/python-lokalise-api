@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.team_user import TeamUserModel
 
-class TeamUsersCollection(BaseCollection[TeamUserModel]):
+class TeamUsersCollection(ExpertCollection[TeamUserModel]):
     items: list[TeamUserModel]

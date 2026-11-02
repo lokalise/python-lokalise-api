@@ -5,10 +5,10 @@ Module containing translation statuses collection.
 """
 
 from ..models.translation_status import TranslationStatusModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class TranslationStatusesCollection(BaseCollection[TranslationStatusModel]):
+class TranslationStatusesCollection(ExpertCollection[TranslationStatusModel]):
     """Describes translation statuses."""
 
     DATA_KEY = "custom_translation_statuses"

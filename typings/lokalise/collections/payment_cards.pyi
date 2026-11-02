@@ -1,5 +1,5 @@
-from lokalise.collections.base_collection import BaseCollection
+from lokalise.collections.expert_collection import ExpertCollection
 from lokalise.models.payment_card import PaymentCardModel
 
-class PaymentCardsCollection(BaseCollection[PaymentCardModel]):
+class PaymentCardsCollection(ExpertCollection[PaymentCardModel]):
     items: list[PaymentCardModel]

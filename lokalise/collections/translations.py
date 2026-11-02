@@ -5,10 +5,10 @@ Module containing translations collection.
 """
 
 from ..models.translation import TranslationModel
-from .base_collection import BaseCollection
+from .expert_collection import ExpertCollection
 
 
-class TranslationsCollection(BaseCollection[TranslationModel]):
+class TranslationsCollection(ExpertCollection[TranslationModel]):
     """Describes translations."""
 
     DATA_KEY = "translations"
