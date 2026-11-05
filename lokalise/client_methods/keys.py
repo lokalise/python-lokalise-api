@@ -9,7 +9,9 @@ from typing import Any
 from lokalise.collections.keys import KeysCollection
 from lokalise.models.key import KeyModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
+from lokalise.types import JsonBody
+from lokalise.response import ApiResponse
 
 
 class KeyMethods(EndpointProviderMixin):
@@ -26,7 +28,7 @@ class KeyMethods(EndpointProviderMixin):
         return KeysCollection(raw_keys)
 
     def create_keys(
-        self, project_id: str, params: dict[str, Any] | list[dict[str, Any]]
+        self, project_id: str, params: JsonBody
     ) -> KeysCollection:
         """Creates one or more keys inside the project
 
@@ -72,7 +74,7 @@ class KeyMethods(EndpointProviderMixin):
         return KeyModel(raw_key)
 
     def update_keys(
-        self, project_id: str, params: list[dict[str, Any]] | dict[str, Any]
+        self, project_id: str, params: JsonBody
     ) -> KeysCollection:
         """Updates translation keys in bulk.
 
@@ -85,26 +87,24 @@ class KeyMethods(EndpointProviderMixin):
         )
         return KeysCollection(raw_keys)
 
-    def delete_key(self, project_id: str, key_id: str | int) -> dict[str, Any]:
+    def delete_key(self, project_id: str, key_id: str | int) -> ApiResponse:
         """Deletes a key.
 
         :param str project_id: ID of the project
         :param key_id: ID of the key to delete
         :type key_id: int or str
         :return: Dictionary with project ID and "key_removed" set to True
-        :rtype dict:
         """
         response = self.get_endpoint("keys").delete(parent_id=project_id, resource_id=key_id)
         return response
 
-    def delete_keys(self, project_id: str, key_ids: list[str | int]) -> dict[str, Any]:
+    def delete_keys(self, project_id: str, key_ids: list[str | int]) -> ApiResponse:
         """Deletes keys in bulk.
 
         :param str project_id: ID of the project
         :type key_id: int or str
         :param list key_ids: List of the key identifiers to delete
         :return: Dictionary with project ID and "keys_removed" set to True
-        :rtype dict:
         """
         response = self.get_endpoint("keys").delete(
             params=key_ids, wrapper_attr="keys", parent_id=project_id

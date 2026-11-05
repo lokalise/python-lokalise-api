@@ -8,7 +8,7 @@ from typing import Any
 
 from lokalise.models.jwt import JwtModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class JwtMethods(EndpointProviderMixin):

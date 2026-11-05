@@ -8,8 +8,9 @@ from typing import Any
 
 from lokalise.collections.tasks import TasksCollection
 from lokalise.models.task import TaskModel
+from lokalise.response import ApiResponse
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TaskMethods(EndpointProviderMixin):
@@ -62,7 +63,7 @@ class TaskMethods(EndpointProviderMixin):
         )
         return TaskModel(raw_task)
 
-    def delete_task(self, project_id: str, task_id: str | int) -> dict[str, Any]:
+    def delete_task(self, project_id: str, task_id: str | int) -> ApiResponse:
         """Deletes a task.
 
         :param str project_id: ID of the project

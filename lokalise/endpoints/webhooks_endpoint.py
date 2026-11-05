@@ -4,8 +4,6 @@ lokalise.endpoints.webhooks_endpoint
 Module containing webhooks endpoint.
 """
 
-from typing import Any
-
 from .. import request
 from .base_endpoint import BaseEndpoint
 from ..response import ApiResponse
@@ -16,7 +14,7 @@ class WebhooksEndpoint(BaseEndpoint):
 
     PATH = "projects/$parent_id/webhooks/$resource_id"
 
-    def regenerate_secret(self, **ids: str | int | None) -> dict[str, Any]:
+    def regenerate_secret(self, **ids: str | int | None) -> ApiResponse:
         """Regenerates webhook secret.
 
         :param ids: Identifiers for path generation

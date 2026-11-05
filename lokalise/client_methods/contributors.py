@@ -8,8 +8,10 @@ from typing import Any
 
 from lokalise.collections.contributors import ContributorsCollection
 from lokalise.models.contributor import ContributorModel
+from lokalise.response import ApiResponse
+from lokalise.types import JsonBody
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class ContributorMethods(EndpointProviderMixin):
@@ -54,7 +56,7 @@ class ContributorMethods(EndpointProviderMixin):
         return ContributorModel(raw_contributor)
 
     def create_contributors(
-        self, project_id: str, params: dict[str, Any] | list[dict[str, Any]]
+        self, project_id: str, params: JsonBody
     ) -> ContributorsCollection:
         """Creates one or more contributors inside the project
 
@@ -85,14 +87,13 @@ class ContributorMethods(EndpointProviderMixin):
         )
         return ContributorModel(raw_contributor)
 
-    def delete_contributor(self, project_id: str, contributor_id: str | int) -> dict[str, Any]:
+    def delete_contributor(self, project_id: str, contributor_id: str | int) -> ApiResponse:
         """Deletes a contributor.
 
         :param str project_id: ID of the project
         :param contributor_id: ID of the contributor to delete
         :type contributor_id: int or str
         :return: Dictionary with project ID and "contributor_deleted" set to True
-        :rtype dict:
         """
         response = self.get_endpoint("contributors").delete(
             parent_id=project_id, resource_id=contributor_id

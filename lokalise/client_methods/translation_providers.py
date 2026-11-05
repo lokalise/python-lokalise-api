@@ -7,7 +7,7 @@ This module contains API client definition for translation providers.
 from lokalise.collections.translation_providers import TranslationProvidersCollection
 from lokalise.models.translation_provider import TranslationProviderModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TranslationProviderMethods(EndpointProviderMixin):

@@ -4,12 +4,11 @@ lokalise.client_methods.comments
 This module contains API client definition for comments.
 """
 
-from typing import Any
-
 from lokalise.collections.comments import CommentsCollection
 from lokalise.models.comment import CommentModel
+from lokalise.response import ApiResponse
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class CommentMethods(EndpointProviderMixin):
@@ -87,7 +86,7 @@ class CommentMethods(EndpointProviderMixin):
 
     def delete_key_comment(
         self, project_id: str, key_id: str | int, comment_id: str | int
-    ) -> dict[str, Any]:
+    ) -> ApiResponse:
         """Deletes a given key comment.
 
         :param str project_id: ID of the project

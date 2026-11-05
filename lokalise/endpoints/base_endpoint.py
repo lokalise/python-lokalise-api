@@ -7,13 +7,12 @@ Endpoint parent class inherited by specific endpoints.
 from string import Template
 from typing import TYPE_CHECKING, Any
 
-from ..utils import to_list
-
 if TYPE_CHECKING:
     from ..base_client import BaseClient
 
 from .. import request
 from ..response import ApiResponse
+from lokalise.types import JsonBody
 
 
 class BaseEndpoint:
@@ -63,12 +62,14 @@ class BaseEndpoint:
 
     def create(
         self,
-        params: dict[str, Any] | None = None,
+        params: JsonBody | None = None,
         wrapper_attr: str | None = None,
         **ids: str | int | None,
     ) -> ApiResponse:
         if wrapper_attr and params is not None:
-            params = {wrapper_attr: to_list(params)}
+            params = {
+                wrapper_attr: params if isinstance(params, list) else [params]
+            }
 
         path = self.path_with_params(**ids)
         return ApiResponse(
@@ -77,12 +78,14 @@ class BaseEndpoint:
 
     def update(
         self,
-        params: dict[str, Any],
+        params: JsonBody | None = None,
         wrapper_attr: str | None = None,
         **ids: str | int | None,
     ) -> ApiResponse:
-        if wrapper_attr:
-            params = {wrapper_attr: to_list(params)}
+        if wrapper_attr and params is not None:
+            params = {
+                wrapper_attr: params if isinstance(params, list) else [params]
+            }
         path = self.path_with_params(**ids)
         return ApiResponse(
             request.put(self.client, path, params)
@@ -90,7 +93,7 @@ class BaseEndpoint:
 
     def delete(
         self,
-        params: dict[str, Any] | None = None,
+        params: JsonBody | None = None,
         wrapper_attr: str | None = None,
         **ids: str | int | None,
     ) -> ApiResponse:

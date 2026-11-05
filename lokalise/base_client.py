@@ -10,9 +10,10 @@ from typing import TypeVar, cast
 from lokalise.utils import snake_to_camel
 
 from .endpoints.base_endpoint import BaseEndpoint
-from .types import FullClientProto
+from .types import FullClientProto, Number
 
-Number = int | float
+
+
 
 T = TypeVar("T", bound=BaseEndpoint)
 

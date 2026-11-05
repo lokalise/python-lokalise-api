@@ -9,7 +9,7 @@ from typing import Any
 from lokalise.collections.orders import OrdersCollection
 from lokalise.models.order import OrderModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class OrderMethods(EndpointProviderMixin):

@@ -4,12 +4,12 @@ lokalise.client_methods.glossary_terms
 This module contains API client definition for glossary terms.
 """
 
-from typing import Any
-
 from lokalise.collections.glossary_terms import GlossaryTermsCollection
 from lokalise.models.glossary_term import GlossaryTermModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
+from lokalise.types import JsonBody
+from lokalise.response import ApiResponse
 
 
 class GlossaryTermsMethods(EndpointProviderMixin):
@@ -40,7 +40,7 @@ class GlossaryTermsMethods(EndpointProviderMixin):
         return GlossaryTermModel(raw_term)
 
     def create_glossary_terms(
-        self, project_id: str, params: dict[str, Any] | list[dict[str, Any]]
+        self, project_id: str, params: JsonBody
     ) -> GlossaryTermsCollection:
         """Creates one or more glossary terms in the project
 
@@ -56,7 +56,7 @@ class GlossaryTermsMethods(EndpointProviderMixin):
         return GlossaryTermsCollection(raw_terms)
 
     def update_glossary_terms(
-        self, project_id: str, params: list[dict[str, Any]] | dict[str, Any]
+        self, project_id: str, params: JsonBody
     ) -> GlossaryTermsCollection:
         """Updates one or more glossary terms.
 
@@ -71,14 +71,13 @@ class GlossaryTermsMethods(EndpointProviderMixin):
 
     def delete_glossary_terms(
         self, project_id: str, glossary_terms_ids: list[str | int]
-    ) -> dict[str, Any]:
+    ) -> ApiResponse:
         """Deletes one or more glossary terms.
 
         :param str project_id: ID of the project
         :type glossary_terms_id: int or str
         :param list glossary_terms_ids: List of the term IDs to delete
         :return: Delete response
-        :rtype dict:
         """
         response = self.get_endpoint("glossary_terms").delete(
             params=glossary_terms_ids, wrapper_attr="terms", parent_id=project_id

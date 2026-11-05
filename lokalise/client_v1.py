@@ -6,8 +6,7 @@ This module contains the base Lokalise API client definition.
 
 from .base_client import BaseClient
 from .client_methods.v1.audit_logs import AuditLogsMethods
-
-Number = int | float
+from .types import Number
 
 
 BASE_URL_V1 = "https://api.lokalise.com/v1/"

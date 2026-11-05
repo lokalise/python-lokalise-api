@@ -8,8 +8,10 @@ from typing import Any
 
 from lokalise.collections.screenshots import ScreenshotsCollection
 from lokalise.models.screenshot import ScreenshotModel
+from lokalise.types import JsonBody
+from lokalise.response import ApiResponse
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class ScreenshotMethods(EndpointProviderMixin):
@@ -41,7 +43,7 @@ class ScreenshotMethods(EndpointProviderMixin):
         return ScreenshotModel(screenshot)
 
     def create_screenshots(
-        self, project_id: str, params: list[dict[str, Any]] | dict[str, Any]
+        self, project_id: str, params: JsonBody
     ) -> ScreenshotsCollection:
         """Creates one or more screenshots in the given project.
 
@@ -74,7 +76,7 @@ class ScreenshotMethods(EndpointProviderMixin):
         )
         return ScreenshotModel(screenshot)
 
-    def delete_screenshot(self, project_id: str, screenshot_id: str | int) -> dict[str, Any]:
+    def delete_screenshot(self, project_id: str, screenshot_id: str | int) -> ApiResponse:
         """Deletes a screenshot.
 
         :param str project_id: ID of the project

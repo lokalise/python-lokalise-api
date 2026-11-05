@@ -6,7 +6,7 @@ This module contains API client definition for permission templates.
 
 from lokalise.collections.permission_templates import PermissionTemplatesCollection
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class PermissionTemplateMethods(EndpointProviderMixin):

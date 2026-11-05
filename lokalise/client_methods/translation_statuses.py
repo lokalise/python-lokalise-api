@@ -4,12 +4,10 @@ lokalise.client_methods.translation_statuses
 This module contains API client definition for translation statuses.
 """
 
-from typing import Any
-
 from lokalise.collections.translation_statuses import TranslationStatusesCollection
 from lokalise.models.translation_status import TranslationStatusModel
-
-from .endpoint_provider import EndpointProviderMixin
+from lokalise.response import ApiResponse
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TranslationStatusMethods(EndpointProviderMixin):
@@ -83,7 +81,7 @@ class TranslationStatusMethods(EndpointProviderMixin):
         self,
         project_id: str,
         translation_status_id: str | int,
-    ) -> dict[str, Any]:
+    ) -> ApiResponse:
         """Deletes a translation status.
 
         :param str project_id: ID of the project
@@ -103,5 +101,5 @@ class TranslationStatusMethods(EndpointProviderMixin):
         :param str project_id: ID of the project
         :return: List with the RGB color codes
         """
-        response = self.get_endpoint("translation_statuses").colors(parent_id=project_id)
+        response = self.expert_endpoint("translation_statuses").colors(parent_id=project_id)
         return response["colors"]

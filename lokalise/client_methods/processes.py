@@ -7,7 +7,7 @@ This module contains API client definition for processes.
 from lokalise.collections.queued_processes import QueuedProcessesCollection
 from lokalise.models.queued_process import QueuedProcessModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class ProcessMethods(EndpointProviderMixin):

@@ -9,7 +9,7 @@ from typing import Any
 from lokalise.collections.segments import SegmentsCollection
 from lokalise.models.segment import SegmentModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class SegmentMethods(EndpointProviderMixin):

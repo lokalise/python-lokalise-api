@@ -11,9 +11,8 @@ import requests
 
 from ._version import __version__
 from .request_utils import format_params, path_to_endpoint
-from .types import FullClientProto
+from .types import FullClientProto, JsonBody, Number
 
-Number = int | float
 HttpMethod = Literal["GET", "POST", "PUT", "PATCH", "DELETE"]
 Timeout = tuple[Number | None, Number | None] | None
 
@@ -29,7 +28,7 @@ def send(
     method: HttpMethod,
     url: str,
     *,
-    params: dict[str, Any] | None = None,
+    params: JsonBody | None = None,
     headers: dict[str, str],
     timeout: Timeout = None,
 ) -> requests.Response:
@@ -59,7 +58,7 @@ def get(
 def post(
     client: FullClientProto,
     path: str,
-    params: dict[str, Any] | None = None,
+    params: JsonBody | None = None,
 ) -> requests.Response:
     """Send a POST request."""
     return _send_api_request("POST", client, path, params)
@@ -68,7 +67,7 @@ def post(
 def put(
     client: FullClientProto,
     path: str,
-    params: dict[str, Any] | None = None,
+    params: JsonBody | None = None,
 ) -> requests.Response:
     """Send a PUT request."""
     return _send_api_request("PUT", client, path, params)
@@ -86,7 +85,7 @@ def patch(
 def delete(
     client: FullClientProto,
     path: str,
-    params: dict[str, Any] | None = None,
+    params: JsonBody | None = None,
 ) -> requests.Response:
     """Send a DELETE request."""
     return _send_api_request("DELETE", client, path, params)
@@ -96,7 +95,7 @@ def _send_api_request(
     method: HttpMethod,
     client: FullClientProto,
     path: str,
-    params: dict[str, Any] | None,
+    params: JsonBody | None,
 ) -> requests.Response:
     """Send an authenticated Lokalise API request."""
     return send(

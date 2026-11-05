@@ -8,8 +8,8 @@ from typing import Any
 
 from lokalise.collections.team_users import TeamUsersCollection
 from lokalise.models.team_user import TeamUserModel
-
-from .endpoint_provider import EndpointProviderMixin
+from lokalise.response import ApiResponse
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TeamUserMethods(EndpointProviderMixin):
@@ -62,7 +62,7 @@ class TeamUserMethods(EndpointProviderMixin):
         )
         return TeamUserModel(raw_team_user)
 
-    def delete_team_user(self, team_id: str | int, team_user_id: str | int) -> dict[str, Any]:
+    def delete_team_user(self, team_id: str | int, team_user_id: str | int) -> ApiResponse:
         """Deletes a team user.
 
         :param team_id: ID of the team

@@ -8,8 +8,8 @@ from typing import Any
 
 from lokalise.collections.webhooks import WebhooksCollection
 from lokalise.models.webhook import WebhookModel
-
-from .endpoint_provider import EndpointProviderMixin
+from lokalise.response import ApiResponse
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class WebhookMethods(EndpointProviderMixin):
@@ -64,7 +64,7 @@ class WebhookMethods(EndpointProviderMixin):
         )
         return WebhookModel(raw_webhook)
 
-    def delete_webhook(self, project_id: str, webhook_id: str) -> dict[str, Any]:
+    def delete_webhook(self, project_id: str, webhook_id: str) -> ApiResponse:
         """Deletes a webhook.
 
         :param str project_id: ID of the project
@@ -76,14 +76,14 @@ class WebhookMethods(EndpointProviderMixin):
         )
         return response
 
-    def regenerate_webhook_secret(self, project_id: str, webhook_id: str) -> dict[str, Any]:
+    def regenerate_webhook_secret(self, project_id: str, webhook_id: str) -> ApiResponse:
         """Regenerates a secret key for the webhook.
 
         :param str project_id: ID of the project
         :param str webhook_id: ID of the webhook to regenerate secret for
         :return: Dict with project ID and `secret` with the new secret's value
         """
-        response = self.get_endpoint("webhooks").regenerate_secret(
+        response = self.expert_endpoint("webhooks").regenerate_secret(
             parent_id=project_id, resource_id=webhook_id
         )
         return response

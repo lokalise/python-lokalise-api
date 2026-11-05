@@ -1,6 +1,8 @@
-from typing import Protocol, TypeAlias
+from typing import Protocol, TypeAlias, Any
 
 Number: TypeAlias = int | float
+
+JsonBody = dict[str, Any] | list[dict[str, Any]] | list[str | int]
 
 
 class RequestClientProto(Protocol):

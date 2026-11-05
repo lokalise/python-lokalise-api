@@ -9,7 +9,8 @@ from typing import Any
 from lokalise.collections.projects import ProjectsCollection
 from lokalise.models.project import ProjectModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
+from lokalise.response import ApiResponse
 
 
 class ProjectMethods(EndpointProviderMixin):
@@ -53,20 +54,18 @@ class ProjectMethods(EndpointProviderMixin):
         raw_project = self.get_endpoint("projects").update(params=params, parent_id=project_id)
         return ProjectModel(raw_project)
 
-    def empty_project(self, project_id: str) -> dict[str, Any]:
+    def empty_project(self, project_id: str) -> ApiResponse:
         """Empties a given project by removing all keys and translations.
 
         :param str project_id: ID of the project to empty
         :return: Dictionary with the project ID and "keys_deleted" set to True
-        :rtype dict:
         """
-        return self.get_endpoint("projects").empty(parent_id=project_id)
+        return self.expert_endpoint("projects").empty(parent_id=project_id)
 
-    def delete_project(self, project_id: str) -> dict[str, Any]:
+    def delete_project(self, project_id: str) -> ApiResponse:
         """Deletes a given project.
 
         :param str project_id: ID of the project to delete
         :return: Dictionary with project ID and "project_deleted" set to True
-        :rtype dict:
         """
         return self.get_endpoint("projects").delete(parent_id=project_id)

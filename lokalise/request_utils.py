@@ -5,8 +5,7 @@ This module provides helpers to send HTTP requests.
 """
 
 import json
-from typing import Any
-from .types import HasApiHost
+from .types import HasApiHost, JsonBody
 
 
 def path_to_endpoint(client: HasApiHost, default_base_uri: str, path: str) -> str:
@@ -15,7 +14,7 @@ def path_to_endpoint(client: HasApiHost, default_base_uri: str, path: str) -> st
     return join_url(base_uri, path)
 
 
-def format_params(params: dict[str, Any] | None = None) -> str | None:
+def format_params(params: JsonBody | None = None) -> str | None:
     """Converts request params to a JSON string for the request body."""
     return json.dumps(params) if params is not None else None
 

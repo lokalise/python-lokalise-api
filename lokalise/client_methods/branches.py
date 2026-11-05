@@ -4,13 +4,11 @@ lokalise.client_methods.branches
 This module contains API client definition for branches.
 """
 
-from typing import Any
-
 from lokalise.collections.branches import BranchesCollection
 from lokalise.models.branch import BranchModel
 from lokalise.response import ApiResponse
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class BranchMethods(EndpointProviderMixin):
@@ -66,14 +64,13 @@ class BranchMethods(EndpointProviderMixin):
         )
         return BranchModel(raw_branch)
 
-    def delete_branch(self, project_id: str, branch_id: str | int) -> dict[str, Any]:
+    def delete_branch(self, project_id: str, branch_id: str | int) -> ApiResponse:
         """Deletes a branch.
 
         :param str project_id: ID of the project
         :param branch_id: ID of the branch to delete
         :type branch_id: int or str
         :return: Dictionary with project ID and "branch_deleted" set to True
-        :rtype dict:
         """
         response = self.get_endpoint("branches").delete(parent_id=project_id, resource_id=branch_id)
         return response
@@ -86,7 +83,7 @@ class BranchMethods(EndpointProviderMixin):
         params: dict[str, str | int] | None = None,
     ) -> ApiResponse:
         """Merge the specified branch into the target branch."""
-        response = self.get_endpoint("branches").merge(
+        response = self.expert_endpoint("branches").merge(
             params=params,
             parent_id=project_id,
             resource_id=branch_id,

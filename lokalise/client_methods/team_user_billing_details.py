@@ -6,7 +6,7 @@ This module contains API client definition for team user billing details.
 
 from lokalise.models.team_user_billing_details import TeamUsersBillingDetailsModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TeamUserBillingDetailsMethods(EndpointProviderMixin):

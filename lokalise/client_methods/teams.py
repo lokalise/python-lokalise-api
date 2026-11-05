@@ -7,7 +7,7 @@ This module contains API client definition for teams.
 from lokalise.collections.teams import TeamsCollection
 from lokalise.models.team import TeamModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TeamMethods(EndpointProviderMixin):

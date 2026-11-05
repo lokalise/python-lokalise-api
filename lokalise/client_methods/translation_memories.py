@@ -6,7 +6,7 @@ This module contains API client definition for translation memories.
 
 from lokalise.collections.translation_memories import TranslationMemoriesCollection
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TranslationMemoriesMethods(EndpointProviderMixin):

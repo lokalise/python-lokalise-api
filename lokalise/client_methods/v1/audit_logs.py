@@ -8,7 +8,7 @@ from typing import Any
 
 from lokalise.collections.v1.audit_logs import AuditLogsCollection
 
-from ..endpoint_provider import EndpointProviderMixin
+from ...mixins.endpoint_provider import EndpointProviderMixin
 
 
 class AuditLogsMethods(EndpointProviderMixin):

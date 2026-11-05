@@ -4,13 +4,12 @@ lokalise.client_methods.snapshots
 This module contains API client definition for snapshots.
 """
 
-from typing import Any
-
 from lokalise.collections.snapshots import SnapshotsCollection
 from lokalise.models.project import ProjectModel
 from lokalise.models.snapshot import SnapshotModel
+from lokalise.response import ApiResponse
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class SnapshotMethods(EndpointProviderMixin):
@@ -53,13 +52,12 @@ class SnapshotMethods(EndpointProviderMixin):
         )
         return ProjectModel(new_project)
 
-    def delete_snapshot(self, project_id: str, snapshot_id: str | int) -> dict[str, Any]:
+    def delete_snapshot(self, project_id: str, snapshot_id: str | int) -> ApiResponse:
         """Deletes a project snapshot.
 
         :param str project_id: ID of the project
         :param snapshot_id: ID of the snapshot to delete
         :return: Dictionary with project ID and "snapshot_deleted" set to True
-        :rtype dict:
         """
         response = self.get_endpoint("snapshots").delete(
             parent_id=project_id, resource_id=snapshot_id

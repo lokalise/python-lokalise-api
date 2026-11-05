@@ -9,7 +9,7 @@ from typing import Any
 from lokalise.collections.translations import TranslationsCollection
 from lokalise.models.translation import TranslationModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class TranslationMethods(EndpointProviderMixin):

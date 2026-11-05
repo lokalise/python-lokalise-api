@@ -10,7 +10,7 @@ from lokalise.collections.files import FilesCollection
 from lokalise.models.queued_process import QueuedProcessModel
 from lokalise.response import ApiResponse
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
 
 
 class FileMethods(EndpointProviderMixin):
@@ -33,7 +33,7 @@ class FileMethods(EndpointProviderMixin):
         :param dict params: Upload params
         :return: Queued process model
         """
-        raw_process = self.get_endpoint("files").upload(params=params, parent_id=project_id)
+        raw_process = self.expert_endpoint("files").upload(params=params, parent_id=project_id)
         return QueuedProcessModel(raw_process)
 
     def download_files(self, project_id: str, params: dict[str, Any]) -> ApiResponse:
@@ -43,7 +43,7 @@ class FileMethods(EndpointProviderMixin):
         :param dict params: Download params
         :return: Dictionary with project ID and a bundle URL
         """
-        return self.get_endpoint("files").download(params=params, parent_id=project_id)
+        return self.expert_endpoint("files").download(params=params, parent_id=project_id)
 
     def download_files_async(self, project_id: str, params: dict[str, Any]) -> QueuedProcessModel:
         """Downloads files from the given project asynchronously.
@@ -52,7 +52,7 @@ class FileMethods(EndpointProviderMixin):
         :param dict params: Download params
         :return: Queued process model
         """
-        raw_process = self.get_endpoint("files").download_async(params=params, parent_id=project_id)
+        raw_process = self.expert_endpoint("files").download_async(params=params, parent_id=project_id)
         return QueuedProcessModel(raw_process)
 
     def delete_file(self, project_id: str, file_id: str | int) -> ApiResponse:

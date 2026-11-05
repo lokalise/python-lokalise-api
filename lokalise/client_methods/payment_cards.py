@@ -4,12 +4,11 @@ lokalise.client_methods.payment_cards
 This module contains API client definition for payment cards.
 """
 
-from typing import Any
-
 from lokalise.collections.payment_cards import PaymentCardsCollection
 from lokalise.models.payment_card import PaymentCardModel
 
-from .endpoint_provider import EndpointProviderMixin
+from ..mixins.endpoint_provider import EndpointProviderMixin
+from lokalise.response import ApiResponse
 
 
 class PaymentCardMethods(EndpointProviderMixin):
@@ -44,13 +43,12 @@ class PaymentCardMethods(EndpointProviderMixin):
         raw_card = self.get_endpoint("payment_cards").create(params=params)
         return PaymentCardModel(raw_card)
 
-    def delete_payment_card(self, payment_card_id: str | int) -> dict[str, Any]:
+    def delete_payment_card(self, payment_card_id: str | int) -> ApiResponse:
         """Deletes a payment card.
 
         :param payment_card_id: ID of the payment card to delete
         :type payment_card_id: int or str
         :return: Dictionary with card ID and "card_deleted" set to True
-        :rtype dict:
         """
         resp = self.get_endpoint("payment_cards").delete(parent_id=payment_card_id)
         return resp
